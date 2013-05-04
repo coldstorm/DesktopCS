@@ -12,6 +12,6 @@ namespace DesktopCS
         public static Color TAB_BORDER_COLOR = Color.FromArgb(255, 42, 46, 54);
         public static Color TAB_TEXT_COLOR = Color.FromArgb(255, 140, 144, 150);
 
-        public const int TEXT_COLOR = 0xBABBBF;
+        public static Color TEXT_COLOR = Color.FromArgb(255, 186, 187, 191);
     }
 }

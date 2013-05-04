@@ -57,17 +57,19 @@
             // 
             // optionsToolStripMenuItem
             // 
+            this.optionsToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // InputBox
             // 
             this.InputBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.InputBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.InputBox.Location = new System.Drawing.Point(0, 361);
+            this.InputBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InputBox.Location = new System.Drawing.Point(0, 360);
             this.InputBox.Name = "InputBox";
-            this.InputBox.Size = new System.Drawing.Size(581, 20);
+            this.InputBox.Size = new System.Drawing.Size(581, 21);
             this.InputBox.TabIndex = 4;
             // 
             // cTabControl
@@ -77,7 +79,7 @@
             this.cTabControl.Location = new System.Drawing.Point(0, 24);
             this.cTabControl.Name = "cTabControl";
             this.cTabControl.SelectedIndex = 0;
-            this.cTabControl.Size = new System.Drawing.Size(581, 337);
+            this.cTabControl.Size = new System.Drawing.Size(581, 336);
             this.cTabControl.TabIndex = 5;
             // 
             // MainForm

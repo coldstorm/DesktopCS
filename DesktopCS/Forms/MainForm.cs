@@ -19,7 +19,13 @@ namespace DesktopCS.Forms
             AddTab("test2");
 
             BackColor = Constants.BACKGROUND_COLOR;
+            ForeColor = Constants.TEXT_COLOR;
+            MainMenuStrip.BackColor = BackColor;
+            MainMenuStrip.ForeColor = ForeColor;
             Userlist.BackColor = BackColor;
+            Userlist.ForeColor = ForeColor;
+            InputBox.BackColor = BackColor;
+            InputBox.ForeColor = ForeColor;
         }
 
         private void AddTab(string title)
