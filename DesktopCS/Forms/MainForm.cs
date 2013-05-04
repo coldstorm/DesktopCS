@@ -7,9 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NetIRC;
 
-namespace DesktopCS
+namespace DesktopCS.Forms
 {
     public partial class MainForm : Form
     {

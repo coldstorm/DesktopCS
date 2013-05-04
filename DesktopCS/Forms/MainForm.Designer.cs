@@ -1,4 +1,4 @@
-﻿namespace DesktopCS
+﻿namespace DesktopCS.Forms
 {
     partial class MainForm
     {
