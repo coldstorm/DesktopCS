@@ -49,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Forms\CSTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TabControl\CTabControl.cs">
       <SubType>Component</SubType>
     </Compile>

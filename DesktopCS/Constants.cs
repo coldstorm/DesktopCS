@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
 namespace DesktopCS
 {
     class Constants
     {
         //public const int BACKGROUND_COLOR = 0x1A1C1F;
-        public const int BACKGROUND_COLOR = 0x24272E;
-        public const int CHAT_BACKGROUND_COLOR = 0x202226;
+        public static Color BACKGROUND_COLOR = Color.FromArgb(255, 26, 28, 31);
+        public static Color CHAT_BACKGROUND_COLOR = Color.FromArgb(255, 36, 39, 46);
 
         public const int TAB_BORDER_COLOR = 0x2a2e36;
+        public static Color TAB_TEXT_COLOR = Color.FromArgb(255, 140, 144, 150);
 
         public const int TEXT_COLOR = 0xBABBBF;
     }

@@ -32,7 +32,7 @@
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InputBox = new System.Windows.Forms.TextBox();
-            this.cTabControl = new DesktopCS.CTabControl();
+            this.cTabControl = new DesktopCS.Forms.CSTabControl();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,7 +105,7 @@
         private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.TextBox InputBox;
-        private CTabControl cTabControl;
+        private Forms.CSTabControl cTabControl;
     }
 }
 
