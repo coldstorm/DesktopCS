@@ -17,6 +17,9 @@ namespace DesktopCS.Forms
             InitializeComponent();
             AddTab("test");
             AddTab("test2");
+
+            BackColor = Constants.BACKGROUND_COLOR;
+            Userlist.BackColor = BackColor;
         }
 
         private void AddTab(string title)
