@@ -77,6 +77,8 @@ namespace DesktopCS.Forms
 
         void Client_OnChannelJoin(Client client, Channel channel)
         {
+            ChannelTab tab = new ChannelTab(channel);
+
             this.Invoke(_addtab, channel.Name, TabType.Channel);
             this.Invoke(_addline, channel.Name, "You joined the channel " + channel.Name);
             this.Invoke(_populateuserlist);
@@ -157,6 +159,8 @@ namespace DesktopCS.Forms
 
         private void Userlist_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            PrivateMessageTab tab = new PrivateMessageTab(new User());
+
             TabList.SelectedTab = AddTab(e.Node.Text, TabType.PrivateMessage);
         }
 

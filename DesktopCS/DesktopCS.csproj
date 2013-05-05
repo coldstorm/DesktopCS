@@ -52,6 +52,12 @@
     <Compile Include="Forms\BaseTab.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\ChannelTab.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\PrivateMessageTab.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\TabList.cs">
       <SubType>Component</SubType>
     </Compile>
