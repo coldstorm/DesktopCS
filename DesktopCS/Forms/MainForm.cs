@@ -18,8 +18,20 @@ namespace DesktopCS.Forms
 
         private delegate void AddLineDelegate(string tabName, string line);
         private delegate CTabPage AddTabDelegate(string title, TabType type);
+        private delegate void PopulateUserlistDelegate();
         private AddLineDelegate _addline;
         private AddTabDelegate _addtab;
+        private PopulateUserlistDelegate _populateuserlist;
+
+        private Dictionary<UserRank, char?> RankChars = new Dictionary<UserRank, char?>()
+        {
+            {UserRank.None, null},
+            {UserRank.Voice, '+'},
+            {UserRank.HalfOp, '#'},
+            {UserRank.Op, '@'},
+            {UserRank.Admin, '@'},
+            {UserRank.Owner, '@'}
+        };
 
         public MainForm()
         {
@@ -47,6 +59,7 @@ namespace DesktopCS.Forms
 
             _addline = new AddLineDelegate(AddLine);
             _addtab = new AddTabDelegate(AddTab);
+            _populateuserlist = new PopulateUserlistDelegate(PopulateUserlist);
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -66,6 +79,7 @@ namespace DesktopCS.Forms
         {
             this.Invoke(_addtab, channel.Name, TabType.Channel);
             this.Invoke(_addline, channel.Name, "You joined the channel " + channel.Name);
+            this.Invoke(_populateuserlist);
             channel.OnMessage += channel_OnMessage;
         }
 
@@ -133,7 +147,12 @@ namespace DesktopCS.Forms
 
         private void PopulateUserlist()
         {
-            //TODO
+            Userlist.Nodes.Clear();
+
+            foreach (User user in Client.Channels[TabList.SelectedTab.Name].Users.Values)
+            {
+                Userlist.Nodes.Add(RankChars[user.Rank] + user.NickName);
+            }
         }
 
         private void Userlist_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -141,7 +160,7 @@ namespace DesktopCS.Forms
             TabList.SelectedTab = AddTab(e.Node.Text, TabType.PrivateMessage);
         }
 
-        private void cTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void TabList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((TabList.SelectedTab as CTabPage).Type == TabType.Channel)
             {
