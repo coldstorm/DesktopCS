@@ -36,13 +36,13 @@
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Userlist
+            // UserList
             // 
-            this.UserList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.UserList.Dock = System.Windows.Forms.DockStyle.Right;
-            this.UserList.Location = new System.Drawing.Point(581, 24);
-            this.UserList.Name = "Userlist";
-            this.UserList.Size = new System.Drawing.Size(121, 357);
+            this.UserList.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
+            this.UserList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.UserList.Location = new System.Drawing.Point(581, 50);
+            this.UserList.Name = "UserList";
+            this.UserList.Size = new System.Drawing.Size(117, 327);
             this.UserList.TabIndex = 1;
             this.UserList.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.UserList_NodeMouseDoubleClick);
             // 
@@ -65,17 +65,17 @@
             // 
             // InputBox
             // 
-            this.InputBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.InputBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.InputBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InputBox.Location = new System.Drawing.Point(0, 360);
+            this.InputBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            this.InputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.InputBox.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InputBox.Location = new System.Drawing.Point(4, 360);
             this.InputBox.Name = "InputBox";
-            this.InputBox.Size = new System.Drawing.Size(581, 21);
+            this.InputBox.Size = new System.Drawing.Size(574, 21);
             this.InputBox.TabIndex = 4;
             // 
-            // cTabControl
+            // TabList
             // 
-            this.TabList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabList.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
             this.TabList.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.TabList.Location = new System.Drawing.Point(0, 24);
             this.TabList.Name = "cTabControl";
