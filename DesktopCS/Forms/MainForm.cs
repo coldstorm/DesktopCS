@@ -71,7 +71,7 @@ namespace DesktopCS.Forms
 
         void channel_OnMessage(Channel source, User user, string message)
         {
-            this.Invoke(_addline, TabList.TabPages.IndexOf(TabList.TabPages[source.Name]), message);
+            this.Invoke(_addline, source.Name, message);
         }
 
         private CTabPage AddTab(string title, TabType type)
