@@ -44,6 +44,7 @@
             this.Userlist.Name = "Userlist";
             this.Userlist.Size = new System.Drawing.Size(121, 357);
             this.Userlist.TabIndex = 1;
+            this.Userlist.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Userlist_NodeMouseClick);
             // 
             // MenuStrip
             // 
@@ -59,8 +60,8 @@
             // 
             this.optionsToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.optionsToolStripMenuItem.Text = "Tools";
             // 
             // InputBox
             // 
@@ -81,6 +82,7 @@
             this.cTabControl.SelectedIndex = 0;
             this.cTabControl.Size = new System.Drawing.Size(581, 336);
             this.cTabControl.TabIndex = 5;
+            this.cTabControl.SelectedIndexChanged += new System.EventHandler(this.cTabControl_SelectedIndexChanged);
             // 
             // MainForm
             // 

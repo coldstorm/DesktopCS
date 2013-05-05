@@ -15,26 +15,33 @@ namespace DesktopCS.Forms
         public MainForm()
         {
             InitializeComponent();
-            AddTab("test");
-            AddTab("test2");
+            AddTab("test", TabType.Channel);
+            AddTab("test2", TabType.Channel);
 
             AddLine(0, "test");
             AddLine(1, "test");
             AddLine(0, "test");
 
+            AddUser("test1");
+            AddUser("test2");
+
             BackColor = Constants.BACKGROUND_COLOR;
             ForeColor = Constants.TEXT_COLOR;
+
             MainMenuStrip.BackColor = BackColor;
             MainMenuStrip.ForeColor = ForeColor;
-            Userlist.BackColor = BackColor;
+
+            Userlist.SelectedNode = null;
+            Userlist.BackColor = Constants.CHAT_BACKGROUND_COLOR;
             Userlist.ForeColor = ForeColor;
-            InputBox.BackColor = BackColor;
+
+            InputBox.BackColor = Constants.CHAT_BACKGROUND_COLOR;
             InputBox.ForeColor = ForeColor;
         }
 
-        private void AddTab(string title)
+        private CTabPage AddTab(string title, TabType type)
         {
-            CTabPage Tab = new CTabPage(title);
+            CTabPage Tab = new CTabPage(title, type);
 
             //Prepare RichTextBox
             RichTextBox TextBox = new RichTextBox();
@@ -48,6 +55,8 @@ namespace DesktopCS.Forms
 
             Tab.Controls.Add(TextBox);
             cTabControl.TabPages.Add(Tab);
+
+            return Tab;
         }
 
         private void RemoveTab(int index)
@@ -60,6 +69,34 @@ namespace DesktopCS.Forms
             line = line.Trim();
             string formattedline = DateTime.Now.ToString("[HH:mm] ") + line + "\n";
             cTabControl.TabPages[tabIndex].Controls["TextBox"].Text += formattedline;
+        }
+
+        private void AddUser(string username)
+        {
+            Userlist.Nodes.Add(username);
+        }
+
+        private void PopulateUserlist()
+        {
+            //TODO
+        }
+
+        private void Userlist_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            cTabControl.SelectedTab = AddTab(e.Node.Text, TabType.PrivateMessage);
+        }
+
+        private void cTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((cTabControl.SelectedTab as CTabPage).Type == TabType.Channel)
+            {
+                PopulateUserlist();
+            }
+
+            else
+            {
+                Userlist.Nodes.Clear();
+            }
         }
     }
 }
