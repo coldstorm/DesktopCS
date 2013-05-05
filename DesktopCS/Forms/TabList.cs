@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,6 +7,8 @@ namespace DesktopCS.Forms
 {
     class TabList : TabControl
     {
+        public Dictionary<string, BaseTab> Tabs = new Dictionary<string, BaseTab>();
+
         public TabList()
         {
             SetStyle(ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
