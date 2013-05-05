@@ -82,9 +82,15 @@ namespace DesktopCS.Forms
             this.AddTab(tab);
 
             this.AddLine("#" + channel.Name, "You joined the channel " + channel.Name);
-            this.Invoke(_populateuserlist);
+            this.PopulateUserlist();
 
             channel.OnMessage += channel_OnMessage;
+            channel.OnJoin += channel_OnJoin;
+        }
+
+        void channel_OnJoin(Channel source, User user)
+        {
+            this.PopulateUserlist();
         }
 
         void channel_OnMessage(Channel source, User user, string message)
@@ -160,6 +166,12 @@ namespace DesktopCS.Forms
 
         private void PopulateUserlist()
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(_populateuserlist);
+                return;
+            }
+
             Userlist.Nodes.Clear();
 
             BaseTab selectedTab = TabList.SelectedTab as BaseTab;
