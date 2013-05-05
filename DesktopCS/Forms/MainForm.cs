@@ -7,28 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NetIRC;
 
 namespace DesktopCS.Forms
 {
     public partial class MainForm : Form
     {
         private string RTF;
+        private NetIRC.Client Client;
+
+        private delegate void AddLineDelegate(int tabIndex, string line);
+        private delegate CTabPage AddTabDelegate(string title, TabType type);
+        private AddLineDelegate _addline;
+        private AddTabDelegate _addtab;
 
         public MainForm()
         {
             InitializeComponent();
 
             RTF = "{\\rtf{\\colortbl;\\red55\\green78\\blue63;\\red186\\green191\\blue187;}}";
-
-            AddTab("test", TabType.Channel);
-            AddTab("test2", TabType.Channel);
-
-            AddLine(0, "test");
-            AddLine(1, "test");
-            AddLine(0, "test");
-
-            AddUser("test1");
-            AddUser("test2");
 
             BackColor = Constants.BACKGROUND_COLOR;
             ForeColor = Constants.TEXT_COLOR;
@@ -42,6 +39,26 @@ namespace DesktopCS.Forms
 
             InputBox.BackColor = Constants.CHAT_BACKGROUND_COLOR;
             InputBox.ForeColor = ForeColor;
+
+            Client = new Client();
+            Client.Connect("frogbox.es", 6667, false, new User("express3"));
+            Client.OnConnect += Client_OnConnect;
+            Client.OnChannelJoin += Client_OnChannelJoin;
+
+            _addline = new AddLineDelegate(AddLine);
+            _addtab = new AddTabDelegate(AddTab);
+        }
+
+        void Client_OnConnect(Client client)
+        {
+            Client.JoinChannel("RunEE");
+            Client.OnConnect -= Client_OnConnect;
+        }
+
+        void Client_OnChannelJoin(Client client, Channel channel)
+        {
+            this.Invoke(_addtab, channel.Name, TabType.Channel);
+            this.Invoke(_addline, 0, "You joined the channel " + channel.Name);
         }
 
         private CTabPage AddTab(string title, TabType type)

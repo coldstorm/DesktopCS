@@ -22,6 +22,7 @@ namespace DesktopCS
         public CTabPage(string _name, TabType _type)
         {
             this.Text = _name;
+            this.Name = _name;
             this.Type = _type;
             this.BorderStyle = System.Windows.Forms.BorderStyle.None;
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
