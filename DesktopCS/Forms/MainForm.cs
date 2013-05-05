@@ -41,7 +41,7 @@ namespace DesktopCS.Forms
             InputBox.ForeColor = ForeColor;
 
             Client = new Client();
-            Client.Connect("frogbox.es", 6667, false, new User("express3"));
+            Client.Connect("frogbox.es", 6667, false, new User("DesktopCS"));
             Client.OnConnect += Client_OnConnect;
             Client.OnChannelJoin += Client_OnChannelJoin;
 
@@ -66,6 +66,12 @@ namespace DesktopCS.Forms
         {
             this.Invoke(_addtab, channel.Name, TabType.Channel);
             this.Invoke(_addline, 0, "You joined the channel " + channel.Name);
+            channel.OnMessage += channel_OnMessage;
+        }
+
+        void channel_OnMessage(Channel source, User user, string message)
+        {
+            this.Invoke(_addline, cTabControl.TabPages.IndexOf(cTabControl.TabPages[source.Name]), message);
         }
 
         private CTabPage AddTab(string title, TabType type)
