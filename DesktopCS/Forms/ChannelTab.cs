@@ -4,7 +4,7 @@ namespace DesktopCS.Forms
 {
     class ChannelTab : BaseTab
     {
-        private NetIRC.Channel Channel;
+        public NetIRC.Channel Channel;
 
         public ChannelTab(NetIRC.Channel channel) : base("#" + channel.Name)
         {

@@ -17,7 +17,7 @@ namespace DesktopCS.Forms
         private NetIRC.Client Client;
 
         private delegate void AddLineDelegate(string tabName, string line);
-        private delegate BaseTab AddTabDelegate(string title, TabType type);
+        private delegate BaseTab AddTabDelegate(BaseTab tab);
         private delegate void PopulateUserlistDelegate();
         private AddLineDelegate _addline;
         private AddTabDelegate _addtab;
@@ -79,23 +79,21 @@ namespace DesktopCS.Forms
         {
             ChannelTab tab = new ChannelTab(channel);
 
-            this.Invoke(_addtab, channel.Name, TabType.Channel);
-            this.Invoke(_addline, channel.Name, "You joined the channel " + channel.Name);
+            this.Invoke(_addtab, tab);
+            this.Invoke(_addline, "#" + channel.Name, "You joined the channel " + channel.Name);
             this.Invoke(_populateuserlist);
             channel.OnMessage += channel_OnMessage;
         }
 
         void channel_OnMessage(Channel source, User user, string message)
         {
-            this.Invoke(_addline, source.Name, message);
+            this.Invoke(_addline, "#" + source.Name, message);
         }
 
-        private BaseTab AddTab(string title, TabType type)
+        private BaseTab AddTab(BaseTab tab)
         {
-            if (!TabList.TabPages.ContainsKey(title))
+            if (!TabList.TabPages.ContainsKey(tab.Text))
             {
-                BaseTab Tab = new BaseTab(title);
-
                 //Prepare RichTextBox
                 RichTextBox TextBox = new RichTextBox();
                 TextBox.Name = "TextBox";
@@ -106,10 +104,10 @@ namespace DesktopCS.Forms
                 TextBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 TextBox.ReadOnly = true;
 
-                Tab.Controls.Add(TextBox);
-                TabList.TabPages.Add(Tab);
+                tab.Controls.Add(TextBox);
+                TabList.TabPages.Add(tab);
 
-                return Tab;
+                return tab;
             }
 
             return null;
@@ -151,17 +149,24 @@ namespace DesktopCS.Forms
         {
             Userlist.Nodes.Clear();
 
-            foreach (User user in Client.Channels[TabList.SelectedTab.Name].Users.Values)
+            BaseTab selectedTab = TabList.SelectedTab as BaseTab;
+
+            if (selectedTab.Type == TabType.Channel)
             {
-                Userlist.Nodes.Add(RankChars[user.Rank] + user.NickName);
+                ChannelTab channelTab = selectedTab as ChannelTab;
+
+                foreach (User user in channelTab.Channel.Users.Values)
+                {
+                    Userlist.Nodes.Add(RankChars[user.Rank] + user.NickName);
+                }
             }
         }
 
         private void Userlist_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            PrivateMessageTab tab = new PrivateMessageTab(new User());
+            PrivateMessageTab tab = new PrivateMessageTab(new User(e.Node.Text));
 
-            TabList.SelectedTab = AddTab(e.Node.Text, TabType.PrivateMessage);
+            TabList.SelectedTab = AddTab(tab);
         }
 
         private void TabList_SelectedIndexChanged(object sender, EventArgs e)
