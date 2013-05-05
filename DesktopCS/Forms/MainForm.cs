@@ -164,7 +164,10 @@ namespace DesktopCS.Forms
 
         private void Userlist_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            PrivateMessageTab tab = new PrivateMessageTab(new User(e.Node.Text));
+            ChannelTab channelTab = TabList.SelectedTab as ChannelTab;
+            User user = channelTab.Channel.Users[e.Node.Text];
+
+            PrivateMessageTab tab = new PrivateMessageTab(user);
 
             TabList.SelectedTab = AddTab(tab);
         }
