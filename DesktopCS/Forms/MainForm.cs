@@ -79,19 +79,26 @@ namespace DesktopCS.Forms
         {
             ChannelTab tab = new ChannelTab(channel);
 
-            this.Invoke(_addtab, tab);
-            this.Invoke(_addline, "#" + channel.Name, "You joined the channel " + channel.Name);
+            this.AddTab(tab);
+
+            this.AddLine("#" + channel.Name, "You joined the channel " + channel.Name);
             this.Invoke(_populateuserlist);
+
             channel.OnMessage += channel_OnMessage;
         }
 
         void channel_OnMessage(Channel source, User user, string message)
         {
-            this.Invoke(_addline, "#" + source.Name, message);
+            this.AddLine("#" + source.Name, message);
         }
 
         private BaseTab AddTab(BaseTab tab)
         {
+            if (this.InvokeRequired)
+            {
+                return (BaseTab)this.Invoke(_addtab, tab);
+            }
+
             if (!TabList.TabPages.ContainsKey(tab.Text))
             {
                 //Prepare RichTextBox
@@ -120,6 +127,12 @@ namespace DesktopCS.Forms
 
         private void AddLine(string tabName, string line)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(_addline, tabName, line);
+                return;
+            }
+
             //initialize the RTF of the RichTextBox in the current tab
             string currRTF;
             if (!String.IsNullOrEmpty((TabList.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf))
