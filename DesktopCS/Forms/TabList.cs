@@ -33,6 +33,10 @@ namespace DesktopCS.Forms
 
         private void DrawTab(int index, Graphics g)
         {
+            Color bgColor = Constants.INACTIVE_TAB_BACKGROUND_COLOR;
+            Color textColor = Constants.INACTIVE_TAB_TEXT_COLOR;
+            Color borderColor = Constants.INACTIVE_TAB_BORDER_COLOR;
+
             BaseTab tabPage = this.TabPages[index] as BaseTab;
 
             Rectangle borderRect = this.GetTabRect(index);
@@ -44,16 +48,20 @@ namespace DesktopCS.Forms
             if (this.SelectedIndex == index)
             {
                 innerRect.Height += 1;
+
+                bgColor = Constants.TAB_BACKGROUND_COLOR;
+                textColor = Constants.TAB_TEXT_COLOR;
+                borderColor = Constants.TAB_BORDER_COLOR;
             }
 
-            g.DrawRectangle(new Pen(Constants.TAB_BORDER_COLOR), borderRect);
-            g.FillRectangle(new SolidBrush(Constants.CHAT_BACKGROUND_COLOR), innerRect);
+            g.DrawRectangle(new Pen(borderColor), borderRect);
+            g.FillRectangle(new SolidBrush(bgColor), innerRect);
 
             StringFormat format = new StringFormat();
             format.Alignment = StringAlignment.Center;
             format.LineAlignment = StringAlignment.Center;
 
-            g.DrawString(tabPage.Text, SystemFonts.DefaultFont, new SolidBrush(Constants.TAB_TEXT_COLOR), borderRect, format);
+            g.DrawString(tabPage.Text, SystemFonts.DefaultFont, new SolidBrush(textColor), borderRect, format);
         }
 
         private void DrawBackground(Graphics g)
@@ -62,8 +70,13 @@ namespace DesktopCS.Forms
             backRect.Height += this.Bounds.Y;
             backRect.Y = 0;
 
+            Rectangle borderRect = this.Bounds;
+            borderRect.Width -= 7;
+            borderRect.Height -= 28;
+            borderRect.X += 3;
+
             g.FillRectangle(new SolidBrush(Constants.BACKGROUND_COLOR), backRect);
-            g.DrawRectangle(new Pen(Constants.TAB_BORDER_COLOR), this.Bounds);
+            g.DrawRectangle(new Pen(Constants.TAB_BORDER_COLOR), borderRect);
         }
     }
 }
