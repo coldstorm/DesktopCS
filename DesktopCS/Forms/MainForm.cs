@@ -45,9 +45,10 @@ namespace DesktopCS.Forms
             MainMenuStrip.BackColor = BackColor;
             MainMenuStrip.ForeColor = ForeColor;
 
-            Userlist.SelectedNode = null;
-            Userlist.BackColor = Constants.CHAT_BACKGROUND_COLOR;
-            Userlist.ForeColor = ForeColor;
+            UserList.SelectedNode = null;
+            UserList.BackColor = Constants.CHAT_BACKGROUND_COLOR;
+            UserList.ForeColor = ForeColor;
+            UserList.ShowRootLines = false;
 
             InputBox.BackColor = Constants.CHAT_BACKGROUND_COLOR;
             InputBox.ForeColor = ForeColor;
@@ -150,7 +151,7 @@ namespace DesktopCS.Forms
 
         private void AddUser(string username)
         {
-            Userlist.Nodes.Add(username);
+            UserList.Nodes.Add(username);
         }
 
         private void PopulateUserlist()
@@ -161,7 +162,7 @@ namespace DesktopCS.Forms
                 return;
             }
 
-            Userlist.Nodes.Clear();
+            UserList.Nodes.Clear();
 
             BaseTab selectedTab = TabList.SelectedTab as BaseTab;
 
@@ -171,7 +172,7 @@ namespace DesktopCS.Forms
 
                 foreach (User user in channelTab.Channel.Users.Values)
                 {
-                    Userlist.Nodes.Add(RankChars[user.Rank] + user.NickName);
+                    UserList.Nodes.Add(RankChars[user.Rank] + user.NickName);
                 }
             }
         }
@@ -195,7 +196,7 @@ namespace DesktopCS.Forms
 
             else
             {
-                Userlist.Nodes.Clear();
+                UserList.Nodes.Clear();
             }
         }
     }

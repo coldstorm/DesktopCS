@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Userlist = new System.Windows.Forms.TreeView();
+            this.UserList = new Forms.UserList();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InputBox = new System.Windows.Forms.TextBox();
@@ -38,13 +38,13 @@
             // 
             // Userlist
             // 
-            this.Userlist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Userlist.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Userlist.Location = new System.Drawing.Point(581, 24);
-            this.Userlist.Name = "Userlist";
-            this.Userlist.Size = new System.Drawing.Size(121, 357);
-            this.Userlist.TabIndex = 1;
-            this.Userlist.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Userlist_NodeMouseClick);
+            this.UserList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.UserList.Dock = System.Windows.Forms.DockStyle.Right;
+            this.UserList.Location = new System.Drawing.Point(581, 24);
+            this.UserList.Name = "Userlist";
+            this.UserList.Size = new System.Drawing.Size(121, 357);
+            this.UserList.TabIndex = 1;
+            this.UserList.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Userlist_NodeMouseClick);
             // 
             // MenuStrip
             // 
@@ -91,7 +91,7 @@
             this.ClientSize = new System.Drawing.Size(702, 381);
             this.Controls.Add(this.TabList);
             this.Controls.Add(this.InputBox);
-            this.Controls.Add(this.Userlist);
+            this.Controls.Add(this.UserList);
             this.Controls.Add(this.MenuStrip);
             this.MainMenuStrip = this.MenuStrip;
             this.Name = "MainForm";
@@ -105,7 +105,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TreeView Userlist;
+        private Forms.UserList UserList;
         private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.TextBox InputBox;
