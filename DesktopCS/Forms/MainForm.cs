@@ -107,23 +107,12 @@ namespace DesktopCS.Forms
 
             if (!TabList.TabPages.ContainsKey(tab.Text))
             {
-                //Prepare RichTextBox
-                RichTextBox TextBox = new RichTextBox();
-                TextBox.Name = "TextBox";
-                TextBox.Dock = DockStyle.Fill;
-                TextBox.BorderStyle = BorderStyle.None;
-                TextBox.BackColor = Constants.CHAT_BACKGROUND_COLOR;
-                TextBox.ForeColor = Constants.TEXT_COLOR;
-                TextBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                TextBox.ReadOnly = true;
-
-                tab.Controls.Add(TextBox);
                 TabList.TabPages.Add(tab);
 
                 return tab;
             }
 
-            return null;
+            return TabList.TabPages[tab.Text] as BaseTab;
         }
 
         private void RemoveTab(int index)
