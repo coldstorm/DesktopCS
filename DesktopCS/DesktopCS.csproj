@@ -52,6 +52,7 @@
     <Compile Include="Forms\TabList.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\TabType.cs" />
     <Compile Include="TabControl\CTabControl.cs">
       <SubType>Component</SubType>
     </Compile>

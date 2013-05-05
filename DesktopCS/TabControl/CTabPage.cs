@@ -9,17 +9,11 @@ using System.Drawing.Drawing2D;
 
 namespace DesktopCS
 {
-    public enum TabType
-    {
-        PrivateMessage,
-        Channel
-    }
-
     public partial class CTabPage : TabPage
     {
-        public TabType Type;
+        public Forms.TabType Type;
 
-        public CTabPage(string _name, TabType _type)
+        public CTabPage(string _name, Forms.TabType _type)
         {
             this.Text = _name;
             this.Name = _name;
