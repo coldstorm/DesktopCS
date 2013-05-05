@@ -71,12 +71,12 @@ namespace DesktopCS.Forms
 
         void channel_OnMessage(Channel source, User user, string message)
         {
-            this.Invoke(_addline, cTabControl.TabPages.IndexOf(cTabControl.TabPages[source.Name]), message);
+            this.Invoke(_addline, TabList.TabPages.IndexOf(TabList.TabPages[source.Name]), message);
         }
 
         private CTabPage AddTab(string title, TabType type)
         {
-            if (!cTabControl.TabPages.ContainsKey(title))
+            if (!TabList.TabPages.ContainsKey(title))
             {
                 CTabPage Tab = new CTabPage(title, type);
 
@@ -91,7 +91,7 @@ namespace DesktopCS.Forms
                 TextBox.ReadOnly = true;
 
                 Tab.Controls.Add(TextBox);
-                cTabControl.TabPages.Add(Tab);
+                TabList.TabPages.Add(Tab);
 
                 return Tab;
             }
@@ -101,16 +101,16 @@ namespace DesktopCS.Forms
 
         private void RemoveTab(int index)
         {
-            cTabControl.TabPages.RemoveAt(index);
+            TabList.TabPages.RemoveAt(index);
         }
 
         private void AddLine(string tabName, string line)
         {
             //initialize the RTF of the RichTextBox in the current tab
             string currRTF;
-            if (!String.IsNullOrEmpty((cTabControl.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf))
+            if (!String.IsNullOrEmpty((TabList.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf))
             {
-                currRTF = (cTabControl.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf;
+                currRTF = (TabList.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf;
             }
 
             else
@@ -123,8 +123,7 @@ namespace DesktopCS.Forms
 
             //append the new line at the end of the current RTF file
             newRTF = newRTF.Insert(newRTF.LastIndexOf('}'), "\\cf1" + DateTime.Now.ToString("[HH:mm] ") + "\\cf2" + line);
-
-            (cTabControl.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
+            (TabList.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
         }
 
         private void AddUser(string username)
@@ -139,12 +138,12 @@ namespace DesktopCS.Forms
 
         private void Userlist_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            cTabControl.SelectedTab = AddTab(e.Node.Text, TabType.PrivateMessage);
+            TabList.SelectedTab = AddTab(e.Node.Text, TabType.PrivateMessage);
         }
 
         private void cTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((cTabControl.SelectedTab as CTabPage).Type == TabType.Channel)
+            if ((TabList.SelectedTab as CTabPage).Type == TabType.Channel)
             {
                 PopulateUserlist();
             }

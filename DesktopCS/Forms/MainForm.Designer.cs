@@ -32,7 +32,7 @@
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InputBox = new System.Windows.Forms.TextBox();
-            this.cTabControl = new DesktopCS.Forms.TabList();
+            this.TabList = new DesktopCS.Forms.TabList();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,21 +75,21 @@
             // 
             // cTabControl
             // 
-            this.cTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cTabControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.cTabControl.Location = new System.Drawing.Point(0, 24);
-            this.cTabControl.Name = "cTabControl";
-            this.cTabControl.SelectedIndex = 0;
-            this.cTabControl.Size = new System.Drawing.Size(581, 336);
-            this.cTabControl.TabIndex = 5;
-            this.cTabControl.SelectedIndexChanged += new System.EventHandler(this.cTabControl_SelectedIndexChanged);
+            this.TabList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabList.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.TabList.Location = new System.Drawing.Point(0, 24);
+            this.TabList.Name = "cTabControl";
+            this.TabList.SelectedIndex = 0;
+            this.TabList.Size = new System.Drawing.Size(581, 336);
+            this.TabList.TabIndex = 5;
+            this.TabList.SelectedIndexChanged += new System.EventHandler(this.cTabControl_SelectedIndexChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 381);
-            this.Controls.Add(this.cTabControl);
+            this.Controls.Add(this.TabList);
             this.Controls.Add(this.InputBox);
             this.Controls.Add(this.Userlist);
             this.Controls.Add(this.MenuStrip);
@@ -109,7 +109,7 @@
         private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.TextBox InputBox;
-        private Forms.TabList cTabControl;
+        private Forms.TabList TabList;
     }
 }
 
