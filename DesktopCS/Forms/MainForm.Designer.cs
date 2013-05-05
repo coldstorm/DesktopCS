@@ -82,7 +82,7 @@
             this.TabList.SelectedIndex = 0;
             this.TabList.Size = new System.Drawing.Size(581, 336);
             this.TabList.TabIndex = 5;
-            this.TabList.SelectedIndexChanged += new System.EventHandler(this.cTabControl_SelectedIndexChanged);
+            this.TabList.SelectedIndexChanged += new System.EventHandler(this.TabList_SelectedIndexChanged);
             // 
             // MainForm
             // 
