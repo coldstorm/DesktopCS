@@ -45,11 +45,6 @@ namespace DesktopCS.Forms
             MainMenuStrip.BackColor = BackColor;
             MainMenuStrip.ForeColor = ForeColor;
 
-            UserList.SelectedNode = null;
-            UserList.BackColor = Constants.CHAT_BACKGROUND_COLOR;
-            UserList.ForeColor = ForeColor;
-            UserList.ShowRootLines = false;
-
             InputBox.BackColor = Constants.CHAT_BACKGROUND_COLOR;
             InputBox.ForeColor = ForeColor;
 
