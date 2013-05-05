@@ -16,7 +16,7 @@ namespace DesktopCS.Forms
         private string RTF;
         private NetIRC.Client Client;
 
-        private delegate void AddLineDelegate(int tabIndex, string line);
+        private delegate void AddLineDelegate(string tabName, string line);
         private delegate CTabPage AddTabDelegate(string title, TabType type);
         private AddLineDelegate _addline;
         private AddTabDelegate _addtab;
@@ -65,7 +65,7 @@ namespace DesktopCS.Forms
         void Client_OnChannelJoin(Client client, Channel channel)
         {
             this.Invoke(_addtab, channel.Name, TabType.Channel);
-            this.Invoke(_addline, 0, "You joined the channel " + channel.Name);
+            this.Invoke(_addline, channel.Name, "You joined the channel " + channel.Name);
             channel.OnMessage += channel_OnMessage;
         }
 
@@ -76,22 +76,27 @@ namespace DesktopCS.Forms
 
         private CTabPage AddTab(string title, TabType type)
         {
-            CTabPage Tab = new CTabPage(title, type);
+            if (!cTabControl.TabPages.ContainsKey(title))
+            {
+                CTabPage Tab = new CTabPage(title, type);
 
-            //Prepare RichTextBox
-            RichTextBox TextBox = new RichTextBox();
-            TextBox.Name = "TextBox";
-            TextBox.Dock = DockStyle.Fill;
-            TextBox.BorderStyle = BorderStyle.None;
-            TextBox.BackColor = Constants.CHAT_BACKGROUND_COLOR;
-            TextBox.ForeColor = Constants.TEXT_COLOR;
-            TextBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            TextBox.ReadOnly = true;
+                //Prepare RichTextBox
+                RichTextBox TextBox = new RichTextBox();
+                TextBox.Name = "TextBox";
+                TextBox.Dock = DockStyle.Fill;
+                TextBox.BorderStyle = BorderStyle.None;
+                TextBox.BackColor = Constants.CHAT_BACKGROUND_COLOR;
+                TextBox.ForeColor = Constants.TEXT_COLOR;
+                TextBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                TextBox.ReadOnly = true;
 
-            Tab.Controls.Add(TextBox);
-            cTabControl.TabPages.Add(Tab);
+                Tab.Controls.Add(TextBox);
+                cTabControl.TabPages.Add(Tab);
 
-            return Tab;
+                return Tab;
+            }
+
+            return null;
         }
 
         private void RemoveTab(int index)
@@ -99,13 +104,13 @@ namespace DesktopCS.Forms
             cTabControl.TabPages.RemoveAt(index);
         }
 
-        private void AddLine(int tabIndex, string line)
+        private void AddLine(string tabName, string line)
         {
             //initialize the RTF of the RichTextBox in the current tab
             string currRTF;
-            if (!String.IsNullOrEmpty((cTabControl.TabPages[tabIndex].Controls["TextBox"] as RichTextBox).Rtf))
+            if (!String.IsNullOrEmpty((cTabControl.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf))
             {
-                currRTF = (cTabControl.TabPages[tabIndex].Controls["TextBox"] as RichTextBox).Rtf;
+                currRTF = (cTabControl.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf;
             }
 
             else
@@ -119,7 +124,7 @@ namespace DesktopCS.Forms
             //append the new line at the end of the current RTF file
             newRTF = newRTF.Insert(newRTF.LastIndexOf('}'), "\\cf1" + DateTime.Now.ToString("[HH:mm] ") + "\\cf2" + line);
 
-            (cTabControl.TabPages[tabIndex].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
+            (cTabControl.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
         }
 
         private void AddUser(string username)
