@@ -17,7 +17,7 @@ namespace DesktopCS.Forms
         private NetIRC.Client Client;
 
         private delegate void AddLineDelegate(string tabName, string line);
-        private delegate CTabPage AddTabDelegate(string title, TabType type);
+        private delegate BaseTab AddTabDelegate(string title, TabType type);
         private delegate void PopulateUserlistDelegate();
         private AddLineDelegate _addline;
         private AddTabDelegate _addtab;
@@ -88,11 +88,11 @@ namespace DesktopCS.Forms
             this.Invoke(_addline, source.Name, message);
         }
 
-        private CTabPage AddTab(string title, TabType type)
+        private BaseTab AddTab(string title, TabType type)
         {
             if (!TabList.TabPages.ContainsKey(title))
             {
-                CTabPage Tab = new CTabPage(title, type);
+                BaseTab Tab = new BaseTab(title);
 
                 //Prepare RichTextBox
                 RichTextBox TextBox = new RichTextBox();
@@ -162,7 +162,7 @@ namespace DesktopCS.Forms
 
         private void TabList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((TabList.SelectedTab as CTabPage).Type == TabType.Channel)
+            if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
             {
                 PopulateUserlist();
             }

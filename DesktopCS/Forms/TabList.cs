@@ -7,8 +7,6 @@ namespace DesktopCS.Forms
 {
     class TabList : TabControl
     {
-        public Dictionary<string, BaseTab> Tabs = new Dictionary<string, BaseTab>();
-
         public TabList()
         {
             SetStyle(ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
@@ -35,7 +33,7 @@ namespace DesktopCS.Forms
 
         private void DrawTab(int index, Graphics g)
         {
-            CTabPage tabPage = this.TabPages[index] as CTabPage;
+            BaseTab tabPage = this.TabPages[index] as BaseTab;
 
             Rectangle borderRect = this.GetTabRect(index);
             borderRect.X += index * 3 + 2;
