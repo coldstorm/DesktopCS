@@ -49,9 +49,16 @@ namespace DesktopCS.Forms
             _addtab = new AddTabDelegate(AddTab);
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            this.Client.Disconnect();
+
+            base.OnClosing(e);
+        }
+
         void Client_OnConnect(Client client)
         {
-            Client.JoinChannel("RunEE");
+            Client.JoinChannel("test");
             Client.OnConnect -= Client_OnConnect;
         }
 
