@@ -5,7 +5,6 @@ namespace DesktopCS
 {
     class Constants
     {
-        //public const int BACKGROUND_COLOR = 0x1A1C1F;
         public static Color BACKGROUND_COLOR = Color.FromArgb(255, 26, 28, 31);
         public static Color CHAT_BACKGROUND_COLOR = Color.FromArgb(255, 36, 39, 46);
 

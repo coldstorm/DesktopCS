@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="Forms\CSTabControl.cs">
+    <Compile Include="Forms\TabList.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="TabControl\CTabControl.cs">

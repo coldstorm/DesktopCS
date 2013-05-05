@@ -4,9 +4,9 @@ using System.Windows.Forms;
 
 namespace DesktopCS.Forms
 {
-    class CSTabControl : TabControl
+    class TabList : TabControl
     {
-        public CSTabControl()
+        public TabList()
         {
             SetStyle(ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             DrawMode = TabDrawMode.OwnerDrawFixed;

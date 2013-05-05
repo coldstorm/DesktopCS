@@ -18,7 +18,7 @@ namespace DesktopCS.Forms
         {
             InitializeComponent();
 
-            RTF = "{\\rtf{\\colortbl;\\red55\\blue63\\green78;\\red186\\blue187\\green191;}}";
+            RTF = "{\\rtf{\\colortbl;\\red55\\green78\\blue63;\\red186\\green191\\blue187;}}";
 
             AddTab("test", TabType.Channel);
             AddTab("test2", TabType.Channel);
