@@ -12,9 +12,14 @@ namespace DesktopCS.Forms
 {
     public partial class MainForm : Form
     {
+        private string RTF;
+
         public MainForm()
         {
             InitializeComponent();
+
+            RTF = "{\\rtf{\\colortbl;\\red55\\blue63\\green78;\\red186\\blue187\\green191;}}";
+
             AddTab("test", TabType.Channel);
             AddTab("test2", TabType.Channel);
 
@@ -66,9 +71,25 @@ namespace DesktopCS.Forms
 
         private void AddLine(int tabIndex, string line)
         {
+            //initialize the RTF of the RichTextBox in the current tab
+            string currRTF;
+            if (!String.IsNullOrEmpty((cTabControl.TabPages[tabIndex].Controls["TextBox"] as RichTextBox).Rtf))
+            {
+                currRTF = (cTabControl.TabPages[tabIndex].Controls["TextBox"] as RichTextBox).Rtf;
+            }
+
+            else
+            {
+                currRTF = RTF;
+            }
+
             line = line.Trim();
-            string formattedline = DateTime.Now.ToString("[HH:mm] ") + line + "\n";
-            cTabControl.TabPages[tabIndex].Controls["TextBox"].Text += formattedline;
+            string newRTF = currRTF;
+
+            //append the new line at the end of the current RTF file
+            newRTF = newRTF.Insert(newRTF.LastIndexOf('}'), "\\cf1" + DateTime.Now.ToString("[HH:mm] ") + "\\cf2" + line);
+
+            (cTabControl.TabPages[tabIndex].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
         }
 
         private void AddUser(string username)
