@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using NetIRC;
 
 namespace DesktopCS.Forms
 {
@@ -15,6 +16,16 @@ namespace DesktopCS.Forms
             this.SelectedNode = null;
             this.ShowRootLines = false;
             this.ShowPlusMinus = false;
+        }
+
+        public void PopulateFromChannel(Channel channel)
+        {
+            this.Nodes.Clear();
+
+            foreach (User user in channel.Users.Values)
+            {
+                this.Nodes.Add(new UserNode(user));
+            }
         }
     }
 }

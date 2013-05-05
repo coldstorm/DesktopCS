@@ -44,7 +44,7 @@
             this.UserList.Name = "Userlist";
             this.UserList.Size = new System.Drawing.Size(121, 357);
             this.UserList.TabIndex = 1;
-            this.UserList.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Userlist_NodeMouseClick);
+            this.UserList.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.UserList_NodeMouseDoubleClick);
             // 
             // MenuStrip
             // 

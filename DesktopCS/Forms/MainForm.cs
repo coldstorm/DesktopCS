@@ -23,16 +23,6 @@ namespace DesktopCS.Forms
         private AddTabDelegate _addtab;
         private PopulateUserlistDelegate _populateuserlist;
 
-        private Dictionary<UserRank, char?> RankChars = new Dictionary<UserRank, char?>()
-        {
-            {UserRank.None, null},
-            {UserRank.Voice, '+'},
-            {UserRank.HalfOp, '#'},
-            {UserRank.Op, '@'},
-            {UserRank.Admin, '@'},
-            {UserRank.Owner, '@'}
-        };
-
         public MainForm()
         {
             InitializeComponent();
@@ -165,17 +155,16 @@ namespace DesktopCS.Forms
             {
                 ChannelTab channelTab = selectedTab as ChannelTab;
 
-                foreach (User user in channelTab.Channel.Users.Values)
-                {
-                    UserList.Nodes.Add(RankChars[user.Rank] + user.NickName);
-                }
+                this.UserList.PopulateFromChannel(channelTab.Channel);
             }
         }
 
-        private void Userlist_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void UserList_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            ChannelTab channelTab = TabList.SelectedTab as ChannelTab;
-            User user = channelTab.Channel.Users[e.Node.Text];
+            ChannelTab channelTab = this.TabList.SelectedTab as ChannelTab;
+
+            UserNode userNode = this.UserList.SelectedNode as UserNode;
+            User user = userNode.User;
 
             PrivateMessageTab tab = new PrivateMessageTab(user);
 
@@ -188,7 +177,6 @@ namespace DesktopCS.Forms
             {
                 PopulateUserlist();
             }
-
             else
             {
                 UserList.Nodes.Clear();
