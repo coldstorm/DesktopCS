@@ -106,6 +106,11 @@ namespace DesktopCS.Forms
 
         public void SwitchToTab(string tabName)
         {
+            if (this.SelectedTab.Name == tabName)
+            {
+                return;
+            }
+
             this.TabPages.Add(this.Tabs[tabName]);
             this.TabPages.RemoveAt(0);
         }

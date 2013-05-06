@@ -96,7 +96,7 @@ namespace DesktopCS.Forms
                 TabList.AddTab(tab);
 
                 Size size = this.TabList.ItemSize;
-                size.Width = this.Width;
+                size.Width = this.TabList.Width - 1;
                 this.TabList.ItemSize = size;
 
                 this.TabList.SizeMode = TabSizeMode.Fixed;
