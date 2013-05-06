@@ -1,16 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DesktopCS.Forms
 {
     class TabList : TabControl
     {
+        public Dictionary<string, BaseTab> Tabs = new Dictionary<string,BaseTab>();
+
         public TabList()
         {
             SetStyle(ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             DrawMode = TabDrawMode.OwnerDrawFixed;
+        }
+
+        public void AddTab(BaseTab tab)
+        {
+            this.Tabs.Add(tab.Name, tab);
+
+            if (this.Tabs.Count == 1)
+            {
+                this.TabPages.Add(tab);
+                this.SwitchToTab(0);
+            }
+
+            this.Invalidate();
+        }
+
+        public void RemoveTab(BaseTab tab)
+        {
+            this.Tabs.Remove(tab.Name);
+
+            this.Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -23,7 +46,7 @@ namespace DesktopCS.Forms
 
         private void DrawTabs(Graphics g)
         {
-            for (int i = 0; i < this.TabCount; i++)
+            for (int i = 0; i < this.Tabs.Count; i++)
             {
                 this.DrawTab(i, g);
             }
@@ -35,14 +58,14 @@ namespace DesktopCS.Forms
             Color textColor = Constants.INACTIVE_TAB_TEXT_COLOR;
             Color borderColor = Constants.INACTIVE_TAB_BORDER_COLOR;
 
-            BaseTab tabPage = this.TabPages[index] as BaseTab;
+            BaseTab tabPage = this.Tabs.ElementAt(index).Value as BaseTab;
 
             Rectangle borderRect = this.GetTabRectangle(index);
 
             Rectangle innerRect = borderRect;
             innerRect.Height += 1;
 
-            if (this.SelectedIndex == index)
+            if (this.TabCount > 0 && this.TabPages[0] == tabPage)
             {
                 innerRect.Height += 1;
 
@@ -78,12 +101,13 @@ namespace DesktopCS.Forms
 
         public void SwitchToTab(int index)
         {
-            this.SwitchToTab(this.TabPages[index].Name);
+            this.SwitchToTab(this.Tabs.ElementAt(index).Value.Name);
         }
 
         public void SwitchToTab(string tabName)
         {
-            this.SelectedTab = this.TabPages[tabName];
+            this.TabPages.Add(this.Tabs[tabName]);
+            this.TabPages.RemoveAt(0);
         }
 
         public Rectangle GetTabRectangle(int index)
@@ -97,7 +121,7 @@ namespace DesktopCS.Forms
                 rect.X += tabRect.Width + 3;
             }
 
-            TabPage tabPage = this.TabPages[index];
+            TabPage tabPage = this.Tabs.ElementAt(index).Value;
 
             rect.Width += tabPage.Text.Length * 7;
 
@@ -106,13 +130,12 @@ namespace DesktopCS.Forms
 
         protected override void OnMouseClick(MouseEventArgs e)
         {
-            for (int i = 0; i < this.TabCount; i++)
+            for (int i = 0; i < this.Tabs.Count; i++)
             {
                 Rectangle rect = this.GetTabRectangle(i);
 
                 if (rect.Contains(e.Location))
                 {
-                    this.SwitchToTab(i);
                     this.SwitchToTab(i);
                     return;
                 }

@@ -91,9 +91,9 @@ namespace DesktopCS.Forms
                 return (BaseTab)this.Invoke(_addtab, tab);
             }
 
-            if (!TabList.TabPages.ContainsKey(tab.Text))
+            if (!TabList.Tabs.ContainsKey(tab.Text))
             {
-                TabList.TabPages.Add(tab);
+                TabList.AddTab(tab);
 
                 Size size = this.TabList.ItemSize;
                 size.Width = this.Width;
@@ -104,12 +104,12 @@ namespace DesktopCS.Forms
                 return tab;
             }
 
-            return TabList.TabPages[tab.Text] as BaseTab;
+            return TabList.Tabs[tab.Text] as BaseTab;
         }
 
         private void RemoveTab(int index)
         {
-            TabList.TabPages.RemoveAt(index);
+            TabList.RemoveTab(TabList.Tabs.ElementAt(index).Value);
         }
 
         private void AddLine(string tabName, string line)
@@ -122,9 +122,9 @@ namespace DesktopCS.Forms
 
             //initialize the RTF of the RichTextBox in the current tab
             string currRTF;
-            if (!String.IsNullOrEmpty((TabList.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf))
+            if (!String.IsNullOrEmpty((TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf))
             {
-                currRTF = (TabList.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf;
+                currRTF = (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf;
             }
 
             else
@@ -137,7 +137,7 @@ namespace DesktopCS.Forms
 
             //append the new line at the end of the current RTF file
             newRTF = newRTF.Insert(newRTF.LastIndexOf('}'), "\\cf1" + DateTime.Now.ToString("[HH:mm] ") + "\\cf2" + line);
-            (TabList.TabPages[tabName].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
+            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
         }
 
         private void AddUser(string username)
