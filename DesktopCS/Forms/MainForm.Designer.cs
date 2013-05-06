@@ -28,23 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.UserList = new Forms.UserList();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InputBox = new System.Windows.Forms.TextBox();
             this.TabList = new DesktopCS.Forms.TabList();
+            this.UserList = new DesktopCS.Forms.UserList();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // UserList
-            // 
-            this.UserList.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
-            this.UserList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.UserList.Location = new System.Drawing.Point(581, 50);
-            this.UserList.Name = "UserList";
-            this.UserList.Size = new System.Drawing.Size(117, 327);
-            this.UserList.TabIndex = 1;
-            this.UserList.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.UserList_NodeMouseDoubleClick);
             // 
             // MenuStrip
             // 
@@ -65,24 +55,44 @@
             // 
             // InputBox
             // 
-            this.InputBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            this.InputBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.InputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.InputBox.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InputBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InputBox.Location = new System.Drawing.Point(4, 360);
             this.InputBox.Name = "InputBox";
-            this.InputBox.Size = new System.Drawing.Size(574, 21);
+            this.InputBox.Size = new System.Drawing.Size(574, 16);
             this.InputBox.TabIndex = 4;
+            this.InputBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputBox_KeyDown);
             // 
             // TabList
             // 
-            this.TabList.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+            this.TabList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TabList.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.TabList.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TabList.Location = new System.Drawing.Point(0, 24);
-            this.TabList.Name = "cTabControl";
+            this.TabList.Name = "TabList";
             this.TabList.SelectedIndex = 0;
             this.TabList.Size = new System.Drawing.Size(581, 336);
             this.TabList.TabIndex = 5;
             this.TabList.SelectedIndexChanged += new System.EventHandler(this.TabList_SelectedIndexChanged);
+            // 
+            // UserList
+            // 
+            this.UserList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UserList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(39)))), ((int)(((byte)(46)))));
+            this.UserList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.UserList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(187)))), ((int)(((byte)(191)))));
+            this.UserList.Location = new System.Drawing.Point(581, 50);
+            this.UserList.Name = "UserList";
+            this.UserList.ShowPlusMinus = false;
+            this.UserList.ShowRootLines = false;
+            this.UserList.Size = new System.Drawing.Size(117, 327);
+            this.UserList.TabIndex = 1;
+            this.UserList.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.UserList_NodeMouseDoubleClick);
             // 
             // MainForm
             // 

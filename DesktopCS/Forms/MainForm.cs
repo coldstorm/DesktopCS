@@ -27,7 +27,7 @@ namespace DesktopCS.Forms
         {
             InitializeComponent();
 
-            RTF = "{\\rtf{\\colortbl;\\red55\\green78\\blue63;\\red186\\green191\\blue187;}}";
+            RTF = "{\\rtf{\\colortbl\\red55\\green78\\blue63;\\red186\\green191\\blue187;}}";
 
             BackColor = Constants.BACKGROUND_COLOR;
             ForeColor = Constants.TEXT_COLOR;
@@ -55,6 +55,7 @@ namespace DesktopCS.Forms
             base.OnClosing(e);
         }
 
+        #region NetIRC Event Handlers
         void Client_OnConnect(Client client)
         {
             Client.JoinChannel("test");
@@ -83,6 +84,7 @@ namespace DesktopCS.Forms
         {
             this.AddLine("#" + source.Name, message);
         }
+        #endregion
 
         private BaseTab AddTab(BaseTab tab)
         {
@@ -140,11 +142,6 @@ namespace DesktopCS.Forms
             (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
         }
 
-        private void AddUser(string username)
-        {
-            UserList.Nodes.Add(username);
-        }
-
         private void PopulateUserlist()
         {
             if (this.InvokeRequired)
@@ -152,8 +149,6 @@ namespace DesktopCS.Forms
                 this.Invoke(_populateuserlist);
                 return;
             }
-
-            UserList.Nodes.Clear();
 
             BaseTab selectedTab = TabList.SelectedTab as BaseTab;
 
@@ -163,8 +158,34 @@ namespace DesktopCS.Forms
 
                 this.UserList.PopulateFromChannel(channelTab.Channel);
             }
+
+            else
+            {
+                UserList.Nodes.Clear();
+            }
         }
 
+        private void ProcessInput(string input)
+        {
+            if (input.StartsWith("/"))
+            {
+                //it's a command, pass it on to ProcessCommand
+                string[] parts = input.Remove(0, 1).Split(' ');
+                ProcessCommand(parts);
+            }
+
+            else
+            {
+                //send the message to the current tab
+            }
+        }
+
+        private void ProcessCommand(string[] parts)
+        {
+            //TODO
+        }
+
+        #region Control Event Handlers
         private void UserList_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             ChannelTab channelTab = this.TabList.SelectedTab as ChannelTab;
@@ -181,14 +202,17 @@ namespace DesktopCS.Forms
 
         private void TabList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
+            PopulateUserlist();
+        }
+
+        private void InputBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
             {
-                PopulateUserlist();
-            }
-            else
-            {
-                UserList.Nodes.Clear();
+                ProcessInput(InputBox.Text);
+                InputBox.ResetText();
             }
         }
+        #endregion
     }
 }
