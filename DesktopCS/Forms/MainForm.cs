@@ -17,9 +17,11 @@ namespace DesktopCS.Forms
         private NetIRC.Client Client;
 
         private delegate void AddLineDelegate(string tabName, string line);
+        private delegate void AddLineWithAuthorDelegate(string tabName, string author, string line);
         private delegate BaseTab AddTabDelegate(BaseTab tab);
         private delegate void PopulateUserlistDelegate();
         private AddLineDelegate _addline;
+        private AddLineWithAuthorDelegate _addlinewithautor;
         private AddTabDelegate _addtab;
         private PopulateUserlistDelegate _populateuserlist;
 
@@ -44,6 +46,7 @@ namespace DesktopCS.Forms
             Client.OnChannelJoin += Client_OnChannelJoin;
 
             _addline = new AddLineDelegate(AddLine);
+            _addlinewithautor = new AddLineWithAuthorDelegate(AddLine);
             _addtab = new AddTabDelegate(AddTab);
             _populateuserlist = new PopulateUserlistDelegate(PopulateUserlist);
         }
@@ -82,7 +85,7 @@ namespace DesktopCS.Forms
 
         void channel_OnMessage(Channel source, User user, string message)
         {
-            this.AddLine("#" + source.Name, message);
+            this.AddLine("#" + source.Name, user.NickName, message);
         }
         #endregion
 
@@ -122,6 +125,10 @@ namespace DesktopCS.Forms
                 return;
             }
 
+            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Text += DateTime.Now.ToString("[HH:mm] ") + line + "\n";
+            return;
+
+            //TODO - Finish implementing RTF
             //initialize the RTF of the RichTextBox in the current tab
             string currRTF;
             if (!String.IsNullOrEmpty((TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf))
@@ -139,6 +146,38 @@ namespace DesktopCS.Forms
 
             //append the new line at the end of the current RTF file
             newRTF = newRTF.Insert(newRTF.LastIndexOf('}'), "\\cf1" + DateTime.Now.ToString("[HH:mm] ") + "\\cf2" + line);
+            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
+        }
+
+        private void AddLine(string tabName, string author, string line)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(_addlinewithautor, tabName, author, line);
+                return;
+            }
+
+            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Text += DateTime.Now.ToString("[HH:mm] ") + author + " " + line + "\n";
+            return;
+
+            //TODO - Finish implementing RTF
+            //initialize the RTF of the RichTextBox in the current tab
+            string currRTF;
+            if (!String.IsNullOrEmpty((TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf))
+            {
+                currRTF = (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf;
+            }
+
+            else
+            {
+                currRTF = RTF;
+            }
+
+            line = line.Trim();
+            string newRTF = currRTF;
+
+            //append the new line at the end of the current RTF file
+            newRTF = newRTF.Insert(newRTF.LastIndexOf('}'), "\\cf1" + DateTime.Now.ToString("[HH:mm] ") + "\\cf2" + author + " " + line);
             (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
         }
 
@@ -182,7 +221,12 @@ namespace DesktopCS.Forms
 
         private void ProcessCommand(string[] parts)
         {
-            //TODO
+            switch (parts[0].ToLowerInvariant())
+            {
+                default:
+                    AddLine(TabList.SelectedTab.Name, "Unknown command");
+                    break;
+            }
         }
 
         #region Control Event Handlers
