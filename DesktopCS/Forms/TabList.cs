@@ -15,8 +15,6 @@ namespace DesktopCS.Forms
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
-
             Graphics g = e.Graphics;
 
             this.DrawBackground(g);
@@ -39,8 +37,7 @@ namespace DesktopCS.Forms
 
             BaseTab tabPage = this.TabPages[index] as BaseTab;
 
-            Rectangle borderRect = this.GetTabRect(index);
-            borderRect.X += index * 3 + 2;
+            Rectangle borderRect = this.GetTabRectangle(index);
 
             Rectangle innerRect = borderRect;
             innerRect.Height += 1;
@@ -77,6 +74,49 @@ namespace DesktopCS.Forms
 
             g.FillRectangle(new SolidBrush(Constants.BACKGROUND_COLOR), backRect);
             g.DrawRectangle(new Pen(Constants.TAB_BORDER_COLOR), borderRect);
+        }
+
+        public void SwitchToTab(int index)
+        {
+            this.SwitchToTab(this.TabPages[index].Name);
+        }
+
+        public void SwitchToTab(string tabName)
+        {
+            this.SelectedTab = this.TabPages[tabName];
+        }
+
+        public Rectangle GetTabRectangle(int index)
+        {
+            Rectangle rect = new Rectangle(3, 2, 6, 21);
+
+            for (int i = 0; i < index; i++)
+            {
+                Rectangle tabRect = this.GetTabRectangle(i);
+
+                rect.X += tabRect.Width + 3;
+            }
+
+            TabPage tabPage = this.TabPages[index];
+
+            rect.Width += tabPage.Text.Length * 7;
+
+            return rect;
+        }
+
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            for (int i = 0; i < this.TabCount; i++)
+            {
+                Rectangle rect = this.GetTabRectangle(i);
+
+                if (rect.Contains(e.Location))
+                {
+                    this.SwitchToTab(i);
+                    this.SwitchToTab(i);
+                    return;
+                }
+            }
         }
     }
 }

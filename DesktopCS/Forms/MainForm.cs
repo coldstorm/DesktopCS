@@ -95,6 +95,12 @@ namespace DesktopCS.Forms
             {
                 TabList.TabPages.Add(tab);
 
+                Size size = this.TabList.ItemSize;
+                size.Width = this.Width;
+                this.TabList.ItemSize = size;
+
+                this.TabList.SizeMode = TabSizeMode.Fixed;
+
                 return tab;
             }
 
@@ -168,7 +174,9 @@ namespace DesktopCS.Forms
 
             PrivateMessageTab tab = new PrivateMessageTab(user);
 
-            TabList.SelectedTab = AddTab(tab);
+            AddTab(tab);
+
+            this.TabList.SwitchToTab(tab.Name);
         }
 
         private void TabList_SelectedIndexChanged(object sender, EventArgs e)
