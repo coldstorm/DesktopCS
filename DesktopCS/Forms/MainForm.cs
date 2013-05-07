@@ -211,9 +211,15 @@ namespace DesktopCS.Forms
             {
                 if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
                 {
-                    //it's a command, pass it on to ProcessCommand
-                    string[] parts = input.Remove(0, 1).Split(' ');
-                    ProcessCommand(parts);
+                    if (CommandExecutor.Execute(this.Client, input) == CommandReturn.INSUFFICIENT_PARAMS)
+                    {
+                        AddLine(TabList.SelectedTab.Name, "Insufficient parameters.");
+                    }
+
+                    else if (CommandExecutor.Execute(this.Client, input) == CommandReturn.UNKNOWN_COMMAND)
+                    {
+                        AddLine(TabList.SelectedTab.Name, "Unknown command.");
+                    }
                 }
             }
 
@@ -224,23 +230,6 @@ namespace DesktopCS.Forms
                     Client.Send(new NetIRC.Messages.Send.ChatMessage((TabList.SelectedTab as ChannelTab).Channel, input));
                     AddLine(TabList.SelectedTab.Name, Client.User.NickName, input);
                 }
-            }
-        }
-
-        private void ProcessCommand(string[] parts)
-        {
-            switch (parts[0].ToLowerInvariant())
-            {
-                case "join":
-                    if (parts.Length >= 2)
-                        Client.JoinChannel(parts[1]);
-                    else
-                        AddLine(TabList.SelectedTab.Name, "Insufficient parameters.");
-                    break;
-
-                default:
-                    AddLine(TabList.SelectedTab.Name, "Unknown command");
-                    break;
             }
         }
 
