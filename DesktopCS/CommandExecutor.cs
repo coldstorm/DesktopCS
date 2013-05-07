@@ -7,13 +7,6 @@ using NetIRC;
 
 namespace DesktopCS
 {
-    public enum CommandReturn
-    {
-        UNKNOWN_COMMAND,
-        INSUFFICIENT_PARAMS,
-        SUCCESS
-    }
-
     public static class CommandExecutor
     {
         public static CommandReturn Execute(Client client, string command)
