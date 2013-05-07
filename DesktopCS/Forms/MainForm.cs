@@ -206,6 +206,7 @@ namespace DesktopCS.Forms
 
         private void ProcessInput(string input)
         {
+            input = input.Trim();
             if (input.StartsWith("/"))
             {
                 if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
@@ -230,6 +231,13 @@ namespace DesktopCS.Forms
         {
             switch (parts[0].ToLowerInvariant())
             {
+                case "join":
+                    if (parts.Length >= 2)
+                        Client.JoinChannel(parts[1]);
+                    else
+                        AddLine(TabList.SelectedTab.Name, "Insufficient parameters.");
+                    break;
+
                 default:
                     AddLine(TabList.SelectedTab.Name, "Unknown command");
                     break;
