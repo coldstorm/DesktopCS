@@ -4,7 +4,7 @@ namespace DesktopCS.Forms
 {
     class PrivateMessageTab : BaseTab
     {
-        private NetIRC.User Target;
+        public NetIRC.User Target;
 
         public PrivateMessageTab(NetIRC.User target) : base(target.NickName)
         {

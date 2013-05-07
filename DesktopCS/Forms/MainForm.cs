@@ -21,7 +21,7 @@ namespace DesktopCS.Forms
         private delegate BaseTab AddTabDelegate(BaseTab tab);
         private delegate void PopulateUserlistDelegate();
         private AddLineDelegate _addline;
-        private AddLineWithAuthorDelegate _addlinewithautor;
+        private AddLineWithAuthorDelegate _addlinewithauthor;
         private AddTabDelegate _addtab;
         private PopulateUserlistDelegate _populateuserlist;
 
@@ -46,7 +46,7 @@ namespace DesktopCS.Forms
             Client.OnChannelJoin += Client_OnChannelJoin;
 
             _addline = new AddLineDelegate(AddLine);
-            _addlinewithautor = new AddLineWithAuthorDelegate(AddLine);
+            _addlinewithauthor = new AddLineWithAuthorDelegate(AddLine);
             _addtab = new AddTabDelegate(AddTab);
             _populateuserlist = new PopulateUserlistDelegate(PopulateUserlist);
         }
@@ -153,7 +153,7 @@ namespace DesktopCS.Forms
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(_addlinewithautor, tabName, author, line);
+                this.Invoke(_addlinewithauthor, tabName, author, line);
                 return;
             }
 
@@ -208,14 +208,21 @@ namespace DesktopCS.Forms
         {
             if (input.StartsWith("/"))
             {
-                //it's a command, pass it on to ProcessCommand
-                string[] parts = input.Remove(0, 1).Split(' ');
-                ProcessCommand(parts);
+                if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
+                {
+                    //it's a command, pass it on to ProcessCommand
+                    string[] parts = input.Remove(0, 1).Split(' ');
+                    ProcessCommand(parts);
+                }
             }
 
             else
             {
-                //send the message to the current tab
+                if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
+                {
+                    Client.Send(new NetIRC.Messages.Send.ChatMessage((TabList.SelectedTab as ChannelTab).Channel, input));
+                    AddLine(TabList.SelectedTab.Name, Client.User.NickName, input);
+                }
             }
         }
 
