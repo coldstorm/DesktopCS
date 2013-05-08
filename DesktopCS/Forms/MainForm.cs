@@ -261,6 +261,32 @@ namespace DesktopCS.Forms
                 InputBox.ResetText();
             }
         }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            Graphics g = e.Graphics;
+            Rectangle userListRect = this.UserList.Bounds;
+
+            userListRect.X -= 1;
+            userListRect.Y -= 1;
+
+            userListRect.Width += 1;
+            userListRect.Height += 1;
+
+            g.DrawRectangle(new Pen(Constants.TAB_BORDER_COLOR), userListRect);
+
+            Rectangle inputBoxRectangle = this.InputBox.Bounds;
+
+            inputBoxRectangle.X -= 1;
+            inputBoxRectangle.Y -= 1;
+
+            inputBoxRectangle.Width += 1;
+            inputBoxRectangle.Height += 1;
+
+            g.DrawRectangle(new Pen(Constants.TAB_BORDER_COLOR), inputBoxRectangle);
+        }
         #endregion
     }
 }

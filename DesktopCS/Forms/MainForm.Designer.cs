@@ -61,7 +61,7 @@
             this.InputBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InputBox.Location = new System.Drawing.Point(4, 360);
             this.InputBox.Name = "InputBox";
-            this.InputBox.Size = new System.Drawing.Size(574, 16);
+            this.InputBox.Size = new System.Drawing.Size(572, 16);
             this.InputBox.TabIndex = 4;
             this.InputBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputBox_KeyDown);
             // 
@@ -75,7 +75,7 @@
             this.TabList.Location = new System.Drawing.Point(0, 24);
             this.TabList.Name = "TabList";
             this.TabList.SelectedIndex = 0;
-            this.TabList.Size = new System.Drawing.Size(581, 336);
+            this.TabList.Size = new System.Drawing.Size(580, 335);
             this.TabList.TabIndex = 5;
             this.TabList.SelectedIndexChanged += new System.EventHandler(this.TabList_SelectedIndexChanged);
             // 
@@ -86,7 +86,7 @@
             this.UserList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(39)))), ((int)(((byte)(46)))));
             this.UserList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.UserList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(187)))), ((int)(((byte)(191)))));
-            this.UserList.Location = new System.Drawing.Point(581, 50);
+            this.UserList.Location = new System.Drawing.Point(581, 49);
             this.UserList.Name = "UserList";
             this.UserList.ShowPlusMinus = false;
             this.UserList.ShowRootLines = false;

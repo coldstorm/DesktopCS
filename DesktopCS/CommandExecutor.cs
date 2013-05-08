@@ -11,9 +11,9 @@ namespace DesktopCS
     {
         public static CommandReturn Execute(Client client, string command)
         {
-            string[] parts = command.Remove(0, 1).ToLowerInvariant().Trim().Split(' ');
+            string[] parts = command.Remove(0, 1).Trim().Split(' ');
 
-            switch (parts[0])
+            switch (parts[0].ToLowerInvariant())
             {
                 case "join":
                     if (parts.Length >= 2)

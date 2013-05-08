@@ -87,7 +87,7 @@ namespace DesktopCS.Forms
         private void DrawBackground(Graphics g)
         {
             Rectangle backRect = this.Bounds;
-            backRect.Height += this.Bounds.Y;
+            backRect.Height += this.Bounds.Y - 1;
             backRect.Y = 0;
 
             Rectangle borderRect = this.Bounds;
