@@ -16,6 +16,8 @@ namespace DesktopCS.Forms
             this.SelectedNode = null;
             this.ShowRootLines = false;
             this.ShowPlusMinus = false;
+
+            this.TreeViewNodeSorter = new UserNodeSorter();
         }
 
         public void PopulateFromChannel(Channel channel)
