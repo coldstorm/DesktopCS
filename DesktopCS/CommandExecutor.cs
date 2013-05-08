@@ -18,7 +18,13 @@ namespace DesktopCS
                 case "join":
                     if (parts.Length >= 2)
                     {
+                        if (parts[1][0] == '#')
+                        {
+                            parts[1] = parts[1].Substring(1);
+                        }
+
                         client.JoinChannel(parts[1]);
+
                         return CommandReturn.SUCCESS;
                     }
 
