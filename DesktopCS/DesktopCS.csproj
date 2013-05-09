@@ -74,6 +74,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\UserNode.cs" />
+    <Compile Include="Forms\UserNodeSorter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MainForm.resx">

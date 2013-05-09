@@ -75,17 +75,46 @@ namespace DesktopCS.Forms
             this.PopulateUserlist();
 
             channel.OnMessage += channel_OnMessage;
+            channel.OnNotice += channel_OnNotice;
             channel.OnJoin += channel_OnJoin;
-        }
-
-        void channel_OnJoin(Channel source, User user)
-        {
-            this.PopulateUserlist();
+            channel.OnLeave += channel_OnLeave;
+            channel.OnKick += channel_OnKick;
         }
 
         void channel_OnMessage(Channel source, User user, string message)
         {
             this.AddLine("#" + source.Name, user.NickName, message);
+        }
+
+        void channel_OnNotice(Channel source, User user, string notice)
+        {
+            this.AddLine("#" + source.Name, user.NickName, notice);
+        }
+
+        void channel_OnJoin(Channel source, User user)
+        {
+            this.AddLine("#" + source.Name, user.NickName + " joined the room.");
+            this.PopulateUserlist();
+        }
+
+        void channel_OnLeave(Channel source, User user)
+        {
+            this.AddLine("#" + source.Name, user.NickName + " left the room.");
+            this.PopulateUserlist();
+        }
+
+        void channel_OnKick(Channel source, User kicker, User user, string reason)
+        {
+            if (user == Client.User)
+            {
+                this.AddLine("#" + source.Name, "You were kicked by " + kicker.NickName + " (" + reason + ")");
+                UserList.Nodes.Clear();
+            }
+            else
+            {
+                this.AddLine("#" + source.Name, kicker.NickName + " kicked " + user.NickName + " (" + reason + ")");
+                this.PopulateUserlist();
+            }
         }
         #endregion
 
@@ -126,6 +155,8 @@ namespace DesktopCS.Forms
             }
 
             (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Text += DateTime.Now.ToString("[HH:mm] ") + line + "\n";
+            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).SelectionStart = (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Text.Length;
+            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).ScrollToCaret();
             return;
 
             //TODO - Finish implementing RTF
@@ -158,6 +189,8 @@ namespace DesktopCS.Forms
             }
 
             (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Text += DateTime.Now.ToString("[HH:mm] ") + author + " " + line + "\n";
+            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).SelectionStart = (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Text.Length;
+            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).ScrollToCaret();
             return;
 
             //TODO - Finish implementing RTF
