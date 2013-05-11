@@ -62,7 +62,7 @@
             this.InputBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InputBox.Location = new System.Drawing.Point(4, 360);
             this.InputBox.Name = "InputBox";
-            this.InputBox.Size = new System.Drawing.Size(572, 16);
+            this.InputBox.Size = new System.Drawing.Size(502, 16);
             this.InputBox.TabIndex = 4;
             this.InputBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputBox_KeyDown);
             // 
@@ -89,7 +89,7 @@
             this.TabList.Location = new System.Drawing.Point(0, 24);
             this.TabList.Name = "TabList";
             this.TabList.SelectedIndex = 0;
-            this.TabList.Size = new System.Drawing.Size(580, 319);
+            this.TabList.Size = new System.Drawing.Size(510, 319);
             this.TabList.TabIndex = 5;
             this.TabList.SelectedIndexChanged += new System.EventHandler(this.TabList_SelectedIndexChanged);
             // 
@@ -100,11 +100,12 @@
             this.UserList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(39)))), ((int)(((byte)(46)))));
             this.UserList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.UserList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(187)))), ((int)(((byte)(191)))));
-            this.UserList.Location = new System.Drawing.Point(582, 49);
+            this.UserList.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, 0);
+            this.UserList.Location = new System.Drawing.Point(512, 49);
             this.UserList.Name = "UserList";
             this.UserList.ShowPlusMinus = false;
             this.UserList.ShowRootLines = false;
-            this.UserList.Size = new System.Drawing.Size(116, 312);
+            this.UserList.Size = new System.Drawing.Size(186, 312);
             this.UserList.Sorted = true;
             this.UserList.TabIndex = 1;
             this.UserList.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.UserList_NodeMouseDoubleClick);
