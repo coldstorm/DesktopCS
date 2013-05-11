@@ -88,6 +88,7 @@ namespace DesktopCS.Forms
             this.AddTab(tab);
 
             this.AddLine("#" + channel.Name, "You joined the channel " + channel.Name);
+
             this.PopulateUserlist();
             this.UpdateTopicLabel();
 
@@ -140,6 +141,7 @@ namespace DesktopCS.Forms
         void channel_OnTopicChange(Channel source, ChannelTopic topic)
         {
             UpdateTopicLabel();
+            this.PopulateUserlist();
         }
         #endregion
 

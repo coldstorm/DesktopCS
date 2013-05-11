@@ -121,6 +121,7 @@
             this.Controls.Add(this.UserList);
             this.Controls.Add(this.MenuStrip);
             this.MainMenuStrip = this.MenuStrip;
+            this.MinimumSize = this.ClientSize;
             this.Name = "MainForm";
             this.Text = "Coldstorm";
             this.MenuStrip.ResumeLayout(false);
