@@ -20,10 +20,12 @@ namespace DesktopCS.Forms
         private delegate void AddLineWithAuthorDelegate(string tabName, string author, string line);
         private delegate BaseTab AddTabDelegate(BaseTab tab);
         private delegate void PopulateUserlistDelegate();
+        private delegate void UpdateTopicLabelDelegate();
         private AddLineDelegate _addline;
         private AddLineWithAuthorDelegate _addlinewithauthor;
         private AddTabDelegate _addtab;
         private PopulateUserlistDelegate _populateuserlist;
+        private UpdateTopicLabelDelegate _updatetopiclabel;
 
         public MainForm()
         {
@@ -40,6 +42,10 @@ namespace DesktopCS.Forms
             InputBox.BackColor = Constants.CHAT_BACKGROUND_COLOR;
             InputBox.ForeColor = ForeColor;
 
+            TopicLabel.BackColor = Constants.BACKGROUND_COLOR;
+            TopicLabel.ForeColor = ForeColor;
+            TopicLabel.Text = "";
+
             Client = new Client();
             Client.Connect("frogbox.es", 6667, false, new User("DesktopCS"));
             Client.OnConnect += Client_OnConnect;
@@ -49,6 +55,7 @@ namespace DesktopCS.Forms
             _addlinewithauthor = new AddLineWithAuthorDelegate(AddLine);
             _addtab = new AddTabDelegate(AddTab);
             _populateuserlist = new PopulateUserlistDelegate(PopulateUserlist);
+            _updatetopiclabel = new UpdateTopicLabelDelegate(UpdateTopicLabel);
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -73,12 +80,14 @@ namespace DesktopCS.Forms
 
             this.AddLine("#" + channel.Name, "You joined the channel " + channel.Name);
             this.PopulateUserlist();
+            this.UpdateTopicLabel();
 
             channel.OnMessage += channel_OnMessage;
             channel.OnNotice += channel_OnNotice;
             channel.OnJoin += channel_OnJoin;
             channel.OnLeave += channel_OnLeave;
             channel.OnKick += channel_OnKick;
+            channel.OnTopicChange += channel_OnTopicChange;
         }
 
         void channel_OnMessage(Channel source, User user, string message)
@@ -115,6 +124,11 @@ namespace DesktopCS.Forms
                 this.AddLine("#" + source.Name, kicker.NickName + " kicked " + user.NickName + " (" + reason + ")");
                 this.PopulateUserlist();
             }
+        }
+
+        void channel_OnTopicChange(Channel source, ChannelTopic topic)
+        {
+            UpdateTopicLabel();
         }
         #endregion
 
@@ -237,6 +251,30 @@ namespace DesktopCS.Forms
             }
         }
 
+        private void UpdateTopicLabel()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(_updatetopiclabel);
+                return;
+            }
+
+            if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
+            {
+                ChannelTab tab = TabList.SelectedTab as ChannelTab;
+
+                if (tab.Channel.Topic.Message != null && tab.Channel.Topic.Author != null)
+                {
+                    TopicLabel.Text = tab.Channel.Topic.Message + " (by " + tab.Channel.Topic.Author.NickName + ")";
+                }
+            }
+
+            else
+            {
+                TopicLabel.Text = "";
+            }
+        }
+
         private void ProcessInput(string input)
         {
             input = input.Trim();
@@ -284,6 +322,7 @@ namespace DesktopCS.Forms
         private void TabList_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateUserlist();
+            UpdateTopicLabel();
         }
 
         private void InputBox_KeyDown(object sender, KeyEventArgs e)

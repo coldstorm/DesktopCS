@@ -31,6 +31,7 @@
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InputBox = new System.Windows.Forms.TextBox();
+            this.TopicLabel = new System.Windows.Forms.Label();
             this.TabList = new DesktopCS.Forms.TabList();
             this.UserList = new DesktopCS.Forms.UserList();
             this.MenuStrip.SuspendLayout();
@@ -65,6 +66,17 @@
             this.InputBox.TabIndex = 4;
             this.InputBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputBox_KeyDown);
             // 
+            // TopicLabel
+            // 
+            this.TopicLabel.AutoSize = true;
+            this.TopicLabel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.TopicLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TopicLabel.Location = new System.Drawing.Point(661, 24);
+            this.TopicLabel.Name = "TopicLabel";
+            this.TopicLabel.Size = new System.Drawing.Size(41, 13);
+            this.TopicLabel.TabIndex = 6;
+            this.TopicLabel.Text = "label1";
+            // 
             // TabList
             // 
             this.TabList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -91,6 +103,7 @@
             this.UserList.ShowPlusMinus = false;
             this.UserList.ShowRootLines = false;
             this.UserList.Size = new System.Drawing.Size(117, 327);
+            this.UserList.Sorted = true;
             this.UserList.TabIndex = 1;
             this.UserList.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.UserList_NodeMouseDoubleClick);
             // 
@@ -99,6 +112,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 381);
+            this.Controls.Add(this.TopicLabel);
             this.Controls.Add(this.TabList);
             this.Controls.Add(this.InputBox);
             this.Controls.Add(this.UserList);
@@ -120,6 +134,7 @@
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.TextBox InputBox;
         private Forms.TabList TabList;
+        private System.Windows.Forms.Label TopicLabel;
     }
 }
 
