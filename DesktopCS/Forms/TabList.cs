@@ -75,6 +75,11 @@ namespace DesktopCS.Forms
                 borderColor = Constants.TAB_BORDER_COLOR;
             }
 
+            if (tabPage.Active)
+            {
+                textColor = Constants.ACTIVE_TAB_TEXT_COLOR;
+            }
+
             g.DrawRectangle(new Pen(borderColor), borderRect);
             g.FillRectangle(new SolidBrush(bgColor), innerRect);
 
@@ -122,6 +127,8 @@ namespace DesktopCS.Forms
             {
                 return;
             }
+
+            this.Tabs[tabName].Active = false;
 
             this.TabPages.Add(this.Tabs[tabName]);
             this.TabPages.RemoveAt(0);

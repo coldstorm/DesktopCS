@@ -229,6 +229,13 @@ namespace DesktopCS.Forms
             (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Text += DateTime.Now.ToString("[HH:mm] ") + author + " " + line + "\n";
             (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).SelectionStart = (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Text.Length;
             (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).ScrollToCaret();
+
+            if (this.TabList.SelectedTab.Name != tabName)
+            {
+                this.TabList.Tabs[tabName].Active = true;
+                this.TabList.Invalidate();
+            }
+
             return;
 
             //TODO - Finish implementing RTF

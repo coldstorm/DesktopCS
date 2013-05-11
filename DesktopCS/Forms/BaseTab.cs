@@ -11,6 +11,8 @@ namespace DesktopCS.Forms
 
         public RichTextBox TextBox;
 
+        public bool Active = false;
+
         public BaseTab(string title)
         {
             this.Name = title;
