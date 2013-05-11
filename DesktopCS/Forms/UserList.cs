@@ -15,6 +15,8 @@ namespace DesktopCS.Forms
     [System.ComponentModel.DesignerCategory("")]
     class UserList : TreeView
     {
+        public static List<string> CountryList = new List<string>();
+
         public UserList() : base()
         {
             this.BackColor = Constants.CHAT_BACKGROUND_COLOR;
@@ -45,6 +47,11 @@ namespace DesktopCS.Forms
                 Bitmap icon = (Bitmap)manager.GetObject(pair.Key.ToString());
 
                 this.ImageList.Images.Add(country, icon);
+
+                if (!UserList.CountryList.Contains(country))
+                {
+                    UserList.CountryList.Add(country);
+                }
             }
         }
 

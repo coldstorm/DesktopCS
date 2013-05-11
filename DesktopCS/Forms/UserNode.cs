@@ -56,7 +56,7 @@ namespace DesktopCS.Forms
 
         private string CountryFromUser(User user)
         {
-            string countryCode = user.UserName;
+            string countryCode = user.UserName.ToLower();
 
             if (countryCode.Length != 8)
             {
@@ -64,6 +64,11 @@ namespace DesktopCS.Forms
             }
 
             string country = countryCode.Substring(6, 2);
+
+            if (!UserList.CountryList.Contains(country))
+            {
+                return "qq";
+            }
 
             return country;
         }

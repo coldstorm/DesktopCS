@@ -109,7 +109,7 @@ namespace DesktopCS.Forms
 
                 this.PopulateUserlist();
             };
-            colorTimer.Interval = 500;
+            colorTimer.Interval = 1000;
 
             colorTimer.Enabled = true;
         }
