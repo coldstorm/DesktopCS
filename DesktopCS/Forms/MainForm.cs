@@ -43,7 +43,7 @@ namespace DesktopCS.Forms
             InputBox.ForeColor = ForeColor;
 
             TopicLabel.BackColor = Constants.BACKGROUND_COLOR;
-            TopicLabel.ForeColor = ForeColor;
+            TopicLabel.ForeColor = Constants.TOPIC_TEXT_COLOR;
             TopicLabel.Text = "";
 
             Client = new Client();
@@ -332,6 +332,19 @@ namespace DesktopCS.Forms
                 ProcessInput(InputBox.Text);
                 InputBox.ResetText();
             }
+        }
+
+        private void TopicLabel_ClientSizeChanged(object sender, System.EventArgs e)
+        {
+            int offset = this.TopicLabel.Bottom + 3;
+
+            this.UserList.Top = offset + 25;
+            this.TabList.Top = offset;
+
+            this.TabList.Height = this.Height - this.InputBox.Height - this.TopicLabel.Height - this.MenuStrip.Height - 49;
+            this.UserList.Height = this.TabList.Height - 6;
+
+            this.InputBox.Top = this.TabList.Bottom + 3;
         }
 
         protected override void OnPaint(PaintEventArgs e)

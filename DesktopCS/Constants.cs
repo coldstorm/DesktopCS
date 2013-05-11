@@ -5,6 +5,8 @@ namespace DesktopCS
 {
     class Constants
     {
+        public static Color TOPIC_TEXT_COLOR = Color.FromArgb(255, 140, 144, 150);
+
         public static Color BACKGROUND_COLOR = Color.FromArgb(255, 26, 28, 31);
         public static Color CHAT_BACKGROUND_COLOR = Color.FromArgb(255, 36, 39, 46);
         

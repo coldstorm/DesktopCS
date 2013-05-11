@@ -68,14 +68,16 @@
             // 
             // TopicLabel
             // 
+            this.TopicLabel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
             this.TopicLabel.AutoSize = true;
-            this.TopicLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.TopicLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TopicLabel.Location = new System.Drawing.Point(661, 24);
+            this.TopicLabel.Location = new System.Drawing.Point(3, 24);
             this.TopicLabel.Name = "TopicLabel";
-            this.TopicLabel.Size = new System.Drawing.Size(41, 13);
+            this.TopicLabel.MaximumSize = new System.Drawing.Size(697, 0);
             this.TopicLabel.TabIndex = 6;
-            this.TopicLabel.Text = "label1";
+            this.TopicLabel.Text = "";
+            this.TopicLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TopicLabel.ClientSizeChanged += new System.EventHandler(this.TopicLabel_ClientSizeChanged);
             // 
             // TabList
             // 
@@ -87,7 +89,7 @@
             this.TabList.Location = new System.Drawing.Point(0, 24);
             this.TabList.Name = "TabList";
             this.TabList.SelectedIndex = 0;
-            this.TabList.Size = new System.Drawing.Size(580, 335);
+            this.TabList.Size = new System.Drawing.Size(580, 319);
             this.TabList.TabIndex = 5;
             this.TabList.SelectedIndexChanged += new System.EventHandler(this.TabList_SelectedIndexChanged);
             // 
@@ -98,11 +100,11 @@
             this.UserList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(39)))), ((int)(((byte)(46)))));
             this.UserList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.UserList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(187)))), ((int)(((byte)(191)))));
-            this.UserList.Location = new System.Drawing.Point(581, 49);
+            this.UserList.Location = new System.Drawing.Point(582, 49);
             this.UserList.Name = "UserList";
             this.UserList.ShowPlusMinus = false;
             this.UserList.ShowRootLines = false;
-            this.UserList.Size = new System.Drawing.Size(117, 327);
+            this.UserList.Size = new System.Drawing.Size(116, 312);
             this.UserList.Sorted = true;
             this.UserList.TabIndex = 1;
             this.UserList.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.UserList_NodeMouseDoubleClick);

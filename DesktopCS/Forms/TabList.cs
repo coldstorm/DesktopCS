@@ -94,6 +94,7 @@ namespace DesktopCS.Forms
             borderRect.Width -= 7;
             borderRect.Height -= 28;
             borderRect.X += 3;
+            borderRect.Y = 24;
 
             g.FillRectangle(new SolidBrush(Constants.BACKGROUND_COLOR), backRect);
             g.DrawRectangle(new Pen(Constants.TAB_BORDER_COLOR), borderRect);
