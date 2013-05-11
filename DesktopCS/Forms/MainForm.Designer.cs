@@ -68,7 +68,7 @@
             // 
             // TopicLabel
             // 
-            this.TopicLabel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
+            this.TopicLabel.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top;
             this.TopicLabel.AutoSize = true;
             this.TopicLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TopicLabel.Location = new System.Drawing.Point(3, 24);

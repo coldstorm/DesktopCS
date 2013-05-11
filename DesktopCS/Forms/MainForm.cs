@@ -65,6 +65,15 @@ namespace DesktopCS.Forms
             base.OnClosing(e);
         }
 
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+
+            this.TopicLabel.MaximumSize = new Size(this.ClientRectangle.Width - 6, 0);
+
+            this.Invalidate();
+        }
+
         #region NetIRC Event Handlers
         void Client_OnConnect(Client client)
         {
@@ -345,6 +354,10 @@ namespace DesktopCS.Forms
             this.UserList.Height = this.TabList.Height - 6;
 
             this.InputBox.Top = this.TabList.Bottom + 3;
+
+            this.TopicLabel.Location = new Point(this.ClientRectangle.Width - this.TopicLabel.Width, this.TopicLabel.Top);
+
+            this.Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
