@@ -1,5 +1,13 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Windows.Forms;
+using DesktopCS.Properties;
 using NetIRC;
 
 namespace DesktopCS.Forms
@@ -19,6 +27,24 @@ namespace DesktopCS.Forms
             this.ShowPlusMinus = false;
 
             this.TreeViewNodeSorter = new UserNodeSorter();
+
+            this.ImageList = new ImageList();
+
+            ResourceManager manager = Resources.ResourceManager;
+            ResourceSet resources = manager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+
+            foreach (DictionaryEntry pair in resources)
+            {
+                if (!pair.Key.ToString().StartsWith("icon_"))
+                {
+                    continue;
+                }
+
+                string country = pair.Key.ToString().Substring(5).Split('.')[0];
+                Bitmap icon = (Bitmap)manager.GetObject(pair.Key.ToString());
+
+                this.ImageList.Images.Add(country, icon);
+            }
         }
 
         public void PopulateFromChannel(Channel channel)
