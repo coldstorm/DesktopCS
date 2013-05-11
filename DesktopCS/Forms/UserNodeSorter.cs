@@ -36,7 +36,7 @@ namespace DesktopCS.Forms
                 return 1;
             }
 
-            return string.Compare(firstUser.NickName, secondUser.NickName);
+            return string.Compare(firstUser.NickName, secondUser.NickName, true);
         }
     }
 }
