@@ -91,6 +91,8 @@ namespace DesktopCS.Forms
             this.PopulateUserlist();
             this.UpdateTopicLabel();
 
+            this.TabList.SwitchToTab(tab.Name);
+
             channel.OnMessage += channel_OnMessage;
             channel.OnNotice += channel_OnNotice;
             channel.OnJoin += channel_OnJoin;

@@ -106,8 +106,18 @@ namespace DesktopCS.Forms
             this.SwitchToTab(this.Tabs.ElementAt(index).Value.Name);
         }
 
+        delegate void SwitchToTabDelegate(string tabName);
+
         public void SwitchToTab(string tabName)
         {
+            if (this.InvokeRequired)
+            {
+                SwitchToTabDelegate del = new SwitchToTabDelegate(this.SwitchToTab);
+
+                this.Invoke(del, tabName);
+                return;
+            }
+
             if (this.SelectedTab.Name == tabName)
             {
                 return;
