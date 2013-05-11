@@ -1873,6 +1873,16 @@ namespace DesktopCS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_qq {
+            get {
+                object obj = ResourceManager.GetObject("icon_qq", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_re {
             get {
                 object obj = ResourceManager.GetObject("icon_re", resourceCulture);
