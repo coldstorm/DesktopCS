@@ -100,6 +100,18 @@ namespace DesktopCS.Forms
             channel.OnLeave += channel_OnLeave;
             channel.OnKick += channel_OnKick;
             channel.OnTopicChange += channel_OnTopicChange;
+
+            System.Timers.Timer colorTimer = new System.Timers.Timer();
+
+            colorTimer.Elapsed += (s, e) =>
+            {
+                colorTimer.Enabled = false;
+
+                this.PopulateUserlist();
+            };
+            colorTimer.Interval = 500;
+
+            colorTimer.Enabled = true;
         }
 
         void channel_OnMessage(Channel source, User user, string message)
@@ -141,7 +153,6 @@ namespace DesktopCS.Forms
         void channel_OnTopicChange(Channel source, ChannelTopic topic)
         {
             UpdateTopicLabel();
-            this.PopulateUserlist();
         }
         #endregion
 

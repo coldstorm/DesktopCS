@@ -39,14 +39,18 @@ namespace DesktopCS.Forms
 
             colorCode = colorCode.Substring(0, 6);
 
+            Color color;
+
             try
             {
-                return ColorTranslator.FromHtml("#" + colorCode);
+                color = ColorTranslator.FromHtml("#" + colorCode);
             }
             catch (FormatException e)
             {
                 return this.ForeColor;
             }
+
+            return color;
         }
     }
 }
