@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace DesktopCS.Forms
 {
+    [System.ComponentModel.DesignerCategory("")]
     class TabList : TabControl
     {
         public Dictionary<string, BaseTab> Tabs = new Dictionary<string,BaseTab>();

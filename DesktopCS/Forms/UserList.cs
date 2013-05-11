@@ -4,6 +4,7 @@ using NetIRC;
 
 namespace DesktopCS.Forms
 {
+    [System.ComponentModel.DesignerCategory("")]
     class UserList : TreeView
     {
         public UserList() : base()

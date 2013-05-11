@@ -51,18 +51,10 @@
     <Compile Include="CommandExecutor.cs" />
     <Compile Include="CommandReturn.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Forms\BaseTab.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\ChannelTab.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\PrivateMessageTab.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\TabList.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Forms\BaseTab.cs" />
+    <Compile Include="Forms\ChannelTab.cs" />
+    <Compile Include="Forms\PrivateMessageTab.cs" />
+    <Compile Include="Forms\TabList.cs" />
     <Compile Include="Forms\TabType.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -70,9 +62,7 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserList.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Forms\UserList.cs" />
     <Compile Include="Forms\UserNode.cs" />
     <Compile Include="Forms\UserNodeSorter.cs" />
     <Compile Include="Program.cs" />

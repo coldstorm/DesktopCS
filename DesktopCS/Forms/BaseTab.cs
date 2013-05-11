@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 namespace DesktopCS.Forms
 {
+    [System.ComponentModel.DesignerCategory("")]
     class BaseTab : TabPage
     {
         public TabType Type;

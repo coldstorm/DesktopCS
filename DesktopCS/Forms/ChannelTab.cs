@@ -2,6 +2,7 @@
 
 namespace DesktopCS.Forms
 {
+    [System.ComponentModel.DesignerCategory("")]
     class ChannelTab : BaseTab
     {
         public NetIRC.Channel Channel;

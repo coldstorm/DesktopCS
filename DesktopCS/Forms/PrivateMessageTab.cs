@@ -2,6 +2,7 @@
 
 namespace DesktopCS.Forms
 {
+    [System.ComponentModel.DesignerCategory("")]
     class PrivateMessageTab : BaseTab
     {
         public NetIRC.User Target;
