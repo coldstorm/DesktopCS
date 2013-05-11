@@ -29,6 +29,7 @@ namespace DesktopCS.Forms
             this.TreeViewNodeSorter = new UserNodeSorter();
 
             this.ImageList = new ImageList();
+            this.ImageList.ImageSize = new Size(16, 11);
 
             ResourceManager manager = Resources.ResourceManager;
             ResourceSet resources = manager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);

@@ -26,11 +26,12 @@ namespace DesktopCS.Forms
             this.User = user;
 
             this.ForeColor = this.ColorFromUser(user);
+            this.ImageKey = this.CountryFromUser(user);
         }
 
         private Color ColorFromUser(User user)
         {
-            string colorCode = User.UserName;
+            string colorCode = user.UserName;
 
             if (colorCode.Length != 8)
             {
@@ -51,6 +52,20 @@ namespace DesktopCS.Forms
             }
 
             return color;
+        }
+
+        private string CountryFromUser(User user)
+        {
+            string countryCode = user.UserName;
+
+            if (countryCode.Length != 8)
+            {
+                return "qq";
+            }
+
+            string country = countryCode.Substring(6, 2);
+
+            return country;
         }
     }
 }
