@@ -33,6 +33,24 @@ namespace DesktopCS
                         return CommandReturn.INSUFFICIENT_PARAMS;
                     }
 
+                case "part":
+                    if (parts.Length >= 2)
+                    {
+                        if (parts[1][0] == '#')
+                        {
+                            parts[1] = parts[1].Substring(1);
+                        }
+
+                        client.LeaveChannel(parts[1]);
+
+                        return CommandReturn.SUCCESS;
+                    }
+
+                    else
+                    {
+                        return CommandReturn.INSUFFICIENT_PARAMS;
+                    }
+
                 default:
                     return CommandReturn.UNKNOWN_COMMAND;
             }

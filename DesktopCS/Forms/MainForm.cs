@@ -13,25 +13,24 @@ namespace DesktopCS.Forms
 {
     public partial class MainForm : Form
     {
-        private string RTF;
         private NetIRC.Client Client;
 
         private delegate void AddLineDelegate(string tabName, string line);
         private delegate void AddLineWithAuthorDelegate(string tabName, User author, string line);
         private delegate BaseTab AddTabDelegate(BaseTab tab);
+        private delegate void RemoveTabDelegate(string tabName);
         private delegate void PopulateUserlistDelegate();
         private delegate void UpdateTopicLabelDelegate();
         private AddLineDelegate _addline;
         private AddLineWithAuthorDelegate _addlinewithauthor;
         private AddTabDelegate _addtab;
+        private RemoveTabDelegate _removetab;
         private PopulateUserlistDelegate _populateuserlist;
         private UpdateTopicLabelDelegate _updatetopiclabel;
 
         public MainForm()
         {
             InitializeComponent();
-
-            RTF = "{\\rtf{\\colortbl\\red55\\green78\\blue63;\\red186\\green191\\blue187;}}";
 
             BackColor = Constants.BACKGROUND_COLOR;
             ForeColor = Constants.TEXT_COLOR;
@@ -50,10 +49,12 @@ namespace DesktopCS.Forms
             Client.Connect("frogbox.es", 6667, false, new User("DesktopCS"));
             Client.OnConnect += Client_OnConnect;
             Client.OnChannelJoin += Client_OnChannelJoin;
+            Client.OnChannelLeave += Client_OnChannelLeave;
 
             _addline = new AddLineDelegate(AddLine);
             _addlinewithauthor = new AddLineWithAuthorDelegate(AddLine);
             _addtab = new AddTabDelegate(AddTab);
+            _removetab = new RemoveTabDelegate(RemoveTab);
             _populateuserlist = new PopulateUserlistDelegate(PopulateUserlist);
             _updatetopiclabel = new UpdateTopicLabelDelegate(UpdateTopicLabel);
         }
@@ -114,6 +115,12 @@ namespace DesktopCS.Forms
             colorTimer.Enabled = true;
         }
 
+        void Client_OnChannelLeave(Client client, Channel channel)
+        {
+            this.RemoveTab("#" + channel.Name);
+            this.PopulateUserlist();
+        }
+
         void channel_OnMessage(Channel source, User user, string message)
         {
             this.AddLine("#" + source.Name, user, message);
@@ -144,7 +151,10 @@ namespace DesktopCS.Forms
 
         void channel_OnLeave(Channel source, User user)
         {
-            this.AddLine("#" + source.Name, user.NickName + " left the room.");
+            if (user != Client.User)
+            {
+                this.AddLine("#" + source.Name, user.NickName + " left the room.");
+            }
             this.PopulateUserlist();
         }
 
@@ -191,9 +201,18 @@ namespace DesktopCS.Forms
             return TabList.Tabs[tab.Text] as BaseTab;
         }
 
-        private void RemoveTab(int index)
+        private void RemoveTab(string tabName)
         {
-            TabList.RemoveTab(TabList.Tabs.ElementAt(index).Value);
+            if (this.InvokeRequired)
+            {
+                this.Invoke(_removetab, tabName);
+                return;
+            }
+
+            if (TabList.Tabs.ContainsKey(tabName))
+            {
+                TabList.RemoveTab(TabList.Tabs[tabName]);
+            }
         }
 
         private void AddLine(string tabName, string line)
@@ -204,8 +223,11 @@ namespace DesktopCS.Forms
                 return;
             }
 
-            ChatOutput output = new ChatOutput(this.TabList.Tabs[tabName]);
-            output.AddLine(line);
+            if (this.TabList.Tabs.ContainsKey(tabName))
+            {
+                ChatOutput output = new ChatOutput(this.TabList.Tabs[tabName]);
+                output.AddLine(line);
+            }
         }
 
         private void AddLine(string tabName, User author, string line)
@@ -236,7 +258,7 @@ namespace DesktopCS.Forms
 
             BaseTab selectedTab = TabList.SelectedTab as BaseTab;
 
-            if (selectedTab.Type == TabType.Channel)
+            if (selectedTab != null && selectedTab.Type == TabType.Channel)
             {
                 ChannelTab channelTab = selectedTab as ChannelTab;
 
@@ -257,7 +279,7 @@ namespace DesktopCS.Forms
                 return;
             }
 
-            if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
+            if (TabList.SelectedTab != null && (TabList.SelectedTab as BaseTab).Type == TabType.Channel)
             {
                 ChannelTab tab = TabList.SelectedTab as ChannelTab;
 
@@ -278,17 +300,14 @@ namespace DesktopCS.Forms
             input = input.Trim();
             if (input.StartsWith("/"))
             {
-                if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
+                if (CommandExecutor.Execute(this.Client, input) == CommandReturn.INSUFFICIENT_PARAMS)
                 {
-                    if (CommandExecutor.Execute(this.Client, input) == CommandReturn.INSUFFICIENT_PARAMS)
-                    {
-                        AddLine(TabList.SelectedTab.Name, "Insufficient parameters.");
-                    }
+                    AddLine(TabList.SelectedTab.Name, "Insufficient parameters.");
+                }
 
-                    else if (CommandExecutor.Execute(this.Client, input) == CommandReturn.UNKNOWN_COMMAND)
-                    {
-                        AddLine(TabList.SelectedTab.Name, "Unknown command.");
-                    }
+                else if (CommandExecutor.Execute(this.Client, input) == CommandReturn.UNKNOWN_COMMAND)
+                {
+                    AddLine(TabList.SelectedTab.Name, "Unknown command.");
                 }
             }
 

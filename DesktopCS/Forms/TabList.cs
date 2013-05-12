@@ -34,6 +34,11 @@ namespace DesktopCS.Forms
         {
             this.Tabs.Remove(tab.Name);
 
+            if (this.Tabs.Count == 0)
+            {
+                this.TabPages.Remove(tab);
+            }
+
             this.Invalidate();
         }
 
