@@ -27,6 +27,7 @@ namespace DesktopCS.Forms
 
             this.ForeColor = ColorFromUser(user);
             this.ImageKey = CountryFromUser(user);
+            this.SelectedImageKey = this.ImageKey;
         }
 
         public static Color ColorFromUser(User user)

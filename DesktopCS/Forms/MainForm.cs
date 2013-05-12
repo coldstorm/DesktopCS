@@ -340,7 +340,7 @@ namespace DesktopCS.Forms
             this.TabList.Top = offset;
 
             this.TabList.Height = this.Height - this.InputBox.Height - this.TopicLabel.Height - this.MenuStrip.Height - 49;
-            this.UserList.Height = this.TabList.Height - 6;
+            this.UserList.Height = this.TabList.Height - 9;
 
             this.InputBox.Top = this.TabList.Bottom + 3;
 
