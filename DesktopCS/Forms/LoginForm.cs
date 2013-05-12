@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DesktopCS.Forms
@@ -31,6 +24,14 @@ namespace DesktopCS.Forms
                 Properties.Settings.Default.Color = ColorTranslator.ToHtml(ColorChooser.Color);
                 Properties.Settings.Default.Save();
             }
+        }
+
+        protected void LoginForm_Load(object sender, System.EventArgs e)
+        {
+            this.Close();
+
+            MainForm main = new MainForm();
+            main.Show();
         }
     }
 }

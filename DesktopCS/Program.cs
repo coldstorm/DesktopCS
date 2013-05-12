@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using DesktopCS.Forms;
 
 namespace DesktopCS
 {
@@ -13,7 +14,11 @@ namespace DesktopCS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.MainForm());
+
+            LoginForm login = new LoginForm();
+            login.Show();
+
+            Application.Run();
         }
     }
 }

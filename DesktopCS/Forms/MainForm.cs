@@ -64,6 +64,8 @@ namespace DesktopCS.Forms
             this.Client.Disconnect();
 
             base.OnClosing(e);
+
+            Application.Exit();
         }
 
         protected override void OnResize(EventArgs e)
