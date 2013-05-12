@@ -92,7 +92,16 @@ namespace DesktopCS.Forms
             format.Alignment = StringAlignment.Center;
             format.LineAlignment = StringAlignment.Center;
 
-            g.DrawString(tabPage.Text, new Font("Verdana", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0), new SolidBrush(textColor), borderRect, format);
+            Rectangle nameRect = borderRect;
+            nameRect.Width -= 10;
+
+            g.DrawString(tabPage.Text, new Font("Verdana", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0), new SolidBrush(textColor), nameRect, format);
+
+            Rectangle xRect = nameRect;
+            xRect.X += xRect.Width;
+            xRect.Width = 10;
+
+            g.DrawString("X", new Font("Verdana", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0), new SolidBrush(textColor), xRect, format);
         }
 
         private void DrawBackground(Graphics g)
@@ -153,8 +162,25 @@ namespace DesktopCS.Forms
             TabPage tabPage = this.Tabs.ElementAt(index).Value;
 
             rect.Width += tabPage.Text.Length * 7;
+            rect.Width += 10;
 
             return rect;
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            for (int i = 0; i < this.Tabs.Count; i++)
+            {
+                Rectangle rect = this.GetTabRectangle(i);
+
+                if (rect.Contains(e.Location))
+                {
+                    this.Cursor = Cursors.Hand;
+                    return;
+                }
+            }
+
+            this.Cursor = Cursors.Default;
         }
 
         protected override void OnMouseClick(MouseEventArgs e)
@@ -165,6 +191,16 @@ namespace DesktopCS.Forms
 
                 if (rect.Contains(e.Location))
                 {
+                    Rectangle xRect = rect;
+                    xRect.X += xRect.Width - 10;
+                    xRect.Width = 10;
+
+                    if (xRect.Contains(e.Location))
+                    {
+                        this.RemoveTab(this.Tabs.Values.ToArray()[i]);
+                        return;
+                    }
+
                     this.SwitchToTab(i);
                     return;
                 }

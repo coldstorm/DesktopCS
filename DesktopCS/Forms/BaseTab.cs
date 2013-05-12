@@ -79,7 +79,7 @@ namespace DesktopCS.Forms
             this.TextBox.SelectionLength = 0;
         }
 
-        void TextBox_DoubleClick(object sender, EventArgs e)
+        private void TextBox_DoubleClick(object sender, EventArgs e)
         {
             MouseEventArgs evt = e as MouseEventArgs;
 
