@@ -17,7 +17,7 @@ namespace DesktopCS
             this.Tab = tab;
         }
 
-        public void AddLine(User author, string text)
+        private void AddLine(string text, List<Color> colorTable)
         {
             RichTextBox textBox = this.Tab.Controls["TextBox"] as RichTextBox;
 
@@ -26,42 +26,12 @@ namespace DesktopCS
                 textBox.Rtf.Insert(textBox.Rtf.LastIndexOf('}'), "\\par");
             }
 
-            textBox.SelectionStart = textBox.Text.Length;
-            textBox.ScrollToCaret();
+            int timestampIndex = GetColorIndex(colorTable, Constants.TIMESTAMP_COLOR);
 
-            List<Color> colorTable = ChatOutput.GetColorTable(textBox.Rtf).ToList();
+            int textIndex = GetColorIndex(colorTable, Constants.TEXT_COLOR);
 
-            if (colorTable == null || !colorTable.Contains(Constants.TIMESTAMP_COLOR))
-            {
-                colorTable = new List<Color>();
-                colorTable.Add(Constants.TIMESTAMP_COLOR);
-            }
-
-            int timestampIndex = colorTable.IndexOf(Constants.TIMESTAMP_COLOR) + 1;
-
-            Color userColor = UserNode.ColorFromUser(author);
-            int colorIndex;
-
-            int textIndex = colorTable.IndexOf(Constants.TEXT_COLOR) + 1;
-
-            if (textIndex < 1)
-            {
-                colorTable.Add(Constants.TEXT_COLOR);
-                textIndex = colorTable.Count;
-            }
-
-            if (!colorTable.Contains(userColor))
-            {
-                colorTable.Add(userColor);
-                colorIndex = colorTable.Count;
-            }
-            else
-            {
-                colorIndex = colorTable.IndexOf(userColor) + 1;
-            }
-
-            string message = String.Format("\\cf{0}[{1:HH:mm}] \\cf{2}{3} \\cf{4} {5}",
-                timestampIndex, DateTime.Now, colorIndex, author.NickName, textIndex, text);
+            string message = string.Format("\\cf{0} [{1:HH:mm}] \\cf{2} {3}",
+                timestampIndex, DateTime.Now, textIndex, text);
 
             string rtf = textBox.Rtf;
 
@@ -74,6 +44,32 @@ namespace DesktopCS
             textBox.ScrollToCaret();
         }
 
+        public void AddLine(string text)
+        {
+            RichTextBox textBox = this.Tab.Controls["TextBox"] as RichTextBox;
+
+            List<Color> colorTable = ChatOutput.GetColorTable(textBox.Rtf).ToList();
+
+            AddLine(text, colorTable);
+        }
+
+        public void AddLine(User author, string text)
+        {
+            RichTextBox textBox = this.Tab.Controls["TextBox"] as RichTextBox;
+
+            List<Color> colorTable = ChatOutput.GetColorTable(textBox.Rtf).ToList();
+
+            Color userColor = UserNode.ColorFromUser(author);
+            int colorIndex = GetColorIndex(colorTable, userColor);
+
+            int textIndex = GetColorIndex(colorTable, Constants.TEXT_COLOR);
+
+            string message = String.Format("\\cf{0} {1} \\cf{2} {3}",
+                colorIndex, author.NickName, textIndex, text);
+
+            AddLine(message, colorTable);
+        }
+
         public static Color[] GetColorTable(string rtf)
         {
             int colorTableStart = rtf.IndexOf("\\colortbl");
@@ -83,16 +79,16 @@ namespace DesktopCS
                 return new Color[0];
             }
 
-            int colorTableEnd = rtf.IndexOf("}", colorTableStart);
+            int colorTableEnd = rtf.IndexOf('}', colorTableStart);
 
             if (colorTableEnd < 0)
             {
                 return new Color[0];
             }
 
-            string colorTable = rtf.Substring(colorTableStart + 10, colorTableEnd - colorTableStart);
+            string colorTable = rtf.Substring(colorTableStart + 11, colorTableEnd - colorTableStart - 12);
 
-            string[] colorTableData = colorTable.Split(';').Skip(1).Reverse().Skip(1).Reverse().ToArray();
+            string[] colorTableData = colorTable.Split(';');
 
             List<Color> colors = new List<Color>();
 
@@ -110,6 +106,18 @@ namespace DesktopCS
             }
 
             return colors.ToArray();
+        }
+
+        public static int GetColorIndex(List<Color> colorTable, Color color)
+        {
+            if (colorTable.Contains(color))
+            {
+                return colorTable.IndexOf(color) + 1;
+            }
+
+            colorTable.Add(color);
+
+            return colorTable.Count;
         }
 
         public static string SetColorTable(string rtf, Color[] colorTable)
