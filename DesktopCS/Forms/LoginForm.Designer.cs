@@ -35,6 +35,7 @@
             this.ColorLabel = new System.Windows.Forms.Label();
             this.ColorBox = new System.Windows.Forms.TextBox();
             this.LoginButton = new System.Windows.Forms.Button();
+            this.ColorChooser = new System.Windows.Forms.ColorDialog();
             this.SuspendLayout();
             // 
             // NicknameBox
@@ -85,6 +86,7 @@
             this.ColorBox.Name = "ColorBox";
             this.ColorBox.Size = new System.Drawing.Size(100, 20);
             this.ColorBox.TabIndex = 4;
+            this.ColorBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ColorBox_MouseDoubleClick);
             // 
             // LoginButton
             // 
@@ -94,6 +96,11 @@
             this.LoginButton.TabIndex = 6;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = true;
+            // 
+            // ColorChooser
+            // 
+            this.ColorChooser.AnyColor = true;
+            this.ColorChooser.FullOpen = true;
             // 
             // LoginForm
             // 
@@ -123,5 +130,6 @@
         private System.Windows.Forms.Label ColorLabel;
         private System.Windows.Forms.TextBox ColorBox;
         private System.Windows.Forms.Button LoginButton;
+        private System.Windows.Forms.ColorDialog ColorChooser;
     }
 }

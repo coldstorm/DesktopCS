@@ -34,5 +34,17 @@ namespace DesktopCS.Properties {
                 this["Nickname"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string Color {
+            get {
+                return ((string)(this["Color"]));
+            }
+            set {
+                this["Color"] = value;
+            }
+        }
     }
 }

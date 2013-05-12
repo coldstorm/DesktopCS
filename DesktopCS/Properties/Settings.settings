@@ -5,5 +5,8 @@
     <Setting Name="Nickname" Type="System.String" Scope="User">
       <Value Profile="(Default)">DesktopCS</Value>
     </Setting>
+    <Setting Name="Color" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFFFF</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
