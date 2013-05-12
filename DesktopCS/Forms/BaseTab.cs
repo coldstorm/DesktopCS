@@ -46,6 +46,12 @@ namespace DesktopCS.Forms
             }
 
             string word = GetWordAtLocation(this.TextBox, e.Location);
+
+            if (word.Length == 0)
+            {
+                return;
+            }
+
             string timeStamp = line.Substring(0, line.IndexOf(' '));
 
             if (word == timeStamp)
@@ -98,11 +104,14 @@ namespace DesktopCS.Forms
             int timeStampLocation = rtfLine.IndexOf(timeStamp);
             string rtfOnlyLine = rtfNoEnd.Substring(timeStampLocation + timeStamp.Length);
 
-            string hiddenCommand = CommandForWord(rtfOnlyLine, word);
+            string hiddenData = CommandForWord(rtfOnlyLine, word);
+            string hiddenCommand = hiddenData.Split(':')[0];
 
             if (hiddenCommand == "cs-pm")
             {
-                MessageBox.Show("Send pm to: " + word);
+                string commandTarget = hiddenData.Split(':')[1];
+
+                MessageBox.Show("Send pm to: " + commandTarget);
             }
 
             this.TextBox.SelectionLength = 0;
@@ -196,9 +205,7 @@ namespace DesktopCS.Forms
                 string rtfData = rtfLine.Substring(0, position - 5);
                 string rtfHidden = rtfData.Substring(rtfData.LastIndexOf(' ') + 1);
 
-                string hiddenCommand = rtfHidden.Substring(0, rtfHidden.IndexOf(':'));
-
-                return hiddenCommand;
+                return rtfHidden;
             }
         }
 

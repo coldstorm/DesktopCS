@@ -11,10 +11,12 @@ namespace DesktopCS
     class ChatOutput
     {
         public BaseTab Tab;
+        private Client Client;
 
-        public ChatOutput(BaseTab tab)
+        public ChatOutput(BaseTab tab, Client client)
         {
             this.Tab = tab;
+            this.Client = client;
         }
 
         private void AddLine(string text, List<Color> colorTable)
@@ -24,6 +26,28 @@ namespace DesktopCS
             int timestampIndex = GetColorIndex(colorTable, Constants.TIMESTAMP_COLOR);
 
             int textIndex = GetColorIndex(colorTable, Constants.TEXT_COLOR);
+
+            string[] words = text.Split(' ');
+
+            for (int i = 1; i < words.Length; i++)
+            {
+                if (words[i - 1] == "\\v0")
+                {
+                    continue;
+                }
+
+                foreach (Channel channel in this.Client.Channels.Values)
+                {
+                    if (channel.Users.ContainsKey(words[i]))
+                    {
+                        words[i] = "{\\v cs-pm:" + words[i] + " }" + words[i];
+
+                        break;
+                    }
+                }
+            }
+
+            text = string.Join(" ", words);
 
             string message = string.Format("\\cf{0} [{1:HH:mm}] \\cf{2} {3}",
                 timestampIndex, DateTime.Now, textIndex, text);

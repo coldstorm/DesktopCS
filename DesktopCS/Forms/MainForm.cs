@@ -225,7 +225,7 @@ namespace DesktopCS.Forms
 
             if (this.TabList.Tabs.ContainsKey(tabName))
             {
-                ChatOutput output = new ChatOutput(this.TabList.Tabs[tabName]);
+                ChatOutput output = new ChatOutput(this.TabList.Tabs[tabName], this.Client);
                 output.AddLine(line);
             }
         }
@@ -238,7 +238,7 @@ namespace DesktopCS.Forms
                 return;
             }
 
-            ChatOutput output = new ChatOutput(this.TabList.Tabs[tabName]);
+            ChatOutput output = new ChatOutput(this.TabList.Tabs[tabName], this.Client);
             output.AddLine(author, line);
 
             if (this.TabList.SelectedTab.Name != tabName)
