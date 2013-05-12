@@ -39,9 +39,6 @@ namespace DesktopCS.Forms
         {
             this.Cursor = Cursors.Default;
 
-            int selectionStart = this.TextBox.SelectionStart;
-            int selectionLength = this.TextBox.SelectionLength;
-
             int charPosition = this.TextBox.GetCharIndexFromPosition(e.Location);
             int lineNumber = this.TextBox.GetLineFromCharIndex(charPosition);
             int lineStart = this.TextBox.GetFirstCharIndexFromLine(lineNumber);
@@ -81,8 +78,6 @@ namespace DesktopCS.Forms
             string rtfLine = this.TextBox.SelectedRtf;
             string rtfNoEnd = rtfLine.Substring(0, rtfLine.Length - 3);
 
-            this.TextBox.Select(selectionStart, selectionLength);
-
             int timeStampLocation = rtfLine.IndexOf(timeStamp);
             string rtfOnlyLine = rtfNoEnd.Substring(timeStampLocation + timeStamp.Length);
 
@@ -103,8 +98,6 @@ namespace DesktopCS.Forms
                 string rtfHidden = rtfData.Substring(rtfData.LastIndexOf(' ') + 1);
 
                 string hiddenCommand = rtfHidden.Substring(0, rtfHidden.IndexOf(':'));
-
-                this.Cursor = Cursors.Cross;
 
                 if (hiddenCommand == "cs-pm")
                 {
