@@ -64,8 +64,8 @@ namespace DesktopCS
 
             int textIndex = GetColorIndex(colorTable, Constants.TEXT_COLOR);
 
-            string message = String.Format("\\cf{0} {1} \\cf{2} {3}",
-                colorIndex, author.NickName, textIndex, text);
+            string message = String.Format("\\cf{0} {1}{2} \\cf{3} {4}",
+                colorIndex, UserNode.RankChars[author.Rank], author.NickName, textIndex, text);
 
             AddLine(message, colorTable);
         }

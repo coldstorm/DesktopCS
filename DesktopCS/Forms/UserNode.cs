@@ -10,7 +10,7 @@ namespace DesktopCS.Forms
     {
         public User User;
 
-        private Dictionary<UserRank, char?> RankChars = new Dictionary<UserRank, char?>()
+        public static readonly Dictionary<UserRank, char?> RankChars = new Dictionary<UserRank, char?>()
         {
             {UserRank.None, null},
             {UserRank.Voice, '+'},
@@ -22,7 +22,7 @@ namespace DesktopCS.Forms
 
         public UserNode(User user) : base()
         {
-            this.Text = this.RankChars[user.Rank] + user.NickName;
+            this.Text = RankChars[user.Rank] + user.NickName;
             this.User = user;
 
             this.ForeColor = ColorFromUser(user);
