@@ -87,7 +87,7 @@ namespace DesktopCS.Forms
             format.Alignment = StringAlignment.Center;
             format.LineAlignment = StringAlignment.Center;
 
-            g.DrawString(tabPage.Text, SystemFonts.DefaultFont, new SolidBrush(textColor), borderRect, format);
+            g.DrawString(tabPage.Text, new Font("Verdana", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0), new SolidBrush(textColor), borderRect, format);
         }
 
         private void DrawBackground(Graphics g)

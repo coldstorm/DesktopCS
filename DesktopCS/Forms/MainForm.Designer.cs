@@ -59,7 +59,7 @@
             this.InputBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.InputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.InputBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InputBox.Font = new System.Drawing.Font("Verdana", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.InputBox.Location = new System.Drawing.Point(4, 360);
             this.InputBox.Name = "InputBox";
             this.InputBox.Size = new System.Drawing.Size(502, 16);
@@ -70,7 +70,7 @@
             // 
             this.TopicLabel.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top;
             this.TopicLabel.AutoSize = true;
-            this.TopicLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TopicLabel.Font = new System.Drawing.Font("Verdana", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.TopicLabel.Location = new System.Drawing.Point(3, 24);
             this.TopicLabel.Name = "TopicLabel";
             this.TopicLabel.MaximumSize = new System.Drawing.Size(697, 0);
@@ -85,7 +85,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TabList.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.TabList.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabList.Font = new System.Drawing.Font("Verdana", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.TabList.Location = new System.Drawing.Point(0, 24);
             this.TabList.Name = "TabList";
             this.TabList.SelectedIndex = 0;

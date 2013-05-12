@@ -30,7 +30,7 @@ namespace DesktopCS
 
             string rtf = textBox.Rtf;
 
-            if (rtf.EndsWith("\\fs17\\par\r\n}\r\n"))
+            if (rtf.EndsWith("\\fs15\\par\r\n}\r\n"))
             {
                 rtf = rtf.Replace("\\par\r\n}", "}");
             }

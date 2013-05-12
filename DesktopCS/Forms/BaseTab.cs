@@ -27,7 +27,7 @@ namespace DesktopCS.Forms
             TextBox.BorderStyle = BorderStyle.None;
             TextBox.BackColor = Constants.CHAT_BACKGROUND_COLOR;
             TextBox.ForeColor = Constants.TEXT_COLOR;
-            TextBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            TextBox.Font = new System.Drawing.Font("Verdana", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, 0);
             TextBox.ReadOnly = true;
 
             this.Controls.Add(TextBox);
