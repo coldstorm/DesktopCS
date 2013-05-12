@@ -31,6 +31,7 @@ namespace DesktopCS.Forms
             TextBox.ReadOnly = true;
 
             TextBox.MouseMove += TextBox_MouseMove;
+            TextBox.DoubleClick += TextBox_DoubleClick;
 
             this.Controls.Add(TextBox);
         }
@@ -67,6 +68,41 @@ namespace DesktopCS.Forms
             else
             {
                 this.Cursor = Cursors.Default;
+            }
+
+            this.TextBox.SelectionLength = 0;
+        }
+
+        void TextBox_DoubleClick(object sender, EventArgs e)
+        {
+            MouseEventArgs evt = e as MouseEventArgs;
+
+            string line = GetLineAtLocation(this.TextBox, evt.Location);
+
+            if (line == null)
+            {
+                return;
+            }
+
+            string word = GetWordAtLocation(this.TextBox, evt.Location);
+            string timeStamp = line.Substring(0, line.IndexOf(' '));
+
+            if (word == timeStamp)
+            {
+                return;
+            }
+
+            string rtfLine = GetRtfAtLocation(this.TextBox, evt.Location);
+            string rtfNoEnd = rtfLine.Substring(0, rtfLine.Length - 3);
+
+            int timeStampLocation = rtfLine.IndexOf(timeStamp);
+            string rtfOnlyLine = rtfNoEnd.Substring(timeStampLocation + timeStamp.Length);
+
+            string hiddenCommand = CommandForWord(rtfOnlyLine, word);
+
+            if (hiddenCommand == "cs-pm")
+            {
+                MessageBox.Show("Send pm to: " + word);
             }
 
             this.TextBox.SelectionLength = 0;
