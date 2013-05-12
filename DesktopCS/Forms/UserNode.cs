@@ -25,17 +25,17 @@ namespace DesktopCS.Forms
             this.Text = this.RankChars[user.Rank] + user.NickName;
             this.User = user;
 
-            this.ForeColor = this.ColorFromUser(user);
-            this.ImageKey = this.CountryFromUser(user);
+            this.ForeColor = ColorFromUser(user);
+            this.ImageKey = CountryFromUser(user);
         }
 
-        private Color ColorFromUser(User user)
+        public static Color ColorFromUser(User user)
         {
             string colorCode = user.UserName;
 
             if (colorCode.Length != 8)
             {
-                return this.ForeColor;
+                return Constants.TEXT_COLOR;
             }
 
             colorCode = colorCode.Substring(0, 6);
@@ -48,13 +48,13 @@ namespace DesktopCS.Forms
             }
             catch (FormatException e)
             {
-                return this.ForeColor;
+                return Constants.TEXT_COLOR;
             }
 
             return color;
         }
 
-        private string CountryFromUser(User user)
+        public static string CountryFromUser(User user)
         {
             string countryCode = user.UserName.ToLower();
 

@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatOutput.cs" />
     <Compile Include="CommandExecutor.cs" />
     <Compile Include="CommandReturn.cs" />
     <Compile Include="Constants.cs" />

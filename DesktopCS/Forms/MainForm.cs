@@ -17,7 +17,7 @@ namespace DesktopCS.Forms
         private NetIRC.Client Client;
 
         private delegate void AddLineDelegate(string tabName, string line);
-        private delegate void AddLineWithAuthorDelegate(string tabName, string author, string line);
+        private delegate void AddLineWithAuthorDelegate(string tabName, User author, string line);
         private delegate BaseTab AddTabDelegate(BaseTab tab);
         private delegate void PopulateUserlistDelegate();
         private delegate void UpdateTopicLabelDelegate();
@@ -116,12 +116,12 @@ namespace DesktopCS.Forms
 
         void channel_OnMessage(Channel source, User user, string message)
         {
-            this.AddLine("#" + source.Name, user.NickName, message);
+            this.AddLine("#" + source.Name, user, message);
         }
 
         void channel_OnNotice(Channel source, User user, string notice)
         {
-            this.AddLine("#" + source.Name, user.NickName, notice);
+            this.AddLine("#" + source.Name, user, notice);
         }
 
         void channel_OnJoin(Channel source, User user)
@@ -218,7 +218,7 @@ namespace DesktopCS.Forms
             (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
         }
 
-        private void AddLine(string tabName, string author, string line)
+        private void AddLine(string tabName, User author, string line)
         {
             if (this.InvokeRequired)
             {
@@ -226,9 +226,8 @@ namespace DesktopCS.Forms
                 return;
             }
 
-            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Text += DateTime.Now.ToString("[HH:mm] ") + author + " " + line + "\n";
-            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).SelectionStart = (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Text.Length;
-            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).ScrollToCaret();
+            ChatOutput output = new ChatOutput(this.TabList.Tabs[tabName]);
+            output.AddLine(author, line);
 
             if (this.TabList.SelectedTab.Name != tabName)
             {
@@ -330,7 +329,7 @@ namespace DesktopCS.Forms
                 if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
                 {
                     Client.Send(new NetIRC.Messages.Send.ChatMessage((TabList.SelectedTab as ChannelTab).Channel, input));
-                    AddLine(TabList.SelectedTab.Name, Client.User.NickName, input);
+                    AddLine(TabList.SelectedTab.Name, Client.User, input);
                 }
             }
         }
