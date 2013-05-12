@@ -37,25 +37,12 @@ namespace DesktopCS.Forms
 
         private void TextBox_MouseMove(object sender, MouseEventArgs e)
         {
-            int charPosition = this.TextBox.GetCharIndexFromPosition(e.Location);
-            int lineNumber = this.TextBox.GetLineFromCharIndex(charPosition);
-            int lineStart = this.TextBox.GetFirstCharIndexFromLine(lineNumber);
-
             string line = GetLineAtLocation(this.TextBox, e.Location);
 
             if (line == null)
             {
                 return;
             }
-
-            int wordEnd = line.IndexOf(' ', charPosition - lineStart);
-
-            if (wordEnd < 0)
-            {
-                wordEnd = line.Length;
-            }
-
-            int wordStart = line.Substring(0, wordEnd).LastIndexOf(' ');
 
             string word = GetWordAtLocation(this.TextBox, e.Location);
             string timeStamp = line.Substring(0, line.IndexOf(' '));
@@ -81,6 +68,8 @@ namespace DesktopCS.Forms
             {
                 this.Cursor = Cursors.Default;
             }
+
+            this.TextBox.SelectionLength = 0;
         }
 
         private static string GetLineAtLocation(RichTextBox textBox, Point location)
