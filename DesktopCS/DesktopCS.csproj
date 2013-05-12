@@ -54,6 +54,12 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Forms\BaseTab.cs" />
     <Compile Include="Forms\ChannelTab.cs" />
+    <Compile Include="Forms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PrivateMessageTab.cs" />
     <Compile Include="Forms\TabList.cs" />
     <Compile Include="Forms\TabType.cs" />
@@ -68,6 +74,9 @@
     <Compile Include="Forms\UserNodeSorter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
