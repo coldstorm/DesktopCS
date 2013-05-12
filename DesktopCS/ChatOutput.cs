@@ -48,6 +48,11 @@ namespace DesktopCS
         {
             RichTextBox textBox = this.Tab.Controls["TextBox"] as RichTextBox;
 
+            if (textBox.Rtf == null)
+            {
+                textBox.Rtf = "";
+            }
+
             List<Color> colorTable = ChatOutput.GetColorTable(textBox.Rtf).ToList();
 
             AddLine(text, colorTable);
