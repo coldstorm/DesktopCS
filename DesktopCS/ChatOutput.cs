@@ -21,11 +21,6 @@ namespace DesktopCS
         {
             RichTextBox textBox = this.Tab.Controls["TextBox"] as RichTextBox;
 
-            if (!textBox.Rtf.EndsWith("\\par\n}"))
-            {
-                textBox.Rtf.Insert(textBox.Rtf.LastIndexOf('}'), "\\par");
-            }
-
             int timestampIndex = GetColorIndex(colorTable, Constants.TIMESTAMP_COLOR);
 
             int textIndex = GetColorIndex(colorTable, Constants.TEXT_COLOR);
@@ -35,7 +30,12 @@ namespace DesktopCS
 
             string rtf = textBox.Rtf;
 
-            rtf = rtf.Insert(rtf.LastIndexOf('}'), message);
+            if (rtf.EndsWith("\\fs17\\par\r\n}\r\n"))
+            {
+                rtf = rtf.Replace("\\par\r\n}", "}");
+            }
+
+            rtf = rtf.Insert(rtf.LastIndexOf("}"), message);
             rtf = SetColorTable(rtf, colorTable.ToArray());
 
             textBox.Rtf = rtf;

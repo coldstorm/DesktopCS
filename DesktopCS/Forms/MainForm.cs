@@ -192,30 +192,8 @@ namespace DesktopCS.Forms
                 return;
             }
 
-            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Text += DateTime.Now.ToString("[HH:mm] ") + line + "\n";
-            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).SelectionStart = (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Text.Length;
-            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).ScrollToCaret();
-            return;
-
-            //TODO - Finish implementing RTF
-            //initialize the RTF of the RichTextBox in the current tab
-            string currRTF;
-            if (!String.IsNullOrEmpty((TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf))
-            {
-                currRTF = (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf;
-            }
-
-            else
-            {
-                currRTF = RTF;
-            }
-
-            line = line.Trim();
-            string newRTF = currRTF;
-
-            //append the new line at the end of the current RTF file
-            newRTF = newRTF.Insert(newRTF.LastIndexOf('}'), "\\cf1" + DateTime.Now.ToString("[HH:mm] ") + "\\cf2" + line);
-            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
+            ChatOutput output = new ChatOutput(this.TabList.Tabs[tabName]);
+            output.AddLine(line);
         }
 
         private void AddLine(string tabName, User author, string line)
@@ -234,28 +212,6 @@ namespace DesktopCS.Forms
                 this.TabList.Tabs[tabName].Active = true;
                 this.TabList.Invalidate();
             }
-
-            return;
-
-            //TODO - Finish implementing RTF
-            //initialize the RTF of the RichTextBox in the current tab
-            string currRTF;
-            if (!String.IsNullOrEmpty((TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf))
-            {
-                currRTF = (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf;
-            }
-
-            else
-            {
-                currRTF = RTF;
-            }
-
-            line = line.Trim();
-            string newRTF = currRTF;
-
-            //append the new line at the end of the current RTF file
-            newRTF = newRTF.Insert(newRTF.LastIndexOf('}'), "\\cf1" + DateTime.Now.ToString("[HH:mm] ") + "\\cf2" + author + " " + line);
-            (TabList.Tabs[tabName].Controls["TextBox"] as RichTextBox).Rtf = newRTF;
         }
 
         private void PopulateUserlist()
