@@ -37,23 +37,13 @@ namespace DesktopCS.Forms
 
         private void TextBox_MouseMove(object sender, MouseEventArgs e)
         {
-            this.Cursor = Cursors.Default;
-
             int charPosition = this.TextBox.GetCharIndexFromPosition(e.Location);
             int lineNumber = this.TextBox.GetLineFromCharIndex(charPosition);
             int lineStart = this.TextBox.GetFirstCharIndexFromLine(lineNumber);
-            int lineEnd = this.TextBox.GetFirstCharIndexFromLine(lineNumber + 1) - 1;
 
-            if (lineEnd < 0)
-            {
-                lineEnd = this.TextBox.Text.Length;
-            }
+            string line = GetLineAtLocation(this.TextBox, e.Location);
 
-            this.TextBox.Select(lineStart, lineEnd - lineStart);
-
-            string line = this.TextBox.SelectedText;
-
-            if (line.Length == 0)
+            if (line == null)
             {
                 return;
             }
@@ -67,7 +57,7 @@ namespace DesktopCS.Forms
 
             int wordStart = line.Substring(0, wordEnd).LastIndexOf(' ');
 
-            string word = line.Substring(wordStart + 1, wordEnd - wordStart - 1);
+            string word = GetWordAtLocation(this.TextBox, e.Location);
             string timeStamp = line.Substring(0, line.IndexOf(' '));
 
             if (word == timeStamp)
@@ -75,42 +65,115 @@ namespace DesktopCS.Forms
                 return;
             }
 
-            string rtfLine = this.TextBox.SelectedRtf;
+            string rtfLine = GetRtfAtLocation(this.TextBox, e.Location);
             string rtfNoEnd = rtfLine.Substring(0, rtfLine.Length - 3);
 
             int timeStampLocation = rtfLine.IndexOf(timeStamp);
             string rtfOnlyLine = rtfNoEnd.Substring(timeStampLocation + timeStamp.Length);
 
-            int wordLocation = rtfOnlyLine.IndexOf(word);
+            string hiddenCommand = CommandForWord(rtfOnlyLine, word);
 
-            if (wordLocation != rtfOnlyLine.LastIndexOf(word))
+            if (hiddenCommand == "cs-pm")
             {
-                string tempLine = rtfOnlyLine.Substring(wordStart);
-                if (tempLine.IndexOf(word) == tempLine.LastIndexOf(word))
-                {
-                    wordLocation = wordStart + tempLine.IndexOf(word);
-                }
+                this.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        private static string GetLineAtLocation(RichTextBox textBox, Point location)
+        {
+            int charPosition = textBox.GetCharIndexFromPosition(location);
+            int lineNumber = textBox.GetLineFromCharIndex(charPosition);
+            int lineStart = textBox.GetFirstCharIndexFromLine(lineNumber);
+            int lineEnd = textBox.GetFirstCharIndexFromLine(lineNumber + 1) - 1;
+
+            if (lineEnd < 0)
+            {
+                lineEnd = textBox.Text.Length;
             }
 
-            if (rtfOnlyLine.Substring(wordLocation - 4, 3) == "\\v0")
+            textBox.Select(lineStart, lineEnd - lineStart);
+
+            string line = textBox.SelectedText;
+
+            if (line.Length == 0)
             {
-                string rtfData = rtfOnlyLine.Substring(0, wordLocation - 5);
+                return null;
+            }
+
+            return line;
+        }
+
+        private static string GetRtfAtLocation(RichTextBox textBox, Point location)
+        {
+            string line = GetLineAtLocation(textBox, location);
+
+            return textBox.SelectedRtf;
+        }
+
+        private static string GetWordAtLocation(RichTextBox textBox, Point location)
+        {
+            int charPosition = textBox.GetCharIndexFromPosition(location);
+            int lineNumber = textBox.GetLineFromCharIndex(charPosition);
+            int lineStart = textBox.GetFirstCharIndexFromLine(lineNumber);
+
+            string line = GetLineAtLocation(textBox, location);
+
+            if (line == null)
+            {
+                return null;
+            }
+
+            int wordEnd = line.IndexOf(' ', charPosition - lineStart);
+
+            if (wordEnd < 0)
+            {
+                wordEnd = line.Length;
+            }
+
+            int wordStart = line.Substring(0, wordEnd).LastIndexOf(' ');
+
+            string word = line.Substring(wordStart + 1, wordEnd - wordStart - 1);
+
+            return word;
+        }
+
+        private static string CommandForWord(string rtfLine, string word)
+        {
+            int offset = -word.Length;
+
+            while (true)
+            {
+                offset += word.Length;
+
+                int position = rtfLine.IndexOf(word, offset);
+
+                if (position < 0)
+                {
+                    return null;
+                }
+
+                if (position < 5)
+                {
+                    continue;
+                }
+
+                string check = rtfLine.Substring(position - 4, 3);
+
+                if (check != "\\v0")
+                {
+                    continue;
+                }
+
+                string rtfData = rtfLine.Substring(0, position - 5);
                 string rtfHidden = rtfData.Substring(rtfData.LastIndexOf(' ') + 1);
 
                 string hiddenCommand = rtfHidden.Substring(0, rtfHidden.IndexOf(':'));
 
-                if (hiddenCommand == "cs-pm")
-                {
-                    this.Cursor = Cursors.Hand;
-                }
-                else
-                {
-                    MessageBox.Show(hiddenCommand);
-                }
-            }
-            else
-            {
-                return;
+                return hiddenCommand;
             }
         }
 
