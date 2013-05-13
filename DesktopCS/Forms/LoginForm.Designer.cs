@@ -95,6 +95,7 @@
             this.ColorBox.Name = "ColorBox";
             this.ColorBox.Size = new System.Drawing.Size(190, 22);
             this.ColorBox.TabIndex = 4;
+            this.ColorBox.LostFocus += ColorBox_LostFocus;
             this.ColorBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ColorBox_MouseDoubleClick);
             // 
             // LoginButton

@@ -20,7 +20,14 @@ namespace DesktopCS.Forms
 
         protected void ColorBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ColorChooser.Color = ColorTranslator.FromHtml(this.ColorBox.Text);
+            try
+            {
+                ColorChooser.Color = ColorTranslator.FromHtml(this.ColorBox.Text);
+            }
+            catch (ArgumentException ex)
+            {
+                ColorChooser.Color = Constants.TEXT_COLOR;
+            }
             DialogResult result = ColorChooser.ShowDialog();
 
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -28,9 +35,26 @@ namespace DesktopCS.Forms
                 string colorHex = "#" + string.Format("{0:X6}", ColorChooser.Color.ToArgb() & 0xFFFFFF);
 
                 this.ColorBox.Text = colorHex;
+                this.ColorBox.BackColor = ColorChooser.Color;
 
                 Properties.Settings.Default.Color = colorHex;
                 Properties.Settings.Default.Save();
+            }
+        }
+
+        protected void ColorBox_LostFocus(object sender, System.EventArgs e)
+        {
+            try
+            {
+                Color bgColor = ColorTranslator.FromHtml(this.ColorBox.Text);
+                this.ColorBox.BackColor = bgColor;
+
+                Properties.Settings.Default.Color = this.ColorBox.Text;
+                Properties.Settings.Default.Save();
+            }
+            catch (ArgumentException ex)
+            {
+
             }
         }
 
