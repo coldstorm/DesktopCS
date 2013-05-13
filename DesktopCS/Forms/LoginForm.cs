@@ -36,9 +36,7 @@ namespace DesktopCS.Forms
 
                 this.ColorBox.Text = colorHex;
                 this.ColorBox.BackColor = ColorChooser.Color;
-
-                Properties.Settings.Default.Color = colorHex;
-                Properties.Settings.Default.Save();
+                this.ColorBox.BackColor = ColorTranslator.FromHtml(colorHex);
             }
         }
 
@@ -48,9 +46,6 @@ namespace DesktopCS.Forms
             {
                 Color bgColor = ColorTranslator.FromHtml(this.ColorBox.Text);
                 this.ColorBox.BackColor = bgColor;
-
-                Properties.Settings.Default.Color = this.ColorBox.Text;
-                Properties.Settings.Default.Save();
             }
             catch (ArgumentException ex)
             {
@@ -68,6 +63,11 @@ namespace DesktopCS.Forms
 
         protected void LoginButton_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.Color = this.ColorBox.Text;
+            Properties.Settings.Default.Nickname = this.NicknameBox.Text;
+
+            Properties.Settings.Default.Save();
+
             this.fullClose = false;
             this.Close();
 
