@@ -26,8 +26,11 @@ namespace DesktopCS.Forms
 
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                this.ColorBox.Text = ColorTranslator.ToHtml(ColorChooser.Color);
-                Properties.Settings.Default.Color = ColorTranslator.ToHtml(ColorChooser.Color);
+                string colorHex = "#" + string.Format("{0:X6}", ColorChooser.Color.ToArgb() & 0xFFFFFF);
+
+                this.ColorBox.Text = colorHex;
+
+                Properties.Settings.Default.Color = colorHex;
                 Properties.Settings.Default.Save();
             }
         }
