@@ -46,7 +46,7 @@ namespace DesktopCS.Forms
             TopicLabel.Text = "";
 
             Client = new Client();
-            Client.Connect("frogbox.es", 6667, false, new User(Properties.Settings.Default.Nickname));
+            Client.Connect("frogbox.es", 6667, false, new User(Properties.Settings.Default.Nickname, Properties.Settings.Default.Color.Substring(1) + "QQ"));
             Client.OnConnect += Client_OnConnect;
             Client.OnChannelJoin += Client_OnChannelJoin;
             Client.OnChannelLeave += Client_OnChannelLeave;

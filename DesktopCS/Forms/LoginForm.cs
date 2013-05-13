@@ -15,7 +15,6 @@ namespace DesktopCS.Forms
             this.NicknameBox.Text = Properties.Settings.Default.Nickname;
             this.ColorBox.Text = Properties.Settings.Default.Color;
 
-            //this.Load += LoginForm_Load;
             this.FormClosing += LoginForm_FormClosing;
         }
 
@@ -43,7 +42,7 @@ namespace DesktopCS.Forms
             }
         }
 
-        protected void LoginForm_Load(object sender, System.EventArgs e)
+        protected void LoginButton_Click(object sender, EventArgs e)
         {
             this.fullClose = false;
             this.Close();
