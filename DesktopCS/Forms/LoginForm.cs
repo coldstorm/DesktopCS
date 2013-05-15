@@ -14,6 +14,7 @@ namespace DesktopCS.Forms
 
             this.NicknameBox.Text = Properties.Settings.Default.Nickname;
             this.ColorBox.Text = Properties.Settings.Default.Color;
+            this.ColorBox.BackColor = ColorTranslator.FromHtml(this.ColorBox.Text);
 
             this.FormClosing += LoginForm_FormClosing;
         }

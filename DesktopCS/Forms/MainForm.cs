@@ -302,14 +302,25 @@ namespace DesktopCS.Forms
             input = input.Trim();
             if (input.StartsWith("/"))
             {
-                if (CommandExecutor.Execute(this.Client, input) == CommandReturn.INSUFFICIENT_PARAMS)
+                if (this.TabList.SelectedTab as BaseTab != null && (this.TabList.SelectedTab as BaseTab).Type == TabType.Channel)
                 {
-                    AddLine(TabList.SelectedTab.Name, "Insufficient parameters.");
+                    ChannelTab CurrentTab = this.TabList.SelectedTab as ChannelTab;
+                    CommandReturn Return = CommandExecutor.Execute(this.Client, CurrentTab.Channel, input);
+
+                    if (Return == CommandReturn.INSUFFICIENT_PARAMS)
+                    {
+                        AddLine(CurrentTab.Name, "Insufficient parameters.");
+                    }
+
+                    else if (Return == CommandReturn.UNKNOWN_COMMAND)
+                    {
+                        AddLine(CurrentTab.Name, "Unknown command.");
+                    }
                 }
 
-                else if (CommandExecutor.Execute(this.Client, input) == CommandReturn.UNKNOWN_COMMAND)
+                else
                 {
-                    AddLine(TabList.SelectedTab.Name, "Unknown command.");
+                    CommandReturn Return = CommandExecutor.Execute(this.Client, null, input);
                 }
             }
 
