@@ -15,6 +15,19 @@ namespace DesktopCS
 
             switch (parts[0].ToLowerInvariant())
             {
+                case "nick":
+                    if (parts.Length >= 2)
+                    {
+                        invoker.Send(new NetIRC.Messages.Send.NickMessage(parts[1]));
+
+                        return CommandReturn.SUCCESS;
+                    }
+
+                    else
+                    {
+                        return CommandReturn.INSUFFICIENT_PARAMS;
+                    }
+
                 case "join":
                     if (parts.Length >= 2)
                     {

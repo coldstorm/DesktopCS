@@ -135,6 +135,7 @@ namespace DesktopCS.Forms
 
         void channel_OnJoin(Channel source, User user)
         {
+            user.OnNickNameChange += user_OnNickNameChange;
             this.AddLine("#" + source.Name, user.NickName + " joined the room.");
             this.PopulateUserlist();
 
@@ -177,6 +178,17 @@ namespace DesktopCS.Forms
         void channel_OnTopicChange(Channel source, ChannelTopic topic)
         {
             UpdateTopicLabel();
+        }
+
+        void user_OnNickNameChange(User user, string original)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.User.OnNickNameChangeHandler(user_OnNickNameChange), user, original);
+                return;
+            }
+
+            this.AddLine((this.TabList.SelectedTab as BaseTab).Name, original + " has changed their nickname to " + user.NickName);
         }
         #endregion
 
