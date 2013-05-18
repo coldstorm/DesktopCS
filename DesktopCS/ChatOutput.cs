@@ -18,7 +18,7 @@ namespace DesktopCS
             this.Tab = tab;
             this.Client = client;
 
-            while (tab.Browser.Document == null)
+            while (tab.Browser.Document.Body == null)
             {
                 Application.DoEvents();
             }
