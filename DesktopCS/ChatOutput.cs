@@ -103,6 +103,28 @@ namespace DesktopCS
                     }
                 }
 
+                Uri uriResult;
+
+                bool isUri = Uri.TryCreate(word, UriKind.Absolute, out uriResult);
+
+                if (isUri)
+                {
+                    textElement.InnerText += " ";
+                    line.AppendChild(textElement);
+
+                    textElement = browser.Document.CreateElement("span");
+                    textElement.InnerText = " ";
+
+                    HtmlElement linkElement = browser.Document.CreateElement("a");
+                    linkElement.InnerText = word;
+                    linkElement.SetAttribute("href", uriResult.AbsoluteUri);
+                    linkElement.Style = "color:lightblue;";
+
+                    line.AppendChild(linkElement);
+
+                    continue;
+                }
+
                 if (!string.IsNullOrWhiteSpace(textElement.InnerText))
                 {
                     textElement.InnerText += " ";
