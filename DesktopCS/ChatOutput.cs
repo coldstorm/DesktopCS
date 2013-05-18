@@ -82,12 +82,37 @@ namespace DesktopCS
                     continue;
                 }
 
+                foreach (Channel channel in this.Client.Channels.Values)
+                {
+                    if (channel.Users.ContainsKey(word))
+                    {
+                        textElement.InnerText += " ";
+                        line.AppendChild(textElement);
+
+                        textElement = browser.Document.CreateElement("span");
+                        textElement.InnerText = " ";
+
+                        HtmlElement userElement = browser.Document.CreateElement("a");
+                        userElement.SetAttribute("href", "cs-pm:" + word);
+                        userElement.InnerText = word;
+                        userElement.Style = "color:lightblue;text-decoration:none;";
+
+                        line.AppendChild(userElement);
+
+                        goto VbLetsYouBreakThese;
+                    }
+                }
+
                 if (!string.IsNullOrWhiteSpace(textElement.InnerText))
                 {
                     textElement.InnerText += " ";
                 }
 
                 textElement.InnerText += word;
+
+            VbLetsYouBreakThese:
+
+                continue;
             }
 
             if (!string.IsNullOrWhiteSpace(textElement.InnerText))
