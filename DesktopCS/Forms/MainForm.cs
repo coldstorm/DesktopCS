@@ -183,7 +183,18 @@ namespace DesktopCS.Forms
             {
                 this.AddLine("#" + source.Name, user.NickName + " left the room.");
             }
-            this.PopulateUserlist();
+
+            System.Timers.Timer colorTimer = new System.Timers.Timer();
+
+            colorTimer.Elapsed += (s, e) =>
+            {
+                colorTimer.Enabled = false;
+
+                this.PopulateUserlist();
+            };
+            colorTimer.Interval = 1000;
+
+            colorTimer.Enabled = true;
         }
 
         void channel_OnKick(Channel source, User kicker, User user, string reason)
