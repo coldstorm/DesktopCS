@@ -70,6 +70,15 @@ namespace DesktopCS
 
         public void AddLine(string text)
         {
+            WebBrowser browser = this.Tab.Browser;
+
+            HtmlElement line = browser.Document.CreateElement("div");
+            line.InnerText = string.Format("[{0:HH:mm}] {1}", DateTime.Now, text);
+
+            browser.Document.Body.AppendChild(line);
+
+            return;
+
             RichTextBox textBox = this.Tab.Controls["TextBox"] as RichTextBox;
 
             if (textBox.Rtf == null)
@@ -84,6 +93,16 @@ namespace DesktopCS
 
         public void AddLine(User author, string text)
         {
+            WebBrowser browser = this.Tab.Browser;
+
+            HtmlElement line = browser.Document.CreateElement("div");
+            line.Style = "font-color: red";
+            line.InnerText = "Test line";
+
+            browser.Document.Body.AppendChild(line);
+
+            return;
+
             RichTextBox textBox = this.Tab.Controls["TextBox"] as RichTextBox;
 
             List<Color> colorTable = ChatOutput.GetColorTable(textBox.Rtf).ToList();

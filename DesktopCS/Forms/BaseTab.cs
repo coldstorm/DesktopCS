@@ -26,6 +26,18 @@ namespace DesktopCS.Forms
             Browser.Dock = DockStyle.Fill;
             Browser.Name = "Browser";
 
+            Browser.DocumentText = "<html><body></body></html>";
+
+            while (Browser.Document.Body == null)
+            {
+                Application.DoEvents();
+            }
+
+            Browser.Document.ForeColor = Constants.TEXT_COLOR;
+            Browser.Document.BackColor = Constants.CHAT_BACKGROUND_COLOR;
+
+            Browser.Document.Body.Style = "font-size:10px;font-family:verdana;margin:0;padding:0;";
+
             TextBox = new RichTextBox();
             TextBox.Name = "TextBox";
             TextBox.Dock = DockStyle.Fill;
@@ -38,7 +50,7 @@ namespace DesktopCS.Forms
             TextBox.MouseMove += TextBox_MouseMove;
             TextBox.DoubleClick += TextBox_DoubleClick;
 
-            this.Controls.Add(TextBox);
+            //this.Controls.Add(TextBox);
             this.Controls.Add(Browser);
         }
 
