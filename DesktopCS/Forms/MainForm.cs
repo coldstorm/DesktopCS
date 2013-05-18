@@ -86,6 +86,12 @@ namespace DesktopCS.Forms
 
         void Client_OnChannelJoin(Client client, Channel channel)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.Client.OnChannelJoinHandler(Client_OnChannelJoin), client, channel);
+                return;
+            }
+
             ChannelTab tab = new ChannelTab(channel);
 
             this.AddTab(tab);

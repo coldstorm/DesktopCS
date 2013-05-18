@@ -10,6 +10,7 @@ namespace DesktopCS.Forms
         public TabType Type;
 
         public RichTextBox TextBox;
+        public WebBrowser Browser;
 
         public bool Active = false;
 
@@ -20,6 +21,10 @@ namespace DesktopCS.Forms
 
             this.BorderStyle = System.Windows.Forms.BorderStyle.None;
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
+
+            Browser = new WebBrowser();
+            Browser.Dock = DockStyle.Fill;
+            Browser.Name = "Browser";
 
             TextBox = new RichTextBox();
             TextBox.Name = "TextBox";
@@ -34,6 +39,7 @@ namespace DesktopCS.Forms
             TextBox.DoubleClick += TextBox_DoubleClick;
 
             this.Controls.Add(TextBox);
+            this.Controls.Add(Browser);
         }
 
         private void TextBox_MouseMove(object sender, MouseEventArgs e)
