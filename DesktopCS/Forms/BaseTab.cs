@@ -44,20 +44,6 @@ namespace DesktopCS.Forms
 
                 // TODO: Handle cs-pm, cs-channel, etc
             };
-
-            TextBox = new RichTextBox();
-            TextBox.Name = "TextBox";
-            TextBox.Dock = DockStyle.Fill;
-            TextBox.BorderStyle = BorderStyle.None;
-            TextBox.BackColor = Constants.CHAT_BACKGROUND_COLOR;
-            TextBox.ForeColor = Constants.TEXT_COLOR;
-            TextBox.Font = new System.Drawing.Font("Verdana", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, 0);
-            TextBox.ReadOnly = true;
-
-            TextBox.MouseMove += TextBox_MouseMove;
-            TextBox.DoubleClick += TextBox_DoubleClick;
-
-            //this.Controls.Add(TextBox);
             this.Controls.Add(Browser);
         }
 
