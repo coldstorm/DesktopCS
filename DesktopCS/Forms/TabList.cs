@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using NetIRC;
 
 namespace DesktopCS.Forms
 {
@@ -197,7 +198,19 @@ namespace DesktopCS.Forms
 
                     if (xRect.Contains(e.Location))
                     {
-                        this.RemoveTab(this.Tabs.Values.ToArray()[i]);
+                        BaseTab tab = this.Tabs.Values.ToArray()[i];
+                        if (tab.Type == TabType.Channel)
+                        {
+                            Channel channel = (tab as ChannelTab).Channel;
+
+                            MainForm mainForm = this.Parent as MainForm;
+                            mainForm.Client.Send(new NetIRC.Messages.Send.PartMessage("#" + channel.Name));
+                        }
+                        else
+                        {
+                            this.RemoveTab(tab);
+                        }
+
                         return;
                     }
 
