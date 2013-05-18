@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using NetIRC;
 
 namespace DesktopCS.Forms
 {
@@ -45,9 +46,28 @@ namespace DesktopCS.Forms
                 switch (e.Url.Scheme)
                 {
                     case "cs-pm":
-                        // TODO: Switch to or open up the pm tab for the user
+                        MainForm mainForm = this.Parent.Parent as MainForm;
 
-                        MessageBox.Show("Pm");
+                        string userName = e.Url.LocalPath;
+                        User user = null;
+
+                        foreach (Channel channel in mainForm.Client.Channels.Values)
+                        {
+                            if (channel.Users.ContainsKey(userName))
+                            {
+                                user = channel.Users[userName];
+                                break;
+                            }
+                        }
+
+                        if (user == null)
+                        {
+                            break;
+                        }
+
+                        PrivateMessageTab tab = new PrivateMessageTab(user);
+
+                        mainForm.AddTab(tab);
 
                         break;
 

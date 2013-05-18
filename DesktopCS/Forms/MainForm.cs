@@ -13,7 +13,7 @@ namespace DesktopCS.Forms
 {
     public partial class MainForm : Form
     {
-        private NetIRC.Client Client;
+        internal NetIRC.Client Client;
 
         private delegate void AddLineDelegate(string tabName, string line);
         private delegate void AddLineWithAuthorDelegate(string tabName, User author, string line);
@@ -198,7 +198,7 @@ namespace DesktopCS.Forms
         }
         #endregion
 
-        private BaseTab AddTab(BaseTab tab)
+        internal BaseTab AddTab(BaseTab tab)
         {
             if (this.InvokeRequired)
             {
