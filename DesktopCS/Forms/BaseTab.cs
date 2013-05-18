@@ -71,7 +71,9 @@ namespace DesktopCS.Forms
                         break;
 
                     case "cs-channel":
-                        // TODO: Switch to or open up the channel tab
+                        mainForm = this.Parent.Parent as MainForm;
+
+                        mainForm.Client.JoinChannel(e.Url.LocalPath);
 
                         break;
 

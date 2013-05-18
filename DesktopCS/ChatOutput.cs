@@ -46,17 +46,54 @@ namespace DesktopCS
 
             string colorHex = string.Format("{0:X6}", authorColor.ToArgb() & 0xFFFFFF);
 
-            authorElement.InnerText = author.NickName;
+            authorElement.InnerText = string.Format("{0}{1}", UserNode.RankChars[author.Rank], author.NickName);
             authorElement.Style = "color:#" + colorHex + ";text-decoration:none;";
             authorElement.SetAttribute("href", "cs-pm:" + author.NickName);
 
-            HtmlElement textElement = browser.Document.CreateElement("span");
-
-            textElement.InnerText = " " + text;
-
             line.AppendChild(timeStamp);
             line.AppendChild(authorElement);
-            line.AppendChild(textElement);
+
+            string[] words = text.Split(' ');
+
+            HtmlElement textElement = browser.Document.CreateElement("span");
+            textElement.InnerText = " ";
+
+            foreach (string iterWord in words)
+            {
+                string word = iterWord;
+
+                if (word.StartsWith("#"))
+                {
+                    word = word.Substring(1);
+
+                    textElement.InnerText += " ";
+                    line.AppendChild(textElement);
+
+                    textElement = browser.Document.CreateElement("span");
+                    textElement.InnerText = " ";
+
+                    HtmlElement channelElement = browser.Document.CreateElement("a");
+                    channelElement.SetAttribute("href", "cs-channel:" + word);
+                    channelElement.InnerText = "#" + word;
+                    channelElement.Style = "color:lightblue;text-decoration:none;";
+
+                    line.AppendChild(channelElement);
+
+                    continue;
+                }
+
+                if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+                {
+                    textElement.InnerText += " ";
+                }
+
+                textElement.InnerText += word;
+            }
+
+            if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+            {
+                line.AppendChild(textElement);
+            }
 
             browser.Document.Body.AppendChild(line);
 
