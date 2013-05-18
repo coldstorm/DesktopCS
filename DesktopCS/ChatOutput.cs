@@ -42,9 +42,12 @@ namespace DesktopCS
             timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
 
             HtmlElement authorElement = browser.Document.CreateElement("a");
+            Color authorColor = UserNode.ColorFromUser(author);
+
+            string colorHex = string.Format("{0:X6}", authorColor.ToArgb() & 0xFFFFFF);
 
             authorElement.InnerText = author.NickName;
-            authorElement.Style = "color:red;text-decoration:none;";
+            authorElement.Style = "color:#" + colorHex + ";text-decoration:none;";
             authorElement.SetAttribute("href", "cs-pm:" + author.NickName);
 
             HtmlElement textElement = browser.Document.CreateElement("span");
