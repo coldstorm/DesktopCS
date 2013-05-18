@@ -147,9 +147,15 @@ namespace DesktopCS.Forms
                 return;
             }
 
-            this.AddLine("#" + source.Name, "Someone joined");
-
             user.OnNickNameChange += user_OnNickNameChange;
+
+            user.OnQuit += (u, m) =>
+            {
+                foreach (Channel channel in user.Channels)
+                {
+                    channel_OnLeave(channel, user);
+                }
+            };
 
             System.Timers.Timer colorTimer = new System.Timers.Timer();
 

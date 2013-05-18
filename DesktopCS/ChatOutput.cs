@@ -100,7 +100,11 @@ namespace DesktopCS
                 {
                     word = word.Substring(1);
 
-                    textElement.InnerText += " ";
+                    if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+                    {
+                        textElement.InnerText += " ";
+                    }
+
                     line.AppendChild(textElement);
 
                     textElement = browser.Document.CreateElement("span");
@@ -109,7 +113,7 @@ namespace DesktopCS
                     HtmlElement channelElement = browser.Document.CreateElement("a");
                     channelElement.SetAttribute("href", "cs-channel:" + word);
                     channelElement.InnerText = "#" + word;
-                    channelElement.Style = "color:lightblue;text-decoration:none;";
+                    channelElement.Style = "text-decoration:none;color:#babbbf;";
 
                     line.AppendChild(channelElement);
 
@@ -120,7 +124,11 @@ namespace DesktopCS
                 {
                     if (channel.Users.ContainsKey(word))
                     {
-                        textElement.InnerText += " ";
+                        if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+                        {
+                            textElement.InnerText += " ";
+                        }
+
                         line.AppendChild(textElement);
 
                         textElement = browser.Document.CreateElement("span");
@@ -129,7 +137,7 @@ namespace DesktopCS
                         HtmlElement userElement = browser.Document.CreateElement("a");
                         userElement.SetAttribute("href", "cs-pm:" + word);
                         userElement.InnerText = word;
-                        userElement.Style = "color:lightblue;text-decoration:none;";
+                        userElement.Style = "text-decoration:none;color:#babbbf;";
 
                         line.AppendChild(userElement);
 
@@ -143,7 +151,11 @@ namespace DesktopCS
 
                 if (isUri)
                 {
-                    textElement.InnerText += " ";
+                    if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+                    {
+                        textElement.InnerText += " ";
+                    }
+
                     line.AppendChild(textElement);
 
                     textElement = browser.Document.CreateElement("span");
@@ -152,7 +164,7 @@ namespace DesktopCS
                     HtmlElement linkElement = browser.Document.CreateElement("a");
                     linkElement.InnerText = word;
                     linkElement.SetAttribute("href", uriResult.AbsoluteUri);
-                    linkElement.Style = "color:lightblue;";
+                    linkElement.Style = "color:#4a7691;";
 
                     line.AppendChild(linkElement);
 
