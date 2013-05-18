@@ -78,17 +78,6 @@ namespace DesktopCS
             browser.Document.Body.AppendChild(line);
 
             return;
-
-            RichTextBox textBox = this.Tab.Controls["TextBox"] as RichTextBox;
-
-            if (textBox.Rtf == null)
-            {
-                textBox.Rtf = "";
-            }
-
-            List<Color> colorTable = ChatOutput.GetColorTable(textBox.Rtf).ToList();
-
-            AddLine(text, colorTable);
         }
 
         public void AddLine(User author, string text)
@@ -96,8 +85,24 @@ namespace DesktopCS
             WebBrowser browser = this.Tab.Browser;
 
             HtmlElement line = browser.Document.CreateElement("div");
-            line.Style = "font-color: red";
-            line.InnerText = "Test line";
+
+            HtmlElement timeStamp = browser.Document.CreateElement("span");
+
+            timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
+
+            HtmlElement authorElement = browser.Document.CreateElement("a");
+
+            authorElement.InnerText = author.NickName;
+            authorElement.Style = "color:red;text-decoration:none;";
+            authorElement.SetAttribute("href", "cs-pm:" + author.NickName);
+
+            HtmlElement textElement = browser.Document.CreateElement("span");
+
+            textElement.InnerText = " " + text;
+
+            line.AppendChild(timeStamp);
+            line.AppendChild(authorElement);
+            line.AppendChild(textElement);
 
             browser.Document.Body.AppendChild(line);
 

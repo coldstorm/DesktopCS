@@ -38,6 +38,13 @@ namespace DesktopCS.Forms
 
             Browser.Document.Body.Style = "font-size:10px;font-family:verdana;margin:0;padding:0;";
 
+            Browser.Navigating += (s, e) =>
+            {
+                e.Cancel = true;
+
+                // TODO: Handle cs-pm, cs-channel, etc
+            };
+
             TextBox = new RichTextBox();
             TextBox.Name = "TextBox";
             TextBox.Dock = DockStyle.Fill;
