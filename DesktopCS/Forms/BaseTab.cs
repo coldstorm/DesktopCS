@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using NetIRC;
@@ -78,9 +79,7 @@ namespace DesktopCS.Forms
                         break;
 
                     default:
-                        // TODO: Open the web browser pointing to the url
-
-                        MessageBox.Show(e.Url.Scheme);
+                        Process.Start(e.Url.AbsoluteUri);
 
                         break;
                 }
