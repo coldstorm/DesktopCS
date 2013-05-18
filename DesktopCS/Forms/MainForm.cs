@@ -131,6 +131,11 @@ namespace DesktopCS.Forms
 
         void channel_OnMessage(Channel source, User user, string message)
         {
+            if (user == null)
+            {
+                MessageBox.Show("Null user");
+            }
+
             this.AddLine("#" + source.Name, user, message);
         }
 
@@ -270,6 +275,11 @@ namespace DesktopCS.Forms
             {
                 this.Invoke(_addlinewithauthor, tabName, author, line);
                 return;
+            }
+
+            if (author == null)
+            {
+                MessageBox.Show("Null user");
             }
 
             ChatOutput output = new ChatOutput(this.TabList.Tabs[tabName], this.Client);

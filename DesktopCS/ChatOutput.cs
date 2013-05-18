@@ -51,6 +51,8 @@ namespace DesktopCS
             line.AppendChild(messageElement);
 
             browser.Document.Body.AppendChild(line);
+
+            browser.Document.Window.ScrollTo(0, browser.Document.Body.ScrollRectangle.Bottom);
         }
 
         public void AddLine(string text)
@@ -62,7 +64,7 @@ namespace DesktopCS
 
             browser.Document.Body.AppendChild(line);
 
-            return;
+            browser.Document.Window.ScrollTo(0, browser.Document.Body.ScrollRectangle.Bottom);
         }
 
         public void AddLine(User author, string text)
@@ -149,7 +151,7 @@ namespace DesktopCS
 
                 bool isUri = Uri.TryCreate(word, UriKind.Absolute, out uriResult);
 
-                if (isUri)
+                if (isUri && !string.IsNullOrEmpty(uriResult.LocalPath))
                 {
                     if (!string.IsNullOrWhiteSpace(textElement.InnerText))
                     {
@@ -190,7 +192,7 @@ namespace DesktopCS
 
             browser.Document.Body.AppendChild(line);
 
-            return;
+            browser.Document.Window.ScrollTo(0, browser.Document.Body.ScrollRectangle.Bottom);
         }
     }
 }
