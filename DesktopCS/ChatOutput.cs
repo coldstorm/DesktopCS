@@ -17,6 +17,40 @@ namespace DesktopCS
         {
             this.Tab = tab;
             this.Client = client;
+
+            while (tab.Browser.Document == null)
+            {
+                Application.DoEvents();
+            }
+        }
+
+        public void AddUserJoin(User user, Channel channel)
+        {
+            WebBrowser browser = this.Tab.Browser;
+
+            HtmlElement line = browser.Document.CreateElement("div");
+
+            HtmlElement timeStamp = browser.Document.CreateElement("span");
+            timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
+
+            line.AppendChild(timeStamp);
+
+            HtmlElement userElement = browser.Document.CreateElement("a");
+            Color authorColor = UserNode.ColorFromUser(user);
+            string colorHex = string.Format("{0:X6}", authorColor.ToArgb() & 0xFFFFFF);
+
+            userElement.InnerText = string.Format("{0}{1}", UserNode.RankChars[user.Rank], user.NickName);
+            userElement.Style = "color:#" + colorHex + ";text-decoration:none;";
+            userElement.SetAttribute("href", "cs-pm:" + user.NickName);
+
+            line.AppendChild(userElement);
+
+            HtmlElement messageElement = browser.Document.CreateElement("span");
+            messageElement.InnerText = " has joined #" + channel.Name;
+
+            line.AppendChild(messageElement);
+
+            browser.Document.Body.AppendChild(line);
         }
 
         public void AddLine(string text)

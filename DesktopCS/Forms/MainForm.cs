@@ -141,15 +141,23 @@ namespace DesktopCS.Forms
 
         void channel_OnJoin(Channel source, User user)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.Channel.OnJoinHandler(channel_OnJoin), source, user);
+                return;
+            }
+
+            this.AddLine("#" + source.Name, "Someone joined");
+
             user.OnNickNameChange += user_OnNickNameChange;
-            this.AddLine("#" + source.Name, user.NickName + " joined the room.");
-            this.PopulateUserlist();
 
             System.Timers.Timer colorTimer = new System.Timers.Timer();
 
             colorTimer.Elapsed += (s, e) =>
             {
                 colorTimer.Enabled = false;
+
+                this.AddUserJoin(source, user);
 
                 this.PopulateUserlist();
             };
@@ -266,6 +274,20 @@ namespace DesktopCS.Forms
                 this.TabList.Tabs[tabName].Active = true;
                 this.TabList.Invalidate();
             }
+        }
+
+        private delegate void AddUserJoinHandler(Channel channel, User user);
+
+        private void AddUserJoin(Channel channel, User user)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new AddUserJoinHandler(AddUserJoin), channel, user);
+                return;
+            }
+
+            ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + channel.Name], this.Client);
+            output.AddUserJoin(user, channel);
         }
 
         private void PopulateUserlist()
