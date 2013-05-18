@@ -42,8 +42,29 @@ namespace DesktopCS.Forms
             {
                 e.Cancel = true;
 
-                // TODO: Handle cs-pm, cs-channel, etc
+                switch (e.Url.Scheme)
+                {
+                    case "cs-pm":
+                        // TODO: Switch to or open up the pm tab for the user
+
+                        MessageBox.Show("Pm");
+
+                        break;
+
+                    case "cs-channel":
+                        // TODO: Switch to or open up the channel tab
+
+                        break;
+
+                    default:
+                        // TODO: Open the web browser pointing to the url
+
+                        MessageBox.Show(e.Url.Scheme);
+
+                        break;
+                }
             };
+
             this.Controls.Add(Browser);
         }
 
