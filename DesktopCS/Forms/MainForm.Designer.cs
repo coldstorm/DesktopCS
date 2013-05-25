@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolsMenuStripItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InputBox = new System.Windows.Forms.TextBox();
             this.TopicLabel = new System.Windows.Forms.Label();
             this.TabList = new DesktopCS.Forms.TabList();
@@ -40,42 +41,43 @@
             // MenuStrip
             // 
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
+            this.ToolsMenuStripItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(702, 24);
             this.MenuStrip.TabIndex = 3;
             this.MenuStrip.Text = "MenuStrip";
             // 
-            // optionsToolStripMenuItem
+            // ToolsMenuStripItem
             // 
-            this.optionsToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-            this.optionsToolStripMenuItem.Text = "Tools";
+            this.ToolsMenuStripItem.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ToolsMenuStripItem.Name = "ToolsMenuStripItem";
+            this.ToolsMenuStripItem.Size = new System.Drawing.Size(49, 20);
+            this.ToolsMenuStripItem.Text = "Tools";
+            this.ToolsMenuStripItem.Click += new System.EventHandler(this.ToolsMenuStripItem_Click);
             // 
             // InputBox
             // 
             this.InputBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.InputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.InputBox.Font = new System.Drawing.Font("Verdana", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.InputBox.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.InputBox.Location = new System.Drawing.Point(4, 360);
             this.InputBox.Name = "InputBox";
-            this.InputBox.Size = new System.Drawing.Size(502, 16);
+            this.InputBox.Size = new System.Drawing.Size(502, 13);
             this.InputBox.TabIndex = 4;
             this.InputBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputBox_KeyDown);
             // 
             // TopicLabel
             // 
-            this.TopicLabel.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top;
+            this.TopicLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TopicLabel.AutoSize = true;
-            this.TopicLabel.Font = new System.Drawing.Font("Verdana", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.TopicLabel.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.TopicLabel.Location = new System.Drawing.Point(3, 24);
-            this.TopicLabel.Name = "TopicLabel";
             this.TopicLabel.MaximumSize = new System.Drawing.Size(697, 0);
+            this.TopicLabel.Name = "TopicLabel";
+            this.TopicLabel.Size = new System.Drawing.Size(0, 12);
             this.TopicLabel.TabIndex = 6;
-            this.TopicLabel.Text = "";
             this.TopicLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.TopicLabel.ClientSizeChanged += new System.EventHandler(this.TopicLabel_ClientSizeChanged);
             // 
@@ -85,7 +87,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TabList.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.TabList.Font = new System.Drawing.Font("Verdana", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.TabList.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.TabList.Location = new System.Drawing.Point(0, 24);
             this.TabList.Name = "TabList";
             this.TabList.SelectedIndex = 0;
@@ -99,10 +101,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UserList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(39)))), ((int)(((byte)(46)))));
             this.UserList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.UserList.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.UserList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(187)))), ((int)(((byte)(191)))));
-            this.UserList.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, 0);
+            this.UserList.ImageIndex = 0;
             this.UserList.Location = new System.Drawing.Point(512, 49);
             this.UserList.Name = "UserList";
+            this.UserList.SelectedImageIndex = 0;
             this.UserList.ShowPlusMinus = false;
             this.UserList.ShowRootLines = false;
             this.UserList.Size = new System.Drawing.Size(186, 312);
@@ -135,7 +139,7 @@
 
         private Forms.UserList UserList;
         private System.Windows.Forms.MenuStrip MenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolsMenuStripItem;
         private System.Windows.Forms.TextBox InputBox;
         private Forms.TabList TabList;
         private System.Windows.Forms.Label TopicLabel;

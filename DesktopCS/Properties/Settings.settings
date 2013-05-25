@@ -8,5 +8,11 @@
     <Setting Name="Color" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFFFFF</Value>
     </Setting>
+    <Setting Name="Channels" Type="System.String" Scope="User">
+      <Value Profile="(Default)">test</Value>
+    </Setting>
+    <Setting Name="SoundsOff" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

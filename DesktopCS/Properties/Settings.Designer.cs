@@ -46,5 +46,29 @@ namespace DesktopCS.Properties {
                 this["Color"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("test")]
+        public string Channels {
+            get {
+                return ((string)(this["Channels"]));
+            }
+            set {
+                this["Channels"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SoundsOff {
+            get {
+                return ((bool)(this["SoundsOff"]));
+            }
+            set {
+                this["SoundsOff"] = value;
+            }
+        }
     }
 }

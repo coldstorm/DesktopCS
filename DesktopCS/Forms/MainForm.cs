@@ -59,6 +59,7 @@ namespace DesktopCS.Forms
             _updatetopiclabel = new UpdateTopicLabelDelegate(UpdateTopicLabel);
         }
 
+        #region Form Overrides
         protected override void OnClosing(CancelEventArgs e)
         {
             this.Client.Disconnect();
@@ -76,11 +77,12 @@ namespace DesktopCS.Forms
 
             this.Invalidate();
         }
+        #endregion
 
         #region NetIRC Event Handlers
         void Client_OnConnect(Client client)
         {
-            Client.JoinChannel("test");
+            JoinChannels();
             Client.OnConnect -= Client_OnConnect;
         }
 
@@ -127,6 +129,7 @@ namespace DesktopCS.Forms
         {
             this.RemoveTab("#" + channel.Name);
             this.PopulateUserlist();
+            this.UpdateTopicLabel();
         }
 
         void channel_OnMessage(Channel source, User user, string message)
@@ -225,8 +228,20 @@ namespace DesktopCS.Forms
             }
 
             this.AddLine((this.TabList.SelectedTab as BaseTab).Name, original + " has changed their nickname to " + user.NickName);
+            this.PopulateUserlist();
         }
         #endregion
+
+        private void JoinChannels()
+        {
+            string[] channels = Properties.Settings.Default.Channels.Split(',');
+
+            foreach (string c in channels)
+            {
+                if (!string.IsNullOrEmpty(c))
+                    Client.JoinChannel(c);
+            }
+        }
 
         internal BaseTab AddTab(BaseTab tab)
         {
@@ -473,6 +488,12 @@ namespace DesktopCS.Forms
 
             g.DrawRectangle(new Pen(Constants.TAB_BORDER_COLOR), inputBoxRectangle);
         }
+
+        private void ToolsMenuStripItem_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion
+
     }
 }
