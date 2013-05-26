@@ -24,6 +24,7 @@ namespace DesktopCS.Forms
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
 
             Browser = new WebBrowser();
+            Browser.IsWebBrowserContextMenuEnabled = false;
             Browser.Dock = DockStyle.Fill;
             Browser.Name = "Browser";
 
