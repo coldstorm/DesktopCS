@@ -33,6 +33,11 @@ namespace DesktopCS.Forms
 
         public void RemoveTab(BaseTab tab)
         {
+            if (this.Tabs.Count > 0)
+            {
+                this.SwitchToTab(0);
+            }
+
             this.Tabs.Remove(tab.Name);
 
             if (this.Tabs.Count == 0)
