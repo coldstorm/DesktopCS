@@ -491,7 +491,8 @@ namespace DesktopCS.Forms
 
         private void ToolsMenuStripItem_Click(object sender, EventArgs e)
         {
-
+            OptionsForm options = new OptionsForm();
+            options.Show();
         }
         #endregion
 

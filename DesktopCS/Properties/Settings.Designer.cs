@@ -62,12 +62,12 @@ namespace DesktopCS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SoundsOff {
+        public bool Sounds {
             get {
-                return ((bool)(this["SoundsOff"]));
+                return ((bool)(this["Sounds"]));
             }
             set {
-                this["SoundsOff"] = value;
+                this["Sounds"] = value;
             }
         }
     }
