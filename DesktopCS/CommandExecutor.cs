@@ -22,7 +22,6 @@ namespace DesktopCS
 
                         return CommandReturn.SUCCESS;
                     }
-
                     else
                     {
                         return CommandReturn.INSUFFICIENT_PARAMS;
@@ -40,7 +39,6 @@ namespace DesktopCS
 
                         return CommandReturn.SUCCESS;
                     }
-
                     else
                     {
                         return CommandReturn.INSUFFICIENT_PARAMS;
@@ -58,14 +56,12 @@ namespace DesktopCS
 
                         return CommandReturn.SUCCESS;
                     }
-
                     else if (target != null)
                     {
                         invoker.LeaveChannel(target.Name);
 
                         return CommandReturn.SUCCESS;
                     }
-
                     else
                     {
                         return CommandReturn.INSUFFICIENT_PARAMS;
@@ -74,7 +70,7 @@ namespace DesktopCS
                 case "motd":
                     if (parts.Length >= 2)
                     {
-                        string motd = string.Concat(parts.Skip(1));
+                        string motd = string.Join(" ", parts.Skip(1));
 
                         if (target != null)
                         {
@@ -83,7 +79,23 @@ namespace DesktopCS
 
                         return CommandReturn.SUCCESS;
                     }
+                    else
+                    {
+                        return CommandReturn.INSUFFICIENT_PARAMS;
+                    }
 
+                case "me":
+                    if (parts.Length >= 2)
+                    {
+                        string action = string.Join(" ", parts.Skip(1));
+
+                        if (target != null)
+                        {
+                            invoker.Send(new NetIRC.Messages.Send.CTCP.ActionMessage(target, action));
+                        }
+
+                        return CommandReturn.SUCCESS;
+                    }
                     else
                     {
                         return CommandReturn.INSUFFICIENT_PARAMS;
