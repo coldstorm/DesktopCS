@@ -374,6 +374,11 @@ namespace DesktopCS.Forms
                 {
                     TopicLabel.Text = tab.Channel.Topic.Message + " (by " + tab.Channel.Topic.Author.NickName + ")";
                 }
+
+                else
+                {
+                    TopicLabel.Text = "";
+                }
             }
 
             else
