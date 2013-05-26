@@ -155,29 +155,32 @@ namespace DesktopCS.Forms
                 return;
             }
 
-            user.OnNickNameChange += user_OnNickNameChange;
-
-            user.OnQuit += (u, m) =>
+            if (user != Client.User)
             {
-                foreach (Channel channel in user.Channels)
+                user.OnNickNameChange += user_OnNickNameChange;
+
+                user.OnQuit += (u, m) =>
                 {
-                    channel_OnLeave(channel, user);
-                }
-            };
+                    foreach (Channel channel in user.Channels)
+                    {
+                        channel_OnLeave(channel, user);
+                    }
+                };
 
-            System.Timers.Timer colorTimer = new System.Timers.Timer();
+                System.Timers.Timer colorTimer = new System.Timers.Timer();
 
-            colorTimer.Elapsed += (s, e) =>
-            {
-                colorTimer.Enabled = false;
+                colorTimer.Elapsed += (s, e) =>
+                {
+                    colorTimer.Enabled = false;
 
-                this.AddUserJoin(source, user);
+                    this.AddUserJoin(source, user);
 
-                this.PopulateUserlist();
-            };
-            colorTimer.Interval = 1000;
+                    this.PopulateUserlist();
+                };
+                colorTimer.Interval = 1000;
 
-            colorTimer.Enabled = true;
+                colorTimer.Enabled = true;
+            }
         }
 
         void channel_OnLeave(Channel source, User user)

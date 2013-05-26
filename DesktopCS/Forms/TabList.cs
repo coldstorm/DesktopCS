@@ -33,7 +33,7 @@ namespace DesktopCS.Forms
 
         public void RemoveTab(BaseTab tab)
         {
-            if (this.Tabs.Count > 0)
+            if (this.Tabs.Count > 0 && this.SelectedTab == tab)
             {
                 this.SwitchToTab(0);
             }
