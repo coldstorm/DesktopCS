@@ -30,23 +30,26 @@ namespace DesktopCS
 
             HtmlElement line = browser.Document.CreateElement("div");
 
+            string timeStampColorHex = string.Format("{0:X6}", Constants.TIMESTAMP_COLOR.ToArgb() & 0xFFFFFF);
+
             HtmlElement timeStamp = browser.Document.CreateElement("span");
             timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
+            timeStamp.Style = "color:#" + timeStampColorHex + ";text-decoration:none;";
 
             line.AppendChild(timeStamp);
 
             HtmlElement userElement = browser.Document.CreateElement("a");
-            Color authorColor = UserNode.ColorFromUser(user);
-            string colorHex = string.Format("{0:X6}", authorColor.ToArgb() & 0xFFFFFF);
+            string lineColorHex = string.Format("{0:X6}", Constants.TEXT_CONTROL_COLOR.ToArgb() & 0xFFFFFF);
 
-            userElement.InnerText = string.Format("{0}{1}", UserNode.RankChars[user.Rank], user.NickName);
-            userElement.Style = "color:#" + colorHex + ";text-decoration:none;";
+            userElement.InnerText = user.NickName;
+            userElement.Style = "color:#" + lineColorHex + ";text-decoration:none;";
             userElement.SetAttribute("href", "cs-pm:" + user.NickName);
 
             line.AppendChild(userElement);
 
             HtmlElement messageElement = browser.Document.CreateElement("span");
             messageElement.InnerText = " has joined #" + channel.Name;
+            messageElement.Style = "color:#" + lineColorHex + ";text-decoration:none;";
 
             line.AppendChild(messageElement);
 
@@ -60,7 +63,22 @@ namespace DesktopCS
             WebBrowser browser = this.Tab.Browser;
 
             HtmlElement line = browser.Document.CreateElement("div");
-            line.InnerText = string.Format("[{0:HH:mm}] {1}", DateTime.Now, text);
+
+            string timeStampColorHex = string.Format("{0:X6}", Constants.TIMESTAMP_COLOR.ToArgb() & 0xFFFFFF);
+
+            HtmlElement timeStamp = browser.Document.CreateElement("span");
+            timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
+            timeStamp.Style = "color:#" + timeStampColorHex + ";text-decoration:none;";
+
+            line.AppendChild(timeStamp);
+
+            string lineColorHex = string.Format("{0:X6}", Constants.TEXT_CONTROL_COLOR.ToArgb() & 0xFFFFFF);
+
+            HtmlElement lineText = browser.Document.CreateElement("span");
+            lineText.InnerText = text;
+            lineText.Style = "color:#" + lineColorHex + ";text-decoration:none;";
+
+            line.AppendChild(lineText);
 
             browser.Document.Body.AppendChild(line);
 
@@ -73,17 +91,20 @@ namespace DesktopCS
 
             HtmlElement line = browser.Document.CreateElement("div");
 
+            string timeStampColorHex = string.Format("{0:X6}", Constants.TIMESTAMP_COLOR.ToArgb() & 0xFFFFFF);
+
             HtmlElement timeStamp = browser.Document.CreateElement("span");
 
             timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
+            timeStamp.Style = "color:#" + timeStampColorHex + ";text-decoration:none;";
 
             HtmlElement authorElement = browser.Document.CreateElement("a");
             Color authorColor = UserNode.ColorFromUser(author);
 
-            string colorHex = string.Format("{0:X6}", authorColor.ToArgb() & 0xFFFFFF);
+            string authorColorHex = string.Format("{0:X6}", authorColor.ToArgb() & 0xFFFFFF);
 
             authorElement.InnerText = string.Format("{0}{1}", UserNode.RankChars[author.Rank], author.NickName);
-            authorElement.Style = "color:#" + colorHex + ";text-decoration:none;";
+            authorElement.Style = "color:#" + authorColorHex + ";text-decoration:none;";
             authorElement.SetAttribute("href", "cs-pm:" + author.NickName);
 
             line.AppendChild(timeStamp);

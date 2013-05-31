@@ -22,5 +22,6 @@ namespace DesktopCS
 
         public static Color TIMESTAMP_COLOR = Color.FromArgb(255, 55, 63, 78);
         public static Color TEXT_COLOR = Color.FromArgb(255, 186, 187, 191);
+        public static Color TEXT_CONTROL_COLOR = Color.FromArgb(255, 128, 128, 128);
     }
 }
