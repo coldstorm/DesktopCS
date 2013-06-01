@@ -34,7 +34,7 @@ namespace DesktopCS
 
             HtmlElement timeStamp = browser.Document.CreateElement("span");
             timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
-            timeStamp.Style = "color:#" + timeStampColorHex + ";text-decoration:none;";
+            timeStamp.Style = "color:#" + timeStampColorHex;
 
             line.AppendChild(timeStamp);
 
@@ -49,7 +49,7 @@ namespace DesktopCS
 
             HtmlElement messageElement = browser.Document.CreateElement("span");
             messageElement.InnerText = " has joined #" + channel.Name;
-            messageElement.Style = "color:#" + lineColorHex + ";text-decoration:none;";
+            messageElement.Style = "color:#" + lineColorHex;
 
             line.AppendChild(messageElement);
 
@@ -68,7 +68,7 @@ namespace DesktopCS
 
             HtmlElement timeStamp = browser.Document.CreateElement("span");
             timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
-            timeStamp.Style = "color:#" + timeStampColorHex + ";text-decoration:none;";
+            timeStamp.Style = "color:#" + timeStampColorHex;
 
             line.AppendChild(timeStamp);
 
@@ -76,7 +76,7 @@ namespace DesktopCS
 
             HtmlElement lineText = browser.Document.CreateElement("span");
             lineText.InnerText = text;
-            lineText.Style = "color:#" + lineColorHex + ";text-decoration:none;";
+            lineText.Style = "color:#" + lineColorHex;
 
             line.AppendChild(lineText);
 
@@ -96,7 +96,7 @@ namespace DesktopCS
             HtmlElement timeStamp = browser.Document.CreateElement("span");
 
             timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
-            timeStamp.Style = "color:#" + timeStampColorHex + ";text-decoration:none;";
+            timeStamp.Style = "color:#" + timeStampColorHex;
 
             HtmlElement authorElement = browser.Document.CreateElement("a");
             Color authorColor = UserNode.ColorFromUser(author);
