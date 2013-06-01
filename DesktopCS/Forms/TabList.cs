@@ -224,5 +224,11 @@ namespace DesktopCS.Forms
                 }
             }
         }
+
+        protected override void OnResize(EventArgs e)
+        {
+            Logger.Log("TabList.OnResize was raised.");
+            base.OnResize(e);
+        }
     }
 }
