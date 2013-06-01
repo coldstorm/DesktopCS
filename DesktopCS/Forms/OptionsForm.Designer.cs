@@ -46,9 +46,9 @@
             this.TitleLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TitleLabel.Location = new System.Drawing.Point(12, 9);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(144, 18);
+            this.TitleLabel.Size = new System.Drawing.Size(139, 18);
             this.TitleLabel.TabIndex = 0;
-            this.TitleLabel.Text = "General Settings";
+            this.TitleLabel.Text = "General Options";
             // 
             // NicknameLabel
             // 

@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
-            this.ToolsMenuStripItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OptionsMenuStripItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InputBox = new System.Windows.Forms.TextBox();
             this.TopicLabel = new System.Windows.Forms.Label();
             this.TabList = new DesktopCS.Forms.TabList();
@@ -41,20 +41,20 @@
             // MenuStrip
             // 
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolsMenuStripItem});
+            this.OptionsMenuStripItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(702, 24);
             this.MenuStrip.TabIndex = 3;
             this.MenuStrip.Text = "MenuStrip";
             // 
-            // ToolsMenuStripItem
+            // OptionsMenuStripItem
             // 
-            this.ToolsMenuStripItem.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ToolsMenuStripItem.Name = "ToolsMenuStripItem";
-            this.ToolsMenuStripItem.Size = new System.Drawing.Size(49, 20);
-            this.ToolsMenuStripItem.Text = "Tools";
-            this.ToolsMenuStripItem.Click += new System.EventHandler(this.ToolsMenuStripItem_Click);
+            this.OptionsMenuStripItem.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OptionsMenuStripItem.Name = "OptionsMenuStripItem";
+            this.OptionsMenuStripItem.Size = new System.Drawing.Size(62, 20);
+            this.OptionsMenuStripItem.Text = "Options";
+            this.OptionsMenuStripItem.Click += new System.EventHandler(this.ToolsMenuStripItem_Click);
             // 
             // InputBox
             // 
@@ -139,7 +139,7 @@
 
         private Forms.UserList UserList;
         private System.Windows.Forms.MenuStrip MenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem ToolsMenuStripItem;
+        private System.Windows.Forms.ToolStripMenuItem OptionsMenuStripItem;
         private System.Windows.Forms.TextBox InputBox;
         private Forms.TabList TabList;
         private System.Windows.Forms.Label TopicLabel;
