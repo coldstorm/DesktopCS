@@ -15,7 +15,7 @@ namespace DesktopCS
 
             try
             {
-                StreamWriter writer = new StreamWriter(path);
+                StreamWriter writer = new StreamWriter(path, true);
 
                 writer.WriteLine("{0} {1}", DateTime.Now.ToString(), message);
                 writer.Close();
