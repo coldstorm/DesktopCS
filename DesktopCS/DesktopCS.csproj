@@ -32,7 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NetIRC">
+    <Reference Include="NetIRC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NetIRC.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -49,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChatOutput.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="CommandExecutor.cs" />
     <Compile Include="CommandReturn.cs" />
     <Compile Include="Constants.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Forms\UserNode.cs" />
     <Compile Include="Forms\UserNodeSorter.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="ParameterException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
