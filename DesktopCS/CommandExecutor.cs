@@ -7,103 +7,44 @@ using NetIRC;
 
 namespace DesktopCS
 {
-    public static class CommandExecutor
+    public class CommandExecutor
     {
-        public static CommandReturn Execute(Client invoker, Channel target, string command)
+        private List<Command> Commands;
+
+        public CommandExecutor()
+        {
+            Commands.Add(new Command("join", 2, JoinCallback, "/join <channel>"));
+            Commands.Add(new Command("part", 2, PartCallback, "/part <channel>"));
+            Commands.Add(new Command("topic", 3, TopicCallback, "/topic <channel> <text>"));
+        }
+
+        public void Execute(Client invoker, string command)
         {
             string[] parts = command.Remove(0, 1).Trim().Split(' ');
 
-            switch (parts[0].ToLowerInvariant())
+            foreach (Command cmd in Commands)
             {
-                case "nick":
-                    if (parts.Length >= 2)
-                    {
-                        invoker.Send(new NetIRC.Messages.Send.NickMessage(parts[1]));
-
-                        return CommandReturn.SUCCESS;
-                    }
-                    else
-                    {
-                        return CommandReturn.INSUFFICIENT_PARAMS;
-                    }
-
-                case "join":
-                    if (parts.Length >= 2)
-                    {
-                        if (parts[1][0] == '#')
-                        {
-                            parts[1] = parts[1].Substring(1);
-                        }
-
-                        invoker.JoinChannel(parts[1]);
-
-                        return CommandReturn.SUCCESS;
-                    }
-                    else
-                    {
-                        return CommandReturn.INSUFFICIENT_PARAMS;
-                    }
-
-                case "part":
-                    if (parts.Length >= 2)
-                    {
-                        if (parts[1][0] == '#')
-                        {
-                            parts[1] = parts[1].Substring(1);
-                        }
-
-                        invoker.LeaveChannel(parts[1]);
-
-                        return CommandReturn.SUCCESS;
-                    }
-                    else if (target != null)
-                    {
-                        invoker.LeaveChannel(target.Name);
-
-                        return CommandReturn.SUCCESS;
-                    }
-                    else
-                    {
-                        return CommandReturn.INSUFFICIENT_PARAMS;
-                    }
-
-                case "motd":
-                    if (parts.Length >= 2)
-                    {
-                        string motd = string.Join(" ", parts.Skip(1));
-
-                        if (target != null)
-                        {
-                            invoker.Send(new NetIRC.Messages.Send.TopicMessage("#" + target.Name, motd));
-                        }
-
-                        return CommandReturn.SUCCESS;
-                    }
-                    else
-                    {
-                        return CommandReturn.INSUFFICIENT_PARAMS;
-                    }
-
-                case "me":
-                    if (parts.Length >= 2)
-                    {
-                        string action = string.Join(" ", parts.Skip(1));
-
-                        if (target != null)
-                        {
-                            invoker.Send(new NetIRC.Messages.Send.CTCP.ActionMessage(target, action));
-                        }
-
-                        return CommandReturn.SUCCESS;
-                    }
-                    else
-                    {
-                        return CommandReturn.INSUFFICIENT_PARAMS;
-                    }
-
-                default:
-                    return CommandReturn.UNKNOWN_COMMAND;
+                if (cmd.Name == parts[0].ToLowerInvariant())
+                {
+                    cmd.Callback(invoker, parts);
+                }
             }
+        }
+
+        private void JoinCallback(Client sender, string[] parameters)
+        {
+            sender.JoinChannel(parameters[1]);
+        }
+
+        private void PartCallback(Client sender, string[] parameters)
+        {
+            sender.LeaveChannel(parameters[1]);
+        }
+
+        private void TopicCallback(Client sender, string[] parameters)
+        {
+            string topic = string.Join(" ", parameters.Skip(2));
+            sender.Channels[parameters[1]].SetTopic(topic);
         }
     }
 }
