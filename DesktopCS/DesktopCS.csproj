@@ -81,7 +81,7 @@
     <Compile Include="Forms\UserNode.cs" />
     <Compile Include="Forms\UserNodeSorter.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="ParameterException.cs" />
+    <Compile Include="CommandException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />

@@ -16,6 +16,7 @@ namespace DesktopCS
             Commands.Add("join", new Command(2, JoinCallback, "/join <channel>"));
             Commands.Add("part", new Command(2, PartCallback, "/part <channel>"));
             Commands.Add("topic", new Command(3, TopicCallback, "/topic <channel> <text>"));
+            Commands.Add("help", new Command(2, HelpCallback, "/help <command>"));
         }
 
         public void Execute(Client invoker, string command, ChatOutput output)
@@ -31,20 +32,22 @@ namespace DesktopCS
                         entry.Value.Callback(invoker, parts);
                     }
 
-                    catch (ParameterException ex)
+                    catch (CommandException ex)
                     {
                         output.AddLine(ex.Message);
                     }
-                    break;
+                    return;
                 }
             }
+
+            output.AddLine("Unknown command.");
         }
 
         private void JoinCallback(Client sender, string[] parameters)
         {
             if (parameters.Length < Commands["join"].MinParams)
             {
-                throw new ParameterException("Insufficient parameters.");
+                throw new CommandException("Insufficient parameters.");
             }
 
             sender.JoinChannel(parameters[1]);
@@ -54,7 +57,7 @@ namespace DesktopCS
         {
             if (parameters.Length < Commands["part"].MinParams)
             {
-                throw new ParameterException("Insufficient parameters.");
+                throw new CommandException("Insufficient parameters.");
             }
 
             sender.LeaveChannel(parameters[1]);
@@ -64,13 +67,23 @@ namespace DesktopCS
         {
             if (parameters.Length < Commands["topic"].MinParams)
             {
-                throw new ParameterException("Insufficient parameters.");
+                throw new CommandException("Insufficient parameters.");
             }
 
             string topic = string.Join(" ", parameters.Skip(2));
 
             if (sender.Channels.ContainsKey(parameters[1]))
                 sender.Channels[parameters[1]].SetTopic(topic);
+        }
+
+        private void HelpCallback(Client sender, string[] parameters)
+        {
+            if (parameters.Length < Commands["help"].MinParams)
+            {
+                throw new CommandException("Help usage: " + Commands["help"].Usage);
+            }
+
+            throw new CommandException("Usage: " + Commands[parameters[1]].Usage);
         }
     }
 }
