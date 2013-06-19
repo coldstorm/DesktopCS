@@ -14,6 +14,7 @@ namespace DesktopCS.Forms
     public partial class MainForm : Form
     {
         internal NetIRC.Client Client;
+        internal CommandExecutor Executor;
 
         private delegate void AddLineDelegate(string tabName, string line);
         private delegate void AddLineWithAuthorDelegate(string tabName, User author, string line);
@@ -44,6 +45,8 @@ namespace DesktopCS.Forms
             TopicLabel.BackColor = Constants.BACKGROUND_COLOR;
             TopicLabel.ForeColor = Constants.TOPIC_TEXT_COLOR;
             TopicLabel.Text = "";
+
+            Executor = new CommandExecutor();
 
             Client = new Client();
             Client.Connect("frogbox.es", 6667, false, new User(Properties.Settings.Default.Nickname, Properties.Settings.Default.Color.Substring(1) + "QQ"));
@@ -392,26 +395,8 @@ namespace DesktopCS.Forms
             input = input.Trim();
             if (input.StartsWith("/"))
             {
-                if (this.TabList.SelectedTab as BaseTab != null && (this.TabList.SelectedTab as BaseTab).Type == TabType.Channel)
-                {
-                    ChannelTab CurrentTab = this.TabList.SelectedTab as ChannelTab;
-                    CommandReturn Return = CommandExecutor.Execute(this.Client, CurrentTab.Channel, input);
-
-                    if (Return == CommandReturn.INSUFFICIENT_PARAMS)
-                    {
-                        AddLine(CurrentTab.Name, "Insufficient parameters.");
-                    }
-
-                    else if (Return == CommandReturn.UNKNOWN_COMMAND)
-                    {
-                        AddLine(CurrentTab.Name, "Unknown command.");
-                    }
-                }
-
-                else
-                {
-                    CommandReturn Return = CommandExecutor.Execute(this.Client, null, input);
-                }
+                ChatOutput output = new ChatOutput((this.TabList.SelectedTab as BaseTab), this.Client);
+                Executor.Execute(this.Client, input, output);
             }
 
             else

@@ -9,7 +9,7 @@ namespace DesktopCS
 {
     public class CommandExecutor
     {
-        private Dictionary<string, Command> Commands;
+        private Dictionary<string, Command> Commands = new Dictionary<string,Command>();
 
         public CommandExecutor()
         {
@@ -18,7 +18,7 @@ namespace DesktopCS
             Commands.Add("topic", new Command(3, TopicCallback, "/topic <channel> <text>"));
         }
 
-        public void Execute(Client invoker, string command)
+        public void Execute(Client invoker, string command, ChatOutput output)
         {
             string[] parts = command.Remove(0, 1).Trim().Split(' ');
 
@@ -26,7 +26,16 @@ namespace DesktopCS
             {
                 if (entry.Key == parts[0].ToLowerInvariant())
                 {
-                    entry.Value.Callback(invoker, parts);
+                    try
+                    {
+                        entry.Value.Callback(invoker, parts);
+                    }
+
+                    catch (ParameterException ex)
+                    {
+                        output.AddLine(ex.Message);
+                    }
+                    break;
                 }
             }
         }
@@ -35,7 +44,7 @@ namespace DesktopCS
         {
             if (parameters.Length < Commands["join"].MinParams)
             {
-                throw new ParameterException();
+                throw new ParameterException("Insufficient parameters.");
             }
 
             sender.JoinChannel(parameters[1]);
@@ -45,7 +54,7 @@ namespace DesktopCS
         {
             if (parameters.Length < Commands["part"].MinParams)
             {
-                throw new ParameterException();
+                throw new ParameterException("Insufficient parameters.");
             }
 
             sender.LeaveChannel(parameters[1]);
@@ -55,11 +64,13 @@ namespace DesktopCS
         {
             if (parameters.Length < Commands["topic"].MinParams)
             {
-                throw new ParameterException();
+                throw new ParameterException("Insufficient parameters.");
             }
 
             string topic = string.Join(" ", parameters.Skip(2));
-            sender.Channels[parameters[1]].SetTopic(topic);
+
+            if (sender.Channels.ContainsKey(parameters[1]))
+                sender.Channels[parameters[1]].SetTopic(topic);
         }
     }
 }
