@@ -52,7 +52,6 @@
     <Compile Include="ChatOutput.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandExecutor.cs" />
-    <Compile Include="CommandReturn.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Forms\BaseTab.cs" />
     <Compile Include="Forms\ChannelTab.cs" />
