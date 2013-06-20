@@ -75,5 +75,11 @@ namespace DesktopCS.Forms
             MainForm main = new MainForm();
             main.Show();
         }
+
+        private void OptionsButton_Click(object sender, EventArgs e)
+        {
+            OptionsForm options = new OptionsForm();
+            options.Show();
+        }
     }
 }

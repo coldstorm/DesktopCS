@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.NicknameBox = new System.Windows.Forms.TextBox();
             this.NicknameLabel = new System.Windows.Forms.Label();
             this.PasswordLabel = new System.Windows.Forms.Label();
@@ -36,6 +37,7 @@
             this.ColorBox = new System.Windows.Forms.TextBox();
             this.LoginButton = new System.Windows.Forms.Button();
             this.ColorChooser = new System.Windows.Forms.ColorDialog();
+            this.OptionsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NicknameBox
@@ -95,14 +97,13 @@
             this.ColorBox.Name = "ColorBox";
             this.ColorBox.Size = new System.Drawing.Size(190, 22);
             this.ColorBox.TabIndex = 4;
-            this.ColorBox.LostFocus += ColorBox_LostFocus;
             this.ColorBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ColorBox_MouseDoubleClick);
             // 
             // LoginButton
             // 
             this.LoginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(39)))), ((int)(((byte)(46)))));
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoginButton.Location = new System.Drawing.Point(83, 183);
+            this.LoginButton.Location = new System.Drawing.Point(67, 183);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(105, 26);
             this.LoginButton.TabIndex = 6;
@@ -115,12 +116,25 @@
             this.ColorChooser.AnyColor = true;
             this.ColorChooser.FullOpen = true;
             // 
+            // OptionsButton
+            // 
+            this.OptionsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(39)))), ((int)(((byte)(46)))));
+            this.OptionsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.OptionsButton.Image = ((System.Drawing.Image)(resources.GetObject("OptionsButton.Image")));
+            this.OptionsButton.Location = new System.Drawing.Point(178, 183);
+            this.OptionsButton.Name = "OptionsButton";
+            this.OptionsButton.Size = new System.Drawing.Size(36, 26);
+            this.OptionsButton.TabIndex = 7;
+            this.OptionsButton.UseVisualStyleBackColor = false;
+            this.OptionsButton.Click += new System.EventHandler(this.OptionsButton_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(31)))));
             this.ClientSize = new System.Drawing.Size(271, 220);
+            this.Controls.Add(this.OptionsButton);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.ColorLabel);
             this.Controls.Add(this.ColorBox);
@@ -150,5 +164,6 @@
         private System.Windows.Forms.TextBox ColorBox;
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.ColorDialog ColorChooser;
+        private System.Windows.Forms.Button OptionsButton;
     }
 }

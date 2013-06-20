@@ -482,7 +482,7 @@ namespace DesktopCS.Forms
             g.DrawRectangle(new Pen(Constants.TAB_BORDER_COLOR), inputBoxRectangle);
         }
 
-        private void ToolsMenuStripItem_Click(object sender, EventArgs e)
+        private void OptionsMenuStripItem_Click(object sender, EventArgs e)
         {
             OptionsForm options = new OptionsForm();
             options.Show();

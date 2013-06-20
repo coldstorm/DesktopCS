@@ -54,7 +54,7 @@
             this.OptionsMenuStripItem.Name = "OptionsMenuStripItem";
             this.OptionsMenuStripItem.Size = new System.Drawing.Size(62, 20);
             this.OptionsMenuStripItem.Text = "Options";
-            this.OptionsMenuStripItem.Click += new System.EventHandler(this.ToolsMenuStripItem_Click);
+            this.OptionsMenuStripItem.Click += new System.EventHandler(this.OptionsMenuStripItem_Click);
             // 
             // InputBox
             // 
