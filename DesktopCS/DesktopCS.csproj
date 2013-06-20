@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ChatOutput.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="CommandArgs.cs" />
     <Compile Include="CommandExecutor.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Forms\BaseTab.cs" />

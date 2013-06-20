@@ -10,7 +10,7 @@ namespace DesktopCS
     public class Command
     {
         public int MinParams;
-        public delegate void callback(Client sender, string[] parameters);
+        public delegate void callback(Client sender, CommandArgs args);
         public callback Callback;
         public string Usage;
 

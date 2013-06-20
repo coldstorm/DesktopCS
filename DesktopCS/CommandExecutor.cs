@@ -13,11 +13,17 @@ namespace DesktopCS
 
         public CommandExecutor()
         {
+            Commands.Add("me", new Command(2, MeCallback, "/me <action>"));
+
             Commands.Add("join", new Command(2, JoinCallback, "/join <channel>"));
             Commands.Add("part", new Command(2, PartCallback, "/part <channel>"));
-            Commands.Add("topic", new Command(3, TopicCallback, "/topic <channel> <text>"));
+
+            Commands.Add("topic", new Command(2, TopicCallback, "/topic <text>"));
+            Commands.Add("kick", new Command(2, KickCallback, "/kick <user> [message]"));
+
             Commands.Add("help", new Command(2, HelpCallback, "/help <command>"));
         }
+
 
         public void Execute(Client invoker, string command, ChatOutput output)
         {
@@ -29,7 +35,15 @@ namespace DesktopCS
                 {
                     try
                     {
-                        entry.Value.Callback(invoker, parts);
+                        if (output.Tab.Type == Forms.TabType.Channel)
+                        {
+                            entry.Value.Callback(invoker, new CommandArgs(parts, (output.Tab as Forms.ChannelTab).Channel));
+                        }
+
+                        else
+                        {
+                            entry.Value.Callback(invoker, new CommandArgs(parts, null));
+                        }
                     }
 
                     catch (CommandException ex)
@@ -43,47 +57,110 @@ namespace DesktopCS
             output.AddLine("Unknown command.");
         }
 
-        private void JoinCallback(Client sender, string[] parameters)
+        private void MeCallback(Client sender, CommandArgs args)
         {
-            if (parameters.Length < Commands["join"].MinParams)
+            if (args.Parameters.Length < Commands["me"].MinParams)
             {
                 throw new CommandException("Insufficient parameters.");
             }
 
-            sender.JoinChannel(parameters[1]);
+            string action = string.Join(" ", args.Parameters.Skip(1));
+
+            if (args.Target != null)
+            {
+                sender.Send(new NetIRC.Messages.Send.CTCP.ActionMessage(args.Target, action));
+            }
+
+            else
+            {
+                throw new CommandException("This command can only be used in a channel.");
+            }
         }
 
-        private void PartCallback(Client sender, string[] parameters)
+        private void JoinCallback(Client sender, CommandArgs args)
         {
-            if (parameters.Length < Commands["part"].MinParams)
+            if (args.Parameters.Length < Commands["join"].MinParams)
             {
                 throw new CommandException("Insufficient parameters.");
             }
 
-            sender.LeaveChannel(parameters[1]);
+            sender.JoinChannel(args.Parameters[1]);
         }
 
-        private void TopicCallback(Client sender, string[] parameters)
+        private void PartCallback(Client sender, CommandArgs args)
         {
-            if (parameters.Length < Commands["topic"].MinParams)
+            if (args.Parameters.Length < Commands["part"].MinParams)
             {
                 throw new CommandException("Insufficient parameters.");
             }
 
-            string topic = string.Join(" ", parameters.Skip(2));
-
-            if (sender.Channels.ContainsKey(parameters[1]))
-                sender.Channels[parameters[1]].SetTopic(topic);
+            sender.LeaveChannel(args.Parameters[1]);
         }
 
-        private void HelpCallback(Client sender, string[] parameters)
+        private void TopicCallback(Client sender, CommandArgs args)
         {
-            if (parameters.Length < Commands["help"].MinParams)
+            if (args.Parameters.Length < Commands["topic"].MinParams)
+            {
+                throw new CommandException("Insufficient parameters.");
+            }
+
+
+            if (args.Target != null)
+            {
+                string topic = string.Join(" ", args.Parameters.Skip(1));
+
+                sender.Send(args.Target.SetTopic(topic));
+            }
+
+            else
+            {
+                throw new CommandException("This command can only be used in a channel.");
+            }
+        }
+
+        private void KickCallback(Client sender, CommandArgs args)
+        {
+            if (args.Parameters.Length < Commands["kick"].MinParams)
+            {
+                throw new CommandException("Insufficient parameters.");
+            }
+
+            if (args.Target != null)
+            {
+                if (args.Target.Users.ContainsKey(args.Parameters[1]))
+                {
+                    if (args.Parameters.Length > 2)
+                    {
+                        string message = string.Join(" ", args.Parameters.Skip(2));
+                        sender.Send(args.Target.Kick(args.Target.Users[args.Parameters[1]], message));
+                    }
+
+                    else
+                    {
+                        sender.Send(args.Target.Kick(args.Target.Users[args.Parameters[1]]));
+                    }
+                }
+
+                else
+                {
+                    throw new CommandException("The user is not in this channel.");
+                }
+            }
+
+            else
+            {
+                throw new CommandException("This command can only be used in a channel.");
+            }
+        }
+
+        private void HelpCallback(Client sender, CommandArgs args)
+        {
+            if (args.Parameters.Length < Commands["help"].MinParams)
             {
                 throw new CommandException("Help usage: " + Commands["help"].Usage);
             }
 
-            throw new CommandException("Usage: " + Commands[parameters[1]].Usage);
+            throw new CommandException("Usage: " + Commands[args.Parameters[1]].Usage);
         }
     }
 }
