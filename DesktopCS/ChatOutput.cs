@@ -8,7 +8,7 @@ using NetIRC;
 
 namespace DesktopCS
 {
-    class ChatOutput
+    public class ChatOutput
     {
         public BaseTab Tab;
         private Client Client;

@@ -7,103 +7,83 @@ using NetIRC;
 
 namespace DesktopCS
 {
-    public static class CommandExecutor
+    public class CommandExecutor
     {
-        public static CommandReturn Execute(Client invoker, Channel target, string command)
+        private Dictionary<string, Command> Commands = new Dictionary<string,Command>();
+
+        public CommandExecutor()
+        {
+            Commands.Add("join", new Command(2, JoinCallback, "/join <channel>"));
+            Commands.Add("part", new Command(2, PartCallback, "/part <channel>"));
+            Commands.Add("topic", new Command(3, TopicCallback, "/topic <channel> <text>"));
+            Commands.Add("help", new Command(2, HelpCallback, "/help <command>"));
+        }
+
+        public void Execute(Client invoker, string command, ChatOutput output)
         {
             string[] parts = command.Remove(0, 1).Trim().Split(' ');
 
-            switch (parts[0].ToLowerInvariant())
+            foreach (KeyValuePair<string, Command> entry in Commands)
             {
-                case "nick":
-                    if (parts.Length >= 2)
+                if (entry.Key == parts[0].ToLowerInvariant())
+                {
+                    try
                     {
-                        invoker.Send(new NetIRC.Messages.Send.NickMessage(parts[1]));
-
-                        return CommandReturn.SUCCESS;
-                    }
-                    else
-                    {
-                        return CommandReturn.INSUFFICIENT_PARAMS;
+                        entry.Value.Callback(invoker, parts);
                     }
 
-                case "join":
-                    if (parts.Length >= 2)
+                    catch (CommandException ex)
                     {
-                        if (parts[1][0] == '#')
-                        {
-                            parts[1] = parts[1].Substring(1);
-                        }
-
-                        invoker.JoinChannel(parts[1]);
-
-                        return CommandReturn.SUCCESS;
+                        output.AddLine(ex.Message);
                     }
-                    else
-                    {
-                        return CommandReturn.INSUFFICIENT_PARAMS;
-                    }
-
-                case "part":
-                    if (parts.Length >= 2)
-                    {
-                        if (parts[1][0] == '#')
-                        {
-                            parts[1] = parts[1].Substring(1);
-                        }
-
-                        invoker.LeaveChannel(parts[1]);
-
-                        return CommandReturn.SUCCESS;
-                    }
-                    else if (target != null)
-                    {
-                        invoker.LeaveChannel(target.Name);
-
-                        return CommandReturn.SUCCESS;
-                    }
-                    else
-                    {
-                        return CommandReturn.INSUFFICIENT_PARAMS;
-                    }
-
-                case "motd":
-                    if (parts.Length >= 2)
-                    {
-                        string motd = string.Join(" ", parts.Skip(1));
-
-                        if (target != null)
-                        {
-                            invoker.Send(new NetIRC.Messages.Send.TopicMessage("#" + target.Name, motd));
-                        }
-
-                        return CommandReturn.SUCCESS;
-                    }
-                    else
-                    {
-                        return CommandReturn.INSUFFICIENT_PARAMS;
-                    }
-
-                case "me":
-                    if (parts.Length >= 2)
-                    {
-                        string action = string.Join(" ", parts.Skip(1));
-
-                        if (target != null)
-                        {
-                            invoker.Send(new NetIRC.Messages.Send.CTCP.ActionMessage(target, action));
-                        }
-
-                        return CommandReturn.SUCCESS;
-                    }
-                    else
-                    {
-                        return CommandReturn.INSUFFICIENT_PARAMS;
-                    }
-
-                default:
-                    return CommandReturn.UNKNOWN_COMMAND;
+                    return;
+                }
             }
+
+            output.AddLine("Unknown command.");
+        }
+
+        private void JoinCallback(Client sender, string[] parameters)
+        {
+            if (parameters.Length < Commands["join"].MinParams)
+            {
+                throw new CommandException("Insufficient parameters.");
+            }
+
+            sender.JoinChannel(parameters[1]);
+        }
+
+        private void PartCallback(Client sender, string[] parameters)
+        {
+            if (parameters.Length < Commands["part"].MinParams)
+            {
+                throw new CommandException("Insufficient parameters.");
+            }
+
+            sender.LeaveChannel(parameters[1]);
+        }
+
+        private void TopicCallback(Client sender, string[] parameters)
+        {
+            if (parameters.Length < Commands["topic"].MinParams)
+            {
+                throw new CommandException("Insufficient parameters.");
+            }
+
+            string topic = string.Join(" ", parameters.Skip(2));
+
+            if (sender.Channels.ContainsKey(parameters[1]))
+                sender.Channels[parameters[1]].SetTopic(topic);
+        }
+
+        private void HelpCallback(Client sender, string[] parameters)
+        {
+            if (parameters.Length < Commands["help"].MinParams)
+            {
+                throw new CommandException("Help usage: " + Commands["help"].Usage);
+            }
+
+            throw new CommandException("Usage: " + Commands[parameters[1]].Usage);
         }
     }
 }

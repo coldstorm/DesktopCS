@@ -7,7 +7,7 @@ using NetIRC;
 namespace DesktopCS.Forms
 {
     [System.ComponentModel.DesignerCategory("")]
-    class BaseTab : TabPage
+    public class BaseTab : TabPage
     {
         public TabType Type;
 
