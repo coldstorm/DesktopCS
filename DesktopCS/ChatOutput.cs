@@ -160,7 +160,16 @@ namespace DesktopCS
                         HtmlElement userElement = browser.Document.CreateElement("a");
                         userElement.SetAttribute("href", "cs-pm:" + word);
                         userElement.InnerText = word;
-                        userElement.Style = "text-decoration:none;color:#babbbf;";
+
+                        if (word == this.Client.User.NickName)
+                        {
+                            userElement.Style = "text-decoration:none;color:#ff921e;font-weight:bold";
+                        }
+
+                        else
+                        {
+                            userElement.Style = "text-decoration:none;color:#babbbf;";
+                        }
 
                         line.AppendChild(userElement);
 
@@ -292,7 +301,16 @@ namespace DesktopCS
                         HtmlElement userElement = browser.Document.CreateElement("a");
                         userElement.SetAttribute("href", "cs-pm:" + word);
                         userElement.InnerText = word;
-                        userElement.Style = "text-decoration:none;color:#babbbf;font-style:italic";
+
+                        if (word == this.Client.User.NickName)
+                        {
+                            userElement.Style = "text-decoration:none;color:#ff921e;font-weight:bold";
+                        }
+
+                        else
+                        {
+                            userElement.Style = "text-decoration:none;color:#babbbf;font-style:italic";
+                        }
 
                         line.AppendChild(userElement);
 
