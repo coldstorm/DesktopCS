@@ -119,7 +119,7 @@ namespace DesktopCS.Forms
                 MessageBox.Show("Null user");
             }
 
-            if (message.Contains(this.Client.User.NickName))
+            if (message.Contains(this.Client.User.NickName) && Properties.Settings.Default.Sounds)
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.cs_ping);
                 player.PlaySync();
@@ -130,7 +130,7 @@ namespace DesktopCS.Forms
 
         void channel_OnAction(Channel source, User user, string action)
         {
-            if (action.Contains(this.Client.User.NickName))
+            if (action.Contains(this.Client.User.NickName) && Properties.Settings.Default.Sounds)
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.cs_ping);
                 player.PlaySync();
