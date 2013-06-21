@@ -209,7 +209,7 @@ namespace DesktopCS.Forms
                             Channel channel = (tab as ChannelTab).Channel;
 
                             MainForm mainForm = this.Parent as MainForm;
-                            mainForm.Client.Send(new NetIRC.Messages.Send.PartMessage("#" + channel.Name));
+                            mainForm.Client.LeaveChannel(channel.Name);
                         }
                         else
                         {
