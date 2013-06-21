@@ -11,6 +11,8 @@ namespace DesktopCS
     {
         private Dictionary<string, Command> Commands = new Dictionary<string,Command>();
 
+        private readonly List<char> ChannelChars = new List<char>() { '#', '&', '!', '+' };
+
         public CommandExecutor()
         {
             Commands.Add("me", new Command(2, MeCallback, "/me <action>"));
@@ -84,6 +86,9 @@ namespace DesktopCS
                 throw new CommandException("Insufficient parameters.");
             }
 
+            if (ChannelChars.Contains(args.Parameters[1][0]))
+                args.Parameters[1] = args.Parameters[1].Remove(0, 1);
+
             sender.JoinChannel(args.Parameters[1]);
         }
 
@@ -93,6 +98,9 @@ namespace DesktopCS
             {
                 throw new CommandException("Insufficient parameters.");
             }
+
+            if (ChannelChars.Contains(args.Parameters[1][0]))
+                args.Parameters[1] = args.Parameters[1].Remove(0, 1);
 
             sender.LeaveChannel(args.Parameters[1]);
         }
