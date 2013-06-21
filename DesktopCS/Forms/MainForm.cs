@@ -16,19 +16,6 @@ namespace DesktopCS.Forms
         internal NetIRC.Client Client;
         internal CommandExecutor Executor;
 
-        private delegate void AddLineDelegate(string tabName, string line);
-        private delegate void AddLineWithAuthorDelegate(string tabName, User author, string line);
-        private delegate BaseTab AddTabDelegate(BaseTab tab);
-        private delegate void RemoveTabDelegate(string tabName);
-        private delegate void PopulateUserlistDelegate();
-        private delegate void UpdateTopicLabelDelegate();
-        private AddLineDelegate _addline;
-        private AddLineWithAuthorDelegate _addlinewithauthor;
-        private AddTabDelegate _addtab;
-        private RemoveTabDelegate _removetab;
-        private PopulateUserlistDelegate _populateuserlist;
-        private UpdateTopicLabelDelegate _updatetopiclabel;
-
         public MainForm()
         {
             InitializeComponent();
@@ -53,13 +40,6 @@ namespace DesktopCS.Forms
             Client.OnConnect += Client_OnConnect;
             Client.OnChannelJoin += Client_OnChannelJoin;
             Client.OnChannelLeave += Client_OnChannelLeave;
-
-            _addline = new AddLineDelegate(AddLine);
-            _addlinewithauthor = new AddLineWithAuthorDelegate(AddLine);
-            _addtab = new AddTabDelegate(AddTab);
-            _removetab = new RemoveTabDelegate(RemoveTab);
-            _populateuserlist = new PopulateUserlistDelegate(PopulateUserlist);
-            _updatetopiclabel = new UpdateTopicLabelDelegate(UpdateTopicLabel);
         }
 
         #region Form Overrides
@@ -101,7 +81,7 @@ namespace DesktopCS.Forms
 
             this.AddTab(tab);
 
-            this.AddLine("#" + channel.Name, "You joined the channel #" + channel.Name);
+            this.AddLine(this.TabList.Tabs["#" + channel.Name], "You joined the channel #" + channel.Name);
 
             this.PopulateUserlist();
             this.UpdateTopicLabel();
@@ -109,6 +89,7 @@ namespace DesktopCS.Forms
             this.TabList.SwitchToTab(tab.Name);
 
             channel.OnMessage += channel_OnMessage;
+            channel.OnAction += channel_OnAction;
             channel.OnNotice += channel_OnNotice;
             channel.OnJoin += channel_OnJoin;
             channel.OnLeave += channel_OnLeave;
@@ -142,12 +123,17 @@ namespace DesktopCS.Forms
                 MessageBox.Show("Null user");
             }
 
-            this.AddLine("#" + source.Name, user, message);
+            this.AddLine(this.TabList.Tabs["#" + source.Name], user, message);
+        }
+
+        void channel_OnAction(Channel source, User user, string action)
+        {
+            this.AddActionLine(source, user, action);
         }
 
         void channel_OnNotice(Channel source, User user, string notice)
         {
-            this.AddLine("#" + source.Name, user, notice);
+            this.AddLine(this.TabList.Tabs["#" + source.Name], user, notice);
         }
 
         void channel_OnJoin(Channel source, User user)
@@ -190,7 +176,7 @@ namespace DesktopCS.Forms
         {
             if (user != Client.User)
             {
-                this.AddLine("#" + source.Name, user.NickName + " left the room.");
+                this.AddLine(this.TabList.Tabs["#" + source.Name], user.NickName + " left the room.");
             }
 
             System.Timers.Timer colorTimer = new System.Timers.Timer();
@@ -210,12 +196,12 @@ namespace DesktopCS.Forms
         {
             if (user == Client.User)
             {
-                this.AddLine("#" + source.Name, "You were kicked by " + kicker.NickName + " (" + reason + ")");
+                this.AddLine(this.TabList.Tabs["#" + source.Name], "You were kicked by " + kicker.NickName + " (" + reason + ")");
                 UserList.Nodes.Clear();
             }
             else
             {
-                this.AddLine("#" + source.Name, kicker.NickName + " kicked " + user.NickName + " (" + reason + ")");
+                this.AddLine(this.TabList.Tabs["#" + source.Name], kicker.NickName + " kicked " + user.NickName + " (" + reason + ")");
                 this.PopulateUserlist();
             }
         }
@@ -233,7 +219,13 @@ namespace DesktopCS.Forms
                 return;
             }
 
-            this.AddLine((this.TabList.SelectedTab as BaseTab).Name, original + " has changed their nickname to " + user.NickName);
+            foreach (BaseTab tab in TabList.Tabs.Values)
+            {
+                if (tab.Type == TabType.Channel || tab.Name == original)
+                {
+                    this.AddLine(tab, original + " has changed their nickname to " + user.NickName);
+                }
+            }
             this.PopulateUserlist();
         }
         #endregion
@@ -249,11 +241,13 @@ namespace DesktopCS.Forms
             }
         }
 
+        private delegate BaseTab AddTabHandler(BaseTab tab);
+
         internal BaseTab AddTab(BaseTab tab)
         {
             if (this.InvokeRequired)
             {
-                return (BaseTab)this.Invoke(_addtab, tab);
+                return (BaseTab)this.Invoke(new AddTabHandler(AddTab), tab);
             }
 
             if (!TabList.Tabs.ContainsKey(tab.Text))
@@ -272,11 +266,13 @@ namespace DesktopCS.Forms
             return TabList.Tabs[tab.Text] as BaseTab;
         }
 
+        private delegate void RemoveTabHandler(string tabName);
+
         private void RemoveTab(string tabName)
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(_removetab, tabName);
+                this.Invoke(new RemoveTabHandler(RemoveTab), tabName);
                 return;
             }
 
@@ -286,26 +282,30 @@ namespace DesktopCS.Forms
             }
         }
 
-        private void AddLine(string tabName, string line)
+        private delegate void AddLineHandler(BaseTab tab, string line);
+
+        private void AddLine(BaseTab tab, string line)
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(_addline, tabName, line);
+                this.Invoke(new AddLineHandler(AddLine), tab, line);
                 return;
             }
 
-            if (this.TabList.Tabs.ContainsKey(tabName))
+            if (this.TabList.Tabs.ContainsValue(tab))
             {
-                ChatOutput output = new ChatOutput(this.TabList.Tabs[tabName], this.Client);
+                ChatOutput output = new ChatOutput(tab, this.Client);
                 output.AddLine(line);
             }
         }
 
-        private void AddLine(string tabName, User author, string line)
+        private delegate void AddLineWithAuthorHandler(BaseTab tab, User user, string line);
+
+        private void AddLine(BaseTab tab, User author, string line)
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(_addlinewithauthor, tabName, author, line);
+                this.Invoke(new AddLineWithAuthorHandler(AddLine), tab, author, line);
                 return;
             }
 
@@ -314,14 +314,28 @@ namespace DesktopCS.Forms
                 MessageBox.Show("Null user");
             }
 
-            ChatOutput output = new ChatOutput(this.TabList.Tabs[tabName], this.Client);
+            ChatOutput output = new ChatOutput(tab, this.Client);
             output.AddLine(author, line);
 
-            if (this.TabList.SelectedTab.Name != tabName)
+            if (this.TabList.SelectedTab.Name != tab.Name)
             {
-                this.TabList.Tabs[tabName].Active = true;
+                tab.Active = true;
                 this.TabList.Invalidate();
             }
+        }
+
+        private delegate void AddActionLineHandler(Channel channel, User author, string action);
+
+        private void AddActionLine(Channel channel, User author, string action)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new AddActionLineHandler(AddActionLine), channel, author, action);
+                return;
+            }
+
+            ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + channel.Name], this.Client);
+            output.AddActionLine(author, action);
         }
 
         private delegate void AddUserJoinHandler(Channel channel, User user);
@@ -338,11 +352,13 @@ namespace DesktopCS.Forms
             output.AddUserJoin(user, channel);
         }
 
+        private delegate void PopulateUserlistHandler();
+
         private void PopulateUserlist()
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(_populateuserlist);
+                this.Invoke(new PopulateUserlistHandler(PopulateUserlist));
                 return;
             }
 
@@ -361,11 +377,13 @@ namespace DesktopCS.Forms
             }
         }
 
+        private delegate void UpdateTopicLabelHandler();
+
         private void UpdateTopicLabel()
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(_updatetopiclabel);
+                this.Invoke(new UpdateTopicLabelHandler(UpdateTopicLabel));
                 return;
             }
 
@@ -404,7 +422,7 @@ namespace DesktopCS.Forms
                 if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
                 {
                     Client.Send(new NetIRC.Messages.Send.ChatMessage((TabList.SelectedTab as ChannelTab).Channel, input));
-                    AddLine(TabList.SelectedTab.Name, Client.User, input);
+                    AddLine(this.TabList.Tabs[TabList.SelectedTab.Name], Client.User, input);
                 }
             }
         }

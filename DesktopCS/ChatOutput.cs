@@ -215,5 +215,138 @@ namespace DesktopCS
 
             browser.Document.Window.ScrollTo(0, browser.Document.Body.ScrollRectangle.Bottom);
         }
+
+        public void AddActionLine(User author, string action)
+        {
+            WebBrowser browser = this.Tab.Browser;
+
+            HtmlElement line = browser.Document.CreateElement("div");
+
+            string timeStampColorHex = string.Format("{0:X6}", Constants.TIMESTAMP_COLOR.ToArgb() & 0xFFFFFF);
+
+            HtmlElement timeStamp = browser.Document.CreateElement("span");
+
+            timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
+            timeStamp.Style = "color:#" + timeStampColorHex;
+
+            HtmlElement authorElement = browser.Document.CreateElement("a");
+            Color authorColor = UserNode.ColorFromUser(author);
+
+            string authorColorHex = string.Format("{0:X6}", authorColor.ToArgb() & 0xFFFFFF);
+
+            authorElement.InnerText = "* " + author.NickName;
+            authorElement.Style = "color:#" + authorColorHex + ";text-decoration:none;font-style:italic";
+            authorElement.SetAttribute("href", "cs-pm:" + author.NickName);
+
+            line.AppendChild(timeStamp);
+            line.AppendChild(authorElement);
+
+            string[] words = action.Split(' ');
+
+            HtmlElement textElement = browser.Document.CreateElement("span");
+            textElement.InnerText = " ";
+            textElement.Style = "font-style:italic";
+
+            foreach (string iterWord in words)
+            {
+                string word = iterWord;
+
+                if (word.StartsWith("#"))
+                {
+                    word = word.Substring(1);
+
+                    if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+                    {
+                        textElement.InnerText += " ";
+                    }
+
+                    line.AppendChild(textElement);
+
+                    textElement = browser.Document.CreateElement("span");
+                    textElement.InnerText = " ";
+
+                    HtmlElement channelElement = browser.Document.CreateElement("a");
+                    channelElement.SetAttribute("href", "cs-channel:" + word);
+                    channelElement.InnerText = "#" + word;
+                    channelElement.Style = "text-decoration:none;color:#babbbf;font-style:italic";
+
+                    line.AppendChild(channelElement);
+
+                    continue;
+                }
+
+                foreach (Channel channel in this.Client.Channels.Values)
+                {
+                    if (channel.Users.ContainsKey(word))
+                    {
+                        if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+                        {
+                            textElement.InnerText += " ";
+                        }
+
+                        line.AppendChild(textElement);
+
+                        textElement = browser.Document.CreateElement("span");
+                        textElement.InnerText = " ";
+
+                        HtmlElement userElement = browser.Document.CreateElement("a");
+                        userElement.SetAttribute("href", "cs-pm:" + word);
+                        userElement.InnerText = word;
+                        userElement.Style = "text-decoration:none;color:#babbbf;font-style:italic";
+
+                        line.AppendChild(userElement);
+
+                        goto VbLetsYouBreakThese;
+                    }
+                }
+
+                Uri uriResult;
+
+                bool isUri = Uri.TryCreate(word, UriKind.Absolute, out uriResult);
+
+                if (isUri && !string.IsNullOrEmpty(uriResult.LocalPath))
+                {
+                    if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+                    {
+                        textElement.InnerText += " ";
+                    }
+
+                    line.AppendChild(textElement);
+
+                    textElement = browser.Document.CreateElement("span");
+                    textElement.InnerText = " ";
+
+                    HtmlElement linkElement = browser.Document.CreateElement("a");
+                    linkElement.InnerText = word;
+                    linkElement.SetAttribute("href", uriResult.AbsoluteUri);
+                    linkElement.Style = "color:#4a7691;font-style:italic";
+
+                    line.AppendChild(linkElement);
+
+                    continue;
+                }
+
+                if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+                {
+                    textElement.InnerText += " ";
+                }
+
+                textElement.InnerText += word;
+                textElement.Style = "font-style:italic";
+
+            VbLetsYouBreakThese:
+
+                continue;
+            }
+
+            if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+            {
+                line.AppendChild(textElement);
+            }
+
+            browser.Document.Body.AppendChild(line);
+
+            browser.Document.Window.ScrollTo(0, browser.Document.Body.ScrollRectangle.Bottom);
+        }
     }
 }
