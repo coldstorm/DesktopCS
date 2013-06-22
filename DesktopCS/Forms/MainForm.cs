@@ -50,11 +50,16 @@ namespace DesktopCS.Forms
 
         protected override void OnResize(EventArgs e)
         {
+            Logger.Log("[MainForm.OnResize] MainForm original size: " + this.Width + "x" + this.Height);
+
             base.OnResize(e);
 
             this.TopicLabel.MaximumSize = new Size(this.ClientRectangle.Width - 6, 0);
 
             this.Invalidate();
+
+            Logger.Log("MainForm.OnResize was called.");
+            Logger.Log("[MainForm.OnResize] MainForm size: " + this.Width + "x" + this.Height);
         }
         #endregion
 
@@ -519,6 +524,28 @@ namespace DesktopCS.Forms
             options.Show();
         }
         #endregion
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            Logger.Log("MainForm.Resize was handled.");
+
+            if (WindowState == FormWindowState.Minimized)
+            {
+                Logger.Log("[MainForm.Resize] MainForm is minimized.");
+            }
+
+            else if (WindowState == FormWindowState.Maximized)
+            {
+                Logger.Log("[MainForm.Resize] MainForm is maximized.");
+            }
+
+            else if (WindowState == FormWindowState.Normal)
+            {
+                Logger.Log("[MainForm.Resize] MainForm is normal size.");
+            }
+
+            Logger.Log("[MainForm.Resize] MainForm size: " + this.Width + "x" + this.Height);
+        }
 
     }
 }

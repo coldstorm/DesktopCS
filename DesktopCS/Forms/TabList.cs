@@ -236,6 +236,8 @@ namespace DesktopCS.Forms
 
         protected override void OnResize(EventArgs e)
         {
+            Logger.Log("[TabList.OnResize] TabList original size: " + this.Width + "x" + this.Height);
+
             base.OnResize(e);
 
             Logger.Log("TabList.OnResize was called.");
