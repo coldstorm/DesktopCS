@@ -21,6 +21,7 @@ namespace DesktopCS.Forms
             this.ColorBox.BackColor = ColorTranslator.FromHtml(this.ColorBox.Text);
             this.ChannelsBox.Text = Properties.Settings.Default.Channels;
             this.SoundsCheckBox.Checked = Properties.Settings.Default.Sounds;
+            this.SpoilersCheckBox.Checked = Properties.Settings.Default.Spoilers;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -29,6 +30,7 @@ namespace DesktopCS.Forms
             Properties.Settings.Default.Color = this.ColorBox.Text;
             Properties.Settings.Default.Channels = this.ChannelsBox.Text;
             Properties.Settings.Default.Sounds = this.SoundsCheckBox.Checked;
+            Properties.Settings.Default.Spoilers = this.SpoilersCheckBox.Checked;
 
             Properties.Settings.Default.Save();
             this.Close();
