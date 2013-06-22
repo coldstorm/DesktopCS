@@ -122,35 +122,54 @@ namespace DesktopCS
             {
                 if (words[i] == "::" || words[i].StartsWith("::") || words[i].EndsWith("::"))
                 {
-                    spoiler++;
-
-                    if (spoiler % 2 == 0)
+                    if (words[i].StartsWith("::") && words[i].EndsWith("::") && words[i].Length > 2)
                     {
-                        spoilerEnd = i;
-                        words[spoilerStart] = words[spoilerStart].Replace("::", "");
-                        words[spoilerEnd] = words[spoilerEnd].Replace("::", "");
-
                         textElement = browser.Document.CreateElement("span");
-                        string spoilerText = " ";
-                        for (int j = spoilerStart; j <= spoilerEnd; j++)
-                        {
-                            spoilerText += words[j] + " ";
-                        }
-                        textElement.InnerText = spoilerText;
+                        words[i] = words[i].Replace("::", "");
+                        textElement.InnerText = words[i];
                         textElement.Style = "background-color:#000000;color:#000000";
                         textElement.MouseOver += spoiler_MouseOver;
                         textElement.MouseLeave += spoiler_MouseLeave;
 
-                        line.AppendChild(textElement);
+                        spoilerStart = -1;
+                        spoilerEnd = -1;
                     }
 
                     else
                     {
-                        spoilerStart = i;
+                        spoiler++;
+
+                        if (spoiler % 2 == 0)
+                        {
+                            spoilerEnd = i;
+                            words[spoilerStart] = words[spoilerStart].Replace("::", "");
+                            words[spoilerEnd] = words[spoilerEnd].Replace("::", "");
+
+                            textElement = browser.Document.CreateElement("span");
+                            string spoilerText = " ";
+                            for (int j = spoilerStart; j <= spoilerEnd; j++)
+                            {
+                                spoilerText += words[j] + " ";
+                            }
+                            textElement.InnerText = spoilerText;
+                            textElement.Style = "background-color:#000000;color:#000000";
+                            textElement.MouseOver += spoiler_MouseOver;
+                            textElement.MouseLeave += spoiler_MouseLeave;
+
+                            line.AppendChild(textElement);
+
+                            spoilerStart = -1;
+                            spoilerEnd = -1;
+                        }
+
+                        else
+                        {
+                            spoilerStart = i;
+                        }
                     }
                 }
 
-                else
+                else if (spoilerStart == -1 && spoilerEnd == -1)
                 {
                     textElement = browser.Document.CreateElement("span");
                     if (words[i].StartsWith("#"))
