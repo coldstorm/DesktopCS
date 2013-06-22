@@ -467,8 +467,6 @@ namespace DesktopCS.Forms
 
         private void TopicLabel_ClientSizeChanged(object sender, System.EventArgs e)
         {
-            Logger.Log("TopicLabel.ClientSizeChanged was handled.");
-
             int offset = this.TopicLabel.Bottom + 3;
 
             this.UserList.Top = offset + 25;
@@ -482,12 +480,13 @@ namespace DesktopCS.Forms
             this.TopicLabel.Location = new Point(this.ClientRectangle.Width - this.TopicLabel.Width, this.TopicLabel.Top);
 
             this.Invalidate();
+
+            Logger.Log("TopicLabel.ClientSizeChanged was handled.");
+            Logger.Log("[TopicLabel.ClientSizeChanged] TopicLabel size: " + this.TopicLabel.Width + "x" + this.TopicLabel.Height);
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Logger.Log("MainForm.OnPaint was called.");
-
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
@@ -510,6 +509,8 @@ namespace DesktopCS.Forms
             inputBoxRectangle.Height += 1;
 
             g.DrawRectangle(new Pen(Constants.TAB_BORDER_COLOR), inputBoxRectangle);
+
+            Logger.Log("MainForm.OnPaint was called.");
         }
 
         private void OptionsMenuStripItem_Click(object sender, EventArgs e)

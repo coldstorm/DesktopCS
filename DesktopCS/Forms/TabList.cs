@@ -20,8 +20,6 @@ namespace DesktopCS.Forms
 
         public void AddTab(BaseTab tab)
         {
-            Logger.Log("TabList.AddTab was called.");
-
             this.Tabs.Add(tab.Name, tab);
 
             if (this.Tabs.Count == 1)
@@ -31,12 +29,13 @@ namespace DesktopCS.Forms
             }
 
             this.Invalidate();
+
+            Logger.Log("TabList.AddTab was called.");
+            Logger.Log("[TabList.AddTab] Added tab: " + tab.Name);
         }
 
         public void RemoveTab(BaseTab tab)
         {
-            Logger.Log("TabList.RemoveTab was called.");
-
             if (this.Tabs.Count > 0 && this.SelectedTab == tab)
             {
                 this.SwitchToTab(0);
@@ -50,6 +49,9 @@ namespace DesktopCS.Forms
             }
 
             this.Invalidate();
+
+            Logger.Log("TabList.RemoveTab was called.");
+            Logger.Log("[TabList.RemoveTab] Removed tab: " + tab.Name);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -139,8 +141,6 @@ namespace DesktopCS.Forms
 
         public void SwitchToTab(string tabName)
         {
-            Logger.Log("TabList.SwitchToTab was called.");
-
             if (this.InvokeRequired)
             {
                 SwitchToTabDelegate del = new SwitchToTabDelegate(this.SwitchToTab);
@@ -158,6 +158,9 @@ namespace DesktopCS.Forms
 
             this.TabPages.Add(this.Tabs[tabName]);
             this.TabPages.RemoveAt(0);
+
+            Logger.Log("TabList.SwitchToTab was called.");
+            Logger.Log("[TabList.SwitchToTab] Switched to tab: " + tabName);
         }
 
         public Rectangle GetTabRectangle(int index)
@@ -233,8 +236,10 @@ namespace DesktopCS.Forms
 
         protected override void OnResize(EventArgs e)
         {
-            Logger.Log("TabList.OnResize was called.");
             base.OnResize(e);
+
+            Logger.Log("TabList.OnResize was called.");
+            Logger.Log("[TabList.OnResize] TabList size: " + this.Width + "x" + this.Height);
         }
     }
 }

@@ -67,8 +67,10 @@ namespace DesktopCS.Forms
 
         protected override void OnResize(EventArgs e)
         {
-            Logger.Log("UserList.OnResize was called.");
             base.OnResize(e);
+
+            Logger.Log("UserList.OnResize was called.");
+            Logger.Log("[UserList.OnResize] UserList size: " + this.Width + "x" + this.Height);
         }
     }
 }
