@@ -122,14 +122,8 @@ namespace DesktopCS
             {
                 if (words[i] == "::" || words[i].StartsWith("::") || words[i].EndsWith("::") && Properties.Settings.Default.Spoilers)
                 {
-                    if (words[i].StartsWith("::") && words[i].EndsWith("::") && words[i].Length > 2)
+                    if (words[i].StartsWith("::") && words[i].EndsWith("::") && words[i].Length > 2) //Single word in a spoiler
                     {
-                        if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-                        {
-                            textElement.InnerText += " ";
-                        }
-                        line.AppendChild(textElement);
-
                         textElement = browser.Document.CreateElement("span");
                         words[i] = words[i].Replace("::", "");
                         textElement.InnerText = words[i];
@@ -137,8 +131,7 @@ namespace DesktopCS
                         textElement.MouseOver += spoiler_MouseOver;
                         textElement.MouseLeave += spoiler_MouseLeave;
 
-                        spoilerStart = -1;
-                        spoilerEnd = -1;
+                        line.AppendChild(textElement);
                     }
 
                     else
@@ -151,23 +144,21 @@ namespace DesktopCS
                             words[spoilerStart] = words[spoilerStart].Replace("::", "");
                             words[spoilerEnd] = words[spoilerEnd].Replace("::", "");
 
-                            if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-                            {
-                                textElement.InnerText += " ";
-                            }
-                            line.AppendChild(textElement);
-
                             textElement = browser.Document.CreateElement("span");
-                            string spoilerText = " ";
+                            string spoilerText = "";
                             for (int j = spoilerStart; j <= spoilerEnd; j++)
                             {
                                 spoilerText += words[j] + " ";
                             }
-                            textElement.InnerText = spoilerText.Trim(' ');
+                            textElement.InnerText = spoilerText.Trim();
                             textElement.Style = "background-color:#000000;color:#000000";
                             textElement.MouseOver += spoiler_MouseOver;
                             textElement.MouseLeave += spoiler_MouseLeave;
 
+                            line.AppendChild(textElement);
+
+                            textElement = browser.Document.CreateElement("span");
+                            textElement.InnerText = " ";
                             line.AppendChild(textElement);
 
                             spoilerStart = -1;
@@ -251,14 +242,8 @@ namespace DesktopCS
             {
                 if (words[i] == "::" || words[i].StartsWith("::") || words[i].EndsWith("::") && Properties.Settings.Default.Spoilers)
                 {
-                    if (words[i].StartsWith("::") && words[i].EndsWith("::") && words[i].Length > 2)
+                    if (words[i].StartsWith("::") && words[i].EndsWith("::") && words[i].Length > 2) //Single word in a spoiler
                     {
-                        if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-                        {
-                            textElement.InnerText += " ";
-                        }
-                        line.AppendChild(textElement);
-
                         textElement = browser.Document.CreateElement("span");
                         words[i] = words[i].Replace("::", "");
                         textElement.InnerText = words[i];
@@ -266,8 +251,7 @@ namespace DesktopCS
                         textElement.MouseOver += spoiler_MouseOver;
                         textElement.MouseLeave += spoiler_MouseLeave;
 
-                        spoilerStart = -1;
-                        spoilerEnd = -1;
+                        line.AppendChild(textElement);
                     }
 
                     else
@@ -280,23 +264,21 @@ namespace DesktopCS
                             words[spoilerStart] = words[spoilerStart].Replace("::", "");
                             words[spoilerEnd] = words[spoilerEnd].Replace("::", "");
 
-                            if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-                            {
-                                textElement.InnerText += " ";
-                            }
-                            line.AppendChild(textElement);
-
                             textElement = browser.Document.CreateElement("span");
                             string spoilerText = "";
                             for (int j = spoilerStart; j <= spoilerEnd; j++)
                             {
                                 spoilerText += words[j] + " ";
                             }
-                            textElement.InnerText = spoilerText;
+                            textElement.InnerText = spoilerText.Trim();
                             textElement.Style = "background-color:#000000;color:#000000";
                             textElement.MouseOver += spoiler_MouseOver;
                             textElement.MouseLeave += spoiler_MouseLeave;
 
+                            line.AppendChild(textElement);
+
+                            textElement = browser.Document.CreateElement("span");
+                            textElement.InnerText = " ";
                             line.AppendChild(textElement);
 
                             spoilerStart = -1;
@@ -420,7 +402,7 @@ namespace DesktopCS
 
         void spoiler_MouseOver(object sender, HtmlElementEventArgs e)
         {
-            e.ToElement.Style = "color:inherit";
+            e.ToElement.Style = "color:inherit;font-style:inherit;font-weight:inherit";
         }
     }
 }
