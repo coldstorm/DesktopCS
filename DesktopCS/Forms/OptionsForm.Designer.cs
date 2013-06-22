@@ -38,6 +38,7 @@
             this.SoundsCheckBox = new System.Windows.Forms.CheckBox();
             this.SaveButton = new System.Windows.Forms.Button();
             this.ColorChooser = new System.Windows.Forms.ColorDialog();
+            this.SpoilersCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -141,12 +142,27 @@
             this.SaveButton.UseVisualStyleBackColor = false;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // SpoilersCheckBox
+            // 
+            this.SpoilersCheckBox.AutoSize = true;
+            this.SpoilersCheckBox.Checked = true;
+            this.SpoilersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.SpoilersCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SpoilersCheckBox.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SpoilersCheckBox.Location = new System.Drawing.Point(55, 152);
+            this.SpoilersCheckBox.Name = "SpoilersCheckBox";
+            this.SpoilersCheckBox.Size = new System.Drawing.Size(73, 18);
+            this.SpoilersCheckBox.TabIndex = 10;
+            this.SpoilersCheckBox.Text = "Spoilers";
+            this.SpoilersCheckBox.UseVisualStyleBackColor = true;
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(31)))));
             this.ClientSize = new System.Drawing.Size(338, 224);
+            this.Controls.Add(this.SpoilersCheckBox);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.SoundsCheckBox);
             this.Controls.Add(this.ChannelsBox);
@@ -177,5 +193,6 @@
         private System.Windows.Forms.CheckBox SoundsCheckBox;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.ColorDialog ColorChooser;
+        private System.Windows.Forms.CheckBox SpoilersCheckBox;
     }
 }
