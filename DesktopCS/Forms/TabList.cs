@@ -243,5 +243,15 @@ namespace DesktopCS.Forms
             Logger.Log("TabList.OnResize was called.");
             Logger.Log("[TabList.OnResize] TabList size: " + this.Width + "x" + this.Height);
         }
+
+        protected override void OnLayout(LayoutEventArgs levent)
+        {
+            Logger.Log("[TabList.OnLayout] TabList original size: " + this.Width + "x" + this.Height);
+
+            base.OnLayout(levent);
+
+            Logger.Log("TabList.OnLayout was called.");
+            Logger.Log("[TabList.OnLayout] TabList size: " + this.Width + "x" + this.Height);
+        }
     }
 }

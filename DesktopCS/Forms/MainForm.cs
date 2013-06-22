@@ -472,6 +472,9 @@ namespace DesktopCS.Forms
 
         private void TopicLabel_ClientSizeChanged(object sender, System.EventArgs e)
         {
+            Logger.Log("[TopicLabel.ClientSizeChanged] UserList size: " + this.UserList.Width + "x" + this.UserList.Height);
+            Logger.Log("[TopicLabel.ClientSizeChanged] TabList size: " + this.TabList.Width + "x" + this.TabList.Height);
+
             int offset = this.TopicLabel.Bottom + 3;
 
             this.UserList.Top = offset + 25;
@@ -545,6 +548,12 @@ namespace DesktopCS.Forms
             }
 
             Logger.Log("[MainForm.Resize] MainForm size: " + this.Width + "x" + this.Height);
+        }
+
+        private void MainForm_Layout(object sender, LayoutEventArgs e)
+        {
+            Logger.Log("MainForm.Layout was handled.");
+            Logger.Log("[MainForm.Layout] MainForm size: " + this.Width + "x" + this.Height);
         }
 
     }

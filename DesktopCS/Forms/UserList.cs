@@ -74,5 +74,15 @@ namespace DesktopCS.Forms
             Logger.Log("UserList.OnResize was called.");
             Logger.Log("[UserList.OnResize] UserList size: " + this.Width + "x" + this.Height);
         }
+
+        protected override void OnLayout(LayoutEventArgs levent)
+        {
+            Logger.Log("[UserList.OnLayout] UserList original size: " + this.Width + "x" + this.Height);
+
+            base.OnLayout(levent);
+
+            Logger.Log("UserList.OnLayout was called.");
+            Logger.Log("[UserList.OnLayout] UserList size: " + this.Width + "x" + this.Height);
+        }
     }
 }

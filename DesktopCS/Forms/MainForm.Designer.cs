@@ -128,6 +128,7 @@
             this.MinimumSize = this.ClientSize;
             this.Name = "MainForm";
             this.Text = "Coldstorm";
+            this.Layout += new System.Windows.Forms.LayoutEventHandler(this.MainForm_Layout);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
