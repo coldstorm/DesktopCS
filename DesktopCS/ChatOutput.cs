@@ -103,7 +103,7 @@ namespace DesktopCS
 
             string authorColorHex = string.Format("{0:X6}", authorColor.ToArgb() & 0xFFFFFF);
 
-            authorElement.InnerText = string.Format("{0}{1}", UserNode.RankChars[author.Rank], author.NickName);
+            authorElement.InnerText = string.Format("{0}{1} ", UserNode.RankChars[author.Rank], author.NickName);
             authorElement.Style = "color:#" + authorColorHex + ";text-decoration:none;";
             authorElement.SetAttribute("href", "cs-pm:" + author.NickName);
 
@@ -124,6 +124,12 @@ namespace DesktopCS
                 {
                     if (words[i].StartsWith("::") && words[i].EndsWith("::") && words[i].Length > 2)
                     {
+                        if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+                        {
+                            textElement.InnerText += " ";
+                        }
+                        line.AppendChild(textElement);
+
                         textElement = browser.Document.CreateElement("span");
                         words[i] = words[i].Replace("::", "");
                         textElement.InnerText = words[i];
@@ -145,13 +151,19 @@ namespace DesktopCS
                             words[spoilerStart] = words[spoilerStart].Replace("::", "");
                             words[spoilerEnd] = words[spoilerEnd].Replace("::", "");
 
+                            if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+                            {
+                                textElement.InnerText += " ";
+                            }
+                            line.AppendChild(textElement);
+
                             textElement = browser.Document.CreateElement("span");
                             string spoilerText = " ";
                             for (int j = spoilerStart; j <= spoilerEnd; j++)
                             {
                                 spoilerText += words[j] + " ";
                             }
-                            textElement.InnerText = spoilerText;
+                            textElement.InnerText = spoilerText.Trim(' ');
                             textElement.Style = "background-color:#000000;color:#000000";
                             textElement.MouseOver += spoiler_MouseOver;
                             textElement.MouseLeave += spoiler_MouseLeave;
@@ -171,107 +183,28 @@ namespace DesktopCS
 
                 else if (spoilerStart == -1 && spoilerEnd == -1)
                 {
-                    textElement = browser.Document.CreateElement("span");
-                    if (words[i].StartsWith("#"))
+                    if (ParseChannelName(words[i]) != null)
                     {
-                        words[i] = words[i].Substring(1);
+                        line.AppendChild(ParseChannelName(words[i]));
+                    }
 
-                        if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-                        {
-                            textElement.InnerText += " ";
-                        }
+                    else if (ParseNickName(words[i]) != null)
+                    {
+                        line.AppendChild(ParseNickName(words[i]));
+                    }
 
-                        line.AppendChild(textElement);
+                    else if (ParseLink(words[i]) != null)
+                    {
+                        line.AppendChild(ParseLink(words[i]));
+                    }
 
+                    else
+                    {
                         textElement = browser.Document.CreateElement("span");
-                        textElement.InnerText = " ";
-
-                        HtmlElement channelElement = browser.Document.CreateElement("a");
-                        channelElement.SetAttribute("href", "cs-channel:" + words[i]);
-                        channelElement.InnerText = "#" + words[i];
-                        channelElement.Style = "text-decoration:none;color:#babbbf;";
-
-                        line.AppendChild(channelElement);
-
-                        continue;
-                    }
-
-                    foreach (Channel channel in this.Client.Channels.Values)
-                    {
-                        if (channel.Users.ContainsKey(words[i]))
-                        {
-                            if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-                            {
-                                textElement.InnerText += " ";
-                            }
-
-                            line.AppendChild(textElement);
-
-                            textElement = browser.Document.CreateElement("span");
-                            textElement.InnerText = " ";
-
-                            HtmlElement userElement = browser.Document.CreateElement("a");
-                            userElement.SetAttribute("href", "cs-pm:" + words[i]);
-                            userElement.InnerText = words[i];
-
-                            if (words[i] == this.Client.User.NickName)
-                            {
-                                userElement.Style = "text-decoration:none;color:#ff921e;font-weight:bold";
-                            }
-
-                            else
-                            {
-                                userElement.Style = "text-decoration:none;color:#babbbf;";
-                            }
-
-                            line.AppendChild(userElement);
-
-                            goto VbLetsYouBreakThese;
-                        }
-                    }
-
-                    Uri uriResult;
-
-                    bool isUri = Uri.TryCreate(words[i], UriKind.Absolute, out uriResult);
-
-                    if (isUri && !string.IsNullOrEmpty(uriResult.LocalPath))
-                    {
-                        if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-                        {
-                            textElement.InnerText += " ";
-                        }
-
+                        textElement.InnerText += words[i] + " ";
                         line.AppendChild(textElement);
-
-                        textElement = browser.Document.CreateElement("span");
-                        textElement.InnerText = " ";
-
-                        HtmlElement linkElement = browser.Document.CreateElement("a");
-                        linkElement.InnerText = words[i];
-                        linkElement.SetAttribute("href", uriResult.AbsoluteUri);
-                        linkElement.Style = "color:#4a7691;";
-
-                        line.AppendChild(linkElement);
-
-                        continue;
                     }
-
-                    if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-                    {
-                        textElement.InnerText += " ";
-                    }
-
-                    textElement.InnerText += words[i];
                 }
-
-            VbLetsYouBreakThese:
-
-                continue;
-            }
-
-            if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-            {
-                line.AppendChild(textElement);
             }
 
             browser.Document.Body.AppendChild(line);
@@ -279,36 +212,27 @@ namespace DesktopCS
             browser.Document.Window.ScrollTo(0, browser.Document.Body.ScrollRectangle.Bottom);
         }
 
-        void spoiler_MouseLeave(object sender, HtmlElementEventArgs e)
-        {
-            e.FromElement.Style = "background-color:#000000;color:#000000";
-        }
-
-        void spoiler_MouseOver(object sender, HtmlElementEventArgs e)
-        {
-            e.ToElement.Style = "color:inherit";
-        }
-
         public void AddActionLine(User author, string action)
         {
             WebBrowser browser = this.Tab.Browser;
 
             HtmlElement line = browser.Document.CreateElement("div");
+            line.Style = "font-style:italic";
 
             string timeStampColorHex = string.Format("{0:X6}", Constants.TIMESTAMP_COLOR.ToArgb() & 0xFFFFFF);
 
             HtmlElement timeStamp = browser.Document.CreateElement("span");
 
             timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
-            timeStamp.Style = "color:#" + timeStampColorHex;
+            timeStamp.Style = "color:#" + timeStampColorHex + ";font-style:normal";
 
             HtmlElement authorElement = browser.Document.CreateElement("a");
             Color authorColor = UserNode.ColorFromUser(author);
 
             string authorColorHex = string.Format("{0:X6}", authorColor.ToArgb() & 0xFFFFFF);
 
-            authorElement.InnerText = "* " + author.NickName;
-            authorElement.Style = "color:#" + authorColorHex + ";text-decoration:none;font-style:italic";
+            authorElement.InnerText = "* " + author.NickName + " ";
+            authorElement.Style = "color:#" + authorColorHex + ";text-decoration:none;font-style:inherit";
             authorElement.SetAttribute("href", "cs-pm:" + author.NickName);
 
             line.AppendChild(timeStamp);
@@ -318,7 +242,7 @@ namespace DesktopCS
 
             HtmlElement textElement = browser.Document.CreateElement("span");
             textElement.InnerText = " ";
-            textElement.Style = "font-style:italic";
+            textElement.Style = "font-style:inherit";
 
             int spoiler = 0;
             int spoilerStart = -1;
@@ -329,6 +253,12 @@ namespace DesktopCS
                 {
                     if (words[i].StartsWith("::") && words[i].EndsWith("::") && words[i].Length > 2)
                     {
+                        if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+                        {
+                            textElement.InnerText += " ";
+                        }
+                        line.AppendChild(textElement);
+
                         textElement = browser.Document.CreateElement("span");
                         words[i] = words[i].Replace("::", "");
                         textElement.InnerText = words[i];
@@ -350,8 +280,14 @@ namespace DesktopCS
                             words[spoilerStart] = words[spoilerStart].Replace("::", "");
                             words[spoilerEnd] = words[spoilerEnd].Replace("::", "");
 
+                            if (!string.IsNullOrWhiteSpace(textElement.InnerText))
+                            {
+                                textElement.InnerText += " ";
+                            }
+                            line.AppendChild(textElement);
+
                             textElement = browser.Document.CreateElement("span");
-                            string spoilerText = " ";
+                            string spoilerText = "";
                             for (int j = spoilerStart; j <= spoilerEnd; j++)
                             {
                                 spoilerText += words[j] + " ";
@@ -376,112 +312,115 @@ namespace DesktopCS
 
                 else if (spoilerStart == -1 && spoilerEnd == -1)
                 {
-                    textElement = browser.Document.CreateElement("span");
-                    if (words[i].StartsWith("#"))
+                    if (ParseChannelName(words[i]) != null)
                     {
-                        words[i] = words[i].Substring(1);
+                        line.AppendChild(ParseChannelName(words[i]));
+                    }
 
-                        if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-                        {
-                            textElement.InnerText += " ";
-                        }
+                    else if (ParseNickName(words[i]) != null)
+                    {
+                        line.AppendChild(ParseNickName(words[i]));
+                    }
 
-                        line.AppendChild(textElement);
+                    else if (ParseLink(words[i]) != null)
+                    {
+                        line.AppendChild(ParseLink(words[i]));
+                    }
 
+                    else
+                    {
                         textElement = browser.Document.CreateElement("span");
-                        textElement.InnerText = " ";
-
-                        HtmlElement channelElement = browser.Document.CreateElement("a");
-                        channelElement.SetAttribute("href", "cs-channel:" + words[i]);
-                        channelElement.InnerText = "#" + words[i];
-                        channelElement.Style = "text-decoration:none;color:#babbbf;";
-
-                        line.AppendChild(channelElement);
-
-                        continue;
-                    }
-
-                    foreach (Channel channel in this.Client.Channels.Values)
-                    {
-                        if (channel.Users.ContainsKey(words[i]))
-                        {
-                            if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-                            {
-                                textElement.InnerText += " ";
-                            }
-
-                            line.AppendChild(textElement);
-
-                            textElement = browser.Document.CreateElement("span");
-                            textElement.InnerText = " ";
-
-                            HtmlElement userElement = browser.Document.CreateElement("a");
-                            userElement.SetAttribute("href", "cs-pm:" + words[i]);
-                            userElement.InnerText = words[i];
-
-                            if (words[i] == this.Client.User.NickName)
-                            {
-                                userElement.Style = "text-decoration:none;color:#ff921e;font-weight:bold";
-                            }
-
-                            else
-                            {
-                                userElement.Style = "text-decoration:none;color:#babbbf;";
-                            }
-
-                            line.AppendChild(userElement);
-
-                            goto VbLetsYouBreakThese;
-                        }
-                    }
-
-                    Uri uriResult;
-
-                    bool isUri = Uri.TryCreate(words[i], UriKind.Absolute, out uriResult);
-
-                    if (isUri && !string.IsNullOrEmpty(uriResult.LocalPath))
-                    {
-                        if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-                        {
-                            textElement.InnerText += " ";
-                        }
-
+                        textElement.InnerText += words[i] + " ";
                         line.AppendChild(textElement);
-
-                        textElement = browser.Document.CreateElement("span");
-                        textElement.InnerText = " ";
-
-                        HtmlElement linkElement = browser.Document.CreateElement("a");
-                        linkElement.InnerText = words[i];
-                        linkElement.SetAttribute("href", uriResult.AbsoluteUri);
-                        linkElement.Style = "color:#4a7691;";
-
-                        line.AppendChild(linkElement);
-
-                        continue;
                     }
-
-                    if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-                    {
-                        textElement.InnerText += " ";
-                    }
-
-                    textElement.InnerText += words[i];
                 }
-
-            VbLetsYouBreakThese:
-
-                continue;
-            }
-
-            if (!string.IsNullOrWhiteSpace(textElement.InnerText))
-            {
-                line.AppendChild(textElement);
             }
 
             browser.Document.Body.AppendChild(line);
 
             browser.Document.Window.ScrollTo(0, browser.Document.Body.ScrollRectangle.Bottom);
+        }
+
+        private HtmlElement ParseNickName(string word)
+        {
+            WebBrowser browser = this.Tab.Browser;
+            HtmlElement userElement = browser.Document.CreateElement("a");
+
+            foreach (Channel channel in this.Client.Channels.Values)
+            {
+                if (channel.Users.ContainsKey(word))
+                {
+                    userElement.SetAttribute("href", "cs-pm:" + word);
+                    userElement.InnerText = word + " ";
+
+                    if (word == this.Client.User.NickName)
+                    {
+                        userElement.Style = "text-decoration:none;color:#ff921e;font-weight:bold;font-style:normal;";
+                    }
+
+                    else
+                    {
+                        userElement.Style = "text-decoration:none;color:#babbbf;font-style:inherit;";
+                    }
+                }
+            }
+
+            if (!String.IsNullOrWhiteSpace(userElement.InnerText))
+                return userElement;
+
+            return null;
+        }
+
+        private HtmlElement ParseChannelName(string word)
+        {
+            WebBrowser browser = this.Tab.Browser;
+            HtmlElement channelElement = browser.Document.CreateElement("a");
+
+            if (word.StartsWith("#"))
+            {
+                word = word.Substring(1);
+
+                channelElement.SetAttribute("href", "cs-channel:" + word);
+                channelElement.InnerText = "#" + word + " ";
+                channelElement.Style = "text-decoration:none;color:#babbbf;font-style:inherit";
+            }
+
+            if (!String.IsNullOrWhiteSpace(channelElement.InnerText))
+                return channelElement;
+
+            return null;
+        }
+
+        private HtmlElement ParseLink(string word)
+        {
+            WebBrowser browser = this.Tab.Browser;
+            HtmlElement linkElement = browser.Document.CreateElement("a");
+
+            Uri uriResult;
+
+            bool isUri = Uri.TryCreate(word, UriKind.Absolute, out uriResult);
+
+            if (isUri && !string.IsNullOrEmpty(uriResult.LocalPath))
+            {
+                linkElement.InnerText = word + " ";
+                linkElement.SetAttribute("href", uriResult.AbsoluteUri);
+                linkElement.Style = "color:#4a7691;font-style:inherit";
+            }
+
+            if (!String.IsNullOrWhiteSpace(linkElement.InnerText))
+                return linkElement;
+
+            return null;
+        }
+
+        void spoiler_MouseLeave(object sender, HtmlElementEventArgs e)
+        {
+            e.FromElement.Style = "background-color:#000000;color:#000000";
+        }
+
+        void spoiler_MouseOver(object sender, HtmlElementEventArgs e)
+        {
+            e.ToElement.Style = "color:inherit";
         }
     }
 }
