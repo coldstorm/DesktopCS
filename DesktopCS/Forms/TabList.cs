@@ -20,6 +20,8 @@ namespace DesktopCS.Forms
 
         public void AddTab(BaseTab tab)
         {
+            Logger.Log("TabList.AddTab was called.");
+
             this.Tabs.Add(tab.Name, tab);
 
             if (this.Tabs.Count == 1)
@@ -33,6 +35,8 @@ namespace DesktopCS.Forms
 
         public void RemoveTab(BaseTab tab)
         {
+            Logger.Log("TabList.RemoveTab was called.");
+
             if (this.Tabs.Count > 0 && this.SelectedTab == tab)
             {
                 this.SwitchToTab(0);
@@ -135,6 +139,8 @@ namespace DesktopCS.Forms
 
         public void SwitchToTab(string tabName)
         {
+            Logger.Log("TabList.SwitchToTab was called.");
+
             if (this.InvokeRequired)
             {
                 SwitchToTabDelegate del = new SwitchToTabDelegate(this.SwitchToTab);
@@ -227,7 +233,7 @@ namespace DesktopCS.Forms
 
         protected override void OnResize(EventArgs e)
         {
-            Logger.Log("TabList.OnResize was raised.");
+            Logger.Log("TabList.OnResize was called.");
             base.OnResize(e);
         }
     }

@@ -467,6 +467,8 @@ namespace DesktopCS.Forms
 
         private void TopicLabel_ClientSizeChanged(object sender, System.EventArgs e)
         {
+            Logger.Log("TopicLabel.ClientSizeChanged was handled.");
+
             int offset = this.TopicLabel.Bottom + 3;
 
             this.UserList.Top = offset + 25;
@@ -484,6 +486,8 @@ namespace DesktopCS.Forms
 
         protected override void OnPaint(PaintEventArgs e)
         {
+            Logger.Log("MainForm.OnPaint was called.");
+
             base.OnPaint(e);
 
             Graphics g = e.Graphics;

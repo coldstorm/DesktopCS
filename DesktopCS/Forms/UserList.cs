@@ -64,5 +64,11 @@ namespace DesktopCS.Forms
                 this.Nodes.Add(new UserNode(user));
             }
         }
+
+        protected override void OnResize(EventArgs e)
+        {
+            Logger.Log("UserList.OnResize was called.");
+            base.OnResize(e);
+        }
     }
 }
