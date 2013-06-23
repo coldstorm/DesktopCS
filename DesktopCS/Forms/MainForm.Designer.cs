@@ -113,6 +113,7 @@
             this.UserList.Sorted = true;
             this.UserList.TabIndex = 1;
             this.UserList.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.UserList_NodeMouseDoubleClick);
+            this.UserList.Resize += new System.EventHandler(this.UserList_Resize);
             // 
             // MainForm
             // 

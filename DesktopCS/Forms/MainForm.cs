@@ -562,5 +562,13 @@ namespace DesktopCS.Forms
             Logger.Log("[MainForm.Layout] TabList size: " + this.TabList.Width + "x" + this.TabList.Height);
         }
 
+        private void UserList_Resize(object sender, EventArgs e)
+        {
+            Logger.Log("[UserList.Resize] TabList original size: " + this.TabList.Width + "x" + this.TabList.Height);
+            this.TabList.Width = this.Width - (3 * 7) - this.UserList.Width;
+            Logger.Log("UserList.Resize was handled.");
+            Logger.Log("[UserList.Resize] TabList size: " + this.TabList.Width + "x" + this.TabList.Height);
+        }
+
     }
 }
