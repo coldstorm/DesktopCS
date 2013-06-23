@@ -566,6 +566,7 @@ namespace DesktopCS.Forms
         {
             Logger.Log("[UserList.Resize] TabList original size: " + this.TabList.Width + "x" + this.TabList.Height);
             this.TabList.Width = this.Width - (3 * 7) - this.UserList.Width;
+            this.TabList.Height = this.UserList.Height + 9;
             Logger.Log("UserList.Resize was handled.");
             Logger.Log("[UserList.Resize] TabList size: " + this.TabList.Width + "x" + this.TabList.Height);
         }
