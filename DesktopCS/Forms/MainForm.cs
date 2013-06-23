@@ -472,8 +472,9 @@ namespace DesktopCS.Forms
 
         private void TopicLabel_ClientSizeChanged(object sender, System.EventArgs e)
         {
-            Logger.Log("[TopicLabel.ClientSizeChanged] UserList size: " + this.UserList.Width + "x" + this.UserList.Height);
-            Logger.Log("[TopicLabel.ClientSizeChanged] TabList size: " + this.TabList.Width + "x" + this.TabList.Height);
+            Logger.Log("[TopicLabel.ClientSizeChanged] TopicLabel original size: " + this.TopicLabel.Width + "x" + this.TopicLabel.Height);
+            Logger.Log("[TopicLabel.ClientSizeChanged] UserList original size: " + this.UserList.Width + "x" + this.UserList.Height);
+            Logger.Log("[TopicLabel.ClientSizeChanged] TabList original size: " + this.TabList.Width + "x" + this.TabList.Height);
 
             int offset = this.TopicLabel.Bottom + 3;
 
@@ -491,6 +492,8 @@ namespace DesktopCS.Forms
 
             Logger.Log("TopicLabel.ClientSizeChanged was handled.");
             Logger.Log("[TopicLabel.ClientSizeChanged] TopicLabel size: " + this.TopicLabel.Width + "x" + this.TopicLabel.Height);
+            Logger.Log("[TopicLabel.ClientSizeChanged] UserList size: " + this.UserList.Width + "x" + this.UserList.Height);
+            Logger.Log("[TopicLabel.ClientSizeChanged] TabList size: " + this.TabList.Width + "x" + this.TabList.Height);
         }
 
         protected override void OnPaint(PaintEventArgs e)
