@@ -557,6 +557,9 @@ namespace DesktopCS.Forms
         {
             Logger.Log("MainForm.Layout was handled.");
             Logger.Log("[MainForm.Layout] MainForm size: " + this.Width + "x" + this.Height);
+            Logger.Log("[MainForm.Layout] TopicLabel size: " + this.TopicLabel.Width + "x" + this.TopicLabel.Height);
+            Logger.Log("[MainForm.Layout] UserList size: " + this.UserList.Width + "x" + this.UserList.Height);
+            Logger.Log("[MainForm.Layout] TabList size: " + this.TabList.Width + "x" + this.TabList.Height);
         }
 
     }
