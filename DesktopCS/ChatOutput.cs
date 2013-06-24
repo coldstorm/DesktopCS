@@ -379,10 +379,11 @@ namespace DesktopCS
             HtmlElement linkElement = browser.Document.CreateElement("a");
 
             Uri uriResult;
+            string[] schemes = {"http", "https", "ftp", "mailto", "irc", "skype"};
 
             bool isUri = Uri.TryCreate(word, UriKind.Absolute, out uriResult);
 
-            if (isUri && !string.IsNullOrEmpty(uriResult.LocalPath))
+            if (isUri && !String.IsNullOrEmpty(uriResult.LocalPath) && schemes.Contains(uriResult.Scheme))
             {
                 linkElement.InnerText = word + " ";
                 linkElement.SetAttribute("href", uriResult.AbsoluteUri);
