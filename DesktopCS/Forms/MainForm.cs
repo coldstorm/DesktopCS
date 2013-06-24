@@ -467,6 +467,7 @@ namespace DesktopCS.Forms
             {
                 ProcessInput(InputBox.Text);
                 InputBox.ResetText();
+                e.SuppressKeyPress = true;
             }
         }
 
@@ -570,6 +571,5 @@ namespace DesktopCS.Forms
             Logger.Log("UserList.Resize was handled.");
             Logger.Log("[UserList.Resize] TabList size: " + this.TabList.Width + "x" + this.TabList.Height);
         }
-
     }
 }

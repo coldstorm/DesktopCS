@@ -19,6 +19,7 @@ namespace DesktopCS.Forms
             BackColor = Constants.BACKGROUND_COLOR;
             ForeColor = Constants.TEXT_COLOR;
 
+            this.Browser.ScriptErrorsSuppressed = true;
             this.Browser.DocumentText = "<html><body></body></html>";
 
             this.Browser.Document.ForeColor = Constants.TEXT_COLOR;
@@ -36,9 +37,8 @@ namespace DesktopCS.Forms
                 Application.DoEvents();
             }
 
+            this.Browser.Document.Body.Style = "margin:0;padding:0;border:0;";
             this.Browser.Document.Body.AppendChild(youtubeElement);
-
-
         }
     }
 }

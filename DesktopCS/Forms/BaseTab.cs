@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using NetIRC;
+using System.Text.RegularExpressions;
 
 namespace DesktopCS.Forms
 {
@@ -80,7 +81,20 @@ namespace DesktopCS.Forms
                         break;
 
                     default:
-                        Process.Start(e.Url.AbsoluteUri);
+                        string ytPattern = @"(?:https?:\/\/)?(?:www\.)?(?:(?:(?:youtube.com\/watch\?[^?]*v=|youtu.be\/)([\w\-]+))(?:[^\s?]+)?)";
+                        Regex rgx = new Regex(ytPattern);
+                        Match match = rgx.Match(e.Url.AbsoluteUri);
+
+                        if (match.Success)
+                        {
+                            YouTubeForm youtubeForm = new YouTubeForm(match.Groups[1].Value);
+                            youtubeForm.Show();
+                        }
+
+                        else
+                        {
+                            Process.Start(e.Url.AbsoluteUri);
+                        }
 
                         break;
                 }

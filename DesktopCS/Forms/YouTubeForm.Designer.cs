@@ -33,22 +33,25 @@
             // 
             // Browser
             // 
-            this.Browser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Browser.Location = new System.Drawing.Point(0, 0);
-            this.Browser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.Browser.IsWebBrowserContextMenuEnabled = false;
+            this.Browser.Location = new System.Drawing.Point(12, 12);
+            this.Browser.MaximumSize = new System.Drawing.Size(640, 390);
+            this.Browser.MinimumSize = new System.Drawing.Size(640, 390);
             this.Browser.Name = "Browser";
-            this.Browser.Size = new System.Drawing.Size(685, 462);
+            this.Browser.ScrollBarsEnabled = false;
+            this.Browser.Size = new System.Drawing.Size(640, 390);
             this.Browser.TabIndex = 0;
+            this.Browser.WebBrowserShortcutsEnabled = false;
             // 
             // YouTubeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 462);
+            this.ClientSize = new System.Drawing.Size(664, 412);
             this.Controls.Add(this.Browser);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "YouTubeForm";
-            this.Text = "YouTubeForm";
+            this.Text = "YouTube Video";
             this.ResumeLayout(false);
 
         }
