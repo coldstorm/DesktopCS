@@ -64,6 +64,7 @@ namespace DesktopCS.Forms
         #endregion
 
         #region NetIRC Event Handlers
+        #region Client
         void Client_OnConnect(Client client)
         {
             JoinChannels();
@@ -115,8 +116,18 @@ namespace DesktopCS.Forms
             this.RemoveTab("#" + channel.Name);
             this.PopulateUserlist();
             this.UpdateTopicLabel();
-        }
 
+            channel.OnMessage -= channel_OnMessage;
+            channel.OnAction -= channel_OnAction;
+            channel.OnNotice -= channel_OnNotice;
+            channel.OnJoin -= channel_OnJoin;
+            channel.OnLeave -= channel_OnLeave;
+            channel.OnKick -= channel_OnKick;
+            channel.OnTopicChange -= channel_OnTopicChange;
+        }
+        #endregion
+
+        #region Channel
         void channel_OnMessage(Channel source, User user, string message)
         {
             if (user == null)
@@ -161,13 +172,7 @@ namespace DesktopCS.Forms
             {
                 user.OnNickNameChange += user_OnNickNameChange;
 
-                user.OnQuit += (u, m) =>
-                {
-                    foreach (Channel channel in user.Channels)
-                    {
-                        channel_OnLeave(channel, user);
-                    }
-                };
+                user.OnQuit += user_OnQuit;
 
                 System.Timers.Timer colorTimer = new System.Timers.Timer();
 
@@ -189,6 +194,8 @@ namespace DesktopCS.Forms
         {
             if (user != Client.User)
             {
+                user.OnNickNameChange -= user_OnNickNameChange;
+                user.OnQuit -= user_OnQuit;
                 this.AddLine(this.TabList.Tabs["#" + source.Name], user.NickName + " left the room.");
             }
 
@@ -214,6 +221,7 @@ namespace DesktopCS.Forms
             }
             else
             {
+                user.OnQuit -= user_OnQuit;
                 this.AddLine(this.TabList.Tabs["#" + source.Name], kicker.NickName + " kicked " + user.NickName + " (" + reason + ")");
                 this.PopulateUserlist();
             }
@@ -222,6 +230,42 @@ namespace DesktopCS.Forms
         void channel_OnTopicChange(Channel source, ChannelTopic topic)
         {
             UpdateTopicLabel();
+        }
+        #endregion
+
+        #region User
+        void user_OnQuit(User user, string reason)
+        {
+            foreach (Channel channel in user.Channels)
+            {
+                if (user != Client.User)
+                {
+                    user.OnNickNameChange -= user_OnNickNameChange;
+                    user.OnQuit -= user_OnQuit;
+
+                    if (String.IsNullOrEmpty(reason))
+                    {
+                        this.AddLine(this.TabList.Tabs["#" + channel.Name], String.Format("{0} has quit.", user.NickName));
+                    }
+
+                    else
+                    {
+                        this.AddLine(this.TabList.Tabs["#" + channel.Name], String.Format("{0} has quit ({1}).", user.NickName, reason));
+                    }
+                }
+
+                System.Timers.Timer colorTimer = new System.Timers.Timer();
+
+                colorTimer.Elapsed += (s, e) =>
+                {
+                    colorTimer.Enabled = false;
+
+                    this.PopulateUserlist();
+                };
+                colorTimer.Interval = 1000;
+
+                colorTimer.Enabled = true;
+            }
         }
 
         void user_OnNickNameChange(User user, string original)
@@ -241,6 +285,7 @@ namespace DesktopCS.Forms
             }
             this.PopulateUserlist();
         }
+        #endregion
         #endregion
 
         private void JoinChannels()
