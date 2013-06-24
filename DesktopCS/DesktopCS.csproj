@@ -80,6 +80,12 @@
     <Compile Include="Forms\UserList.cs" />
     <Compile Include="Forms\UserNode.cs" />
     <Compile Include="Forms\UserNodeSorter.cs" />
+    <Compile Include="Forms\YouTubeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\YouTubeForm.Designer.cs">
+      <DependentUpon>YouTubeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logger.cs" />
     <Compile Include="CommandException.cs" />
     <Compile Include="Program.cs" />
@@ -93,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\YouTubeForm.resx">
+      <DependentUpon>YouTubeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
