@@ -86,8 +86,6 @@ namespace DesktopCS.Forms
             ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + channel.Name], this.Client);
             output.AddJoinLine(channel);
 
-            //this.AddLine(this.TabList.Tabs["#" + channel.Name], "You joined the channel #" + channel.Name);
-
             this.PopulateUserlist();
             this.UpdateTopicLabel();
 
@@ -147,7 +145,6 @@ namespace DesktopCS.Forms
                 SoundPlayer player = new SoundPlayer(Properties.Resources.cs_ping);
                 player.PlaySync();
             }
-            //this.AddLine(this.TabList.Tabs["#" + source.Name], user, message);
         }
 
         void channel_OnAction(Channel source, User user, string action)
@@ -166,7 +163,6 @@ namespace DesktopCS.Forms
                 SoundPlayer player = new SoundPlayer(Properties.Resources.cs_ping);
                 player.PlaySync();
             }
-            //this.AddActionLine(source, user, action);
         }
 
         void channel_OnNotice(Channel source, User user, string notice)
@@ -185,61 +181,53 @@ namespace DesktopCS.Forms
             if (user != Client.User)
             {
                 user.OnNickNameChange += user_OnNickNameChange;
+                user.OnUserNameChange += user_OnUserNameChange;
 
                 user.OnQuit += user_OnQuit;
 
                 System.Timers.Timer colorTimer = new System.Timers.Timer();
 
-                colorTimer.Elapsed += (s, e) =>
-                {
-                    colorTimer.Enabled = false;
-
-                    ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + source.Name], this.Client);
-                    output.AddJoinLine(source, user);
-
-                    //this.AddUserJoin(source, user);
-
-                    this.PopulateUserlist();
-                };
-                colorTimer.Interval = 1000;
-
-                colorTimer.Enabled = true;
+                ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + source.Name], this.Client);
+                output.AddJoinLine(source, user);
             }
         }
 
         void channel_OnLeave(Channel source, User user)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.Channel.OnLeaveHandler(channel_OnLeave), source, user);
+                return;
+            }
+
             if (user != Client.User)
             {
                 user.OnNickNameChange -= user_OnNickNameChange;
                 user.OnQuit -= user_OnQuit;
-                this.AddLine(this.TabList.Tabs["#" + source.Name], user.NickName + " left the room.");
+
+                ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + source.Name], this.Client);
+                output.AddLeaveLine(user, source);
             }
-
-            System.Timers.Timer colorTimer = new System.Timers.Timer();
-
-            colorTimer.Elapsed += (s, e) =>
-            {
-                colorTimer.Enabled = false;
-
-                this.PopulateUserlist();
-            };
-            colorTimer.Interval = 1000;
-
-            colorTimer.Enabled = true;
         }
 
         void channel_OnKick(Channel source, User kicker, User user, string reason)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.Channel.OnKickHandler(channel_OnKick), source, kicker, user, reason);
+                return;
+            }
+
+            ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + source.Name], this.Client);
             if (user == Client.User)
             {
-                this.AddLine(this.TabList.Tabs["#" + source.Name], "You were kicked by " + kicker.NickName + " (" + reason + ")");
+                output.AddInfoLine(String.Format("You were kicked by {0} ({1}).", kicker.NickName, reason));
                 UserList.Nodes.Clear();
             }
             else
             {
                 user.OnQuit -= user_OnQuit;
-                this.AddLine(this.TabList.Tabs["#" + source.Name], kicker.NickName + " kicked " + user.NickName + " (" + reason + ")");
+                output.AddInfoLine(String.Format("{0} was kicked by {1} ({2}).", user.NickName, kicker.NickName, reason));
                 this.PopulateUserlist();
             }
         }
@@ -253,6 +241,12 @@ namespace DesktopCS.Forms
         #region User
         void user_OnQuit(User user, string reason)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.User.OnQuitHandler(user_OnQuit), user, reason);
+                return;
+            }
+
             foreach (Channel channel in user.Channels)
             {
                 if (user != Client.User)
@@ -260,28 +254,9 @@ namespace DesktopCS.Forms
                     user.OnNickNameChange -= user_OnNickNameChange;
                     user.OnQuit -= user_OnQuit;
 
-                    if (String.IsNullOrEmpty(reason))
-                    {
-                        this.AddLine(this.TabList.Tabs["#" + channel.Name], String.Format("{0} has quit.", user.NickName));
-                    }
-
-                    else
-                    {
-                        this.AddLine(this.TabList.Tabs["#" + channel.Name], String.Format("{0} has quit ({1}).", user.NickName, reason));
-                    }
+                    ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + channel.Name], this.Client);
+                    output.AddQuitLine(user, reason);
                 }
-
-                System.Timers.Timer colorTimer = new System.Timers.Timer();
-
-                colorTimer.Elapsed += (s, e) =>
-                {
-                    colorTimer.Enabled = false;
-
-                    this.PopulateUserlist();
-                };
-                colorTimer.Interval = 1000;
-
-                colorTimer.Enabled = true;
             }
         }
 
@@ -297,9 +272,21 @@ namespace DesktopCS.Forms
             {
                 if (tab.Type == TabType.Channel || tab.Name == original)
                 {
-                    this.AddLine(tab, original + " has changed their nickname to " + user.NickName);
+                    ChatOutput output = new ChatOutput(tab, this.Client);
+                    output.AddInfoLine(String.Format("{0} changed their nickname to {1}.", original, user.NickName));
                 }
             }
+            this.PopulateUserlist();
+        }
+
+        void user_OnUserNameChange(User user, string original)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.User.OnUserNameChangeHandler(user_OnUserNameChange), user, original);
+                return;
+            }
+
             this.PopulateUserlist();
         }
         #endregion

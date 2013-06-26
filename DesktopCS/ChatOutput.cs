@@ -60,6 +60,23 @@ namespace DesktopCS
             Browser.Document.Window.ScrollTo(0, Browser.Document.Body.ScrollRectangle.Bottom);
         }
 
+        public void AddQuitLine(User user, string reason = null)
+        {
+            HtmlElement line = Browser.Document.CreateElement("div");
+
+            line.AppendChild(CreateTimeStampElement());
+
+            HtmlElement quitLine = Browser.Document.CreateElement("span");
+            quitLine.InnerText = String.Format("{0} quit ({1}).", user.NickName, String.IsNullOrEmpty(reason) ? "" : reason);
+            quitLine.Style = "color:#808080";
+
+            line.AppendChild(quitLine);
+
+            Browser.Document.Body.AppendChild(line);
+
+            Browser.Document.Window.ScrollTo(0, Browser.Document.Body.ScrollRectangle.Bottom);
+        }
+
         public void AddInfoLine(string text)
         {
             HtmlElement line = Browser.Document.CreateElement("div");
