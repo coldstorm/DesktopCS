@@ -26,68 +26,60 @@ namespace DesktopCS
             }
         }
 
-        public void AddUserJoin(User user, Channel channel)
+        public void AddJoinLine(Channel channel, User user = null)
         {
-            WebBrowser browser = this.Tab.Browser;
+            HtmlElement line = Browser.Document.CreateElement("div");
 
-            HtmlElement line = browser.Document.CreateElement("div");
+            line.AppendChild(CreateTimeStampElement());
 
-            string timeStampColorHex = string.Format("{0:X6}", Constants.TIMESTAMP_COLOR.ToArgb() & 0xFFFFFF);
+            HtmlElement joinLine = Browser.Document.CreateElement("span");
+            joinLine.InnerText = String.Format("{0} joined #{1}.", user == null ? "You" : user.NickName, channel.Name);
+            joinLine.Style = "color:#808080";
 
-            HtmlElement timeStamp = browser.Document.CreateElement("span");
-            timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
-            timeStamp.Style = "color:#" + timeStampColorHex;
+            line.AppendChild(joinLine);
 
-            line.AppendChild(timeStamp);
+            Browser.Document.Body.AppendChild(line);
 
-            HtmlElement userElement = browser.Document.CreateElement("a");
-            string lineColorHex = string.Format("{0:X6}", Constants.TEXT_CONTROL_COLOR.ToArgb() & 0xFFFFFF);
-
-            userElement.InnerText = user.NickName;
-            userElement.Style = "color:#" + lineColorHex + ";text-decoration:none;";
-            userElement.SetAttribute("href", "cs-pm:" + user.NickName);
-
-            line.AppendChild(userElement);
-
-            HtmlElement messageElement = browser.Document.CreateElement("span");
-            messageElement.InnerText = " has joined #" + channel.Name;
-            messageElement.Style = "color:#" + lineColorHex;
-
-            line.AppendChild(messageElement);
-
-            browser.Document.Body.AppendChild(line);
-
-            browser.Document.Window.ScrollTo(0, browser.Document.Body.ScrollRectangle.Bottom);
+            Browser.Document.Window.ScrollTo(0, Browser.Document.Body.ScrollRectangle.Bottom);
         }
 
-        public void AddLine(string text)
+        public void AddLeaveLine(User user, Channel channel, string reason = null)
         {
-            WebBrowser browser = this.Tab.Browser;
+            HtmlElement line = Browser.Document.CreateElement("div");
 
-            HtmlElement line = browser.Document.CreateElement("div");
+            line.AppendChild(CreateTimeStampElement());
 
-            string timeStampColorHex = string.Format("{0:X6}", Constants.TIMESTAMP_COLOR.ToArgb() & 0xFFFFFF);
+            HtmlElement leaveLine = Browser.Document.CreateElement("span");
+            leaveLine.InnerText = String.Format("{0} left #{1} ({2}).", user.NickName, channel.Name, String.IsNullOrEmpty(reason) ? "" : reason);
+            leaveLine.Style = "color:#808080";
 
-            HtmlElement timeStamp = browser.Document.CreateElement("span");
-            timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
-            timeStamp.Style = "color:#" + timeStampColorHex;
+            line.AppendChild(leaveLine);
 
-            line.AppendChild(timeStamp);
+            Browser.Document.Body.AppendChild(line);
+
+            Browser.Document.Window.ScrollTo(0, Browser.Document.Body.ScrollRectangle.Bottom);
+        }
+
+        public void AddInfoLine(string text)
+        {
+            HtmlElement line = Browser.Document.CreateElement("div");
+
+            line.AppendChild(CreateTimeStampElement());
 
             string lineColorHex = string.Format("{0:X6}", Constants.TEXT_CONTROL_COLOR.ToArgb() & 0xFFFFFF);
 
-            HtmlElement lineText = browser.Document.CreateElement("span");
+            HtmlElement lineText = Browser.Document.CreateElement("span");
             lineText.InnerText = text;
             lineText.Style = "color:#" + lineColorHex;
 
             line.AppendChild(lineText);
 
-            browser.Document.Body.AppendChild(line);
+            Browser.Document.Body.AppendChild(line);
 
-            browser.Document.Window.ScrollTo(0, browser.Document.Body.ScrollRectangle.Bottom);
+            Browser.Document.Window.ScrollTo(0, Browser.Document.Body.ScrollRectangle.Bottom);
         }
 
-        public void AddLine(User author, string text)
+        public void AddChatLine(User author, string text)
         {
             WebBrowser browser = this.Tab.Browser;
 

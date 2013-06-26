@@ -50,13 +50,13 @@ namespace DesktopCS
 
                     catch (CommandException ex)
                     {
-                        output.AddLine(ex.Message);
+                        output.AddInfoLine(ex.Message);
                     }
                     return;
                 }
             }
 
-            output.AddLine("Unknown command.");
+            output.AddInfoLine("Unknown command.");
         }
 
         private void MeCallback(Client sender, CommandArgs args)

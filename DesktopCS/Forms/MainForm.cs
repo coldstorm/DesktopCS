@@ -83,7 +83,10 @@ namespace DesktopCS.Forms
 
             this.AddTab(tab);
 
-            this.AddLine(this.TabList.Tabs["#" + channel.Name], "You joined the channel #" + channel.Name);
+            ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + channel.Name], this.Client);
+            output.AddJoinLine(channel);
+
+            //this.AddLine(this.TabList.Tabs["#" + channel.Name], "You joined the channel #" + channel.Name);
 
             this.PopulateUserlist();
             this.UpdateTopicLabel();
@@ -130,29 +133,40 @@ namespace DesktopCS.Forms
         #region Channel
         void channel_OnMessage(Channel source, User user, string message)
         {
-            if (user == null)
+            if (this.InvokeRequired)
             {
-                MessageBox.Show("Null user");
+                this.Invoke(new NetIRC.Channel.OnMessageHandler(channel_OnMessage), source, user, message);
+                return;
             }
+
+            ChatOutput output = new ChatOutput(this.TabList.SelectedTab as BaseTab, this.Client);
+            output.AddChatLine(user, message);
 
             if (message.Contains(this.Client.User.NickName) && Properties.Settings.Default.Sounds)
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.cs_ping);
                 player.PlaySync();
             }
-
-            this.AddLine(this.TabList.Tabs["#" + source.Name], user, message);
+            //this.AddLine(this.TabList.Tabs["#" + source.Name], user, message);
         }
 
         void channel_OnAction(Channel source, User user, string action)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.Channel.OnActionHandler(channel_OnAction), source, user, action);
+                return;
+            }
+
+            ChatOutput output = new ChatOutput(this.TabList.SelectedTab as BaseTab, this.Client);
+            output.AddActionLine(user, action);
+
             if (action.Contains(this.Client.User.NickName) && Properties.Settings.Default.Sounds)
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.cs_ping);
                 player.PlaySync();
             }
-
-            this.AddActionLine(source, user, action);
+            //this.AddActionLine(source, user, action);
         }
 
         void channel_OnNotice(Channel source, User user, string notice)
@@ -180,7 +194,10 @@ namespace DesktopCS.Forms
                 {
                     colorTimer.Enabled = false;
 
-                    this.AddUserJoin(source, user);
+                    ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + source.Name], this.Client);
+                    output.AddJoinLine(source, user);
+
+                    //this.AddUserJoin(source, user);
 
                     this.PopulateUserlist();
                 };
@@ -353,7 +370,7 @@ namespace DesktopCS.Forms
             if (this.TabList.Tabs.ContainsValue(tab))
             {
                 ChatOutput output = new ChatOutput(tab, this.Client);
-                output.AddLine(line);
+                output.AddInfoLine(line);
             }
         }
 
@@ -373,7 +390,7 @@ namespace DesktopCS.Forms
             }
 
             ChatOutput output = new ChatOutput(tab, this.Client);
-            output.AddLine(author, line);
+            output.AddChatLine(author, line);
 
             if (this.TabList.SelectedTab.Name != tab.Name)
             {
@@ -407,7 +424,7 @@ namespace DesktopCS.Forms
             }
 
             ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + channel.Name], this.Client);
-            output.AddUserJoin(user, channel);
+            output.AddJoinLine(channel, user);
         }
 
         private delegate void PopulateUserlistHandler();
