@@ -59,9 +59,11 @@ namespace DesktopCS.Forms
         {
             this.Nodes.Clear();
 
+            (this.TreeViewNodeSorter as UserNodeSorter).Channel = channel;
+
             foreach (User user in channel.Users.Values)
             {
-                this.Nodes.Add(new UserNode(user));
+                this.Nodes.Add(new UserNode(user, channel));
             }
         }
 

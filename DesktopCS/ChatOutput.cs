@@ -103,7 +103,16 @@ namespace DesktopCS
 
             string authorColorHex = string.Format("{0:X6}", authorColor.ToArgb() & 0xFFFFFF);
 
-            authorElement.InnerText = string.Format("{0}{1} ", UserNode.RankChars[author.Rank], author.NickName);
+            UserRank authorRank = UserRank.None;
+
+            if (this.Tab.Type == TabType.Channel)
+            {
+                ChannelTab channelTab = this.Tab as ChannelTab;
+
+                authorRank = author.Rank[channelTab.Channel.Name];
+            }
+
+            authorElement.InnerText = string.Format("{0}{1} ", UserNode.RankChars[authorRank], author.NickName);
             authorElement.Style = "color:#" + authorColorHex + ";text-decoration:none;";
             authorElement.SetAttribute("href", "cs-pm:" + author.NickName);
 

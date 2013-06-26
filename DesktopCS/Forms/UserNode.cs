@@ -20,9 +20,9 @@ namespace DesktopCS.Forms
             {UserRank.Owner, '@'}
         };
 
-        public UserNode(User user) : base()
+        public UserNode(User user, Channel channel) : base()
         {
-            this.Text = RankChars[user.Rank] + user.NickName;
+            this.Text = RankChars[user.Rank[channel.Name]] + user.NickName;
             this.User = user;
 
             this.ForeColor = ColorFromUser(user);

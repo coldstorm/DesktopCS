@@ -6,6 +6,8 @@ namespace DesktopCS.Forms
 {
     class UserNodeSorter : IComparer
     {
+        public Channel Channel;
+
         public int Compare(object x, object y)
         {
             UserNode first = x as UserNode;
@@ -23,17 +25,20 @@ namespace DesktopCS.Forms
                 UserRank.Owner
             };
 
-            if (firstUser.Rank != secondUser.Rank)
+            if (this.Channel != null)
             {
-                int firstIndex = Array.IndexOf(ranks, firstUser.Rank);
-                int secondIndex = Array.IndexOf(ranks, secondUser.Rank);
-
-                if (firstIndex > secondIndex)
+                if (firstUser.Rank != secondUser.Rank)
                 {
-                    return -1;
-                }
+                    int firstIndex = Array.IndexOf(ranks, firstUser.Rank[this.Channel.Name]);
+                    int secondIndex = Array.IndexOf(ranks, secondUser.Rank[this.Channel.Name]);
 
-                return 1;
+                    if (firstIndex > secondIndex)
+                    {
+                        return -1;
+                    }
+
+                    return 1;
+                }
             }
 
             return string.Compare(firstUser.NickName, secondUser.NickName, true);
