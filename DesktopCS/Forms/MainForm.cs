@@ -167,7 +167,11 @@ namespace DesktopCS.Forms
 
         void channel_OnNotice(Channel source, User user, string notice)
         {
-            this.AddLine(this.TabList.Tabs["#" + source.Name], user, notice);
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.Channel.OnNoticeHandler(channel_OnNotice), source, user, notice);
+                return;
+            }
         }
 
         void channel_OnJoin(Channel source, User user)
@@ -344,76 +348,6 @@ namespace DesktopCS.Forms
             }
         }
 
-        private delegate void AddLineHandler(BaseTab tab, string line);
-
-        private void AddLine(BaseTab tab, string line)
-        {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new AddLineHandler(AddLine), tab, line);
-                return;
-            }
-
-            if (this.TabList.Tabs.ContainsValue(tab))
-            {
-                ChatOutput output = new ChatOutput(tab, this.Client);
-                output.AddInfoLine(line);
-            }
-        }
-
-        private delegate void AddLineWithAuthorHandler(BaseTab tab, User user, string line);
-
-        private void AddLine(BaseTab tab, User author, string line)
-        {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new AddLineWithAuthorHandler(AddLine), tab, author, line);
-                return;
-            }
-
-            if (author == null)
-            {
-                MessageBox.Show("Null user");
-            }
-
-            ChatOutput output = new ChatOutput(tab, this.Client);
-            output.AddChatLine(author, line);
-
-            if (this.TabList.SelectedTab.Name != tab.Name)
-            {
-                tab.Active = true;
-                this.TabList.Invalidate();
-            }
-        }
-
-        private delegate void AddActionLineHandler(Channel channel, User author, string action);
-
-        private void AddActionLine(Channel channel, User author, string action)
-        {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new AddActionLineHandler(AddActionLine), channel, author, action);
-                return;
-            }
-
-            ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + channel.Name], this.Client);
-            output.AddActionLine(author, action);
-        }
-
-        private delegate void AddUserJoinHandler(Channel channel, User user);
-
-        private void AddUserJoin(Channel channel, User user)
-        {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new AddUserJoinHandler(AddUserJoin), channel, user);
-                return;
-            }
-
-            ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + channel.Name], this.Client);
-            output.AddJoinLine(channel, user);
-        }
-
         private delegate void PopulateUserlistHandler();
 
         private void PopulateUserlist()
@@ -473,9 +407,9 @@ namespace DesktopCS.Forms
         private void ProcessInput(string input)
         {
             input = input.Trim();
+            ChatOutput output = new ChatOutput((this.TabList.SelectedTab as BaseTab), this.Client);
             if (input.StartsWith("/"))
             {
-                ChatOutput output = new ChatOutput((this.TabList.SelectedTab as BaseTab), this.Client);
                 Executor.Execute(this.Client, input, output);
             }
 
@@ -484,7 +418,7 @@ namespace DesktopCS.Forms
                 if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
                 {
                     Client.Send(new NetIRC.Messages.Send.ChatMessage((TabList.SelectedTab as ChannelTab).Channel, input));
-                    AddLine(this.TabList.Tabs[TabList.SelectedTab.Name], Client.User, input);
+                    output.AddChatLine(this.Client.User, input);
                 }
             }
         }
