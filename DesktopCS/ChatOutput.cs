@@ -12,11 +12,13 @@ namespace DesktopCS
     {
         public BaseTab Tab;
         private Client Client;
+        private WebBrowser Browser;
 
         public ChatOutput(BaseTab tab, Client client)
         {
             this.Tab = tab;
             this.Client = client;
+            this.Browser = this.Tab.Browser;
 
             while (tab.Browser.Document.Body == null)
             {
@@ -91,33 +93,8 @@ namespace DesktopCS
 
             HtmlElement line = browser.Document.CreateElement("div");
 
-            string timeStampColorHex = string.Format("{0:X6}", Constants.TIMESTAMP_COLOR.ToArgb() & 0xFFFFFF);
-
-            HtmlElement timeStamp = browser.Document.CreateElement("span");
-
-            timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
-            timeStamp.Style = "color:#" + timeStampColorHex;
-
-            HtmlElement authorElement = browser.Document.CreateElement("a");
-            Color authorColor = UserNode.ColorFromUser(author);
-
-            string authorColorHex = string.Format("{0:X6}", authorColor.ToArgb() & 0xFFFFFF);
-
-            UserRank authorRank = UserRank.None;
-
-            if (this.Tab.Type == TabType.Channel)
-            {
-                ChannelTab channelTab = this.Tab as ChannelTab;
-
-                authorRank = author.Rank[channelTab.Channel.Name];
-            }
-
-            authorElement.InnerText = string.Format("{0}{1} ", UserNode.RankChars[authorRank], author.NickName);
-            authorElement.Style = "color:#" + authorColorHex + ";text-decoration:none;";
-            authorElement.SetAttribute("href", "cs-pm:" + author.NickName);
-
-            line.AppendChild(timeStamp);
-            line.AppendChild(authorElement);
+            line.AppendChild(CreateTimeStampElement());
+            line.AppendChild(CreateAuthorElement(author));
 
             string[] words = text.Split(' ');
 
@@ -219,24 +196,8 @@ namespace DesktopCS
             HtmlElement line = browser.Document.CreateElement("div");
             line.Style = "font-style:italic";
 
-            string timeStampColorHex = string.Format("{0:X6}", Constants.TIMESTAMP_COLOR.ToArgb() & 0xFFFFFF);
-
-            HtmlElement timeStamp = browser.Document.CreateElement("span");
-
-            timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
-            timeStamp.Style = "color:#" + timeStampColorHex + ";font-style:normal";
-
-            HtmlElement authorElement = browser.Document.CreateElement("a");
-            Color authorColor = UserNode.ColorFromUser(author);
-
-            string authorColorHex = string.Format("{0:X6}", authorColor.ToArgb() & 0xFFFFFF);
-
-            authorElement.InnerText = "* " + author.NickName + " ";
-            authorElement.Style = "color:#" + authorColorHex + ";text-decoration:none;font-style:inherit";
-            authorElement.SetAttribute("href", "cs-pm:" + author.NickName);
-
-            line.AppendChild(timeStamp);
-            line.AppendChild(authorElement);
+            line.AppendChild(CreateTimeStampElement());
+            line.AppendChild(CreateActionAuthorElement(author));
 
             string[] words = action.Split(' ');
 
@@ -330,6 +291,53 @@ namespace DesktopCS
             browser.Document.Body.AppendChild(line);
 
             browser.Document.Window.ScrollTo(0, browser.Document.Body.ScrollRectangle.Bottom);
+        }
+
+        private HtmlElement CreateTimeStampElement()
+        {
+            string timeStampColorHex = string.Format("{0:X6}", Constants.TIMESTAMP_COLOR.ToArgb() & 0xFFFFFF);
+
+            HtmlElement timeStamp = Browser.Document.CreateElement("span");
+
+            timeStamp.InnerText = string.Format("[{0:HH:mm}] ", DateTime.Now);
+            timeStamp.Style = "color:#" + timeStampColorHex + ";font-style:normal";
+
+            return timeStamp;
+        }
+
+        private HtmlElement CreateAuthorElement(User author)
+        {
+            HtmlElement authorElement = Browser.Document.CreateElement("a");
+
+            string authorColorHex = string.Format("{0:X6}", UserNode.ColorFromUser(author).ToArgb() & 0xFFFFFF);
+
+            UserRank authorRank = UserRank.None;
+
+            if (this.Tab.Type == TabType.Channel)
+            {
+                ChannelTab channelTab = this.Tab as ChannelTab;
+
+                authorRank = author.Rank[channelTab.Channel.Name];
+            }
+
+            authorElement.InnerText = string.Format("{0}{1} ", UserNode.RankChars[authorRank], author.NickName);
+            authorElement.Style = "color:#" + authorColorHex + ";text-decoration:none;";
+            authorElement.SetAttribute("href", "cs-pm:" + author.NickName);
+
+            return authorElement;
+        }
+
+        private HtmlElement CreateActionAuthorElement(User author)
+        {
+            HtmlElement authorElement = Browser.Document.CreateElement("a");
+
+            string authorColorHex = string.Format("{0:X6}", UserNode.ColorFromUser(author).ToArgb() & 0xFFFFFF);
+
+            authorElement.InnerText = "* " + author.NickName + " ";
+            authorElement.Style = "color:#" + authorColorHex + ";text-decoration:none;font-style:inherit";
+            authorElement.SetAttribute("href", "cs-pm:" + author.NickName);
+
+            return authorElement;
         }
 
         private HtmlElement ParseNickName(string word)
