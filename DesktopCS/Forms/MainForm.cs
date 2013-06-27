@@ -36,6 +36,7 @@ namespace DesktopCS.Forms
             Client.OnConnect += Client_OnConnect;
             Client.OnChannelJoin += Client_OnChannelJoin;
             Client.OnChannelLeave += Client_OnChannelLeave;
+            Client.Server.OnWho += Server_OnWho;
         }
 
         #region Form Overrides
@@ -98,18 +99,6 @@ namespace DesktopCS.Forms
             channel.OnLeave += channel_OnLeave;
             channel.OnKick += channel_OnKick;
             channel.OnTopicChange += channel_OnTopicChange;
-
-            System.Timers.Timer colorTimer = new System.Timers.Timer();
-
-            colorTimer.Elapsed += (s, e) =>
-            {
-                colorTimer.Enabled = false;
-
-                this.PopulateUserlist();
-            };
-            colorTimer.Interval = 1000;
-
-            colorTimer.Enabled = true;
         }
 
         void Client_OnChannelLeave(Client client, Channel channel)
@@ -125,6 +114,27 @@ namespace DesktopCS.Forms
             channel.OnLeave -= channel_OnLeave;
             channel.OnKick -= channel_OnKick;
             channel.OnTopicChange -= channel_OnTopicChange;
+        }
+        #endregion
+
+        #region Server
+        void Server_OnWho(Server server, string message)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.Server.OnWhoHandler(Server_OnWho), server, message);
+            }
+
+            System.Timers.Timer updateTimer = new System.Timers.Timer(1000);
+
+            updateTimer.Elapsed += (s, e) =>
+            {
+                updateTimer.Enabled = false;
+
+                this.PopulateUserlist();
+            };
+
+            updateTimer.Enabled = true;
         }
         #endregion
 
@@ -188,10 +198,7 @@ namespace DesktopCS.Forms
             {
                 user.OnNickNameChange += user_OnNickNameChange;
                 user.OnUserNameChange += user_OnUserNameChange;
-
                 user.OnQuit += user_OnQuit;
-
-                System.Timers.Timer colorTimer = new System.Timers.Timer();
 
                 ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + source.Name], this.Client);
                 output.AddJoinLine(source, user);
