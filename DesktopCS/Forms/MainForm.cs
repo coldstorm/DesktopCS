@@ -137,6 +137,7 @@ namespace DesktopCS.Forms
                 return;
             }
 
+            (this.TabList.SelectedTab as BaseTab).LineID++;
             ChatOutput output = new ChatOutput(this.TabList.SelectedTab as BaseTab, this.Client);
             output.AddChatLine(user, message);
 
@@ -155,6 +156,7 @@ namespace DesktopCS.Forms
                 return;
             }
 
+            (this.TabList.SelectedTab as BaseTab).LineID++;
             ChatOutput output = new ChatOutput(this.TabList.SelectedTab as BaseTab, this.Client);
             output.AddActionLine(user, action);
 

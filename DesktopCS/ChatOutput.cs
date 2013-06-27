@@ -98,16 +98,16 @@ namespace DesktopCS
 
         public void AddChatLine(User author, string text)
         {
-            WebBrowser browser = this.Tab.Browser;
+            HtmlElement line = Browser.Document.CreateElement("div");
 
-            HtmlElement line = browser.Document.CreateElement("div");
+            line.Id = "line-" + this.Tab.LineID;
 
             line.AppendChild(CreateTimeStampElement());
             line.AppendChild(CreateAuthorElement(author));
 
             string[] words = text.Split(' ');
 
-            HtmlElement textElement = browser.Document.CreateElement("span");
+            HtmlElement textElement = Browser.Document.CreateElement("span");
             textElement.InnerText = " ";
 
             int spoiler = 0;
@@ -119,7 +119,7 @@ namespace DesktopCS
                 {
                     if (words[i].StartsWith("::") && words[i].EndsWith("::") && words[i].Length > 2) //Single word in a spoiler
                     {
-                        textElement = browser.Document.CreateElement("span");
+                        textElement = Browser.Document.CreateElement("span");
                         words[i] = words[i].Replace("::", "");
                         textElement.InnerText = words[i];
                         textElement.Style = "background-color:#000000;color:#000000";
@@ -139,7 +139,7 @@ namespace DesktopCS
                             words[spoilerStart] = words[spoilerStart].Replace("::", "");
                             words[spoilerEnd] = words[spoilerEnd].Replace("::", "");
 
-                            textElement = browser.Document.CreateElement("span");
+                            textElement = Browser.Document.CreateElement("span");
                             string spoilerText = "";
                             for (int j = spoilerStart; j <= spoilerEnd; j++)
                             {
@@ -152,7 +152,7 @@ namespace DesktopCS
 
                             line.AppendChild(textElement);
 
-                            textElement = browser.Document.CreateElement("span");
+                            textElement = Browser.Document.CreateElement("span");
                             textElement.InnerText = " ";
                             line.AppendChild(textElement);
 
@@ -186,23 +186,23 @@ namespace DesktopCS
 
                     else
                     {
-                        textElement = browser.Document.CreateElement("span");
+                        textElement = Browser.Document.CreateElement("span");
                         textElement.InnerText += words[i] + " ";
                         line.AppendChild(textElement);
                     }
                 }
             }
 
-            browser.Document.Body.AppendChild(line);
+            Browser.Document.Body.AppendChild(line);
 
-            browser.Document.Window.ScrollTo(0, browser.Document.Body.ScrollRectangle.Bottom);
+            Browser.Document.Window.ScrollTo(0, Browser.Document.Body.ScrollRectangle.Bottom);
         }
 
         public void AddActionLine(User author, string action)
         {
-            WebBrowser browser = this.Tab.Browser;
+            HtmlElement line = Browser.Document.CreateElement("div");
 
-            HtmlElement line = browser.Document.CreateElement("div");
+            line.Id = "line-" + this.Tab.LineID;
             line.Style = "font-style:italic";
 
             line.AppendChild(CreateTimeStampElement());
@@ -210,7 +210,7 @@ namespace DesktopCS
 
             string[] words = action.Split(' ');
 
-            HtmlElement textElement = browser.Document.CreateElement("span");
+            HtmlElement textElement = Browser.Document.CreateElement("span");
             textElement.InnerText = " ";
             textElement.Style = "font-style:inherit";
 
@@ -223,7 +223,7 @@ namespace DesktopCS
                 {
                     if (words[i].StartsWith("::") && words[i].EndsWith("::") && words[i].Length > 2) //Single word in a spoiler
                     {
-                        textElement = browser.Document.CreateElement("span");
+                        textElement = Browser.Document.CreateElement("span");
                         words[i] = words[i].Replace("::", "");
                         textElement.InnerText = words[i];
                         textElement.Style = "background-color:#000000;color:#000000";
@@ -243,7 +243,7 @@ namespace DesktopCS
                             words[spoilerStart] = words[spoilerStart].Replace("::", "");
                             words[spoilerEnd] = words[spoilerEnd].Replace("::", "");
 
-                            textElement = browser.Document.CreateElement("span");
+                            textElement = Browser.Document.CreateElement("span");
                             string spoilerText = "";
                             for (int j = spoilerStart; j <= spoilerEnd; j++)
                             {
@@ -256,7 +256,7 @@ namespace DesktopCS
 
                             line.AppendChild(textElement);
 
-                            textElement = browser.Document.CreateElement("span");
+                            textElement = Browser.Document.CreateElement("span");
                             textElement.InnerText = " ";
                             line.AppendChild(textElement);
 
@@ -290,16 +290,22 @@ namespace DesktopCS
 
                     else
                     {
-                        textElement = browser.Document.CreateElement("span");
+                        textElement = Browser.Document.CreateElement("span");
                         textElement.InnerText += words[i] + " ";
                         line.AppendChild(textElement);
                     }
                 }
             }
 
-            browser.Document.Body.AppendChild(line);
+            Browser.Document.Body.AppendChild(line);
 
-            browser.Document.Window.ScrollTo(0, browser.Document.Body.ScrollRectangle.Bottom);
+            Browser.Document.Window.ScrollTo(0, Browser.Document.Body.ScrollRectangle.Bottom);
+        }
+
+        public void RemoveAll()
+        {
+            Browser.Document.Body.InnerHtml = "";
+            Browser.Document.Body.InnerText = "";
         }
 
         private HtmlElement CreateTimeStampElement()

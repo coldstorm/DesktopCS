@@ -16,6 +16,8 @@ namespace DesktopCS.Forms
 
         public bool Active = false;
 
+        public int LineID = 0;
+
         public BaseTab(string title)
         {
             this.Name = title;

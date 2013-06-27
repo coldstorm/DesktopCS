@@ -10,12 +10,12 @@ namespace DesktopCS
     public class CommandArgs
     {
         public string[] Parameters;
-        public Channel Target;
+        public ChatOutput Output;
 
-        public CommandArgs(string[] parameters, Channel target)
+        public CommandArgs(string[] parameters, ChatOutput output)
         {
             Parameters = parameters;
-            Target = target;
+            Output = output;
         }
     }
 }

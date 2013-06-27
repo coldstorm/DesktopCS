@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NetIRC;
+using DesktopCS.Forms;
 
 namespace DesktopCS
 {
@@ -23,9 +24,10 @@ namespace DesktopCS
             Commands.Add("topic", new Command(2, TopicCallback, "/topic <text>"));
             Commands.Add("kick", new Command(2, KickCallback, "/kick <user> [message]"));
 
+            Commands.Add("clear", new Command(1, ClearCallback, "/clear"));
+
             Commands.Add("help", new Command(2, HelpCallback, "/help <command>"));
         }
-
 
         public void Execute(Client invoker, string command, ChatOutput output)
         {
@@ -37,15 +39,7 @@ namespace DesktopCS
                 {
                     try
                     {
-                        if (output.Tab.Type == Forms.TabType.Channel)
-                        {
-                            entry.Value.Callback(invoker, new CommandArgs(parts, (output.Tab as Forms.ChannelTab).Channel));
-                        }
-
-                        else
-                        {
-                            entry.Value.Callback(invoker, new CommandArgs(parts, null));
-                        }
+                        entry.Value.Callback(invoker, new CommandArgs(parts, output));
                     }
 
                     catch (CommandException ex)
@@ -68,14 +62,15 @@ namespace DesktopCS
 
             string action = string.Join(" ", args.Parameters.Skip(1));
 
-            if (args.Target != null)
+            if (args.Output.Tab.Type == Forms.TabType.Channel)
             {
-                sender.Send(new NetIRC.Messages.Send.CTCP.ActionMessage(args.Target, action));
+                Channel channel = (args.Output.Tab as ChannelTab).Channel;
+                sender.Send(new NetIRC.Messages.Send.CTCP.ActionMessage(channel, action));
             }
 
             else
             {
-                throw new CommandException("This command can only be used in a channel.");
+                args.Output.AddInfoLine("This command can only be used in a channel.");
             }
         }
 
@@ -113,16 +108,17 @@ namespace DesktopCS
             }
 
 
-            if (args.Target != null)
+            if (args.Output.Tab.Type == TabType.Channel)
             {
+                Channel channel = (args.Output.Tab as ChannelTab).Channel;
                 string topic = string.Join(" ", args.Parameters.Skip(1));
 
-                sender.Send(args.Target.SetTopic(topic));
+                sender.Send(channel.SetTopic(topic));
             }
 
             else
             {
-                throw new CommandException("This command can only be used in a channel.");
+                args.Output.AddInfoLine("This command can only be used in a channel.");
             }
         }
 
@@ -133,42 +129,53 @@ namespace DesktopCS
                 throw new CommandException("Insufficient parameters.");
             }
 
-            if (args.Target != null)
+            if (args.Output.Tab.Type == TabType.Channel)
             {
-                if (args.Target.Users.ContainsKey(args.Parameters[1]))
+                Channel channel = (args.Output.Tab as ChannelTab).Channel;
+                if (channel.Users.ContainsKey(args.Parameters[1]))
                 {
                     if (args.Parameters.Length > 2)
                     {
                         string message = string.Join(" ", args.Parameters.Skip(2));
-                        sender.Send(args.Target.Kick(args.Target.Users[args.Parameters[1]], message));
+                        sender.Send(channel.Kick(channel.Users[args.Parameters[1]], message));
                     }
 
                     else
                     {
-                        sender.Send(args.Target.Kick(args.Target.Users[args.Parameters[1]]));
+                        sender.Send(channel.Kick(channel.Users[args.Parameters[1]]));
                     }
                 }
 
                 else
                 {
-                    throw new CommandException("The user is not in this channel.");
+                    args.Output.AddInfoLine("The user is not in this channel.");
                 }
             }
 
             else
             {
-                throw new CommandException("This command can only be used in a channel.");
+                args.Output.AddInfoLine("This command can only be used in a channel.");
             }
+        }
+
+        private void ClearCallback(Client sender, CommandArgs args)
+        {
+            args.Output.RemoveAll();
+            args.Output.Tab.LineID = 0;
         }
 
         private void HelpCallback(Client sender, CommandArgs args)
         {
             if (args.Parameters.Length < Commands["help"].MinParams)
             {
-                throw new CommandException("Help usage: " + Commands["help"].Usage);
+                foreach (KeyValuePair<string, Command> pair in Commands)
+                {
+                    args.Output.AddInfoLine(String.Format("{0}: {1}", pair.Key, pair.Value.Usage));
+                }
+                return;
             }
 
-            throw new CommandException("Usage: " + Commands[args.Parameters[1]].Usage);
+            args.Output.AddInfoLine("Usage: " + Commands[args.Parameters[1]].Usage);
         }
     }
 }
