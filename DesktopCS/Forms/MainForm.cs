@@ -93,8 +93,11 @@ namespace DesktopCS.Forms
             this.TabList.SwitchToTab(tab.Name);
 
             channel.OnMessage += channel_OnMessage;
+            channel.OnSendMessage += channel_OnSendMessage;
             channel.OnAction += channel_OnAction;
+            channel.OnSendAction += channel_OnSendAction;
             channel.OnNotice += channel_OnNotice;
+            channel.OnSendNotice += channel_OnSendNotice;
             channel.OnJoin += channel_OnJoin;
             channel.OnLeave += channel_OnLeave;
             channel.OnKick += channel_OnKick;
@@ -108,8 +111,11 @@ namespace DesktopCS.Forms
             this.UpdateTopicLabel();
 
             channel.OnMessage -= channel_OnMessage;
+            channel.OnSendMessage -= channel_OnSendMessage;
             channel.OnAction -= channel_OnAction;
+            channel.OnSendAction -= channel_OnSendAction;
             channel.OnNotice -= channel_OnNotice;
+            channel.OnSendNotice -= channel_OnSendNotice;
             channel.OnJoin -= channel_OnJoin;
             channel.OnLeave -= channel_OnLeave;
             channel.OnKick -= channel_OnKick;
@@ -147,9 +153,28 @@ namespace DesktopCS.Forms
                 return;
             }
 
-            (this.TabList.SelectedTab as BaseTab).LineID++;
-            ChatOutput output = new ChatOutput(this.TabList.SelectedTab as BaseTab, this.Client);
+            this.TabList.Tabs["#" + source.Name].LineID++;
+            ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + source.Name], this.Client);
             output.AddChatLine(user, message);
+
+            if (message.Contains(this.Client.User.NickName) && Properties.Settings.Default.Sounds)
+            {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.cs_ping);
+                player.PlaySync();
+            }
+        }
+
+        void channel_OnSendMessage(Channel source, string message)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.Channel.OnSendMessageHandler(channel_OnSendMessage), source, message);
+                return;
+            }
+
+            this.TabList.Tabs["#" + source.Name].LineID++;
+            ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + source.Name], this.Client);
+            output.AddChatLine(this.Client.User, message);
 
             if (message.Contains(this.Client.User.NickName) && Properties.Settings.Default.Sounds)
             {
@@ -166,9 +191,28 @@ namespace DesktopCS.Forms
                 return;
             }
 
-            (this.TabList.SelectedTab as BaseTab).LineID++;
-            ChatOutput output = new ChatOutput(this.TabList.SelectedTab as BaseTab, this.Client);
+            this.TabList.Tabs["#" + source.Name].LineID++;
+            ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + source.Name], this.Client);
             output.AddActionLine(user, action);
+
+            if (action.Contains(this.Client.User.NickName) && Properties.Settings.Default.Sounds)
+            {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.cs_ping);
+                player.PlaySync();
+            }
+        }
+
+        void channel_OnSendAction(Channel source, string action)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.Channel.OnSendActionHandler(channel_OnSendAction), source, action);
+                return;
+            }
+
+            this.TabList.Tabs["#" + source.Name].LineID++;
+            ChatOutput output = new ChatOutput(this.TabList.Tabs["#" + source.Name], this.Client);
+            output.AddActionLine(this.Client.User, action);
 
             if (action.Contains(this.Client.User.NickName) && Properties.Settings.Default.Sounds)
             {
@@ -182,6 +226,15 @@ namespace DesktopCS.Forms
             if (this.InvokeRequired)
             {
                 this.Invoke(new NetIRC.Channel.OnNoticeHandler(channel_OnNotice), source, user, notice);
+                return;
+            }
+        }
+
+        void channel_OnSendNotice(Channel source, string notice)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new NetIRC.Channel.OnSendNoticeHandler(channel_OnSendNotice), source, notice);
                 return;
             }
         }
@@ -427,7 +480,6 @@ namespace DesktopCS.Forms
                 if ((TabList.SelectedTab as BaseTab).Type == TabType.Channel)
                 {
                     Client.Send(new NetIRC.Messages.Send.ChatMessage((TabList.SelectedTab as ChannelTab).Channel, input));
-                    output.AddChatLine(this.Client.User, input);
                 }
             }
         }
