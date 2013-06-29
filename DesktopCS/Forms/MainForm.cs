@@ -92,6 +92,13 @@ namespace DesktopCS.Forms
 
             this.TabList.SwitchToTab(tab.Name);
 
+            foreach (User user in channel.Users.Values)
+            {
+                user.OnQuit += user_OnQuit;
+                user.OnNickNameChange += user_OnNickNameChange;
+                user.OnUserNameChange += user_OnUserNameChange;
+            }
+
             channel.OnMessage += channel_OnMessage;
             channel.OnSendMessage += channel_OnSendMessage;
             channel.OnAction += channel_OnAction;
