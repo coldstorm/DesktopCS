@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using DesktopCS.Properties;
 using DesktopCS.Forms;
 
 namespace DesktopCS
@@ -14,6 +15,9 @@ namespace DesktopCS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Updater.CheckForUpdates();
+            Settings.Default.Upgrade();
 
             LoginForm login = new LoginForm();
             login.Show();
