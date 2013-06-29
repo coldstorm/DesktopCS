@@ -17,7 +17,12 @@ namespace DesktopCS
             Application.SetCompatibleTextRenderingDefault(false);
 
             Updater.CheckForUpdates();
-            Settings.Default.Upgrade();
+
+            if (Settings.Default.UpgradeRequired)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeRequired = false;
+            }
 
             LoginForm login = new LoginForm();
             login.Show();
