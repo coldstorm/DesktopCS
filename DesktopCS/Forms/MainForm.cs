@@ -109,6 +109,7 @@ namespace DesktopCS.Forms
             channel.OnLeave += channel_OnLeave;
             channel.OnKick += channel_OnKick;
             channel.OnTopicChange += channel_OnTopicChange;
+            channel.OnWho += channel_OnWho;
         }
 
         void Client_OnChannelLeave(Client client, Channel channel)
@@ -308,6 +309,20 @@ namespace DesktopCS.Forms
         void channel_OnTopicChange(Channel source, ChannelTopic topic)
         {
             UpdateTopicLabel();
+        }
+
+        void channel_OnWho(Channel source, string message)
+        {
+            foreach (User user in source.Users.Values)
+            {
+                user.OnQuit -= user_OnQuit;
+                user.OnNickNameChange -= user_OnNickNameChange;
+                user.OnUserNameChange -= user_OnUserNameChange;
+
+                user.OnQuit += user_OnQuit;
+                user.OnNickNameChange += user_OnNickNameChange;
+                user.OnUserNameChange += user_OnUserNameChange;
+            }
         }
         #endregion
 
