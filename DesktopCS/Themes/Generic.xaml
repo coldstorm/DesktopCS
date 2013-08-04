@@ -27,11 +27,11 @@
         </Setter>
     </Style>
     
-    <Style TargetType="{x:Type controls:CsTabItem}">
+    <Style TargetType="{x:Type controls:CSTabItem}">
         <!-- Custom TabItem for CS-like tabs-->
         <Setter Property="Template">
             <Setter.Value>
-            <ControlTemplate TargetType="{x:Type controls:CsTabItem}">
+            <ControlTemplate TargetType="{x:Type controls:CSTabItem}">
                     <!-- The Outer border will take care of spaces between tabs, hiding the content border line under the selected tab. -->
                     <Border 
                         x:Name="OuterBorder" 

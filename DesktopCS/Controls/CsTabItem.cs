@@ -44,18 +44,18 @@ namespace DesktopCS.Controls
     ///     <MyNamespace:CsTabControl/>
     ///
     /// </summary>
-    public class CsTabItem : TabItem
+    public class CSTabItem : TabItem
     {
-        static CsTabItem()
+        static CSTabItem()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(CsTabItem), new FrameworkPropertyMetadata(typeof(CsTabItem)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(CSTabItem), new FrameworkPropertyMetadata(typeof(CSTabItem)));
         }
 
-        public static readonly DependencyProperty UnreadProperty = DependencyProperty.Register("Unread", typeof(bool), typeof(CsTabItem), new PropertyMetadata(false));
+        public static readonly DependencyProperty UnreadProperty = DependencyProperty.Register("Unread", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
 
         public static readonly RoutedEvent CloseTabEvent =
             EventManager.RegisterRoutedEvent("CloseTab", RoutingStrategy.Bubble,
-                typeof(RoutedEventHandler), typeof(CsTabItem));
+                typeof(RoutedEventHandler), typeof(CSTabItem));
 
         public event RoutedEventHandler CloseTab
         {

@@ -9,12 +9,12 @@
 
     <Grid Background="#212226">
         <TabControl Style="{StaticResource ColdstormTabControl}" Margin="20">
-            <controls:CsTabItem Header="#Coldstorm">
+            <controls:CSTabItem Header="#Coldstorm">
 
-            </controls:CsTabItem>
-            <controls:CsTabItem Header="#2" Unread="True">
+            </controls:CSTabItem>
+            <controls:CSTabItem Header="#2" Unread="True">
 
-            </controls:CsTabItem>
+            </controls:CSTabItem>
         </TabControl>
     </Grid>
 </Window>
