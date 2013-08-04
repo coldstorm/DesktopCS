@@ -1,0 +1,20 @@
+﻿<Window x:Class="DesktopCS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:DesktopCS.Controls"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        
+    </Window.Resources>
+
+    <Grid Background="#212226">
+        <TabControl Style="{StaticResource ColdstormTabControl}" Margin="20">
+            <controls:CSTabItem Header="#Coldstorm">
+
+            </controls:CSTabItem>
+            <controls:CSTabItem Header="#2" Unread="True">
+
+            </controls:CSTabItem>
+        </TabControl>
+    </Grid>
+</Window>
