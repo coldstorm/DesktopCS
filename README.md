@@ -1,4 +1,4 @@
 DesktopCS
 =================
 
-A WinForms implementation of the Coldstorm client.
+A WPF implementation of the Coldstorm client.
