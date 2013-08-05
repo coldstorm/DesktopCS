@@ -3,13 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:DesktopCS.Controls">
 
-    <SolidColorBrush x:Key="BackgroundBrush" Color="#212226"/>
-    <SolidColorBrush x:Key="ForegroundBrush" Color="#626569"/>
-    <SolidColorBrush x:Key="BorderBrush" Color="#2a2e36"/>
-    <SolidColorBrush x:Key="SelectedTabBackgroundBrush" Color="#24272e"/>
-    <SolidColorBrush x:Key="SelectedTabForegroundBrush" Color="#8c9096"/>
-    <SolidColorBrush x:Key="UnreadTabForegroundBrush" Color="#ff921e"/>
-
     <Style x:Key="TextButtonStyle" TargetType="Button">
         <Setter Property="Template">
             <Setter.Value>

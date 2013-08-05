@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="TextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border
+                        x:Name="Border"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Background="{StaticResource SelectedTabBackgroundBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        >
+
+                        <ScrollViewer 
+                            Margin="2"
+                            x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{StaticResource ChatBrush}" />
+        <Setter Property="CaretBrush" Value="{StaticResource ChatBrush}" />
+    </Style>
+</ResourceDictionary>

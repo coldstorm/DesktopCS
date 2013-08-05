@@ -7,15 +7,23 @@
         
     </Window.Resources>
 
-    <Grid Background="#212226">
-        <TabControl Margin="20">
-            <controls:CSTabItem Header="#Coldstorm">
+    <ScrollViewer VerticalScrollBarVisibility = "Auto">
+        <Grid Background="#212226">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        
+            <TabControl Margin="5,5,5,0" MinHeight="250">
+                <controls:CSTabItem Header="#Coldstorm">
                 
-            </controls:CSTabItem>
-            <controls:CSTabItem Header="#2" Unread="True">
+                </controls:CSTabItem>
+                <controls:CSTabItem Header="#2" Unread="True">
 
-            </controls:CSTabItem>
+                </controls:CSTabItem>
 
-        </TabControl>
-    </Grid>
+            </TabControl>
+            <TextBox  Margin="5" TextWrapping="Wrap" Grid.Row="1" />
+        </Grid>
+    </ScrollViewer>
 </Window>
