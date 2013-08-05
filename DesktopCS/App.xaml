@@ -6,7 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 
-                <ResourceDictionary Source="Styles/Coldstorm.xaml"/>
+                <ResourceDictionary Source="Styles/TabControl.xaml"/>
                 <ResourceDictionary Source="Themes/CSTabItem.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
