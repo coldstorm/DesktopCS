@@ -7,7 +7,7 @@
     <!-- TabControl style
     Changes the background of content pages,
     Custom colored and rouded borders-->
-    <Style x:Key="ColdstormTabControl" TargetType="{x:Type TabControl}">
+    <Style TargetType="{x:Type TabControl}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
