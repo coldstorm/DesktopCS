@@ -41,7 +41,7 @@
                             <DockPanel 
                                 x:Name="ContentPanel"
                                 Margin="4" 
-                                TextElement.FontSize="11px" 
+                                TextElement.FontSize="10px"
                                 TextElement.FontFamily="Verdana">
 
                                 <Button 
