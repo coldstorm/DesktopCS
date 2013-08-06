@@ -23,5 +23,20 @@ namespace DesktopCS
         {
             InitializeComponent();
         }
+
+        public void AddChat(Brush color, string username, string chat)
+        {
+            var p = new Paragraph();
+            var dateRun = new Run("[00:00]") {Foreground = (Brush) FindResource("TimeBrush")};
+            var usernameRun = new Run(username) { Foreground = color };
+            var chatRun = new Run(chat) {Foreground = (Brush) FindResource("ChatBrush") };
+            p.Inlines.Add(dateRun);
+            p.Inlines.Add(" ");
+            p.Inlines.Add(usernameRun);
+            p.Inlines.Add(" ");
+            p.Inlines.Add(chatRun);
+
+            FlowDoc.Blocks.Add(p);
+        }
     }
 }

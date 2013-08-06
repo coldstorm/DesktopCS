@@ -7,7 +7,6 @@
         Style="{StaticResource WindowStyle}">
     
     <Border
-        x:Name="Border"
         Style="{StaticResource ContentBorder}"
         Background="{StaticResource BackgroundBrush}"
         BorderBrush="{StaticResource SelectedTabBackgroundBrush}" 
@@ -32,7 +31,7 @@
 
             <TabControl Margin="0,0,4,4" Grid.Row="1">
                 <controls:CSTabItem Header="#Coldstorm">
-                    <desktopCs:TabUserControl />
+                    <desktopCs:TabUserControl x:Name="ColdstormTab" />
                 </controls:CSTabItem>
                 <controls:CSTabItem Header="#2">
                     <desktopCs:TabUserControl />

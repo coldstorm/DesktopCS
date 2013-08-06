@@ -9,13 +9,7 @@
     
     <ScrollViewer>
         <RichTextBox Background="Transparent" Foreground="{StaticResource ChatBrush}" BorderThickness="0" Margin="0" IsReadOnly="True" >
-            <FlowDocument behaviors:FlowDocumentPagePadding.PagePadding="0">
-                <Paragraph>
-                    <Span Foreground="{StaticResource TimeBrush}">[20:13]</Span>
-                    <Span Foreground="#C0FFEE">Processor</Span>
-                    <Span Foreground="{StaticResource ChatBrush}">Hello</Span>
-                </Paragraph>
-            </FlowDocument>
+            <FlowDocument x:Name="FlowDoc" behaviors:FlowDocumentPagePadding.PagePadding="0" />
         </RichTextBox>
     </ScrollViewer>
 </UserControl>

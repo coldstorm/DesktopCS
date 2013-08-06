@@ -23,6 +23,8 @@ namespace DesktopCS
         public MainWindow()
         {
             InitializeComponent();
+
+            ColdstormTab.AddChat(Brushes.IndianRed, "Processor", "OMG HAI FROM CODEZ");
         }
     }
 }
