@@ -3,22 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:DesktopCS.Controls">
 
-    <Style x:Key="TextButtonStyle" TargetType="Button">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <ContentControl
-                        x:Name="ContentContainer" 
-                        ContentTemplate="{TemplateBinding ContentTemplate}" 
-                        Content="{TemplateBinding Content}" 
-                        Foreground="{TemplateBinding Foreground}" 
-                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                        Padding="{TemplateBinding Padding}" 
-                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+
     
     <Style TargetType="{x:Type controls:CSTabItem}">
         <Setter Property="IsTabStop" Value="False" />

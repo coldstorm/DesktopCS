@@ -48,10 +48,34 @@
             </Border>
 
             <Border Margin="0,21,0,0" Grid.RowSpan="2" Grid.Row="1"  Grid.Column="1" Style="{StaticResource ContentBorder}">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer Margin="2" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <Expander Header="Express">
+                        <Expander Foreground="Aqua">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="http://cs.yonom.org/flags/ca.png"  />
+                                    <TextBlock Text=" Express" />
+                                </StackPanel>
+                            </Expander.Header>
                             <StackPanel>
+                                <TextBox Text="QUERY"/>
+                                <TextBox Text="KICK"/> 
+                                <TextBox  Text="BAN"/>
+                                <!--Area for action buttons-->
+                            </StackPanel>
+                        </Expander>
+
+                        <Expander Foreground="IndianRed" >
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="http://cs.yonom.org/flags/de.png"  />
+                                    <TextBlock Text=" Processor" />
+                                </StackPanel>
+                            </Expander.Header>
+                            <StackPanel>
+                                <TextBox Text="QUERY"/>
+                                <TextBox Text="KICK"/>
+                                <TextBox  Text="BAN"/>
                                 <!--Area for action buttons-->
                             </StackPanel>
                         </Expander>
