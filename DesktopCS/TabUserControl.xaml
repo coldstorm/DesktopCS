@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="DesktopCS.TabUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:behaviors="clr-namespace:DesktopCS.Behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    
+    <ScrollViewer>
+        <RichTextBox Background="Transparent" Foreground="{StaticResource ChatBrush}" BorderThickness="0" Margin="0" IsReadOnly="True" >
+            <FlowDocument behaviors:FlowDocumentPagePadding.PagePadding="0">
+                <Paragraph>
+                    <Span Foreground="{StaticResource TimeBrush}">[20:13]</Span>
+                    <Span Foreground="#C0FFEE">Processor</Span>
+                    <Span Foreground="{StaticResource ChatBrush}">Hello</Span>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </ScrollViewer>
+</UserControl>

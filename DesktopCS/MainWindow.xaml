@@ -1,7 +1,8 @@
 ﻿<Window x:Class="DesktopCS.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:DesktopCS.Controls" xmlns:behaviors="clr-namespace:DesktopCS.Behaviors"
+        xmlns:controls="clr-namespace:DesktopCS.Controls"
+        xmlns:desktopCs="clr-namespace:DesktopCS"
         Title="MainWindow" Height="350" Width="550" MinHeight="200" MinWidth="300"
         Style="{StaticResource WindowStyle}">
     
@@ -31,23 +32,13 @@
 
             <TabControl Margin="0,0,4,4" Grid.Row="1">
                 <controls:CSTabItem Header="#Coldstorm">
-                    <ScrollViewer>
-                        <RichTextBox Background="Transparent" Foreground="{StaticResource ChatBrush}" BorderThickness="0" Margin="0" IsReadOnly="True" >
-                            <FlowDocument behaviors:FlowDocumentPagePadding.PagePadding="0">
-                                <Paragraph>
-                                    <Span Foreground="{StaticResource TimeBrush}">[20:13]</Span>
-                                    <Span Foreground="#C0FFEE">Processor</Span>
-                                    <Span Foreground="{StaticResource ChatBrush}">Hello</Span>
-                                </Paragraph>
-                            </FlowDocument>
-                        </RichTextBox>
-                    </ScrollViewer> 
+                    <desktopCs:TabUserControl />
                 </controls:CSTabItem>
                 <controls:CSTabItem Header="#2">
-
+                    <desktopCs:TabUserControl />
                 </controls:CSTabItem>
                 <controls:CSTabItem Header="Express" Unread="True">
-
+                    <desktopCs:TabUserControl />
                 </controls:CSTabItem>
             </TabControl>
 
