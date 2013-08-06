@@ -31,7 +31,7 @@
                     <!-- The Outer border will take care of spaces between tabs, hiding the content border line under the selected tab. -->
                     <Border 
                         x:Name="OuterBorder" 
-                        Padding="0,0,4,1" 
+                        Padding="0,0,3,1" 
                         Margin="0,0,0,-2" 
                         SnapsToDevicePixels="True">
                         <!-- This border will contain the visible part of the tab header. The gray line around the tabs, their bg etc. is set here. -->
@@ -67,7 +67,7 @@
                             <Setter TargetName="PART_Close" Property="TextElement.Foreground" Value="{StaticResource SelectedTabForegroundBrush}" />
                             <!-- Move the header one px down and make its size one px bigger so we hide the line of the border under the header -->
                             <Setter TargetName="OuterBorder" Property="Margin" Value="0,0,0,-3"/>
-                            <Setter TargetName="OuterBorder" Property="Padding" Value="0,0,4,2"/>
+                            <Setter TargetName="OuterBorder" Property="Padding" Value="0,0,3,2"/>
                         </Trigger>
 
                         <Trigger Property="Unread" Value="True">

@@ -27,7 +27,7 @@
                             x:Name="Border"
                             Grid.Row="1"
                             BorderThickness="1"
-                            CornerRadius="0,4,4,4"
+                            CornerRadius="0,3,3,3"
                             KeyboardNavigation.TabNavigation="Local"
                             KeyboardNavigation.DirectionalNavigation="Contained"
                             KeyboardNavigation.TabIndex="2"

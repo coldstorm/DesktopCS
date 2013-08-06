@@ -6,11 +6,13 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Coldstorm.xaml"/>
-                <ResourceDictionary Source="Styles/Window.xaml"/>
+                
+                <ResourceDictionary Source="Styles/Border.xaml"/>
                 <ResourceDictionary Source="Styles/Paragraph.xaml"/>
                 <ResourceDictionary Source="Styles/ScrollViewer.xaml"/>
                 <ResourceDictionary Source="Styles/TabControl.xaml"/>
                 <ResourceDictionary Source="Styles/TextBox.xaml"/>
+                <ResourceDictionary Source="Styles/Window.xaml"/>
                 
                 <ResourceDictionary Source="Themes/CSTabItem.xaml"/>
             </ResourceDictionary.MergedDictionaries>
