@@ -18,6 +18,7 @@
                             x:Name="HeaderPanel"
                             Grid.Row="0"
                             Panel.ZIndex="1"
+                            KeyboardNavigation.TabIndex="1"
                             IsItemsHost="True"/>
 
                         <Border 
@@ -25,6 +26,9 @@
                             Grid.Row="1"
                             BorderThickness="1"
                             CornerRadius="0,4,4,4"
+                            KeyboardNavigation.TabNavigation="Local"
+                            KeyboardNavigation.DirectionalNavigation="Contained"
+                            KeyboardNavigation.TabIndex="2"
                             Background="{StaticResource SelectedTabBackgroundBrush}"
                             BorderBrush="{StaticResource BorderBrush}">
 
