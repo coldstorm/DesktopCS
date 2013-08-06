@@ -21,6 +21,9 @@
     </Style>
     
     <Style TargetType="{x:Type controls:CSTabItem}">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <!-- Custom TabItem for CS-like tabs-->
         <Setter Property="Template">
             <Setter.Value>
@@ -40,9 +43,7 @@
                             <!-- Hosts the title and exit buttons -->
                             <DockPanel 
                                 x:Name="ContentPanel"
-                                Margin="4" 
-                                TextElement.FontSize="10px"
-                                TextElement.FontFamily="Verdana">
+                                Margin="4">
 
                                 <Button 
                                     x:Name="PART_Close" 
