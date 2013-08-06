@@ -24,13 +24,22 @@ namespace DesktopCS
             InitializeComponent();
         }
 
+        private Inline CreateTimeStamp()
+        {
+            var time = new Run(DateTime.Now.ToString("[HH:mm]"))
+            {
+                Foreground = (Brush)TryFindResource("TimeBrush")
+            };
+
+            return time;
+        }
+
         public void AddChat(Brush color, string username, string chat)
         {
             var p = new Paragraph();
-            var dateRun = new Run("[00:00]") {Foreground = (Brush) FindResource("TimeBrush")};
             var usernameRun = new Run(username) { Foreground = color };
             var chatRun = new Run(chat) {Foreground = (Brush) FindResource("ChatBrush") };
-            p.Inlines.Add(dateRun);
+            p.Inlines.Add(CreateTimeStamp());
             p.Inlines.Add(" ");
             p.Inlines.Add(usernameRun);
             p.Inlines.Add(" ");
