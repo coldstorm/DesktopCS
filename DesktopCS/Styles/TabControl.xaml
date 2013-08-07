@@ -5,8 +5,8 @@
     Changes the background of content pages,
     Custom colored and rouded borders-->
     <Style TargetType="{x:Type TabControl}">
-        <Setter Property="Foreground" Value="{StaticResource ChatBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ChatBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource ChatBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ChatBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -21,7 +21,7 @@
                             Grid.Row="0"
                             Panel.ZIndex="1"
                             KeyboardNavigation.TabIndex="1"
-                            IsItemsHost="True"/>
+                            IsItemsHost="True" />
 
                         <Border 
                             x:Name="Border"

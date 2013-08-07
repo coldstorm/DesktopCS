@@ -35,7 +35,7 @@
                                     TextElement.Foreground="{StaticResource ForegroundBrush}"
                                     Style="{StaticResource TextButtonStyle}" 
                                     DockPanel.Dock="Right"
-                                    Content=" X"/>
+                                    Content=" X" />
 
                                 <ContentPresenter 
                                     x:Name="ContentSite"
@@ -51,8 +51,8 @@
                             <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{StaticResource SelectedTabForegroundBrush}" />
                             <Setter TargetName="PART_Close" Property="TextElement.Foreground" Value="{StaticResource SelectedTabForegroundBrush}" />
                             <!-- Move the header one px down and make its size one px bigger so we hide the line of the border under the header -->
-                            <Setter TargetName="OuterBorder" Property="Margin" Value="0,0,0,-3"/>
-                            <Setter TargetName="OuterBorder" Property="Padding" Value="0,0,3,2"/>
+                            <Setter TargetName="OuterBorder" Property="Margin" Value="0,0,0,-3" />
+                            <Setter TargetName="OuterBorder" Property="Padding" Value="0,0,3,2" />
                         </Trigger>
 
                         <Trigger Property="Unread" Value="True">
