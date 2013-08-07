@@ -40,6 +40,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -155,7 +156,753 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Flags\br.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\by.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ci.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\co.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cx.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\cz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\de.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\dj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\dk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\dm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\do.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\dz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\eg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\eh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\er.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\es.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\et.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\fi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\fj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\fk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\fm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\fo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\fr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ga.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gq.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\gy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\he.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\hk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\hm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\hn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\hr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ht.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\hu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\hy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\id.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\il.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\im.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\in.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\io.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\iq.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\is.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\it.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\jm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\jo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\jp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ke.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\kg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\kh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ki.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\km.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\kn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\kp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\kr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\kw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ky.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\kz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\la.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\lb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\lc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\li.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\lk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\lr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ls.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\lt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\lu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\lv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ly.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ma.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\md.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\me.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ml.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mq.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ms.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mx.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\my.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\mz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\na.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\nc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\nf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ng.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ni.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\nl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\no.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\np.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\nr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\nu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\nz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\om.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\oz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\pa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\pe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\pf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\pg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\pk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\pl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\pm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\pn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\pr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ps.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\pt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\pw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\py.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\qa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\qq.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\re.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\rs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ru.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\rw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\se.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\si.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\so.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\st.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\sz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\td.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\th.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\to.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\tz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ua.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\um.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\us.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\uy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\uz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\va.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\vc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\vg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\vi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\vn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\vu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\wf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ws.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\yt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\za.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\zm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\zw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\a1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ae.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ai.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\al.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\am.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\an.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ao.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\as.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\at.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\au.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\aw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ax.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\az.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\ba.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\be.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\bo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\af.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flags\as1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

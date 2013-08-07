@@ -48,7 +48,7 @@
                     <ListBox behaviors:ListBoxSelectionBehavior.ClickSelection="True">
                         <controls:UserlistItem Foreground="IndianRed" >
                             <controls:UserlistItem.Flag>
-                                <Image Source="http://cs.yonom.org/flags/de.png" />
+                                <Image Source="Resources/Flags/de.png"/>
                             </controls:UserlistItem.Flag>
                             Processor
                         </controls:UserlistItem>
