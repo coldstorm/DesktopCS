@@ -15,7 +15,8 @@
                             Grid.Row="0" 
                             Style="{StaticResource TextToggleButtonStyle}"
                             IsChecked="{Binding Path=IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                            OverridesDefaultStyle="True">
+                            OverridesDefaultStyle="True"
+                            Cursor="Hand">
                                     
                             <ContentPresenter
                                 ContentSource="Header"

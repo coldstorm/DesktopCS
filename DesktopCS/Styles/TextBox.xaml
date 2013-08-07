@@ -6,7 +6,6 @@
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
                     <ScrollViewer 
-                        Margin="2"
                         x:Name="PART_ContentHost" />
                 </ControlTemplate>
             </Setter.Value>
