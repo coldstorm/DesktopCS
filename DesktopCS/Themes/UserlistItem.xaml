@@ -14,8 +14,7 @@
                             Grid.Row="0"
                             Style="{StaticResource TextToggleButtonStyle}"
                             IsChecked="{Binding Path=IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                            OverridesDefaultStyle="True"
-                            Cursor="Hand">
+                            OverridesDefaultStyle="True">
 
                             <ContentPresenter
                                 ContentSource="Header"
@@ -23,7 +22,7 @@
                         </ToggleButton>
 
                         <ContentPresenter 
-                            Margin="25,0,0,0" 
+                            Margin="21,0,0,0" 
                             Grid.Row="1"/>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -49,9 +48,9 @@
                         </Expander.Header>
 
                         <StackPanel>
-                            <Button Foreground="{StaticResource ChatBrush}" Style="{StaticResource TextButtonStyle}">QUERY</Button>
-                            <Button Foreground="{StaticResource ChatBrush}" Style="{StaticResource TextButtonStyle}">KICK</Button>
-                            <Button Foreground="{StaticResource ChatBrush}" Style="{StaticResource TextButtonStyle}">BAN</Button>
+                            <Button Foreground="{StaticResource ChatBrush}" Style="{StaticResource TextButtonStyle}" x:Name="PART_Query">QUERY</Button>
+                            <Button Foreground="{StaticResource ChatBrush}" Style="{StaticResource TextButtonStyle}" x:Name="PART_Kick">KICK</Button>
+                            <Button Foreground="{StaticResource ChatBrush}" Style="{StaticResource TextButtonStyle}" x:Name="PART_Ban">BAN</Button>
                         </StackPanel>
                     </Expander>
                 </ControlTemplate>

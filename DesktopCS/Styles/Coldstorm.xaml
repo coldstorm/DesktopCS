@@ -18,6 +18,7 @@
                 <ControlTemplate TargetType="Button">
                     <ContentControl
                         x:Name="ContentContainer" 
+                        Cursor="Hand"
                         ContentTemplate="{TemplateBinding ContentTemplate}" 
                         Content="{TemplateBinding Content}" 
                         Foreground="{TemplateBinding Foreground}" 
@@ -35,6 +36,7 @@
                 <ControlTemplate TargetType="ToggleButton">
                     <ContentControl
                         x:Name="ContentContainer" 
+                        Cursor="Hand"
                         ContentTemplate="{TemplateBinding ContentTemplate}" 
                         Content="{TemplateBinding Content}" 
                         Foreground="{TemplateBinding Foreground}" 
