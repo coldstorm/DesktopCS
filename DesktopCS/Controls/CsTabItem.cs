@@ -35,7 +35,6 @@ namespace DesktopCS.Controls
         }
 
         [System.ComponentModel.Description("Shows or hides the unread glow.")]
-        [System.ComponentModel.Category("Common")]
         public bool Unread
         {
             get { return (bool)GetValue(UnreadProperty); }

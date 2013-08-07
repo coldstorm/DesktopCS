@@ -23,13 +23,21 @@ namespace DesktopCS.Controls
 
         public static DependencyProperty FlagProperty = DependencyProperty.Register("Flag", typeof(Image), typeof(UserlistItem));
 
-        [System.ComponentModel.Description("Flag")]
-        [System.ComponentModel.Category("Common")]
         public Image Flag
         {
             get { return (Image)GetValue(FlagProperty); }
             set { SetValue(FlagProperty, value); }
         }
+
+
+        public static DependencyProperty IsExpandedProperty = DependencyProperty.Register("IsExpanded", typeof(bool), typeof(UserlistItem));
+
+        public bool IsExpanded
+        {
+            get { return (bool)GetValue(IsExpandedProperty); }
+            set { SetValue(IsExpandedProperty, value); }
+        }
+
 
         public static readonly RoutedEvent QueryEvent =
             EventManager.RegisterRoutedEvent("Query", RoutingStrategy.Bubble,

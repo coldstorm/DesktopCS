@@ -31,7 +31,7 @@
 
             <TabControl Margin="0,0,4,4" Grid.Row="1">
                 <controls:CSTabItem Header="#Coldstorm">
-                    <desktopCs:TabUserControl x:Name="coldstormTab" />
+                    <desktopCs:TabUserControl x:Name="ColdstormTab" />
                 </controls:CSTabItem>
                     <controls:CSTabItem Header="#2">
                     <desktopCs:TabUserControl />
@@ -50,11 +50,25 @@
             <Border Margin="0,21,0,0" Grid.RowSpan="2" Grid.Row="1"  Grid.Column="1" Style="{StaticResource ContentBorder}">
                 <ScrollViewer Margin="2" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <controls:UserlistItem Foreground="IndianRed">
+                        <controls:UserlistItem Foreground="IndianRed" IsExpanded="True">
                             <controls:UserlistItem.Flag>
                                 <Image Source="http://cs.yonom.org/flags/de.png"/>
                             </controls:UserlistItem.Flag>
                             Processor
+                        </controls:UserlistItem>
+
+                        <controls:UserlistItem Foreground="BlueViolet">
+                            <controls:UserlistItem.Flag>
+                                <Image Source="http://cs.yonom.org/flags/hu.png"/>
+                            </controls:UserlistItem.Flag>
+                            Jojatekok
+                        </controls:UserlistItem>
+
+                        <controls:UserlistItem Foreground="#C0FFEE">
+                            <controls:UserlistItem.Flag>
+                                <Image Source="http://cs.yonom.org/flags/ca.png"/>
+                            </controls:UserlistItem.Flag>
+                            Bash
                         </controls:UserlistItem>
                     </StackPanel>
                 </ScrollViewer>
