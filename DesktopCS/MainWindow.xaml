@@ -1,8 +1,8 @@
 ﻿<Window x:Class="DesktopCS.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:DesktopCS.Controls"
-        xmlns:desktopCs="clr-namespace:DesktopCS"
+        xmlns:Controls="clr-namespace:DesktopCS.Controls"
+        xmlns:DesktopCS="clr-namespace:DesktopCS"
         Title="MainWindow" Height="350" Width="550" MinHeight="200" MinWidth="300"
         Style="{StaticResource WindowStyle}">
     
@@ -30,15 +30,15 @@
 
 
             <TabControl Margin="0,0,4,4" Grid.Row="1">
-                <controls:CSTabItem Header="#Coldstorm">
-                    <desktopCs:TabUserControl x:Name="ColdstormTab" />
-                </controls:CSTabItem>
-                <controls:CSTabItem Header="#2">
-                    <desktopCs:TabUserControl />
-                </controls:CSTabItem>
-                <controls:CSTabItem Header="Express" Unread="True">
-                    <desktopCs:TabUserControl />
-                </controls:CSTabItem>
+                <Controls:CSTabItem Header="#Coldstorm">
+                    <DesktopCS:TabUserControl x:Name="ColdstormTab" />
+                </Controls:CSTabItem>
+                    <Controls:CSTabItem Header="#2">
+                    <DesktopCS:TabUserControl />
+                </Controls:CSTabItem>
+                <Controls:CSTabItem Header="Express" Unread="True">
+                    <DesktopCS:TabUserControl />
+                </Controls:CSTabItem>
             </TabControl>
 
             <Border Grid.Row="2" Margin="0,0,4,0" Style="{StaticResource ContentBorder}">
@@ -53,14 +53,14 @@
                         <Expander Foreground="Aqua">
                             <Expander.Header>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="http://cs.yonom.org/flags/ca.png"  />
+                                    <Image Source="http://cs.yonom.org/flags/ca.png" />
                                     <TextBlock Text=" Express" />
                                 </StackPanel>
                             </Expander.Header>
                             <StackPanel>
-                                <TextBox Text="QUERY"/>
-                                <TextBox Text="KICK"/> 
-                                <TextBox  Text="BAN"/>
+                                <TextBox Text="QUERY" />
+                                <TextBox Text="KICK" /> 
+                                <TextBox Text="BAN" />
                                 <!--Area for action buttons-->
                             </StackPanel>
                         </Expander>
@@ -68,14 +68,14 @@
                         <Expander Foreground="IndianRed" >
                             <Expander.Header>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="http://cs.yonom.org/flags/de.png"  />
+                                    <Image Source="http://cs.yonom.org/flags/de.png" />
                                     <TextBlock Text=" Processor" />
                                 </StackPanel>
                             </Expander.Header>
                             <StackPanel>
-                                <TextBox Text="QUERY"/>
-                                <TextBox Text="KICK"/>
-                                <TextBox  Text="BAN"/>
+                                <TextBox Text="QUERY" />
+                                <TextBox Text="KICK" />
+                                <TextBox Text="BAN" />
                                 <!--Area for action buttons-->
                             </StackPanel>
                         </Expander>
