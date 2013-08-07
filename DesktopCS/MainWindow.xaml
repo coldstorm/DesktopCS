@@ -1,8 +1,9 @@
 ﻿<Window x:Class="DesktopCS.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Controls="clr-namespace:DesktopCS.Controls"
-        xmlns:DesktopCS="clr-namespace:DesktopCS"
+        xmlns:controls="clr-namespace:DesktopCS.Controls"
+        xmlns:desktopCs="clr-namespace:DesktopCS" 
+        xmlns:converters="clr-namespace:DesktopCS.Converters"
         Title="MainWindow" Height="350" Width="550" MinHeight="200" MinWidth="300"
         Style="{StaticResource WindowStyle}">
     
@@ -30,18 +31,18 @@
 
 
             <TabControl Margin="0,0,4,4" Grid.Row="1">
-                <Controls:CSTabItem Header="#Coldstorm">
-                    <DesktopCS:TabUserControl x:Name="ColdstormTab" />
-                </Controls:CSTabItem>
-                    <Controls:CSTabItem Header="#2">
-                    <DesktopCS:TabUserControl />
-                </Controls:CSTabItem>
-                <Controls:CSTabItem Header="Express" Unread="True">
-                    <DesktopCS:TabUserControl />
-                </Controls:CSTabItem>
+                <controls:CSTabItem Header="#Coldstorm">
+                    <desktopCs:TabUserControl x:Name="ColdstormTab" />
+                </controls:CSTabItem>
+                    <controls:CSTabItem Header="#2">
+                    <desktopCs:TabUserControl />
+                </controls:CSTabItem>
+                <controls:CSTabItem Header="Express" Unread="True">
+                    <desktopCs:TabUserControl />
+                </controls:CSTabItem>
             </TabControl>
 
-            <Border Grid.Row="2" Margin="0,0,4,0" Style="{StaticResource ContentBorder}">
+            <Border Grid.Row="2" Margin="0,0,4,0" Padding="2" Style="{StaticResource ContentBorder}">
                 <ScrollViewer MaxHeight="150" VerticalScrollBarVisibility="Auto" >
                     <TextBox SpellCheck.IsEnabled="True" Language="en" TextWrapping="Wrap" />
                 </ScrollViewer>
@@ -50,35 +51,12 @@
             <Border Margin="0,21,0,0" Grid.RowSpan="2" Grid.Row="1"  Grid.Column="1" Style="{StaticResource ContentBorder}">
                 <ScrollViewer Margin="2" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <Expander Foreground="Aqua">
-                            <Expander.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="http://cs.yonom.org/flags/ca.png" />
-                                    <TextBlock Text=" Express" />
-                                </StackPanel>
-                            </Expander.Header>
-                            <StackPanel>
-                                <TextBox Text="QUERY" />
-                                <TextBox Text="KICK" /> 
-                                <TextBox Text="BAN" />
-                                <!--Area for action buttons-->
-                            </StackPanel>
-                        </Expander>
-
-                        <Expander Foreground="IndianRed" >
-                            <Expander.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="http://cs.yonom.org/flags/de.png" />
-                                    <TextBlock Text=" Processor" />
-                                </StackPanel>
-                            </Expander.Header>
-                            <StackPanel>
-                                <TextBox Text="QUERY" />
-                                <TextBox Text="KICK" />
-                                <TextBox Text="BAN" />
-                                <!--Area for action buttons-->
-                            </StackPanel>
-                        </Expander>
+                        <controls:UserlistItem Foreground="IndianRed">
+                            <controls:UserlistItem.Flag>
+                                <Image Source="http://cs.yonom.org/flags/de.png"/>
+                            </controls:UserlistItem.Flag>
+                            Processor
+                        </controls:UserlistItem>
                     </StackPanel>
                 </ScrollViewer>
             </Border>
