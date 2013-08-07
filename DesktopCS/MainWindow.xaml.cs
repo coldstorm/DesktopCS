@@ -24,7 +24,7 @@ namespace DesktopCS
         {
             InitializeComponent();
 
-            ColdstormTab.AddChat(Brushes.IndianRed, "Processor", "OMG HAI");
+            coldstormTab.AddChat(Brushes.IndianRed, "Processor", "OMG HAI");
         }
     }
 }

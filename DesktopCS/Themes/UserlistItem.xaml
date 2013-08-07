@@ -11,13 +11,11 @@
                             <RowDefinition Name="ContentRow" Height="0"/>
                         </Grid.RowDefinitions>
                         <ToggleButton 
-                            Grid.Row="0" 
-                            
-                            TextElement.FontWeight="Bold"
+                            Grid.Row="0"
                             Style="{StaticResource TextToggleButtonStyle}"
                             IsChecked="{Binding Path=IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                             OverridesDefaultStyle="True"
-                            x:Name="HeaderPanel">
+                            Cursor="Hand">
 
                             <ContentPresenter
                                 ContentSource="Header"
