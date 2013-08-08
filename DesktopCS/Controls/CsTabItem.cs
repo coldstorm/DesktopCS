@@ -23,6 +23,7 @@ namespace DesktopCS.Controls
         }
 
         public static readonly DependencyProperty UnreadProperty = DependencyProperty.Register("Unread", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsClosableProperty = DependencyProperty.Register("IsClosable", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
 
         public static readonly RoutedEvent CloseTabEvent =
             EventManager.RegisterRoutedEvent("CloseTab", RoutingStrategy.Bubble,
@@ -32,6 +33,13 @@ namespace DesktopCS.Controls
         {
             add { AddHandler(CloseTabEvent, value); }
             remove { RemoveHandler(CloseTabEvent, value); }
+        }
+
+        [System.ComponentModel.Description("Shows or hides the close button.")]
+        public bool IsClosable
+        {
+            get { return (bool)GetValue(IsClosableProperty); }
+            set { SetValue(IsClosableProperty, value); }
         }
 
         [System.ComponentModel.Description("Shows or hides the unread glow.")]

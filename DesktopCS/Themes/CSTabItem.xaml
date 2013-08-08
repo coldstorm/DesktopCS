@@ -9,6 +9,7 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="IsClosable" Value="True" />
         <!-- Custom TabItem for CS-like tabs-->
         <Setter Property="Template">
             <Setter.Value>
@@ -58,6 +59,12 @@
                         <Trigger Property="Unread" Value="True">
                             <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{StaticResource UnreadTabForegroundBrush}" />
                             <Setter TargetName="PART_Close" Property="TextElement.Foreground" Value="{StaticResource UnreadTabForegroundBrush}" />
+                        </Trigger>
+
+
+                        <Trigger Property="IsClosable" Value="False">
+                            <Setter TargetName="PART_Close" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_Close" Property="IsEnabled" Value="False" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

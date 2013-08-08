@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     
     <ScrollViewer>
-        <RichTextBox Background="Transparent" Foreground="{StaticResource ChatBrush}" BorderThickness="0" Margin="0" IsReadOnly="True" >
+        <RichTextBox Background="Transparent" Foreground="{StaticResource ChatBrush}" BorderThickness="0" Margin="0" IsReadOnly="True">
             <FlowDocument x:Name="FlowDoc" behaviors:FlowDocumentPagePadding.PagePadding="0" />
         </RichTextBox>
     </ScrollViewer>

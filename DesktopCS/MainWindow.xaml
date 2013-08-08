@@ -24,35 +24,23 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBox Grid.ColumnSpan="2" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}">
-                Some weird random long MOTD (By Processor)
-            </TextBox>
+            <TextBox Grid.ColumnSpan="2" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" />
 
             <TabControl Margin="0,0,4,4" Grid.Row="1">
-                <controls:CSTabItem Header="#Coldstorm">
-                    <desktopCS:TabUserControl x:Name="ColdstormTab" />
-                </controls:CSTabItem>
-                    <controls:CSTabItem Header="#2">
+                <controls:CSTabItem Header="IRC" IsClosable="False">
                     <desktopCS:TabUserControl />
                 </controls:CSTabItem>
             </TabControl>
 
             <Border Grid.Row="2" Margin="0,0,4,0" Padding="2" Style="{StaticResource ContentBorder}">
-                <ScrollViewer MaxHeight="150" VerticalScrollBarVisibility="Auto" >
+                <ScrollViewer MaxHeight="150" VerticalScrollBarVisibility="Auto">
                     <TextBox SpellCheck.IsEnabled="True" Language="en" TextWrapping="Wrap" />
                 </ScrollViewer>
             </Border>
 
             <Border Margin="0,21,0,0" Grid.RowSpan="2" Grid.Row="1"  Grid.Column="1" Style="{StaticResource ContentBorder}">
                 <ScrollViewer Margin="2" VerticalScrollBarVisibility="Auto">
-                    <ListBox behaviors:ListBoxSelectionBehavior.ClickSelection="True">
-                        <controls:UserlistItem Foreground="IndianRed" >
-                            <controls:UserlistItem.Flag>
-                                <Image Source="Resources/Flags/de.png"/>
-                            </controls:UserlistItem.Flag>
-                            Processor
-                        </controls:UserlistItem>
-                    </ListBox>
+                    <ListBox behaviors:ListBoxSelectionBehavior.ClickSelection="True" />
                 </ScrollViewer>
             </Border>
         </Grid>
