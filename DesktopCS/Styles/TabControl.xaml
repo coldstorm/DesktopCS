@@ -26,13 +26,11 @@
                         <Border 
                             x:Name="Border"
                             Grid.Row="1"
-                            BorderThickness="1"
+                            Style="{StaticResource ContentBorder}"
                             CornerRadius="0,3,3,3"
                             KeyboardNavigation.TabNavigation="Local"
                             KeyboardNavigation.DirectionalNavigation="Contained"
-                            KeyboardNavigation.TabIndex="2"
-                            Background="{StaticResource SelectedTabBackgroundBrush}"
-                            BorderBrush="{StaticResource BorderBrush}">
+                            KeyboardNavigation.TabIndex="2">
 
                             <ContentPresenter x:Name="PART_SelectedContentHost" Margin="4" ContentSource="SelectedContent" />
                         </Border>

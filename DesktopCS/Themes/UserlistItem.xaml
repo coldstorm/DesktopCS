@@ -1,56 +1,30 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:DesktopCS.Controls">
-    <Style x:Key="UserlistExpander" TargetType="{x:Type Expander}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Expander}">
-                    <StackPanel Margin="2">
-                        <ContentPresenter
-                            Grid.Row="0"
-                            Cursor="Hand"
-                            ContentSource="Header"
-                            RecognizesAccessKey="True" />
-                        
-                        <ContentPresenter 
-                            x:Name="ContentRow"
-                            Visibility="Collapsed"
-                            Margin="21,2,0,0" 
-                            Grid.Row="1" />
-                    </StackPanel>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsExpanded" Value="True">
-                            <Setter TargetName="ContentRow" Property="Visibility" Value="Visible" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
     <Style TargetType="{x:Type controls:UserlistItem}">
         <Setter Property="IsExpanded" Value="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:UserlistItem}">
-                    <Expander 
-                        Style="{StaticResource UserlistExpander}" 
-                        Foreground="{TemplateBinding Foreground}" 
-                        IsExpanded="{TemplateBinding IsExpanded}">
-                        
-                        <Expander.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <ContentPresenter ContentSource="Flag" Margin="0,0,5,0" />
-                                <ContentPresenter />
-                            </StackPanel>
-                        </Expander.Header>
+                    <StackPanel Margin="2">
+                        <DockPanel>
+                            <ContentPresenter DockPanel.Dock="Left" Width="16" ContentSource="Flag" />
+                            <ContentPresenter Cursor="Hand" Margin="4,0,0,0" />
+                        </DockPanel>
 
-                        <StackPanel>
-                            <Button Foreground="{StaticResource ChatBrush}" Style="{StaticResource TextButtonStyle}" x:Name="PART_Query">QUERY</Button>
-                            <Button Foreground="{StaticResource ChatBrush}" Style="{StaticResource TextButtonStyle}" x:Name="PART_Kick">KICK</Button>
-                            <Button Foreground="{StaticResource ChatBrush}" Style="{StaticResource TextButtonStyle}" x:Name="PART_Ban">BAN</Button>
+                        <StackPanel x:Name="ContentRow" Margin="20,1,0,0">
+                            <Button Style="{StaticResource TextButtonStyle}" x:Name="PART_Query">QUERY</Button>
+                            <Button Style="{StaticResource TextButtonStyle}" x:Name="PART_Kick">KICK</Button>
+                            <Button Style="{StaticResource TextButtonStyle}" x:Name="PART_Ban">BAN</Button>
                         </StackPanel>
-                    </Expander>
+                    </StackPanel>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="False">
+                            <Setter TargetName="ContentRow" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
