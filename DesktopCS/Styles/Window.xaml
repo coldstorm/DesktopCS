@@ -3,6 +3,7 @@
 
     <Style TargetType="Window" x:Key="WindowStyle">
         <Setter Property="Background" Value="{StaticResource WindowBgBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ChatBrush}" />
         <Setter Property="FontFamily" Value="Verdana" />
         <Setter Property="FontSize" Value="11px" />
     </Style>
