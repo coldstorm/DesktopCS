@@ -4,7 +4,7 @@
         xmlns:controls="clr-namespace:DesktopCS.Controls"
         xmlns:desktopCS="clr-namespace:DesktopCS"
         xmlns:behaviors="clr-namespace:DesktopCS.Behaviors"
-        Title="MainWindow" Height="350" Width="550" MinHeight="200" MinWidth="300"
+        Title="Coldstorm" Height="350" Width="550" MinHeight="200" MinWidth="300" Icon="coldstorm.ico"
         Style="{StaticResource WindowStyle}">
     
     <Border

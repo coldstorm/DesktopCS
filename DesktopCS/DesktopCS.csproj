@@ -37,6 +37,9 @@
   <PropertyGroup>
     <StartupObject>DesktopCS.App</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>coldstorm.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -902,6 +905,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Flags\as1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="coldstorm.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
