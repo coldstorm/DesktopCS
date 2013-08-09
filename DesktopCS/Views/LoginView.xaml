@@ -21,23 +21,23 @@
             
             <StackPanel Margin="30,10">
                 <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Username" />
-                <Border Padding="4" Style="{StaticResource ContentBorder}">
-                    <TextBox Text="{Binding LoginData.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <Border Padding="0" Style="{StaticResource ContentBorder}">
+                    <TextBox Padding="3" Text="{Binding LoginData.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 </Border>
             </StackPanel>
 
             <StackPanel Margin="30,10">
                 <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Password" />
-                <Border Padding="4" Style="{StaticResource ContentBorder}">
-                    <PasswordBox behaviors:PasswordBoxAssistant.BoundPassword="{Binding LoginData.Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <Border Padding="0" Style="{StaticResource ContentBorder}">
+                    <PasswordBox Padding="3" behaviors:PasswordBoxAssistant.BoundPassword="{Binding LoginData.Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 </Border>
             </StackPanel>
 
 
             <StackPanel Margin="30,10">
                 <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Color" />
-                <Border Padding="3" Style="{StaticResource ContentBorder}">
-                    <TextBox Text="{Binding LoginData.Color, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <Border Padding="0" Style="{StaticResource ContentBorder}">
+                    <TextBox Padding="3" Text="{Binding LoginData.Color, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 </Border>
             </StackPanel>
 
@@ -45,8 +45,8 @@
                 <Button FontSize="14" Style="{StaticResource TextButtonStyle}" Content="Login" HorizontalAlignment="Center"/>
             </Border>
 
-            <Border Margin="20,0" Padding="3" Style="{StaticResource ContentBorder}">
-                <TextBlock>
+            <Border Margin="20,0" Padding="0" Style="{StaticResource ContentBorder}">
+                <TextBlock Padding="3">
                     <Span Foreground="{StaticResource TimeBrush}">
                         [11:11]
                     </Span>

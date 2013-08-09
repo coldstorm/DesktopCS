@@ -32,9 +32,9 @@
                 </controls:CSTabItem>
             </TabControl>
 
-            <Border Grid.Row="2" Margin="0,0,4,0" Padding="2" Style="{StaticResource ContentBorder}">
-                <ScrollViewer MaxHeight="150" VerticalScrollBarVisibility="Auto">
-                    <TextBox SpellCheck.IsEnabled="True" Language="en" TextWrapping="Wrap" />
+            <Border Padding="0" Grid.Row="2" Margin="0,0,4,0" Style="{StaticResource ContentBorder}">
+                <ScrollViewer MaxHeight="35" VerticalScrollBarVisibility="Auto">
+                    <TextBox Padding="3" SpellCheck.IsEnabled="True" Language="en" TextWrapping="Wrap" />
                 </ScrollViewer>
             </Border>
 
