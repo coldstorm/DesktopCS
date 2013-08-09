@@ -45,7 +45,7 @@
                         [11:11]
                     </Span>
                     
-                    <Run Foreground="{Binding LoginData.Color}" Text="{Binding LoginData.Username, TargetNullValue='Username'}" />
+                    <Run Foreground="{Binding LoginData.Color, TargetNullValue='#FFFFFF', FallbackValue='#FFFFFF'}" Text="{Binding LoginData.Username, TargetNullValue='Username'}" />
                         
                     I love this color!
                 </TextBlock>
