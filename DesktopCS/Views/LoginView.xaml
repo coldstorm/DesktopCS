@@ -42,7 +42,7 @@
             </StackPanel>
 
             <Border Margin="20,15" Padding="3" Style="{StaticResource ContentBorder}" MaxWidth="150">
-                <Button FontSize="14" Style="{StaticResource TextButtonStyle}" Content="Login" HorizontalAlignment="Center"/>
+                <Button FontSize="14" Style="{StaticResource TextButtonStyle}" Content="Login" HorizontalAlignment="Center" Command="{Binding LoginCommand}"/>
             </Border>
 
             <Border Margin="20,0" Padding="0" Style="{StaticResource ContentBorder}">
