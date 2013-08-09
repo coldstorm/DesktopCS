@@ -66,6 +66,17 @@ namespace DesktopCS.Models
 
         #region Validation
 
+        public bool IsValid
+        {
+            get { return _validatedProperties.All(property => GetValidationError(property) == null); }
+        }
+
+        private readonly string[] _validatedProperties =
+            {
+                "Username",
+                "Color"
+            };
+
         private string GetValidationError(string columnName)
         {
             switch (columnName)
