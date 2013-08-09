@@ -10,10 +10,28 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource ChatBrush}" />
         <Setter Property="CaretBrush" Value="{StaticResource ChatBrush}" />
+        <Setter Property="FontSize" Value="10px" />
+    </Style>
+
+    <Style x:Key="InputTextBox" TargetType="TextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Style="{StaticResource ContentBorder}">
+                        <ScrollViewer 
+                        Padding="{TemplateBinding Padding}"
+                        x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource ChatBrush}" />
+        <Setter Property="CaretBrush" Value="{StaticResource ChatBrush}" />
+        <Setter Property="Padding" Value="3" />
         <Setter Property="FontSize" Value="10px" />
     </Style>
 </ResourceDictionary>

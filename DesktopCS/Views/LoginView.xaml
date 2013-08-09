@@ -7,7 +7,7 @@
         xmlns:behaviors="clr-namespace:DesktopCS.Behaviors"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:LoginViewModel}"
-        Title="LoginView" Height="420" Width="380"
+        Title="Login" Height="420" Width="380"
         Style="{StaticResource WindowStyle}">
     
     <Border
@@ -21,24 +21,18 @@
             
             <StackPanel Margin="30,10">
                 <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Username" />
-                <Border Padding="0" Style="{StaticResource ContentBorder}">
-                    <TextBox Padding="3" Text="{Binding LoginData.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                </Border>
+                <TextBox Style="{StaticResource InputTextBox}" Text="{Binding LoginData.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             </StackPanel>
 
             <StackPanel Margin="30,10">
                 <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Password" />
-                <Border Padding="0" Style="{StaticResource ContentBorder}">
-                    <PasswordBox Padding="3" behaviors:PasswordBoxAssistant.BoundPassword="{Binding LoginData.Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                </Border>
+                <PasswordBox behaviors:PasswordBoxAssistant.BoundPassword="{Binding LoginData.Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Height="21" HorizontalAlignment="Right" Width="250" />
             </StackPanel>
 
 
             <StackPanel Margin="30,10">
                 <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Color" />
-                <Border Padding="0" Style="{StaticResource ContentBorder}">
-                    <TextBox Padding="3" Text="{Binding LoginData.Color, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                </Border>
+                <TextBox Style="{StaticResource InputTextBox}" Text="{Binding LoginData.Color, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             </StackPanel>
 
             <Border Margin="20,15" Padding="3" Style="{StaticResource ContentBorder}" MaxWidth="150">
@@ -50,6 +44,9 @@
                     <Span Foreground="{StaticResource TimeBrush}">
                         [11:11]
                     </Span>
+                    
+                    <Run Foreground="{Binding LoginData.Color}" Text="{Binding LoginData.Username, TargetNullValue='Username'}" />
+                        
                     I love this color!
                 </TextBlock>
             </Border>
