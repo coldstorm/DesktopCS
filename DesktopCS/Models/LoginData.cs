@@ -100,7 +100,7 @@ namespace DesktopCS.Models
         private string ValidateColor()
         {
             var regex = new Regex(@"^#(?:[0-9a-fA-F]{3}){1,2}$");
-            if (Color != null || !regex.IsMatch(Color)) 
+            if (Color == null || !regex.IsMatch(Color)) 
                 return "Invalid color.";
 
             return null;
