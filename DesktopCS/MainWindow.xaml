@@ -27,7 +27,7 @@
             <TextBox Grid.ColumnSpan="2" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" />
 
             <TabControl Margin="0,0,4,4" Grid.Row="1">
-                <controls:CSTabItem Header="IRC" IsClosable="False">
+                <controls:CSTabItem Header="Server" IsClosable="False">
                     <desktopCS:TabUserControl />
                 </controls:CSTabItem>
             </TabControl>
