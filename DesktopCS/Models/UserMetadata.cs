@@ -15,7 +15,7 @@ namespace DesktopCS.Models
             CountryCode = countryCode;
         }
 
-        public SolidColorBrush Color { get; set; }
-        public string CountryCode { get; set; }
+        public SolidColorBrush Color { get; private set; }
+        public string CountryCode { get; private set; }
     }
 }
