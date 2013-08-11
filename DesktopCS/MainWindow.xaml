@@ -2,8 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:DesktopCS.Controls"
-        xmlns:desktopCS="clr-namespace:DesktopCS"
-        xmlns:behaviors="clr-namespace:DesktopCS.Behaviors"
+        xmlns:behaviors="clr-namespace:DesktopCS.Behaviors" 
+        xmlns:userControls="clr-namespace:DesktopCS.UserControls"
         Title="Coldstorm" Height="350" Width="550" MinHeight="200" MinWidth="300" Icon="coldstorm.ico"
         Style="{StaticResource WindowStyle}">
     
@@ -28,7 +28,7 @@
 
             <TabControl Margin="0,0,4,4" Grid.Row="1">
                 <controls:CSTabItem Header="Server" IsClosable="False">
-                    <desktopCS:TabUserControl />
+                    <userControls:TabUserControl />
                 </controls:CSTabItem>
             </TabControl>
 
