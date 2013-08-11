@@ -20,14 +20,26 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
-                    <Border Style="{StaticResource ContentBorder}">
+                    <Border 
+                        Style="{StaticResource ContentBorder}" 
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        
                         <ScrollViewer 
                         Padding="{TemplateBinding Padding}"
                         x:Name="PART_ContentHost" />
                     </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource ErrorBrush}" />
+                            <Setter Property="BorderThickness" Value="2" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource ChatBrush}" />
         <Setter Property="CaretBrush" Value="{StaticResource ChatBrush}" />
