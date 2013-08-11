@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using DesktopCS.Controls;
 using DesktopCS.Helpers;
 
 namespace DesktopCS.UserControls
@@ -11,13 +12,19 @@ namespace DesktopCS.UserControls
     /// </summary>
     public partial class TabUserControl
     {
-        public TabUserControl()
+        private readonly CSTabItem _parent;
+
+        public TabUserControl(CSTabItem parent)
         {
+            _parent = parent;
             InitializeComponent();
         }
 
         public void AddChat(Brush color, string username, string chat)
         {
+            if (!_parent.IsSelected)
+                _parent.IsUnread = true;
+
             var p = new Paragraph();
             var usernameRun = new Run(username) { Foreground = color };
             var timeRun = new Run(TimeHelper.CreateTimeStamp()) { Foreground = (Brush)TryFindResource("TimeBrush") };

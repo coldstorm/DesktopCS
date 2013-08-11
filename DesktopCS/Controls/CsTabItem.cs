@@ -22,7 +22,7 @@ namespace DesktopCS.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CSTabItem), new FrameworkPropertyMetadata(typeof(CSTabItem)));
         }
 
-        public static readonly DependencyProperty UnreadProperty = DependencyProperty.Register("Unread", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsUnreadProperty = DependencyProperty.Register("IsUnread", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
         public static readonly DependencyProperty IsClosableProperty = DependencyProperty.Register("IsClosable", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
 
         public static readonly RoutedEvent CloseTabEvent =
@@ -43,10 +43,10 @@ namespace DesktopCS.Controls
         }
 
         [System.ComponentModel.Description("Shows or hides the unread glow.")]
-        public bool Unread
+        public bool IsUnread
         {
-            get { return (bool)GetValue(UnreadProperty); }
-            set { SetValue(UnreadProperty, value); }
+            get { return (bool)GetValue(IsUnreadProperty); }
+            set { SetValue(IsUnreadProperty, value); }
         }
 
         public override void OnApplyTemplate()

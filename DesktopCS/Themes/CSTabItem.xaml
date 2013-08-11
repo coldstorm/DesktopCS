@@ -56,7 +56,7 @@
                             <Setter TargetName="OuterBorder" Property="Padding" Value="0,0,3,2" />
                         </Trigger>
 
-                        <Trigger Property="Unread" Value="True">
+                        <Trigger Property="IsUnread" Value="True">
                             <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{StaticResource UnreadTabForegroundBrush}" />
                             <Setter TargetName="PART_Close" Property="TextElement.Foreground" Value="{StaticResource UnreadTabForegroundBrush}" />
                         </Trigger>

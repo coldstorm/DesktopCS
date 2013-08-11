@@ -36,7 +36,7 @@ namespace DesktopCS.ViewModels
             set
             {
                 _selectedTabIndex = value;
-                Tabs[value].Unread = false;
+                Tabs[value].IsUnread = false;
             }
         }
     }
