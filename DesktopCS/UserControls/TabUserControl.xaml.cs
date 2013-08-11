@@ -4,7 +4,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using DesktopCS.Helpers;
 
-namespace DesktopCS
+namespace DesktopCS.UserControls
 {
     /// <summary>
     /// Interaction logic for TabUserControl.xaml

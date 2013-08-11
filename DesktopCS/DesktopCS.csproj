@@ -74,7 +74,7 @@
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserMetadata.cs" />
-    <Compile Include="TabUserControl.xaml.cs">
+    <Compile Include="UserControls\TabUserControl.xaml.cs">
       <DependentUpon>TabUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserlistItem.cs" />
@@ -116,6 +116,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\RichTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\UserlistItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,7 +144,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TabUserControl.xaml">
+    <Page Include="UserControls\TabUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
