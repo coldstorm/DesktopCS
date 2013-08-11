@@ -73,27 +73,6 @@ namespace DesktopCS.Tests
         }
 
         [TestMethod]
-        public void NoHexIdentTest()
-        {
-            // arrange
-            const string testIdent = "QQ";
-            ArgumentException expectedExcetpion = null;
-
-            // act
-            try
-            {
-                IdentParser.Parse(testIdent);
-            }
-            catch (ArgumentException ex)
-            {
-                expectedExcetpion = ex;
-            }
-
-            // assert
-            Assert.IsNotNull(expectedExcetpion);
-        }
-
-        [TestMethod]
         public void InvalidHexIdentTest()
         {
             // arrange
@@ -113,7 +92,6 @@ namespace DesktopCS.Tests
             // assert
             Assert.IsNotNull(expectedExcetpion);
         }
-
 
         [TestMethod]
         public void TooShortHexIdentTest()
@@ -146,8 +124,8 @@ namespace DesktopCS.Tests
             var userMetadata = IdentParser.Parse(testIdent);
 
             // assert
-            Assert.AreEqual(userMetadata.CountryCode, "QQ");
-            Assert.AreEqual(userMetadata.Color.Color, Brushes.White.Color);
+            Assert.Equals(userMetadata.CountryCode, "QQ");
+            Assert.Equals(userMetadata.Color, Brushes.White);
         }
 
         [TestMethod]
@@ -160,8 +138,8 @@ namespace DesktopCS.Tests
             var userMetadata = IdentParser.Parse(testIdent);
 
             // assert
-            Assert.AreEqual(userMetadata.CountryCode, "QQ");
-            Assert.AreEqual(userMetadata.Color.Color, Brushes.White.Color);
+            Assert.Equals(userMetadata.CountryCode, "QQ");
+            Assert.Equals(userMetadata.Color, Brushes.White);
         }
 
     }
