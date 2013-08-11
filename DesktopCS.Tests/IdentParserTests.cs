@@ -13,7 +13,7 @@ namespace DesktopCS.Tests
         {
             // arrange
             const string testIdent = "RANDOM_IDENT";
-            ArgumentException expectedExcetpion = null;
+            ArgumentException expectedException = null;
 
             // act
             try
@@ -22,12 +22,12 @@ namespace DesktopCS.Tests
             }
             catch (ArgumentException ex)
             {
-                expectedExcetpion = ex;
+                expectedException = ex;
             }
             
 
             // assert
-            Assert.IsNotNull(expectedExcetpion);
+            Assert.IsNotNull(expectedException);
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace DesktopCS.Tests
         {
             // arrange
             const string testIdent = "";
-            ArgumentException expectedExcetpion = null;
+            ArgumentException expectedException = null;
 
             // act
             try
@@ -44,11 +44,11 @@ namespace DesktopCS.Tests
             }
             catch (ArgumentException ex)
             {
-                expectedExcetpion = ex;
+                expectedException = ex;
             }
 
             // assert
-            Assert.IsNotNull(expectedExcetpion);
+            Assert.IsNotNull(expectedException);
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@ namespace DesktopCS.Tests
         {
             // arrange
             const string testIdent = null;
-            ArgumentException expectedExcetpion = null;
+            ArgumentException expectedException = null;
 
             // act
             try
@@ -65,11 +65,11 @@ namespace DesktopCS.Tests
             }
             catch (ArgumentException ex)
             {
-                expectedExcetpion = ex;
+                expectedException = ex;
             }
 
             // assert
-            Assert.IsNotNull(expectedExcetpion);
+            Assert.IsNotNull(expectedException);
         }
 
         [TestMethod]
@@ -77,7 +77,7 @@ namespace DesktopCS.Tests
         {
             // arrange
             const string testIdent = "QQ";
-            ArgumentException expectedExcetpion = null;
+            ArgumentException expectedException = null;
 
             // act
             try
@@ -86,11 +86,11 @@ namespace DesktopCS.Tests
             }
             catch (ArgumentException ex)
             {
-                expectedExcetpion = ex;
+                expectedException = ex;
             }
 
             // assert
-            Assert.IsNotNull(expectedExcetpion);
+            Assert.IsNotNull(expectedException);
         }
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace DesktopCS.Tests
         {
             // arrange
             const string testIdent = "GGGQQ";
-            ArgumentException expectedExcetpion = null;
+            ArgumentException expectedException = null;
 
             // act
             try
@@ -107,11 +107,11 @@ namespace DesktopCS.Tests
             }
             catch (ArgumentException ex)
             {
-                expectedExcetpion = ex;
+                expectedException = ex;
             }
 
             // assert
-            Assert.IsNotNull(expectedExcetpion);
+            Assert.IsNotNull(expectedException);
         }
 
 
@@ -120,7 +120,7 @@ namespace DesktopCS.Tests
         {
             // arrange
             const string testIdent = "12345QQ";
-            ArgumentException expectedExcetpion = null;
+            ArgumentException expectedException = null;
 
             // act
             try
@@ -129,11 +129,11 @@ namespace DesktopCS.Tests
             }
             catch (ArgumentException ex)
             {
-                expectedExcetpion = ex;
+                expectedException = ex;
             }
 
             // assert
-            Assert.IsNotNull(expectedExcetpion);
+            Assert.IsNotNull(expectedException);
         }
 
         [TestMethod]
