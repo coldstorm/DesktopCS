@@ -33,13 +33,14 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="Validation.HasError" Value="True">
                             <Setter Property="BorderBrush" Value="{StaticResource ErrorBrush}" />
-                            <Setter Property="BorderThickness" Value="2" />
+                            <Setter Property="BorderThickness" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource ChatBrush}" />
         <Setter Property="CaretBrush" Value="{StaticResource ChatBrush}" />
