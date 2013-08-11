@@ -13,13 +13,13 @@ namespace DesktopCS.Helpers
     {
         public static UserMetadata Parse(string ident)
         {
-            var regexp = new Regex(@"^([0-9a-f]{3}|[0-9a-f]{6})([a-z]{2})$", RegexOptions.IgnoreCase);
-            Match match = regexp.Match(ident);
+            var regexp = new Regex(@"^(?:[0-9a-f]{3}){1,2}|[a-z]{2}$", RegexOptions.IgnoreCase);
+            MatchCollection match = regexp.Matches(ident);
 
-            if (match.Success)
+            if (match.Count == 2)
             {
-                var color = (SolidColorBrush)(new BrushConverter().ConvertFrom(match.Groups[0].Value));
-                var flag = match.Groups[1].Value;
+                var color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#" + match[0].Value));
+                var flag = match[1].Value;
                 return new UserMetadata(color, flag);
             }
 
