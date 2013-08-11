@@ -26,7 +26,7 @@
 
             <StackPanel Margin="30,10">
                 <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Password" />
-                <PasswordBox behaviors:PasswordBoxAssistant.BoundPassword="{Binding LoginData.Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Height="21" HorizontalAlignment="Right" Width="250" />
+                <PasswordBox behaviors:PasswordBoxAssistant.BoundPassword="{Binding LoginData.Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             </StackPanel>
 
 
