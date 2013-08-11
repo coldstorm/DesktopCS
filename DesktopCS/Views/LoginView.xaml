@@ -32,7 +32,7 @@
 
             <StackPanel Margin="30,10">
                 <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Color" />
-                <TextBox Style="{StaticResource InputTextBox}" Text="{Binding LoginData.Color, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox Style="{StaticResource InputTextBox}" Text="{Binding LoginData.ColorString, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             </StackPanel>
 
             <Border Margin="20,15" Padding="3" Style="{StaticResource ContentBorder}" MaxWidth="150">
@@ -41,11 +41,11 @@
 
             <Border Margin="20,0" Padding="0" Style="{StaticResource ContentBorder}">
                 <TextBlock Padding="3">
-                    <Span Foreground="{StaticResource TimeBrush}">
-                        [11:11]
-                    </Span>
+                    <Run Foreground="{StaticResource TimeBrush}">
+                        [00:00]
+                    </Run>
                     
-                    <Run Foreground="{Binding LoginData.Color, TargetNullValue='#FFFFFF', FallbackValue='#FFFFFF'}" Text="{Binding LoginData.Username, TargetNullValue='Username'}" />
+                    <Run Foreground="{Binding LoginData.ColorBrush, TargetNullValue='#FFFFFF', FallbackValue='#FFFFFF'}" Text="{Binding LoginData.Username, TargetNullValue='Username'}" />
                         
                     I love this color!
                 </TextBlock>

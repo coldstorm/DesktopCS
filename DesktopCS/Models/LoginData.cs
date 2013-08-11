@@ -12,7 +12,8 @@ namespace DesktopCS.Models
     {
         private string _username;
         private string _password;
-        private string _color;
+        private string _colorString;
+        private SolidColorBrush _colorBrush;
 
         public string Username
         {
@@ -34,13 +35,28 @@ namespace DesktopCS.Models
             }
         }
 
-        public string Color
+        public string ColorString
         {
-            get { return _color; }
+            get { return _colorString; }
             set
             {
-                _color = value;
-                OnPropertyChanged("Color");
+                _colorString = value;
+                OnPropertyChanged("ColorString");
+
+                if (ValidateColorString() == null)
+                    ColorBrush = (SolidColorBrush)new BrushConverter().ConvertFrom(ColorString);
+                else
+                    ColorBrush = null;
+            }
+        }
+
+        public SolidColorBrush ColorBrush
+        {
+            get { return _colorBrush; }
+            set
+            {
+                _colorBrush = value;
+                OnPropertyChanged("ColorBrush");
             }
         }
 
@@ -74,7 +90,7 @@ namespace DesktopCS.Models
         private readonly string[] _validatedProperties =
             {
                 "Username",
-                "Color"
+                "ColorString"
             };
 
         private string GetValidationError(string columnName)
@@ -83,8 +99,8 @@ namespace DesktopCS.Models
             {
                 case "Username":
                     return ValidateUsername();
-                case "Color":
-                    return ValidateColor();
+                case "ColorString":
+                    return ValidateColorString();
             }
             return null;
         }
@@ -97,10 +113,10 @@ namespace DesktopCS.Models
             return null;
         }
 
-        private string ValidateColor()
+        private string ValidateColorString()
         {
             var regex = new Regex(@"^#(?:[0-9a-fA-F]{3}){1,2}$");
-            if (Color == null || !regex.IsMatch(Color)) 
+            if (ColorString == null || !regex.IsMatch(ColorString)) 
                 return "Invalid color.";
 
             return null;
