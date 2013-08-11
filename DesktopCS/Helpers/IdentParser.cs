@@ -18,8 +18,8 @@ namespace DesktopCS.Helpers
 
             if (match.Success)
             {
-                var color = (SolidColorBrush)(new BrushConverter().ConvertFrom(match.Groups[0].Value));
-                var flag = match.Groups[1].Value;
+                var color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#" + match.Groups[1].Value));
+                var flag = match.Groups[2].Value;
                 return new UserMetadata(color, flag);
             }
 
