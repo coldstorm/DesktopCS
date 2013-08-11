@@ -74,5 +74,12 @@ namespace DesktopCS.Controls
                 }
             }
         }
+
+        protected override void OnSelected(RoutedEventArgs e)
+        {
+            base.OnSelected(e);
+
+            IsUnread = false;
+        }
     }
 }

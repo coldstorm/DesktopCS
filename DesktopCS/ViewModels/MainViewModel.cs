@@ -16,7 +16,7 @@ namespace DesktopCS.ViewModels
             _tabManager = new TabManager(Tabs);
 
             _tabManager["#Coldstorm"].AddChat(Brushes.White, "Processor", "Test");
-            _tabManager.MarkUnread("#Coldstorm");
+            _tabManager["#2"].AddChat(Brushes.White, "Processor", "Test");
         }
 
         private readonly ObservableCollection<CSTabItem> _tabs = new ObservableCollection<CSTabItem>();
@@ -28,16 +28,5 @@ namespace DesktopCS.ViewModels
 
         private readonly TabManager _tabManager;
 
-        private int _selectedTabIndex;
-
-        public int SelectedTabIndex
-        {
-            get { return _selectedTabIndex; }
-            set
-            {
-                _selectedTabIndex = value;
-                Tabs[value].IsUnread = false;
-            }
-        }
     }
 }
