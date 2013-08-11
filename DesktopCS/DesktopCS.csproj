@@ -71,6 +71,7 @@
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\IdentParser.cs" />
     <Compile Include="Models\LoginData.cs" />
+    <Compile Include="Models\UserMetadata.cs" />
     <Compile Include="TabUserControl.xaml.cs">
       <DependentUpon>TabUserControl.xaml</DependentUpon>
     </Compile>

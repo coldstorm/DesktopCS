@@ -61,7 +61,7 @@ namespace DesktopCS.Models
         }
 
 
-        #region INotifyPropertyChanged
+        #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -71,7 +71,7 @@ namespace DesktopCS.Models
         }
         #endregion
 
-        #region INotifyPropertyChanged
+        #region IDataErrorInfo Members
         public string this[string columnName]
         {
             get { return GetValidationError(columnName); }
