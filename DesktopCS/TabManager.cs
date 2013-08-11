@@ -10,24 +10,33 @@ namespace DesktopCS
 {
     public class TabManager
     {
-        private ObservableCollection<CSTabItem> _tabs;
+        private readonly ObservableCollection<CSTabItem> _tabs;
 
         public TabManager(ObservableCollection<CSTabItem> tabs)
         {
-            this._tabs = tabs;
+            _tabs = tabs;
         }
 
         public TabUserControl this[string tabName]
         {
             get
             {
-                return (TabUserControl)_tabs.FirstOrDefault(t => (string)t.Header == tabName).Content;
+                var firstOrDefault = _tabs.FirstOrDefault(t => (string) t.Header == tabName);
+                if (firstOrDefault != null)
+                    return (TabUserControl) firstOrDefault.Content;
+
+                var tabContent = new TabUserControl();
+                var tab = new CSTabItem {Header = tabName, Content = tabContent};
+                _tabs.Add(tab);
+                return tabContent;
             }
         }
 
         public void MarkUnread(string tabName)
         {
-            _tabs.FirstOrDefault(t => (string)t.Header == tabName).Unread = true;
+            var firstOrDefault = _tabs.FirstOrDefault(t => (string)t.Header == tabName);
+            if (firstOrDefault != null && firstOrDefault.IsSelected == false)
+                firstOrDefault.Unread = true;
         }
     }
 }
