@@ -11,23 +11,4 @@
     <SolidColorBrush x:Key="ChatBrush" Color="#FFBABBBF" />
     <SolidColorBrush x:Key="TimeBrush" Color="#FF373F4E" />
     <SolidColorBrush x:Key="MessageBrush" Color="#FF808080" />
-
-    <Style x:Key="TextButtonStyle" TargetType="Button">
-        <Setter Property="Foreground" Value="{StaticResource ChatBrush}"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <ContentControl
-                        x:Name="ContentContainer" 
-                        Cursor="Hand"
-                        ContentTemplate="{TemplateBinding ContentTemplate}" 
-                        Content="{TemplateBinding Content}" 
-                        Foreground="{TemplateBinding Foreground}" 
-                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                        Padding="{TemplateBinding Padding}" 
-                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 </ResourceDictionary>
