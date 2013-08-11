@@ -47,7 +47,7 @@
             <Border Margin="20,0" Padding="0" Style="{StaticResource ContentBorder}">
                 <TextBlock Padding="3">
                     <Run x:Name="Time" Foreground="{StaticResource TimeBrush}" Text="[00:00]" />
-                    <Run Foreground="{Binding LoginData.ColorBrush, TargetNullValue='#FFFFFF', FallbackValue='#FFFFFF'}" Text="{Binding LoginData.Username, Converter={StaticResource PlaceholderConverter}, ConverterParameter='Username'}" />
+                    <Run Foreground="{Binding LoginData.ColorBrush, TargetNullValue='#FFFFFFFF', FallbackValue='#FFFFFFF'}" Text="{Binding LoginData.Username, Converter={StaticResource PlaceholderConverter}, ConverterParameter='Username'}" />
                         
                     I love this color!
                 </TextBlock>

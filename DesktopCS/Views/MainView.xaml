@@ -1,10 +1,10 @@
-﻿<Window x:Class="DesktopCS.MainWindow"
+﻿<Window x:Class="DesktopCS.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:DesktopCS.Controls"
         xmlns:behaviors="clr-namespace:DesktopCS.Behaviors" 
         xmlns:userControls="clr-namespace:DesktopCS.UserControls"
-        Title="Coldstorm" Height="350" Width="550" MinHeight="200" MinWidth="300" Icon="coldstorm.ico"
+        Title="Coldstorm" Height="350" Width="550" MinHeight="200" MinWidth="300"
         Style="{StaticResource WindowStyle}">
     
     <Border
@@ -27,11 +27,7 @@
 
             <TextBox Grid.ColumnSpan="3" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" />
 
-            <TabControl Margin="0,0,4,4" Grid.Row="1">
-                <controls:CSTabItem Header="Server" IsClosable="False">
-                    <userControls:TabUserControl />
-                </controls:CSTabItem>
-            </TabControl>
+            <TabControl Margin="0,0,4,4" Grid.Row="1" ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}" />
 
             <Border Padding="0" Grid.Row="2" Margin="0,0,4,0" Style="{StaticResource ContentBorder}">
                 <ScrollViewer MaxHeight="35" VerticalScrollBarVisibility="Auto">
