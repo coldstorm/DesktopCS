@@ -4,12 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:DesktopCS.ViewModels" 
+        xmlns:converters="clr-namespace:DesktopCS.Converters"
         xmlns:behaviors="clr-namespace:DesktopCS.Behaviors"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:LoginViewModel}"
         Title="Login" Height="420" Width="380"
         Style="{StaticResource WindowStyle}">
-    
+
+    <Window.Resources>
+        <converters:PlaceholderConverter x:Key="PlaceholderConverter" />
+    </Window.Resources>
+
     <Border
         Style="{StaticResource ContentBorder}"
         Background="{StaticResource BackgroundBrush}"
@@ -42,7 +47,7 @@
             <Border Margin="20,0" Padding="0" Style="{StaticResource ContentBorder}">
                 <TextBlock Padding="3">
                     <Run x:Name="Time" Foreground="{StaticResource TimeBrush}" Text="[00:00]" />
-                    <Run Foreground="{Binding LoginData.ColorBrush, TargetNullValue='#FFFFFF', FallbackValue='#FFFFFF'}" Text="{Binding LoginData.Username, TargetNullValue='Username'}" />
+                    <Run Foreground="{Binding LoginData.ColorBrush, TargetNullValue='#FFFFFF', FallbackValue='#FFFFFF'}" Text="{Binding LoginData.Username, Converter={StaticResource PlaceholderConverter}, ConverterParameter='Username'}" />
                         
                     I love this color!
                 </TextBlock>

@@ -68,6 +68,7 @@
     <Compile Include="Behaviors\PasswordBoxAssistant.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Converters\FlagToImageConverter.cs" />
+    <Compile Include="Converters\PlaceholderConverter.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\IdentParser.cs" />
     <Compile Include="Models\ChatLine.cs" />
