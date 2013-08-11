@@ -67,6 +67,7 @@
     <Compile Include="Behaviors\ListBoxSelectionBehavior.cs" />
     <Compile Include="Behaviors\PasswordBoxAssistant.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
+    <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="TabUserControl.xaml.cs">
       <DependentUpon>TabUserControl.xaml</DependentUpon>

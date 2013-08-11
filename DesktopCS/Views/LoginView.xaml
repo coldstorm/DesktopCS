@@ -41,10 +41,7 @@
 
             <Border Margin="20,0" Padding="0" Style="{StaticResource ContentBorder}">
                 <TextBlock Padding="3">
-                    <Run Foreground="{StaticResource TimeBrush}">
-                        [00:00]
-                    </Run>
-                    
+                    <Run x:Name="Time" Foreground="{StaticResource TimeBrush}" Text="[00:00]" />
                     <Run Foreground="{Binding LoginData.ColorBrush, TargetNullValue='#FFFFFF', FallbackValue='#FFFFFF'}" Text="{Binding LoginData.Username, TargetNullValue='Username'}" />
                         
                     I love this color!
