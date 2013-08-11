@@ -16,7 +16,7 @@
         <Grid Margin="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width="0.25*" />
+                <ColumnDefinition Width="0.25*" MinWidth="125" MaxWidth="250" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
