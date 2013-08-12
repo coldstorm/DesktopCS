@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
 using System.Windows.Media;
 using DesktopCS.Commands;
 using DesktopCS.Helpers;
@@ -25,8 +21,9 @@ namespace DesktopCS.ViewModels
             {
                 username = Settings.Default.Username;
                 password = Settings.Default.Password.DecryptString().ToInsecureString();
-                var w = Settings.Default.Password.DecryptString();
-                colorBrush = (SolidColorBrush) new BrushConverter().ConvertFrom(Settings.Default.Color);
+
+                if (!String.IsNullOrWhiteSpace(Settings.Default.Color))
+                    colorBrush = (SolidColorBrush) new BrushConverter().ConvertFrom(Settings.Default.Color);
                 
             }
             catch

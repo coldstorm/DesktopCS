@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Controls;
-using System.Windows.Documents;
+﻿using System.Windows.Documents;
 using System.Windows.Media;
 using DesktopCS.Controls;
 using DesktopCS.Helpers;
