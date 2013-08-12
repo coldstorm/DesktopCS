@@ -58,6 +58,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\Lib\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -67,6 +70,7 @@
     <Compile Include="Behaviors\ListBoxSelectionBehavior.cs" />
     <Compile Include="Behaviors\PasswordBoxAssistant.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
+    <Compile Include="Converters\BrushColorConverter.cs" />
     <Compile Include="Converters\FlagToImageConverter.cs" />
     <Compile Include="Converters\PlaceholderConverter.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />

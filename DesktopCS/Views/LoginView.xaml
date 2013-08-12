@@ -6,13 +6,15 @@
         xmlns:viewModels="clr-namespace:DesktopCS.ViewModels" 
         xmlns:converters="clr-namespace:DesktopCS.Converters"
         xmlns:behaviors="clr-namespace:DesktopCS.Behaviors"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:LoginViewModel}"
         Title="Login" Height="420" Width="380"
-        Style="{StaticResource WindowStyle}">
+        Style="{StaticResource WindowStyle}" ResizeMode="CanMinimize">
 
     <Window.Resources>
         <converters:PlaceholderConverter x:Key="PlaceholderConverter" />
+        <converters:BrushColorConverter x:Key="BrushColorConverter"/>
     </Window.Resources>
 
     <Border
@@ -34,10 +36,14 @@
                 <PasswordBox behaviors:PasswordBoxAssistant.BoundPassword="{Binding LoginData.Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             </StackPanel>
 
-
             <StackPanel Margin="30,10">
                 <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Color" />
-                <TextBox Style="{StaticResource InputTextBox}" Text="{Binding LoginData.ColorString, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <xctk:DropDownButton Height="23" ><!--Style="{StaticResource InputTextBox}" Text="{Binding LoginData.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"-->
+                    <xctk:DropDownButton.DropDownContent>
+                        <xctk:ColorCanvas UsingAlphaChannel="False" SelectedColor="{Binding LoginData.ColorBrush, Converter={StaticResource BrushColorConverter}}" />
+                    </xctk:DropDownButton.DropDownContent>
+                    <Label Margin="0" Height="23" Width="250" Background="{Binding LoginData.ColorBrush}"></Label>
+                </xctk:DropDownButton>
             </StackPanel>
 
             <Border Margin="20,15" Padding="3" Style="{StaticResource ContentBorder}" MaxWidth="150">

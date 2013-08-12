@@ -12,8 +12,7 @@ namespace DesktopCS.Models
     {
         private string _username;
         private string _password;
-        private string _colorString;
-        private SolidColorBrush _colorBrush;
+        private SolidColorBrush _colorBrush = Brushes.White;
 
         public string Username
         {
@@ -32,21 +31,6 @@ namespace DesktopCS.Models
             {
                 _password = value;
                 OnPropertyChanged("Password");
-            }
-        }
-
-        public string ColorString
-        {
-            get { return _colorString; }
-            set
-            {
-                _colorString = value;
-                OnPropertyChanged("ColorString");
-
-                if (ValidateColorString() == null)
-                    ColorBrush = (SolidColorBrush)new BrushConverter().ConvertFrom(ColorString);
-                else
-                    ColorBrush = null;
             }
         }
 
@@ -89,8 +73,7 @@ namespace DesktopCS.Models
 
         private readonly string[] _validatedProperties =
             {
-                "Username",
-                "ColorString"
+                "Username"
             };
 
         private string GetValidationError(string columnName)
@@ -99,25 +82,15 @@ namespace DesktopCS.Models
             {
                 case "Username":
                     return ValidateUsername();
-                case "ColorString":
-                    return ValidateColorString();
             }
             return null;
         }
 
         private string ValidateUsername()
         {
-            if (String.IsNullOrWhiteSpace(Username))
-                return "Username cannot be empty.";
-
-            return null;
-        }
-
-        private string ValidateColorString()
-        {
-            var regex = new Regex(@"^#(?:[0-9a-fA-F]{3}){1,2}$");
-            if (ColorString == null || !regex.IsMatch(ColorString)) 
-                return "Invalid color.";
+            var regex = new Regex(@"^[a-z_\-\[\]\\^{}|`][a-z0-9_\-\[\]\\^{}|`]*$", RegexOptions.IgnoreCase);
+            if (Username == null || !regex.IsMatch(Username)) 
+               return "Invalid Username.";
 
             return null;
         }
