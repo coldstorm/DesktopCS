@@ -1,6 +1,43 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Style TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource ChatBrush}"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border      
+                        Cursor="Hand"
+                        BorderThickness="1" 
+                        BorderBrush="{StaticResource BorderBrush}"
+                        Background="{StaticResource SelectedTabBackgroundBrush}"
+                        CornerRadius="3"
+                        Padding="{TemplateBinding Padding}">
+                        
+                        <ContentControl
+                            x:Name="ContentContainer" 
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            ContentTemplate="{TemplateBinding ContentTemplate}" 
+                            Content="{TemplateBinding Content}" 
+                            Foreground="{TemplateBinding Foreground}" 
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                            Padding="{TemplateBinding Padding}" 
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource TimeBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="TextButtonStyle" TargetType="Button">
         <Setter Property="Foreground" Value="{StaticResource ChatBrush}"/>
         <Setter Property="Template">
@@ -15,13 +52,6 @@
                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
                         Padding="{TemplateBinding Padding}" 
                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
-                    
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{StaticResource TimeBrush}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
