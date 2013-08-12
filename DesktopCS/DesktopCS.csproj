@@ -38,7 +38,7 @@
     <StartupObject>DesktopCS.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>coldstorm.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\coldstorm.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NetIRC">
@@ -75,6 +75,7 @@
     <Compile Include="Converters\PlaceholderConverter.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\IdentParser.cs" />
+    <Compile Include="IRC\IRCClient.cs" />
     <Compile Include="Models\ChatLine.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\User.cs" />
@@ -946,7 +947,7 @@
     <Resource Include="Resources\Flags\as1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="coldstorm.ico" />
+    <Resource Include="Resources\coldstorm.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
