@@ -47,6 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,6 +74,7 @@
     <Compile Include="Converters\BrushColorConverter.cs" />
     <Compile Include="Converters\FlagToImageConverter.cs" />
     <Compile Include="Converters\PlaceholderConverter.cs" />
+    <Compile Include="Helpers\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\IdentParser.cs" />
     <Compile Include="IRC\IRCClient.cs" />

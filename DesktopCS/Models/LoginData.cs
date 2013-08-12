@@ -14,6 +14,13 @@ namespace DesktopCS.Models
         private string _password;
         private SolidColorBrush _colorBrush = Brushes.White;
 
+        public LoginData(string username, string password, SolidColorBrush colorBrush)
+        {
+            _username = username;
+            _password = password;
+            _colorBrush = colorBrush;
+        }
+
         public string Username
         {
             get { return _username; }

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using System.Windows.Media;
 using DesktopCS.Commands;
+using DesktopCS.Helpers;
 using DesktopCS.Models;
+using DesktopCS.Properties;
 
 namespace DesktopCS.ViewModels
 {
@@ -14,7 +17,25 @@ namespace DesktopCS.ViewModels
 
         public LoginViewModel()
         {
-            _loginData = new LoginData();
+            string username = null;
+            string password = null;
+            SolidColorBrush colorBrush = Brushes.White;
+
+            try
+            {
+                username = Settings.Default.Username;
+                password = Settings.Default.Password.DecryptString().ToInsecureString();
+                var w = Settings.Default.Password.DecryptString();
+                colorBrush = (SolidColorBrush) new BrushConverter().ConvertFrom(Settings.Default.Color);
+                
+            }
+            catch
+            {
+                //TODO: Log
+            }
+
+            _loginData = new LoginData(username, password, colorBrush);
+
 
             LoginCommand = new LoginCommand(this);
         }
@@ -33,7 +54,10 @@ namespace DesktopCS.ViewModels
 
         public void Login()
         {
-            throw new NotImplementedException();
+            Settings.Default.Username = LoginData.Username;
+            Settings.Default.Password = LoginData.Password.ToSecureString().EncryptString();
+            Settings.Default.Color = LoginData.ColorBrush.ToString();
+            Settings.Default.Save();
         }
     }
 }
