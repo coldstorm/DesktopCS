@@ -19,7 +19,7 @@ namespace DesktopCS.Views
     /// <summary>
     /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class LoginView : Window
+    public partial class LoginView
     {
         private readonly DispatcherTimer _timeTimer = new DispatcherTimer();
 

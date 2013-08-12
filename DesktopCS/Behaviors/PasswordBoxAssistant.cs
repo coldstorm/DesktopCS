@@ -15,7 +15,7 @@ namespace DesktopCS.Behaviors
         public static readonly DependencyProperty BindPassword = DependencyProperty.RegisterAttached(
             "BindPassword", typeof(bool), typeof(PasswordBoxAssistant), new PropertyMetadata(false, OnBindPasswordChanged));
 
-        private static readonly DependencyProperty UpdatingPassword =
+        private static readonly DependencyProperty _updatingPassword =
             DependencyProperty.RegisterAttached("UpdatingPassword", typeof(bool), typeof(PasswordBoxAssistant), new PropertyMetadata(false));
 
         private static void OnBoundPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -24,7 +24,7 @@ namespace DesktopCS.Behaviors
 
             // only handle this event when the property is attached to a PasswordBox
             // and when the BindPassword attached property has been set to true
-            if (d == null || !GetBindPassword(d))
+            if (box == null || !GetBindPassword(d))
             {
                 return;
             }
@@ -70,7 +70,7 @@ namespace DesktopCS.Behaviors
 
         private static void HandlePasswordChanged(object sender, RoutedEventArgs e)
         {
-            var box = sender as PasswordBox;
+            var box = (PasswordBox) sender;
 
             // set a flag to indicate that we're updating the password
             SetUpdatingPassword(box, true);
@@ -101,12 +101,12 @@ namespace DesktopCS.Behaviors
 
         private static bool GetUpdatingPassword(DependencyObject dp)
         {
-            return (bool)dp.GetValue(UpdatingPassword);
+            return (bool)dp.GetValue(_updatingPassword);
         }
 
         private static void SetUpdatingPassword(DependencyObject dp, bool value)
         {
-            dp.SetValue(UpdatingPassword, value);
+            dp.SetValue(_updatingPassword, value);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -46,13 +47,14 @@ namespace DesktopCS.Behaviors
             {
                 var listBox = sender as ListBox;
                 var valid = e.AddedItems[0];
-                foreach (var item in new ArrayList(listBox.SelectedItems))
-                {
-                    if (item != valid)
+                if (listBox != null)
+                    foreach (var item in new ArrayList(listBox.SelectedItems))
                     {
-                        listBox.SelectedItems.Remove(item);
+                        if (item != valid)
+                        {
+                            listBox.SelectedItems.Remove(item);
+                        }
                     }
-                }
             }
         }
     }

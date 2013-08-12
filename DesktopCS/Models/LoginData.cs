@@ -58,7 +58,11 @@ namespace DesktopCS.Models
         #region IDataErrorInfo Members
         public string this[string columnName]
         {
-            get { return GetValidationError(columnName); }
+            get
+            {
+                Error = GetValidationError(columnName);
+                return Error;
+            }
         }
 
         public string Error { get; private set; }
