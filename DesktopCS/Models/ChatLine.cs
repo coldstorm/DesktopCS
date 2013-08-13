@@ -20,10 +20,9 @@ namespace DesktopCS.Models
             Chat = chat;
         }
 
-        public ChatLine(SolidColorBrush userBrush, User user, SolidColorBrush chatBrush, string chat)
+        public ChatLine(User user, SolidColorBrush chatBrush, string chat)
         {
             ChatBrush = chatBrush;
-            UserBrush = userBrush;
             Timestamp = TimeHelper.CreateTimeStamp();
             Chat = chat;
             User = user;
@@ -32,14 +31,12 @@ namespace DesktopCS.Models
         public ChatLine(SolidColorBrush userBrush, User user, SolidColorBrush chatBrush, string chat, string timestamp)
         {
             ChatBrush = chatBrush;
-            UserBrush = userBrush;
             Timestamp = timestamp;
             Chat = chat;
             User = user;
         }
 
         public string Timestamp { get; private set; }
-        public SolidColorBrush UserBrush { get; private set; }
         public User User { get; private set; }
         public SolidColorBrush ChatBrush { get; private set; }
         public string Chat { get; private set; }

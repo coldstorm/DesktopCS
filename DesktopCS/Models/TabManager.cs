@@ -19,9 +19,6 @@ namespace DesktopCS
             _tabs = tabs;
         }
 
-
-
-
         public Channel this[string tabName]
         {
             get
@@ -35,12 +32,29 @@ namespace DesktopCS
                 var tabContent = new TabUserControl(tabContentViewModel);
                 var tab = new CSTabItem { Header = tabName, Content = tabContent };
                 var channel = new Channel(tabContentViewModel, tab);
-                
+
+                tab.CloseTab += tab_CloseTab;
                 _tabs.Add(tab);
                 _channels.Add(tabName, channel);
 
                 return channel;
             }
         }
+
+        void tab_CloseTab(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+
+            var tab = (CSTabItem) sender;
+            _tabs.Remove(tab);
+
+            if (_channels.ContainsKey((string) tab.Header))
+            {
+                //TODO: Disconnect from channel
+            }
+
+        }
+
+        
     }
 }

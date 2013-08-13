@@ -2,19 +2,19 @@
 {
     public class User
     {
-        public User(string rank, string username, string realName, string host, string metadata)
+        public User(UserRank rank, string nick, string ident, string host, UserMetadata metadata)
         {
             Host = host;
-            RealName = realName;
+            Nickname = nick;
             Metadata = metadata;
-            Username = username;
+            Ident = ident;
             Rank = rank;
         }
 
-        public string Rank { get; private set; }
-        public string Username { get; private set; }
-        public string RealName { get; private set; }
+        public UserRank Rank { get; private set; }
+        public string Nickname { get; private set; }
+        public string Ident { get; private set; }
         public string Host { get; private set; }
-        public string Metadata { get; private set; }
+        public UserMetadata Metadata { get; private set; }
     }
 }

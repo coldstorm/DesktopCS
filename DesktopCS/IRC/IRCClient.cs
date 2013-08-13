@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
 using DesktopCS.Helpers;
+using DesktopCS.IRC;
 using DesktopCS.Models;
 using NetIRC;
 using Channel = NetIRC.Channel;
@@ -30,20 +31,18 @@ namespace DesktopCS
 
         void _irc_OnChannelJoin(Client client, Channel channel)
         {
-
             _dispatcher.BeginInvoke(new Action(() =>
                 {
-                    var line = new SystemMessageLine("You joined the room.");
-                    _tabManager[channel.FullName()].AddChat(line);
-                })
-                );
 
+                    new IRCChannel(_tabManager[channel.FullName()], channel);
+                    
+                }));
         }
 
         void irc_OnConnect(Client client)
         {
             
-            _irc.JoinChannel("test");
+            _irc.JoinChannel("DesktopCS");
             
         }
 

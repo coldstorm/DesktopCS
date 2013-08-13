@@ -9,7 +9,7 @@ namespace DesktopCS.Helpers
     {
         public static UserMetadata Parse(string ident)
         {
-            var regexp = new Regex(@"^([0-9a-f]{3}|[0-9a-f]{6})([a-z]{2})$", RegexOptions.IgnoreCase);
+            var regexp = new Regex(@"^([0-9a-f]{3}|[0-9a-f]{6})([0-9a-z]{2})$", RegexOptions.IgnoreCase);
             Match match = regexp.Match(ident);
 
             if (match.Success)

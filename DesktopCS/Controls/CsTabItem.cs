@@ -51,16 +51,16 @@ namespace DesktopCS.Controls
             var args = new RoutedEventArgs(CloseTabEvent, this);
             RaiseEvent(args);
 
-            if (!args.Handled)
-            {
-                var tabItem = args.Source as TabItem;
-                if (tabItem != null)
-                {
-                    var tabControl = tabItem.Parent as TabControl;
-                    if (tabControl != null)
-                        tabControl.Items.Remove(tabItem);
-                }
-            }
+            //if (!args.Handled)
+            //{
+            //    var tabItem = args.Source as TabItem;
+            //    if (tabItem != null)
+            //    {
+            //        var tabControl = tabItem.Parent as TabControl;
+            //        if (tabControl != null)
+            //            tabControl.Items.Remove(tabItem);
+            //    }
+            //}
         }
 
         protected override void OnSelected(RoutedEventArgs e)

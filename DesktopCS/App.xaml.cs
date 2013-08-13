@@ -19,6 +19,5 @@ namespace DesktopCS
             _settingsManager.Save();
         }
 
-
     }
 }

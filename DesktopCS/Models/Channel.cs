@@ -23,7 +23,7 @@ namespace DesktopCS.Models
             _parent = parent;
         }
 
-        public void AddChat(ChatLine line)
+        public void AddChat(ChatLine line, bool dispatch = false)
         {
             MarkUnread();
 
@@ -38,7 +38,7 @@ namespace DesktopCS.Models
 
             if (line.User != null)
             {
-                var usernameRun = new Run(line.User.Username) { Foreground = line.UserBrush };
+                var usernameRun = new Run(line.User.Nickname) { Foreground = line.User.Metadata.Color };
                 p.Inlines.Add(usernameRun);
                 p.Inlines.Add(" ");
             }
