@@ -5,6 +5,7 @@ using System.Windows;
 using DesktopCS.Controls;
 using DesktopCS.Models;
 using DesktopCS.UserControls;
+using DesktopCS.ViewModels;
 
 namespace DesktopCS
 {
@@ -29,11 +30,11 @@ namespace DesktopCS
                 {
                     return _channels[tabName];
                 }
-
-                var tab = new CSTabItem { Header = tabName };
-                var tabContent = new TabUserControl(tab);
-                tab.Content = tabContent;
-                var channel = new Channel(tabContent, tab);
+                
+                var tabContentViewModel = new TabUserControlViewModel();
+                var tabContent = new TabUserControl(tabContentViewModel);
+                var tab = new CSTabItem { Header = tabName, Content = tabContent };
+                var channel = new Channel(tabContentViewModel, tab);
                 
                 _tabs.Add(tab);
                 _channels.Add(tabName, channel);

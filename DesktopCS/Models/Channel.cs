@@ -8,15 +8,16 @@ using System.Windows.Media;
 using DesktopCS.Controls;
 using DesktopCS.Helpers;
 using DesktopCS.UserControls;
+using DesktopCS.ViewModels;
 
 namespace DesktopCS.Models
 {
     public class Channel
     {
-        private readonly TabUserControl _tab;
+        private readonly TabUserControlViewModel _tab;
         private readonly CSTabItem _parent;
 
-        public Channel(TabUserControl tab, CSTabItem parent)
+        public Channel(TabUserControlViewModel tab, CSTabItem parent)
         {
             _tab = tab;
             _parent = parent;
@@ -35,7 +36,7 @@ namespace DesktopCS.Models
                 p.Inlines.Add(" ");
             }
 
-            if (!String.IsNullOrEmpty(line.User.Username))
+            if (line.User != null)
             {
                 var usernameRun = new Run(line.User.Username) { Foreground = line.UserBrush };
                 p.Inlines.Add(usernameRun);
@@ -45,7 +46,7 @@ namespace DesktopCS.Models
             var chatRun = new Run(line.Chat) { Foreground = line.ChatBrush };
             p.Inlines.Add(chatRun);
 
-            _tab.FlowDoc.Blocks.Add(p);
+            _tab.FlowDocument.Blocks.Add(p);
         }
 
         public void MarkUnread()

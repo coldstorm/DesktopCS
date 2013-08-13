@@ -1,9 +1,8 @@
-﻿using System;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Media;
-using DesktopCS.Controls;
-using DesktopCS.Helpers;
-using DesktopCS.Models;
+using DesktopCS.ViewModels;
 
 namespace DesktopCS.UserControls
 {
@@ -12,14 +11,30 @@ namespace DesktopCS.UserControls
     /// </summary>
     public partial class TabUserControl
     {
-        private readonly CSTabItem _parent;
-
-        public TabUserControl(CSTabItem parent)
+        public TabUserControl(TabUserControlViewModel vm)
         {
-            _parent = parent;
             InitializeComponent();
+            DataContext = vm;
+            SetBinding(DocumentProperty, new Binding("FlowDocument"));
         }
 
+        public FlowDocument Document
+        {
+            get { return (FlowDocument)GetValue(DocumentProperty); }
+            set { SetValue(DocumentProperty, value); }
+        }
+
+        public static readonly DependencyProperty DocumentProperty =
+            DependencyProperty.Register("Document", typeof(FlowDocument), typeof(TabUserControl), new PropertyMetadata(OnDocumentChanged));
+
+        private static void OnDocumentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = (TabUserControl)d;
+            if (e.NewValue == null)
+                control.RTB.Document = new FlowDocument(); //Document is not amused by null :)
+
+            control.RTB.Document =control.Document;
+        }
 
     }
 }
