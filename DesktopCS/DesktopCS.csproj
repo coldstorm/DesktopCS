@@ -74,9 +74,11 @@
     <Compile Include="Converters\BrushColorConverter.cs" />
     <Compile Include="Converters\FlagToImageConverter.cs" />
     <Compile Include="Converters\PlaceholderConverter.cs" />
+    <Compile Include="Helpers\BrushHelper.cs" />
+    <Compile Include="Helpers\CountryCodeHelper.cs" />
     <Compile Include="Helpers\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
-    <Compile Include="Helpers\IdentParser.cs" />
+    <Compile Include="Helpers\IdentHelper.cs" />
     <Compile Include="IRC\IRCClient.cs" />
     <Compile Include="Models\ChatLine.cs" />
     <Compile Include="Models\LoginData.cs" />

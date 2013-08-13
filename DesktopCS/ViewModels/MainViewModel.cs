@@ -1,17 +1,20 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Media;
 using DesktopCS.Controls;
+using DesktopCS.Models;
 
 namespace DesktopCS.ViewModels
 {
     class MainViewModel
     {
-        public MainViewModel(IRCClient irc)
+        private readonly TabManager _tabManager;
+        private IRCClient _irc;
+
+        public MainViewModel(SettingsManager settings, IRCClient irc)
         {
             _tabManager = new TabManager(Tabs);
 
             _tabManager["#Coldstorm"].AddChat(Brushes.White, "Processor", "Test");
-            _tabManager["#2"].AddChat(Brushes.White, "Processor", "Test");
         }
 
         private readonly ObservableCollection<CSTabItem> _tabs = new ObservableCollection<CSTabItem>();
@@ -21,7 +24,10 @@ namespace DesktopCS.ViewModels
             get { return _tabs; }
         }
 
-        private readonly TabManager _tabManager;
-
+        public MainViewModel(SettingsManager settingsManager, LoginData loginData)
+        {
+            _tabManager = new TabManager(Tabs);
+            _irc = new IRCClient(_tabManager, loginData);
+        }
     }
 }

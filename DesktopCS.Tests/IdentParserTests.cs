@@ -18,7 +18,7 @@ namespace DesktopCS.Tests
             // act
             try
             {
-                IdentParser.Parse(testIdent);
+                IdentHelper.Parse(testIdent);
             }
             catch (ArgumentException ex)
             {
@@ -40,7 +40,7 @@ namespace DesktopCS.Tests
             // act
             try
             {
-                IdentParser.Parse(testIdent);
+                IdentHelper.Parse(testIdent);
             }
             catch (ArgumentException ex)
             {
@@ -61,7 +61,7 @@ namespace DesktopCS.Tests
             // act
             try
             {
-                IdentParser.Parse(testIdent);
+                IdentHelper.Parse(testIdent);
             }
             catch (ArgumentException ex)
             {
@@ -82,7 +82,7 @@ namespace DesktopCS.Tests
             // act
             try
             {
-                IdentParser.Parse(testIdent);
+                IdentHelper.Parse(testIdent);
             }
             catch (ArgumentException ex)
             {
@@ -103,7 +103,7 @@ namespace DesktopCS.Tests
             // act
             try
             {
-                IdentParser.Parse(testIdent);
+                IdentHelper.Parse(testIdent);
             }
             catch (ArgumentException ex)
             {
@@ -125,7 +125,7 @@ namespace DesktopCS.Tests
             // act
             try
             {
-                IdentParser.Parse(testIdent);
+                IdentHelper.Parse(testIdent);
             }
             catch (ArgumentException ex)
             {
@@ -143,7 +143,7 @@ namespace DesktopCS.Tests
             const string testIdent = "FFFQQ";
 
             // act
-            var userMetadata = IdentParser.Parse(testIdent);
+            var userMetadata = IdentHelper.Parse(testIdent);
 
             // assert
             Assert.AreEqual(userMetadata.CountryCode, "QQ");
@@ -157,7 +157,7 @@ namespace DesktopCS.Tests
             const string testIdent = "FFFFFFQQ";
 
             // act
-            var userMetadata = IdentParser.Parse(testIdent);
+            var userMetadata = IdentHelper.Parse(testIdent);
 
             // assert
             Assert.AreEqual(userMetadata.CountryCode, "QQ");

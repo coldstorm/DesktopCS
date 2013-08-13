@@ -40,7 +40,6 @@ namespace DesktopCS
 
                 if (!String.IsNullOrWhiteSpace(_settings.Color))
                     colorBrush = (SolidColorBrush) new BrushConverter().ConvertFrom(_settings.Color);
-
             }
             catch (Exception ex)
             {

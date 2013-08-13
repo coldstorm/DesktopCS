@@ -1,4 +1,5 @@
-﻿using DesktopCS.ViewModels;
+﻿using DesktopCS.Models;
+using DesktopCS.ViewModels;
 
 namespace DesktopCS.Views
 {
@@ -7,10 +8,10 @@ namespace DesktopCS.Views
     /// </summary>
     public partial class MainView
     {
-        public MainView(IRCClient irc)
+        public MainView(SettingsManager settings, LoginData loginData)
         {
             InitializeComponent();
-            DataContext = new MainViewModel(irc);
+            DataContext = new MainViewModel(settings, loginData);
         }
     }
 }

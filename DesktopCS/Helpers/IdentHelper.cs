@@ -5,7 +5,7 @@ using DesktopCS.Models;
 
 namespace DesktopCS.Helpers
 {
-    public static class IdentParser
+    public static class IdentHelper
     {
         public static UserMetadata Parse(string ident)
         {
@@ -14,12 +14,22 @@ namespace DesktopCS.Helpers
 
             if (match.Success)
             {
-                var color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#" + match.Groups[1].Value));
+                var color = BrushHelper.FromHexWithoutHash(match.Groups[1].Value);
                 var flag = match.Groups[2].Value;
                 return new UserMetadata(color, flag);
             }
 
             throw new ArgumentException("Identity could not be parsed.", "ident");
+        }
+
+        public static string Generate(SolidColorBrush color, string cc)
+        {
+            return Generate(BrushHelper.ToHexWithoutHash(color), cc);
+        }
+
+        public static string Generate(string hex, string cc)
+        {
+            return string.Format("{0}{1}", hex, cc);
         }
     }
 }

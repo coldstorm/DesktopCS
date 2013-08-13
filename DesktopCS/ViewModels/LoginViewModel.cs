@@ -37,7 +37,7 @@ namespace DesktopCS.ViewModels
         {
             _settings.SetLoginData(LoginData);
 
-            var main = new MainView(new IRCClient(LoginData));
+            var main = new MainView(_settings, LoginData);
             main.Show();
         }
     }
