@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Threading;
 using DesktopCS.Helpers;
+using DesktopCS.Properties;
 using DesktopCS.ViewModels;
 
 namespace DesktopCS.Views
@@ -12,10 +13,10 @@ namespace DesktopCS.Views
     {
         private readonly DispatcherTimer _timeTimer = new DispatcherTimer();
 
-        public LoginView()
+        public LoginView(SettingsManager settings)
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            DataContext = new LoginViewModel(settings);
             
             _timeTimer.Tick += timeTimer_Tick;
             _timeTimer.Start();

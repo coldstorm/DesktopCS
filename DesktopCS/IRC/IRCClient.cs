@@ -1,12 +1,23 @@
-﻿using NetIRC;
+﻿using DesktopCS.Models;
+using NetIRC;
 
 namespace DesktopCS
 {
-    class IRCClient
+    public class IRCClient
     {
-        public IRCClient()
+        private readonly Client _irc;
+
+        public IRCClient(LoginData loginData)
         {
-            var irc = new Client();
+            _irc = new Client();
+            _irc.OnConnect += irc_OnConnect;
+            _irc.Connect("frogbox.es", 6667, false, new NetIRC.User(loginData.Username));
+        }
+
+        void irc_OnConnect(Client client)
+        {
+            _irc.JoinChannel("test");
+            
         }
 
     }

@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace DesktopCS.Models
 {
-    class LoginData : INotifyPropertyChanged, IDataErrorInfo
+    public class LoginData : INotifyPropertyChanged, IDataErrorInfo
     {
         private string _username;
         private string _password;

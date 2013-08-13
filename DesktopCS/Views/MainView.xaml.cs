@@ -5,12 +5,12 @@ namespace DesktopCS.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class MainView
     {
-        public MainWindow()
+        public MainView(IRCClient irc)
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = new MainViewModel(irc);
         }
     }
 }

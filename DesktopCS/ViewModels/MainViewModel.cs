@@ -6,7 +6,7 @@ namespace DesktopCS.ViewModels
 {
     class MainViewModel
     {
-        public MainViewModel()
+        public MainViewModel(IRCClient irc)
         {
             _tabManager = new TabManager(Tabs);
 

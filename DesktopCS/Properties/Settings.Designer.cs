@@ -58,5 +58,17 @@ namespace DesktopCS.Properties {
                 this["Color"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HasUpgrade {
+            get {
+                return ((bool)(this["HasUpgrade"]));
+            }
+            set {
+                this["HasUpgrade"] = value;
+            }
+        }
     }
 }
