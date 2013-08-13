@@ -1,6 +1,6 @@
 ﻿namespace DesktopCS.Models
 {
-    class User
+    public class User
     {
         public User(string rank, string username, string realName, string host, string metadata)
         {

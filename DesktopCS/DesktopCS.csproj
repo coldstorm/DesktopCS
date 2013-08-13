@@ -80,13 +80,16 @@
     <Compile Include="Helpers\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\IdentHelper.cs" />
+    <Compile Include="IRC\IRCChannel.cs" />
     <Compile Include="IRC\IRCClient.cs" />
+    <Compile Include="Models\Channel.cs" />
     <Compile Include="Models\ChatLine.cs" />
     <Compile Include="Models\LoginData.cs" />
+    <Compile Include="Models\SystemMessageLine.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserMetadata.cs" />
     <Compile Include="SettingsManager.cs" />
-    <Compile Include="TabManager.cs" />
+    <Compile Include="Models\TabManager.cs" />
     <Compile Include="UserControls\TabUserControl.xaml.cs">
       <DependentUpon>TabUserControl.xaml</DependentUpon>
     </Compile>

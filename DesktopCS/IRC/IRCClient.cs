@@ -5,6 +5,7 @@ using System.Windows.Threading;
 using DesktopCS.Helpers;
 using DesktopCS.Models;
 using NetIRC;
+using Channel = NetIRC.Channel;
 
 namespace DesktopCS
 {
@@ -29,10 +30,11 @@ namespace DesktopCS
 
         void _irc_OnChannelJoin(Client client, Channel channel)
         {
-            
+
             _dispatcher.BeginInvoke(new Action(() =>
                 {
-                    _tabManager[channel.FullName()].AddSystemMessage("You joined the room.");
+                    var line = new SystemMessageLine("You joined the room.");
+                    _tabManager[channel.FullName()].AddChat(line);
                 })
                 );
 
