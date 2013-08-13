@@ -13,8 +13,6 @@ namespace DesktopCS.ViewModels
         public MainViewModel(SettingsManager settings, IRCClient irc)
         {
             _tabManager = new TabManager(Tabs);
-
-            _tabManager["#Coldstorm"].AddChat(Brushes.White, "Processor", "Test");
         }
 
         private readonly ObservableCollection<CSTabItem> _tabs = new ObservableCollection<CSTabItem>();

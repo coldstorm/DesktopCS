@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using DesktopCS.Controls;
 using DesktopCS.UserControls;
 
@@ -18,6 +19,7 @@ namespace DesktopCS
         {
             get
             {
+
                 var firstOrDefault = _tabs.FirstOrDefault(t => (string) t.Header == tabName);
                 if (firstOrDefault != null)
                     return (TabUserControl) firstOrDefault.Content;

@@ -75,6 +75,7 @@
     <Compile Include="Converters\FlagToImageConverter.cs" />
     <Compile Include="Converters\PlaceholderConverter.cs" />
     <Compile Include="Helpers\BrushHelper.cs" />
+    <Compile Include="Helpers\NetIRCExtentions.cs" />
     <Compile Include="Helpers\CountryCodeHelper.cs" />
     <Compile Include="Helpers\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
