@@ -1,24 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Threading;
 using DesktopCS.Helpers;
 using DesktopCS.Models;
-using DesktopCS.UserControls;
-using Channel = NetIRC.Channel;
-using User = NetIRC.User;
+using NetIRC;
 
 namespace DesktopCS.IRC
 {
     class IRCChannel
     {
         private readonly Dispatcher _dispatcher;
-        private readonly Models.Channel _tab;
+        private readonly Tab _tab;
         private readonly Channel _channel;
 
-        public IRCChannel(Models.Channel tab, Channel channel)
+        public IRCChannel(Tab tab, Channel channel)
         {
             _dispatcher = Application.Current.Dispatcher;
             _tab = tab;
@@ -34,8 +29,7 @@ namespace DesktopCS.IRC
         {
             _dispatcher.BeginInvoke(new Action(() =>
                 {
-                    var u = new Models.User(UserRank.None, user.NickName, user.UserName, user.HostName,
-                                            IdentHelper.Parse(user.UserName));
+                    var u = new UserListItem(user.NickName, IdentHelper.Parse(user.UserName));
                     var line = new MessageLine(u, message);
                     _tab.AddChat(line);
                 }));

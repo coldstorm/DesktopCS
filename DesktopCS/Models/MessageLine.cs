@@ -9,7 +9,7 @@ namespace DesktopCS.Models
 {
     class MessageLine : ChatLine
     {
-        public MessageLine(User user, string message) : base(user, (SolidColorBrush) Application.Current.FindResource("ChatBrush"), message)
+        public MessageLine(UserListItem user, string message) : base(user, (SolidColorBrush) Application.Current.FindResource("ChatBrush"), message)
         {
             
         }

@@ -3,23 +3,22 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using DesktopCS.Controls;
-using DesktopCS.Models;
 using DesktopCS.UserControls;
 using DesktopCS.ViewModels;
 
-namespace DesktopCS
+namespace DesktopCS.Models
 {
     public class TabManager
     {
         private readonly ObservableCollection<CSTabItem> _tabs;
-        private readonly Dictionary<string, Channel> _channels = new Dictionary<string, Channel>(); 
+        private readonly Dictionary<string, Tab> _channels = new Dictionary<string, Tab>(); 
 
         public TabManager(ObservableCollection<CSTabItem> tabs)
         {
             _tabs = tabs;
         }
 
-        public Channel this[string tabName]
+        public Tab this[string tabName]
         {
             get
             {
@@ -31,7 +30,7 @@ namespace DesktopCS
                 var tabContentViewModel = new TabUserControlViewModel();
                 var tabContent = new TabUserControl(tabContentViewModel);
                 var tab = new CSTabItem { Header = tabName, Content = tabContent };
-                var channel = new Channel(tabContentViewModel, tab);
+                var channel = new Tab(tabContentViewModel, tab);
 
                 tab.CloseTab += tab_CloseTab;
                 _tabs.Add(tab);

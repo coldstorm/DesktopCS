@@ -20,7 +20,7 @@ namespace DesktopCS.Models
             Chat = chat;
         }
 
-        public ChatLine(User user, SolidColorBrush chatBrush, string chat)
+        public ChatLine(UserListItem user, SolidColorBrush chatBrush, string chat)
         {
             ChatBrush = chatBrush;
             Timestamp = TimeHelper.CreateTimeStamp();
@@ -28,7 +28,7 @@ namespace DesktopCS.Models
             User = user;
         }
 
-        public ChatLine(SolidColorBrush userBrush, User user, SolidColorBrush chatBrush, string chat, string timestamp)
+        public ChatLine(SolidColorBrush userBrush, UserListItem user, SolidColorBrush chatBrush, string chat, string timestamp)
         {
             ChatBrush = chatBrush;
             Timestamp = timestamp;
@@ -37,7 +37,7 @@ namespace DesktopCS.Models
         }
 
         public string Timestamp { get; private set; }
-        public User User { get; private set; }
+        public UserListItem User { get; private set; }
         public SolidColorBrush ChatBrush { get; private set; }
         public string Chat { get; private set; }
     }

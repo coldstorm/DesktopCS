@@ -12,12 +12,13 @@ using DesktopCS.ViewModels;
 
 namespace DesktopCS.Models
 {
-    public class Channel
+    public class Tab
     {
         private readonly TabUserControlViewModel _tab;
         private readonly CSTabItem _parent;
+        private static readonly Brush _timeBrush = (Brush) Application.Current.FindResource("TimeBrush");
 
-        public Channel(TabUserControlViewModel tab, CSTabItem parent)
+        public Tab(TabUserControlViewModel tab, CSTabItem parent)
         {
             _tab = tab;
             _parent = parent;
@@ -31,7 +32,7 @@ namespace DesktopCS.Models
 
             if (!String.IsNullOrEmpty(line.Timestamp))
             {
-                var timeRun = new Run(line.Timestamp) { Foreground = (Brush) Application.Current.FindResource("TimeBrush") };
+                var timeRun = new Run(line.Timestamp) { Foreground = _timeBrush };
                 p.Inlines.Add(timeRun);
                 p.Inlines.Add(" ");
             }

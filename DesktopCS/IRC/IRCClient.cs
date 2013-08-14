@@ -25,7 +25,7 @@ namespace DesktopCS
             _irc.OnChannelJoin += _irc_OnChannelJoin;
 
             var cc = CountryCodeHelper.GetCC();
-            var user = new NetIRC.User(loginData.Username, IdentHelper.Generate(loginData.ColorBrush, cc));
+            var user = new User(loginData.Username, IdentHelper.Generate(loginData.ColorBrush, cc));
             _irc.Connect("frogbox.es", 6667, false, user);
         }
 
@@ -41,10 +41,7 @@ namespace DesktopCS
 
         void irc_OnConnect(Client client)
         {
-            
-            _irc.JoinChannel("DesktopCS");
-            
+            _irc.JoinChannel("test");
         }
-
     }
 }

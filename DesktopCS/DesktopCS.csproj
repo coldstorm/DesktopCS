@@ -48,6 +48,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,6 +69,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviors\AutoScrollBehavior.cs" />
     <Compile Include="Behaviors\ListBoxSelectionBehavior.cs" />
     <Compile Include="Behaviors\PasswordBoxAssistant.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
@@ -82,14 +84,13 @@
     <Compile Include="Helpers\IdentHelper.cs" />
     <Compile Include="IRC\IRCChannel.cs" />
     <Compile Include="IRC\IRCClient.cs" />
-    <Compile Include="Models\Channel.cs" />
+    <Compile Include="Models\Tab.cs" />
     <Compile Include="Models\ChatLine.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\MessageLine.cs" />
     <Compile Include="Models\SystemMessageLine.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserListItem.cs" />
     <Compile Include="Models\UserMetadata.cs" />
-    <Compile Include="Models\UserRank.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="Models\TabManager.cs" />
     <Compile Include="UserControls\TabUserControl.xaml.cs">
