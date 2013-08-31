@@ -7,7 +7,6 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using DesktopCS.Controls;
 using DesktopCS.Helpers;
-using DesktopCS.UserControls;
 using DesktopCS.ViewModels;
 
 namespace DesktopCS.Models

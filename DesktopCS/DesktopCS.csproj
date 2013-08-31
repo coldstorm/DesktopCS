@@ -93,8 +93,8 @@
     <Compile Include="Models\UserMetadata.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="Models\TabManager.cs" />
-    <Compile Include="UserControls\TabUserControl.xaml.cs">
-      <DependentUpon>TabUserControl.xaml</DependentUpon>
+    <Compile Include="Views\TabView.xaml.cs">
+      <DependentUpon>TabView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserlistItem.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -169,7 +169,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\TabUserControl.xaml">
+    <Page Include="Views\TabView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

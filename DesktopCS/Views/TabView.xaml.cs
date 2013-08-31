@@ -4,14 +4,14 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using DesktopCS.ViewModels;
 
-namespace DesktopCS.UserControls
+namespace DesktopCS.Views
 {
     /// <summary>
     /// Interaction logic for TabUserControl.xaml
     /// </summary>
-    public partial class TabUserControl
+    public partial class TabView
     {
-        public TabUserControl(TabUserControlViewModel vm)
+        public TabView(TabUserControlViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
@@ -25,15 +25,15 @@ namespace DesktopCS.UserControls
         }
 
         public static readonly DependencyProperty DocumentProperty =
-            DependencyProperty.Register("Document", typeof(FlowDocument), typeof(TabUserControl), new PropertyMetadata(OnDocumentChanged));
+            DependencyProperty.Register("Document", typeof(FlowDocument), typeof(TabView), new PropertyMetadata(OnDocumentChanged));
 
         private static void OnDocumentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = (TabUserControl)d;
+            var control = (TabView)d;
             if (e.NewValue == null)
-                control.RTB.Document = new FlowDocument(); //Document is not amused by null :)
+                control.ChatRichTextBox.Document = new FlowDocument(); //Document is not amused by null :)
 
-            control.RTB.Document =control.Document;
+            control.ChatRichTextBox.Document = control.Document;
         }
 
     }

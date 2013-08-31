@@ -3,8 +3,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using DesktopCS.Controls;
-using DesktopCS.UserControls;
 using DesktopCS.ViewModels;
+using DesktopCS.Views;
 
 namespace DesktopCS.Models
 {
@@ -28,7 +28,7 @@ namespace DesktopCS.Models
                 }
                 
                 var tabContentViewModel = new TabUserControlViewModel();
-                var tabContent = new TabUserControl(tabContentViewModel);
+                var tabContent = new TabView(tabContentViewModel);
                 var tab = new CSTabItem { Header = tabName, Content = tabContent };
                 var channel = new Tab(tabContentViewModel, tab);
 

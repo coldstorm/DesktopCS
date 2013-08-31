@@ -249,11 +249,6 @@
             A dictionary that represents the characters associated with specific ranks in WHO and NAMES messages.
             </summary>
         </member>
-        <member name="F:NetIRC.User.RankModes">
-            <summary>
-            A dictionary representing the characters that are used to change a user's rank through channel modes.
-            </summary>
-        </member>
         <member name="P:NetIRC.User.NickName">
             <summary>
             The nickname that the user will be associated with.
