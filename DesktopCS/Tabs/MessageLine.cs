@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
+using DesktopCS.Models;
 
-namespace DesktopCS.Models
+namespace DesktopCS.Tabs
 {
     class MessageLine : ChatLine
     {

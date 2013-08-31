@@ -9,9 +9,9 @@ namespace DesktopCS.Views
     /// <summary>
     /// Interaction logic for TabUserControl.xaml
     /// </summary>
-    public partial class TabView
+    public partial class ChatTabContentView
     {
-        public TabView(TabUserControlViewModel vm)
+        public ChatTabContentView(ChatTabContentViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
@@ -25,11 +25,11 @@ namespace DesktopCS.Views
         }
 
         public static readonly DependencyProperty DocumentProperty =
-            DependencyProperty.Register("Document", typeof(FlowDocument), typeof(TabView), new PropertyMetadata(OnDocumentChanged));
+            DependencyProperty.Register("Document", typeof(FlowDocument), typeof(ChatTabContentView), new PropertyMetadata(OnDocumentChanged));
 
         private static void OnDocumentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = (TabView)d;
+            var control = (ChatTabContentView)d;
             if (e.NewValue == null)
                 control.ChatRichTextBox.Document = new FlowDocument(); //Document is not amused by null :)
 

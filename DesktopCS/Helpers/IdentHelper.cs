@@ -19,7 +19,7 @@ namespace DesktopCS.Helpers
                 return new UserMetadata(color, flag);
             }
 
-            throw new ArgumentException("Identity could not be parsed.", "ident");
+            return null;
         }
 
         public static string Generate(SolidColorBrush color, string cc)

@@ -8,9 +8,9 @@ using DesktopCS.Behaviors;
 
 namespace DesktopCS.ViewModels
 {
-    public class TabUserControlViewModel
+    public class ChatTabContentViewModel
     {
-        public TabUserControlViewModel()
+        public ChatTabContentViewModel()
         {
             FlowDocumentPagePadding.SetPagePadding(_flowDocument, new Thickness(0));
         }

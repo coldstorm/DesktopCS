@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Threading;
 using DesktopCS.Helpers;
 using DesktopCS.Models;
+using DesktopCS.Tabs;
 using NetIRC;
 
 namespace DesktopCS.IRC
@@ -20,7 +21,7 @@ namespace DesktopCS.IRC
             _channel = channel;
 
              var line = new SystemMessageLine("You joined the room.");
-            _tab.AddChat(line);
+            _tab.AddChat(line, false);
 
             _channel.OnMessage += _channel_OnMessage;
         }

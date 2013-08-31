@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Media;
 using DesktopCS.Controls;
 using DesktopCS.Models;
+using DesktopCS.Tabs;
 
 namespace DesktopCS.ViewModels
 {
@@ -12,10 +12,11 @@ namespace DesktopCS.ViewModels
 
         public MainViewModel(SettingsManager settings, IRCClient irc)
         {
-            _tabManager = new TabManager(Tabs);
+            _tabManager = new TabManager();
+            _tabs = _tabManager.Tabs;
         }
 
-        private readonly ObservableCollection<CSTabItem> _tabs = new ObservableCollection<CSTabItem>();
+        private readonly ObservableCollection<CSTabItem> _tabs;
 
         public ObservableCollection<CSTabItem> Tabs
         {
@@ -24,7 +25,8 @@ namespace DesktopCS.ViewModels
 
         public MainViewModel(SettingsManager settingsManager, LoginData loginData)
         {
-            _tabManager = new TabManager(Tabs);
+            _tabManager = new TabManager();
+            _tabs = _tabManager.Tabs;
             _irc = new IRCClient(_tabManager, loginData);
         }
     }

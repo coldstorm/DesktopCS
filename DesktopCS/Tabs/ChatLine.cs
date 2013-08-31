@@ -1,7 +1,8 @@
 ﻿using System.Windows.Media;
 using DesktopCS.Helpers;
+using DesktopCS.Models;
 
-namespace DesktopCS.Models
+namespace DesktopCS.Tabs
 {
     public class ChatLine
     {
@@ -28,7 +29,7 @@ namespace DesktopCS.Models
             User = user;
         }
 
-        public ChatLine(SolidColorBrush userBrush, UserListItem user, SolidColorBrush chatBrush, string chat, string timestamp)
+        public ChatLine(UserListItem user, SolidColorBrush chatBrush, string chat, string timestamp)
         {
             ChatBrush = chatBrush;
             Timestamp = timestamp;
