@@ -19,6 +19,16 @@
             A list of masks that are allowed in the channel, even if the channel is invite-only.
             </summary>
         </member>
+        <member name="P:NetIRC.Channel.Name">
+            <summary>
+            Name of the channel without its prefix
+            </summary>
+        </member>
+        <member name="P:NetIRC.Channel.FullName">
+            <summary>
+            Full name of the channel with it's prefix (usually '#')
+            </summary>
+        </member>
         <member name="P:NetIRC.Channel.IsAnonymous">
             <summary>
             The channel is anonymous and all messages sent by users have an anonymous mask.
@@ -118,20 +128,120 @@
             </summary>
             <param name="type">The type of the Message object that messages will be checked against.</param>
         </member>
-        <member name="M:NetIRC.Client.Send(NetIRC.Messages.SendMessage)">
+        <member name="M:NetIRC.Client.Send(NetIRC.Messages.ISendMessage)">
             <summary>
             Send a message to the connected server.
             </summary>
             <param name="message">The NetIRC.SendMessage instance to be sent.</param>
         </member>
-        <member name="F:NetIRC.User.Channels">
+        <member name="P:NetIRC.Client.HostName">
             <summary>
-            The list of channels that the user is in.
+            The hostname of the server.
             </summary>
         </member>
-        <member name="F:NetIRC.User.Rank">
+        <member name="P:NetIRC.Client.Port">
             <summary>
-            A dictionary that contains the current ranks for the user in each of their channels.
+            The port of the server.
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.GetUser(System.String)">
+            <summary>
+            Gets or generates a User object from the UserFactory
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.GetUserFromNick(System.String)">
+            <summary>
+            Gets or generates a User object from the UserFactory
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.GetChannel(System.String)">
+            <summary>
+            Gets or generates a Channel object from the ChannelFactory
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.GetUser">
+            <summary>
+            Gets the User who sent the message or null
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.GetChannel">
+            <summary>
+            Gets the Channel the message is targeted at or null
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.IsUser(System.String)">
+            <summary>
+            Determines whether the given userMask is valid
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.IsChannel(System.String)">
+            <summary>
+            Determines whether the given channel is valid
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.IsUser">
+            <summary>
+            Determines whether the message is originated from a user
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.IsChannel">
+            <summary>
+            Determines whether the message is targeted at a channel
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.IsNumeric">
+            <summary>
+            Checks if the message is a numeric one
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.GetCTCP(System.String)">
+            <summary>
+            Gets the CTCP message or null
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.GetCTCP">
+            <summary>
+            Gets the CTCP message or null
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.GetCTCPCommand(System.String)">
+            <summary>
+            Gets the CTCP command
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.GetCTCPCommand">
+            <summary>
+            Gets the CTCP command
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.GetCTCPParameter(System.String)">
+            <summary>
+            Gets the CTCP arguments 
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.GetCTCPParameter">
+            <summary>
+            Gets the CTCP arguments 
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.HasCTCPParameter(System.String)">
+            <summary>
+            Checks if the ctcp message contains parameters
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.HasCTCPParameter">
+            <summary>
+            Checks if the ctcp message contains parameters
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.IsCTCP(System.String)">
+            <summary>
+            Checks if the message is a Client-to-client protocol message
+            </summary>
+        </member>
+        <member name="M:NetIRC.Messages.ParsedMessage.IsCTCP">
+            <summary>
+            Checks if the message is a Client-to-client protocol message
             </summary>
         </member>
         <member name="F:NetIRC.User.RankChars">
@@ -192,6 +302,16 @@
         <member name="P:NetIRC.User.IsReceivingServerNotices">
             <summary>
             The user can receive server notices. (Obsolete in RFC2812)
+            </summary>
+        </member>
+        <member name="P:NetIRC.User.Channels">
+            <summary>
+            The list of channels that the user is in.
+            </summary>
+        </member>
+        <member name="P:NetIRC.User.Ranks">
+            <summary>
+            A dictionary that contains the current ranks for the user in each of their channels.
             </summary>
         </member>
     </members>
