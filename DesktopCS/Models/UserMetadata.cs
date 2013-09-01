@@ -6,8 +6,8 @@ namespace DesktopCS.Models
     {
         public UserMetadata(SolidColorBrush color, string countryCode)
         {
-            Color = color;
-            CountryCode = countryCode;
+            this.Color = color;
+            this.CountryCode = countryCode;
         }
 
         public SolidColorBrush Color { get; private set; }

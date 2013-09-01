@@ -11,8 +11,8 @@ namespace DesktopCS.Views
     {
         public MainView(SettingsManager settings, LoginData loginData)
         {
-            InitializeComponent();
-            DataContext = new MainViewModel(settings, loginData);
+            this.InitializeComponent();
+            this.DataContext = new MainViewModel(settings, loginData);
         }
     }
 }

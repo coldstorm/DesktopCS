@@ -14,31 +14,31 @@ namespace DesktopCS.Services.IRC
 
         public IRCClient(TabManager tabManager, LoginData loginData)
         {
-            _tabManager = tabManager;
-            _loginData = loginData;
+            this._tabManager = tabManager;
+            this._loginData = loginData;
 
-            Connect();
+            this.Connect();
         }
 
         void _client_OnConnect(Client client)
         {
-            new IRCServer(_tabManager, _client);
+            new IRCServer(this._tabManager, this._client);
         }
 
         void _client_OnChannelJoin(Client client, Channel channel)
         {
-            new IRCChannel(_tabManager, channel);
+            new IRCChannel(this._tabManager, channel);
         }
 
         public void Connect()
         {
-            _client = new Client();
-            _client.OnConnect += _client_OnConnect;
-            _client.OnChannelJoin += _client_OnChannelJoin;
+            this._client = new Client();
+            this._client.OnConnect += this._client_OnConnect;
+            this._client.OnChannelJoin += this._client_OnChannelJoin;
 
             var cc = CountryCodeHelper.GetCC();
-            var user = new User(_loginData.Username, IdentHelper.Generate(_loginData.ColorBrush, cc));
-            _client.Connect("kaslai.us", 6667, false, user);
+            var user = new User(this._loginData.Username, IdentHelper.Generate(this._loginData.ColorBrush, cc));
+            this._client.Connect("kaslai.us", 6667, false, user);
         }
 
         public void Chat(string text)

@@ -19,44 +19,44 @@ namespace DesktopCS.Controls
 
         public event RoutedEventHandler CloseTab
         {
-            add { AddHandler(CloseTabEvent, value); }
-            remove { RemoveHandler(CloseTabEvent, value); }
+            add { this.AddHandler(CloseTabEvent, value); }
+            remove { this.RemoveHandler(CloseTabEvent, value); }
         }
 
         [System.ComponentModel.Description("Shows or hides the close button.")]
         public bool IsClosable
         {
-            get { return (bool)GetValue(IsClosableProperty); }
-            set { SetValue(IsClosableProperty, value); }
+            get { return (bool)this.GetValue(IsClosableProperty); }
+            set { this.SetValue(IsClosableProperty, value); }
         }
 
         [System.ComponentModel.Description("Shows or hides the unread glow.")]
         public bool IsUnread
         {
-            get { return (bool)GetValue(IsUnreadProperty); }
-            set { SetValue(IsUnreadProperty, value); }
+            get { return (bool)this.GetValue(IsUnreadProperty); }
+            set { this.SetValue(IsUnreadProperty, value); }
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            var closeButton = GetTemplateChild("PART_Close") as Button;
+            var closeButton = this.GetTemplateChild("PART_Close") as Button;
             if (closeButton != null)
-                closeButton.Click += closeButton_Click;
+                closeButton.Click += this.closeButton_Click;
         }
 
         void closeButton_Click(object sender, RoutedEventArgs e)
         {
             var args = new RoutedEventArgs(CloseTabEvent, this);
-            RaiseEvent(args);
+            this.RaiseEvent(args);
         }
 
         protected override void OnSelected(RoutedEventArgs e)
         {
             base.OnSelected(e);
 
-            IsUnread = false;
+            this.IsUnread = false;
         }
     }
 }

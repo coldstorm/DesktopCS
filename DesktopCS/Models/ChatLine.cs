@@ -14,33 +14,33 @@ namespace DesktopCS.Models
 
         public ChatLine(SolidColorBrush chatBrush, string chat, string timestamp)
         {
-            ChatBrush = chatBrush;
-            Timestamp = TimeHelper.CreateTimeStamp();
-            Chat = chat;
-            Timestamp = timestamp;
+            this.ChatBrush = chatBrush;
+            this.Timestamp = TimeHelper.CreateTimeStamp();
+            this.Chat = chat;
+            this.Timestamp = timestamp;
         }
 
         public ChatLine(SolidColorBrush chatBrush, string chat)
         {
-            ChatBrush = chatBrush;
-            Timestamp = TimeHelper.CreateTimeStamp();
-            Chat = chat;
+            this.ChatBrush = chatBrush;
+            this.Timestamp = TimeHelper.CreateTimeStamp();
+            this.Chat = chat;
         }
 
         public ChatLine(UserListItem user, SolidColorBrush chatBrush, string chat)
         {
-            ChatBrush = chatBrush;
-            Timestamp = TimeHelper.CreateTimeStamp();
-            Chat = chat;
-            User = user;
+            this.ChatBrush = chatBrush;
+            this.Timestamp = TimeHelper.CreateTimeStamp();
+            this.Chat = chat;
+            this.User = user;
         }
 
         public ChatLine(UserListItem user, SolidColorBrush chatBrush, string chat, string timestamp)
         {
-            ChatBrush = chatBrush;
-            Timestamp = timestamp;
-            Chat = chat;
-            User = user;
+            this.ChatBrush = chatBrush;
+            this.Timestamp = timestamp;
+            this.Chat = chat;
+            this.User = user;
         }
 
         public Paragraph ToParagraph()
@@ -48,27 +48,27 @@ namespace DesktopCS.Models
             var p = new Paragraph();
 
             // Time
-            if (!String.IsNullOrEmpty(Timestamp))
+            if (!String.IsNullOrEmpty(this.Timestamp))
             {
-                var timeRun = new Run(Timestamp) { Foreground = BrushHelper.TimeBrush };
+                var timeRun = new Run(this.Timestamp) { Foreground = BrushHelper.TimeBrush };
                 p.Inlines.Add(timeRun);
                 p.Inlines.Add(" ");
             }
 
             // User
-            if (User != null)
+            if (this.User != null)
             {
                 Brush brush = BrushHelper.ChatBrush;
-                if (User.Metadata != null)
-                    brush = User.Metadata.Color;
+                if (this.User.Metadata != null)
+                    brush = this.User.Metadata.Color;
 
-                var usernameRun = new Run(User.Nickname) { Foreground = brush };
+                var usernameRun = new Run(this.User.Nickname) { Foreground = brush };
                 p.Inlines.Add(usernameRun);
                 p.Inlines.Add(" ");
             }
 
             // Message
-            var chatRun = new Run(Chat) { Foreground = ChatBrush };
+            var chatRun = new Run(this.Chat) { Foreground = this.ChatBrush };
             p.Inlines.Add(chatRun);
 
             return p;

@@ -13,38 +13,38 @@ namespace DesktopCS.Models
 
         public LoginData(string username, string password, SolidColorBrush colorBrush)
         {
-            _username = username;
-            _password = password;
-            _colorBrush = colorBrush;
+            this._username = username;
+            this._password = password;
+            this._colorBrush = colorBrush;
         }
 
         public string Username
         {
-            get { return _username; }
+            get { return this._username; }
             set 
             {
-                _username = value;
-                OnPropertyChanged("Username");
+                this._username = value;
+                this.OnPropertyChanged("Username");
             }
         }
 
         public string Password
         {
-            get { return _password; }
+            get { return this._password; }
             set
             {
-                _password = value;
-                OnPropertyChanged("Password");
+                this._password = value;
+                this.OnPropertyChanged("Password");
             }
         }
 
         public SolidColorBrush ColorBrush
         {
-            get { return _colorBrush; }
+            get { return this._colorBrush; }
             set
             {
-                _colorBrush = value;
-                OnPropertyChanged("ColorBrush");
+                this._colorBrush = value;
+                this.OnPropertyChanged("ColorBrush");
             }
         }
 
@@ -54,7 +54,7 @@ namespace DesktopCS.Models
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
+            PropertyChangedEventHandler handler = this.PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
@@ -64,8 +64,8 @@ namespace DesktopCS.Models
         {
             get
             {
-                Error = GetValidationError(columnName);
-                return Error;
+                this.Error = this.GetValidationError(columnName);
+                return this.Error;
             }
         }
 
@@ -76,7 +76,7 @@ namespace DesktopCS.Models
 
         public bool IsValid
         {
-            get { return _validatedProperties.All(property => GetValidationError(property) == null); }
+            get { return this._validatedProperties.All(property => this.GetValidationError(property) == null); }
         }
 
         private readonly string[] _validatedProperties =
@@ -89,7 +89,7 @@ namespace DesktopCS.Models
             switch (columnName)
             {
                 case "Username":
-                    return ValidateUsername();
+                    return this.ValidateUsername();
             }
             return null;
         }
@@ -97,7 +97,7 @@ namespace DesktopCS.Models
         private string ValidateUsername()
         {
             var regex = new Regex(@"^[a-z_\-\[\]\\^{}|`][a-z0-9_\-\[\]\\^{}|`]*$", RegexOptions.IgnoreCase);
-            if (Username == null || !regex.IsMatch(Username)) 
+            if (this.Username == null || !regex.IsMatch(this.Username)) 
                return "Invalid Username.";
 
             return null;

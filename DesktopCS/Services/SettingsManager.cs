@@ -13,12 +13,12 @@ namespace DesktopCS.Services
 
         internal SettingsManager(Settings settings)
         {
-            _settings = settings;
+            this._settings = settings;
 
-            if (!_settings.HasUpgrade)
+            if (!this._settings.HasUpgrade)
             {
-                _settings.Upgrade();
-                _settings.HasUpgrade = true;
+                this._settings.Upgrade();
+                this._settings.HasUpgrade = true;
             }
         }
 
@@ -30,13 +30,13 @@ namespace DesktopCS.Services
 
             try
             {
-                username = _settings.Username;
+                username = this._settings.Username;
 
-                if (!String.IsNullOrWhiteSpace(_settings.Password))
-                    password = _settings.Password.DecryptString().ToInsecureString();
+                if (!String.IsNullOrWhiteSpace(this._settings.Password))
+                    password = this._settings.Password.DecryptString().ToInsecureString();
 
-                if (!String.IsNullOrWhiteSpace(_settings.Color))
-                    colorBrush = (SolidColorBrush) new BrushConverter().ConvertFrom(_settings.Color);
+                if (!String.IsNullOrWhiteSpace(this._settings.Color))
+                    colorBrush = (SolidColorBrush) new BrushConverter().ConvertFrom(this._settings.Color);
             }
             catch (Exception ex)
             {
@@ -48,14 +48,14 @@ namespace DesktopCS.Services
 
         public void SetLoginData(LoginData loginData)
         {
-            _settings.Username = loginData.Username;
-            _settings.Password = loginData.Password.ToSecureString().EncryptString();
-            _settings.Color = loginData.ColorBrush.ToString();
+            this._settings.Username = loginData.Username;
+            this._settings.Password = loginData.Password.ToSecureString().EncryptString();
+            this._settings.Color = loginData.ColorBrush.ToString();
         }
 
         public void Save()
         {
-            _settings.Save();
+            this._settings.Save();
         }
     }
 }

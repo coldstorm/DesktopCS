@@ -11,10 +11,10 @@ namespace DesktopCS.Services.IRC
 
         public IRCServer(TabManager tabManager, Client client)
         {
-            _serverTab = tabManager.AddServer("Server");
+            this._serverTab = tabManager.AddServer("Server");
 
-            _client = client;
-            _client.OnNotice += ClientOnNotice;
+            this._client = client;
+            this._client.OnNotice += this.ClientOnNotice;
         }
 
         void ClientOnNotice(Client client, User source, string notice)
@@ -23,7 +23,7 @@ namespace DesktopCS.Services.IRC
             if (source != null)
                 u = new UserListItem(source.NickName, IdentHelper.Parse(source.UserName));
             var line = new MessageLine(u, notice);
-            _serverTab.AddChat(line);
+            this._serverTab.AddChat(line);
         }
     }
 }

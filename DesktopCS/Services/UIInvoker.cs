@@ -13,13 +13,13 @@ namespace DesktopCS.Services
         {
             get
             {
-               return _dispatcher.Thread != Thread.CurrentThread;
+               return this._dispatcher.Thread != Thread.CurrentThread;
             }
         }
 
         protected void Invoke(Action action)
         {
-            _dispatcher.Invoke(action);
+            this._dispatcher.Invoke(action);
         }
     }
 }

@@ -10,18 +10,18 @@ namespace DesktopCS.Commands
 
         public ChatInputCommand(MainViewModel vm)
         {
-            _vm = vm;
+            this._vm = vm;
         }
 
         #region ICommand Members
         public void Execute(object parameter)
         {
-            _vm.Chat(parameter as string);
+            this._vm.Chat(parameter as string);
         }
 
         public bool CanExecute(object parameter)
         {
-            return _vm.CanChat;
+            return this._vm.CanChat;
         }
 
         public event EventHandler CanExecuteChanged

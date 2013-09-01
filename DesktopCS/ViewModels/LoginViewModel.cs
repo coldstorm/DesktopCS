@@ -16,29 +16,29 @@ namespace DesktopCS.ViewModels
 
         public LoginViewModel(SettingsManager settings)
         {
-            _settings = settings;
-            _loginData = _settings.GetLoginData();
+            this._settings = settings;
+            this._loginData = this._settings.GetLoginData();
 
-            LoginCommand = new LoginCommand(this);
+            this.LoginCommand = new LoginCommand(this);
         }
 
         public LoginCommand LoginCommand { get; private set; }
 
         public LoginData LoginData
         {
-            get { return _loginData; }
+            get { return this._loginData; }
         }
 
         public bool CanLogin
         {
-            get { return LoginData.IsValid; }
+            get { return this.LoginData.IsValid; }
         }
 
         public void Login()
         {
-            _settings.SetLoginData(LoginData);
+            this._settings.SetLoginData(this.LoginData);
 
-            var main = new MainView(_settings, LoginData);
+            var main = new MainView(this._settings, this.LoginData);
             main.Show();
         }
     }

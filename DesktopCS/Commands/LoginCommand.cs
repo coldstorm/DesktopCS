@@ -10,18 +10,18 @@ namespace DesktopCS.Commands
 
         public LoginCommand(LoginViewModel vm)
         {
-            _vm = vm;
+            this._vm = vm;
         }
 
         #region ICommand Members
         public void Execute(object parameter)
         {
-            _vm.Login();
+            this._vm.Login();
         }
 
         public bool CanExecute(object parameter)
         {
-            return _vm.CanLogin;
+            return this._vm.CanLogin;
         }
 
         public event EventHandler CanExecuteChanged

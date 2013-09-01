@@ -11,20 +11,20 @@ namespace DesktopCS.Services.IRC
 
         public IRCChannel(TabManager tabManager, Channel channel)
         {
-            _channel = channel;
-            _channelTab = tabManager.AddChannel(channel.FullName);
+            this._channel = channel;
+            this._channelTab = tabManager.AddChannel(channel.FullName);
 
              var line = new SystemMessageLine("You joined the room.");
-            _channelTab.AddChat(line, false);
+            this._channelTab.AddChat(line, false);
 
-            _channel.OnMessage += _channel_OnMessage;
+            this._channel.OnMessage += this._channel_OnMessage;
         }
 
         void _channel_OnMessage(Channel source, User user, string message)
         {
             var u = new UserListItem(user.NickName, IdentHelper.Parse(user.UserName));
             var line = new MessageLine(u, message);
-            _channelTab.AddChat(line);
+            this._channelTab.AddChat(line);
         }
     }
 }

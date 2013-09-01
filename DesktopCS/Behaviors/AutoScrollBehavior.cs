@@ -16,22 +16,22 @@ namespace DesktopCS.Behaviors
         {
             base.OnAttached();
 
-            _scrollViewer = AssociatedObject;
-            _scrollViewer.LayoutUpdated += _scrollViewer_LayoutUpdated;
+            this._scrollViewer = this.AssociatedObject;
+            this._scrollViewer.LayoutUpdated += this._scrollViewer_LayoutUpdated;
         }
 
         private void _scrollViewer_LayoutUpdated(object sender, EventArgs e)
         {
-            if ((int)_scrollViewer.VerticalOffset == (int)_scrollViewer.ScrollableHeight)
-                _scrollViewer.ScrollToBottom();
+            if ((int)this._scrollViewer.VerticalOffset == (int)this._scrollViewer.ScrollableHeight)
+                this._scrollViewer.ScrollToBottom();
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
 
-            if (_scrollViewer != null)
-                _scrollViewer.LayoutUpdated -= _scrollViewer_LayoutUpdated;
+            if (this._scrollViewer != null)
+                this._scrollViewer.LayoutUpdated -= this._scrollViewer_LayoutUpdated;
         }
     }
 }

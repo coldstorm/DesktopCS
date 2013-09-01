@@ -16,17 +16,17 @@ namespace DesktopCS.Views
 
         public LoginView(SettingsManager settings)
         {
-            InitializeComponent();
-            DataContext = new LoginViewModel(settings);
+            this.InitializeComponent();
+            this.DataContext = new LoginViewModel(settings);
             
-            _timeTimer.Tick += timeTimer_Tick;
-            _timeTimer.Start();
+            this._timeTimer.Tick += this.timeTimer_Tick;
+            this._timeTimer.Start();
         }
 
         private void timeTimer_Tick(object sender, EventArgs e)
         {
-            _timeTimer.Interval = new TimeSpan(0, 0, 60 - DateTime.Now.Second);
-            Time.Text = TimeHelper.CreateTimeStamp();
+            this._timeTimer.Interval = new TimeSpan(0, 0, 60 - DateTime.Now.Second);
+            this.Time.Text = TimeHelper.CreateTimeStamp();
         }
     }
 }

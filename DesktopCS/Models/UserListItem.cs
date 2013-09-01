@@ -4,8 +4,8 @@
     {
         public UserListItem(string nick, UserMetadata metadata)
         {
-            Nickname = nick;
-            Metadata = metadata;
+            this.Nickname = nick;
+            this.Metadata = metadata;
         }
 
         public string Nickname { get; private set; }

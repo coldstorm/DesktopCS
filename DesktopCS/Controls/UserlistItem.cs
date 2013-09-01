@@ -14,8 +14,8 @@ namespace DesktopCS.Controls
 
         public Image Flag
         {
-            get { return (Image)GetValue(FlagProperty); }
-            set { SetValue(FlagProperty, value); }
+            get { return (Image)this.GetValue(FlagProperty); }
+            set { this.SetValue(FlagProperty, value); }
         }
 
 
@@ -23,8 +23,8 @@ namespace DesktopCS.Controls
 
         public bool IsExpanded
         {
-            get { return (bool)GetValue(IsExpandedProperty); }
-            set { SetValue(IsExpandedProperty, value); }
+            get { return (bool)this.GetValue(IsExpandedProperty); }
+            set { this.SetValue(IsExpandedProperty, value); }
         }
 
 
@@ -35,8 +35,8 @@ namespace DesktopCS.Controls
 
         public event RoutedEventHandler Query
         {
-            add { AddHandler(QueryEvent, value); }
-            remove { RemoveHandler(QueryEvent, value); }
+            add { this.AddHandler(QueryEvent, value); }
+            remove { this.RemoveHandler(QueryEvent, value); }
         }
 
         public static readonly RoutedEvent KickEvent =
@@ -46,8 +46,8 @@ namespace DesktopCS.Controls
 
         public event RoutedEventHandler Kick
         {
-            add { AddHandler(KickEvent, value); }
-            remove { RemoveHandler(KickEvent, value); }
+            add { this.AddHandler(KickEvent, value); }
+            remove { this.RemoveHandler(KickEvent, value); }
         }
 
         public static readonly RoutedEvent BanEvent =
@@ -57,40 +57,40 @@ namespace DesktopCS.Controls
 
         public event RoutedEventHandler Ban
         {
-            add { AddHandler(BanEvent, value); }
-            remove { RemoveHandler(BanEvent, value); }
+            add { this.AddHandler(BanEvent, value); }
+            remove { this.RemoveHandler(BanEvent, value); }
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            var queryButton = GetTemplateChild("PART_Query") as Button;
+            var queryButton = this.GetTemplateChild("PART_Query") as Button;
             if (queryButton != null)
-                queryButton.Click += queryButton_Click;
+                queryButton.Click += this.queryButton_Click;
 
-            var kickButton = GetTemplateChild("PART_Kick") as Button;
+            var kickButton = this.GetTemplateChild("PART_Kick") as Button;
             if (kickButton != null)
-                kickButton.Click += kickButton_Click;
+                kickButton.Click += this.kickButton_Click;
 
-            var banButton = GetTemplateChild("PART_Ban") as Button;
+            var banButton = this.GetTemplateChild("PART_Ban") as Button;
             if (banButton != null)
-                banButton.Click += banButton_Click;         
+                banButton.Click += this.banButton_Click;         
         }
 
         void queryButton_Click(object sender, RoutedEventArgs e)
         {
-           RaiseEvent(new RoutedEventArgs(QueryEvent, this));
+           this.RaiseEvent(new RoutedEventArgs(QueryEvent, this));
         }
 
         void kickButton_Click(object sender, RoutedEventArgs e)
         {
-            RaiseEvent(new RoutedEventArgs(KickEvent, this));
+            this.RaiseEvent(new RoutedEventArgs(KickEvent, this));
         }
 
         void banButton_Click(object sender, RoutedEventArgs e)
         {
-            RaiseEvent(new RoutedEventArgs(BanEvent, this));
+            this.RaiseEvent(new RoutedEventArgs(BanEvent, this));
         }
     }
 }

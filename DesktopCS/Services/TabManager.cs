@@ -18,85 +18,85 @@ namespace DesktopCS.Services
 
         public TabManager()
         {
-            Tabs = new CompositeCollection();
+            this.Tabs = new CompositeCollection();
 
-            var serverContainer = new CollectionContainer { Collection = _serverTabs };
-            var channelContainer = new CollectionContainer { Collection = _channelTabs };
+            var serverContainer = new CollectionContainer { Collection = this._serverTabs };
+            var channelContainer = new CollectionContainer { Collection = this._channelTabs };
 
-            Tabs.Add(serverContainer);
-            Tabs.Add(channelContainer);
+            this.Tabs.Add(serverContainer);
+            this.Tabs.Add(channelContainer);
         }
 
         void channel_Close(object sender, EventArgs e)
         {
             var tab = (Tab)sender;
-            _channelTabs.Remove(tab.TabItem);
+            this._channelTabs.Remove(tab.TabItem);
         }
 
         void user_Close(object sender, EventArgs e)
         {
             var tab = (Tab)sender;
-            _userTabDictionary.Remove(tab.Header);
-            _userTabs.Remove(tab.TabItem);
+            this._userTabDictionary.Remove(tab.Header);
+            this._userTabs.Remove(tab.TabItem);
         }
 
         void user_HeaderChange(object sender, string oldValue)
         {
             var tab = (Tab)sender;
-            _userTabDictionary.Remove(oldValue);
-            _userTabDictionary.Add(tab.Header, tab);
+            this._userTabDictionary.Remove(oldValue);
+            this._userTabDictionary.Add(tab.Header, tab);
         }
 
         public Tab AddServer(string tabName)
         {
-            if (InvokeRequired)
+            if (this.InvokeRequired)
             {
                 Tab value = null;
-                Invoke(() => value = AddServer(tabName));
+                this.Invoke(() => value = this.AddServer(tabName));
                 return value;
             }
 
             var server = new ServerTab(tabName);
-            _serverTabs.Add(server.TabItem);
+            this._serverTabs.Add(server.TabItem);
 
             return server;
         }
 
         public Tab AddChannel(string tabName)
         {
-            if (InvokeRequired)
+            if (this.InvokeRequired)
             {
                 Tab value = null;
-                Invoke(() => value = AddChannel(tabName));
+                this.Invoke(() => value = this.AddChannel(tabName));
                 return value;
             }
 
             var channel = new Tab(tabName);
-            channel.Close += channel_Close;
-            _channelTabs.Add(channel.TabItem);
+            channel.Close += this.channel_Close;
+            this._channelTabs.Add(channel.TabItem);
 
             return channel;
         }
 
         public Tab AddOrGetUser(string tabName)
         {
-            if (InvokeRequired)
+            if (this.InvokeRequired)
             {
                 Tab value = null;
-                Invoke(() => value = AddOrGetUser(tabName));
+                this.Invoke(() => value = this.AddOrGetUser(tabName));
                 return value;
             }
 
-            if (_userTabDictionary.ContainsKey(tabName))
+            if (this._userTabDictionary.ContainsKey(tabName))
             {
-                return _userTabDictionary[tabName];
+                return this._userTabDictionary[tabName];
             }
 
             var user = new Tab(tabName);
-            user.Close += user_Close;
-            user.HeaderChange += user_HeaderChange;
-            _userTabDictionary.Add(tabName, user);
-            _userTabs.Add(user.TabItem);
+            user.Close += this.user_Close;
+            user.HeaderChange += this.user_HeaderChange;
+            this._userTabDictionary.Add(tabName, user);
+            this._userTabs.Add(user.TabItem);
 
             return user;
         }

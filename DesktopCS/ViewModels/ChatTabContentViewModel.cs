@@ -12,14 +12,14 @@ namespace DesktopCS.ViewModels
     {
         public ChatTabContentViewModel()
         {
-            FlowDocumentPagePadding.SetPagePadding(_flowDocument, new Thickness(0));
+            FlowDocumentPagePadding.SetPagePadding(this._flowDocument, new Thickness(0));
         }
 
         private readonly FlowDocument _flowDocument = new FlowDocument();
 
         public FlowDocument FlowDocument
         {
-            get { return _flowDocument; }
+            get { return this._flowDocument; }
         }
     }
 }

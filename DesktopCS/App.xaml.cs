@@ -13,11 +13,11 @@ namespace DesktopCS
         private SettingsManager _settingsManager;
         private void Application_Startup(object sender, System.Windows.StartupEventArgs e)
         {
-            _settingsManager = new SettingsManager(Settings.Default);
+            this._settingsManager = new SettingsManager(Settings.Default);
 
-            new LoginView(_settingsManager).ShowDialog();
+            new LoginView(this._settingsManager).ShowDialog();
 
-            _settingsManager.Save();
+            this._settingsManager.Save();
         }
 
     }

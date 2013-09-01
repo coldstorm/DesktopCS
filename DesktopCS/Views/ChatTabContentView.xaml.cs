@@ -13,15 +13,15 @@ namespace DesktopCS.Views
     {
         public ChatTabContentView(ChatTabContentViewModel vm)
         {
-            InitializeComponent();
-            DataContext = vm;
-            SetBinding(DocumentProperty, new Binding("FlowDocument"));
+            this.InitializeComponent();
+            this.DataContext = vm;
+            this.SetBinding(DocumentProperty, new Binding("FlowDocument"));
         }
 
         public FlowDocument Document
         {
-            get { return (FlowDocument)GetValue(DocumentProperty); }
-            set { SetValue(DocumentProperty, value); }
+            get { return (FlowDocument)this.GetValue(DocumentProperty); }
+            set { this.SetValue(DocumentProperty, value); }
         }
 
         public static readonly DependencyProperty DocumentProperty =

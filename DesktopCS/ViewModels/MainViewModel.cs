@@ -16,14 +16,14 @@ namespace DesktopCS.ViewModels
 
         public CompositeCollection Tabs
         {
-            get { return _tabs; }
+            get { return this._tabs; }
         }
 
         public MainViewModel(SettingsManager settingsManager, LoginData loginData)
         {
-            _tabManager = new TabManager();
-            _tabs = _tabManager.Tabs;
-            _irc = new IRCClient(_tabManager, loginData);
+            this._tabManager = new TabManager();
+            this._tabs = this._tabManager.Tabs;
+            this._irc = new IRCClient(this._tabManager, loginData);
         }
 
         public bool CanChat
@@ -33,7 +33,7 @@ namespace DesktopCS.ViewModels
 
         public void Chat(string text)
         {
-            _irc.Chat(text);
+            this._irc.Chat(text);
         }
     }
 }
