@@ -87,17 +87,17 @@
     <Compile Include="Services\IRC\IRCChannel.cs" />
     <Compile Include="Services\IRC\IRCServer.cs" />
     <Compile Include="Services\IRC\IRCUser.cs" />
-    <Compile Include="Models\ServerTab.cs" />
+    <Compile Include="Services\ServerTab.cs" />
     <Compile Include="Services\Tab.cs" />
     <Compile Include="Models\ChatLine.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\MessageLine.cs" />
-    <Compile Include="Services\SystemMessageLine.cs" />
+    <Compile Include="Models\SystemMessageLine.cs" />
     <Compile Include="Models\UserListItem.cs" />
     <Compile Include="Models\UserMetadata.cs" />
     <Compile Include="Services\SettingsManager.cs" />
     <Compile Include="Services\TabManager.cs" />
-    <Compile Include="UIInvoker.cs" />
+    <Compile Include="Services\UIInvoker.cs" />
     <Compile Include="Views\ChatTabContentView.xaml.cs">
       <DependentUpon>ChatTabContentView.xaml</DependentUpon>
     </Compile>
@@ -967,9 +967,7 @@
   <ItemGroup>
     <Resource Include="Resources\coldstorm.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tabs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

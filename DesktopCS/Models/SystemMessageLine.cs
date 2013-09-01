@@ -1,7 +1,6 @@
 ﻿using DesktopCS.Helpers;
-using DesktopCS.Models;
 
-namespace DesktopCS.Services
+namespace DesktopCS.Models
 {
     class SystemMessageLine : ChatLine
     {

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace DesktopCS
+namespace DesktopCS.Services
 {
     public abstract class UIInvoker
     {
@@ -16,7 +13,7 @@ namespace DesktopCS
         {
             get
             {
-                return _dispatcher.Thread != Thread.CurrentThread;
+               return _dispatcher.Thread != Thread.CurrentThread;
             }
         }
 
