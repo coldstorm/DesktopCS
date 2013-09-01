@@ -13,7 +13,7 @@ namespace DesktopCS.Helpers
 
             if (match.Success)
             {
-                var color = BrushHelper.FromHexWithoutHash(match.Groups[1].Value);
+                var color = ColorHelper.FromHexWithoutHash(match.Groups[1].Value);
                 var flag = match.Groups[2].Value;
                 return new UserMetadata(color, flag);
             }
@@ -21,9 +21,9 @@ namespace DesktopCS.Helpers
             return null;
         }
 
-        public static string Generate(SolidColorBrush color, string cc)
+        public static string Generate(Color color, string cc)
         {
-            return Generate(BrushHelper.ToHexWithoutHash(color), cc);
+            return Generate(ColorHelper.ToHexWithoutHash(color), cc);
         }
 
         public static string Generate(string hex, string cc)

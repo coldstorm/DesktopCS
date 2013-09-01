@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Media;
+using DesktopCS.Helpers;
 
 namespace DesktopCS.Models
 {
@@ -9,13 +10,13 @@ namespace DesktopCS.Models
     {
         private string _username;
         private string _password;
-        private SolidColorBrush _colorBrush = Brushes.White;
+        private Color _color;
 
-        public LoginData(string username, string password, SolidColorBrush colorBrush)
+        public LoginData(string username, string password, Color color)
         {
             this._username = username;
             this._password = password;
-            this._colorBrush = colorBrush;
+            this._color = color;
         }
 
         public string Username
@@ -38,13 +39,13 @@ namespace DesktopCS.Models
             }
         }
 
-        public SolidColorBrush ColorBrush
+        public Color Color
         {
-            get { return this._colorBrush; }
+            get { return this._color; }
             set
             {
-                this._colorBrush = value;
-                this.OnPropertyChanged("ColorBrush");
+                this._color = value;
+                this.OnPropertyChanged("Color");
             }
         }
 

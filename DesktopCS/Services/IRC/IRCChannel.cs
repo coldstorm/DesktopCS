@@ -1,4 +1,6 @@
-﻿using DesktopCS.Helpers;
+﻿using System;
+using System.Windows;
+using DesktopCS.Helpers;
 using DesktopCS.Models;
 using NetIRC;
 
@@ -20,11 +22,21 @@ namespace DesktopCS.Services.IRC
             this._channel.OnMessage += this._channel_OnMessage;
         }
 
-        void _channel_OnMessage(Channel source, User user, string message)
+        private void _channel_OnMessage(Channel source, User user, string message)
         {
-            var u = new UserListItem(user.NickName, IdentHelper.Parse(user.UserName));
-            var line = new MessageLine(u, message);
+            UserListItem u = null;
+            MessageLine line = null;
+            Application.Current.Dispatcher.Invoke(new Action(
+                () =>
+                {
+                    
+
+
+                }));
+            u = new UserListItem(user.NickName, IdentHelper.Parse(user.UserName));
+            line = new MessageLine(u, message);
             this._channelTab.AddChat(line);
+
         }
     }
 }

@@ -77,12 +77,13 @@
     <Compile Include="Converters\BrushColorConverter.cs" />
     <Compile Include="Converters\FlagToImageConverter.cs" />
     <Compile Include="Converters\PlaceholderConverter.cs" />
-    <Compile Include="Helpers\BrushHelper.cs" />
+    <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\NetIRCHelper.cs" />
     <Compile Include="Helpers\CountryCodeHelper.cs" />
     <Compile Include="Helpers\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\IdentHelper.cs" />
+    <Compile Include="Models\ChatData.cs" />
     <Compile Include="Services\IRC\IRCClient.cs" />
     <Compile Include="Services\IRC\IRCChannel.cs" />
     <Compile Include="Services\IRC\IRCServer.cs" />

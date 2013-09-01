@@ -4,7 +4,7 @@
     {
         public ServerTab(string header) : base(header)
         {
-            TabItem.IsClosable = false;
+            this.TabItem.IsClosable = false;
         }
     }
 }

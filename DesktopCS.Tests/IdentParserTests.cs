@@ -116,7 +116,7 @@ namespace DesktopCS.Tests
 
             // assert
             Assert.AreEqual(userMetadata.CountryCode, "QQ");
-            Assert.AreEqual(userMetadata.Color.Color, Brushes.White.Color);
+            Assert.AreEqual(userMetadata.Color, Colors.White);
         }
 
         [TestMethod]
@@ -130,7 +130,7 @@ namespace DesktopCS.Tests
 
             // assert
             Assert.AreEqual(userMetadata.CountryCode, "QQ");
-            Assert.AreEqual(userMetadata.Color.Color, Brushes.White.Color);
+            Assert.AreEqual(userMetadata.Color, Colors.White);
         }
 
     }

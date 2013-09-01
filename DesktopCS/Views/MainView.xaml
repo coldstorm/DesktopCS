@@ -27,11 +27,16 @@
 
             <TextBox Grid.ColumnSpan="4" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" />
 
-            <TabControl Grid.Row="1" ItemsSource="{Binding Tabs}" SelectedIndex="0" />
+            <TabControl Grid.Row="1" Grid.Column="0" SelectedIndex="0" ItemsSource="{Binding Tabs}" />
 
-            <Border Padding="4" Grid.Row="3" Style="{StaticResource ContentBorder}">
+            <Border Padding="4" Grid.Row="3" Grid.Column="0" Style="{StaticResource ContentBorder}">
                 <ScrollViewer MaxHeight="64" VerticalScrollBarVisibility="Auto">
-                    <TextBox SpellCheck.IsEnabled="True" Language="en" TextWrapping="Wrap" />
+                    <TextBox SpellCheck.IsEnabled="True" Language="en" TextWrapping="Wrap" 
+                             Text="{Binding ChatData.InputText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding Path=ChatInputCommand}" Key="Enter" />
+                        </TextBox.InputBindings>
+                    </TextBox>
                 </ScrollViewer>
             </Border>
 

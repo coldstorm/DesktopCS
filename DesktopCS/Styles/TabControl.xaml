@@ -6,7 +6,6 @@
     Custom colored and rouded borders-->
     <Style TargetType="{x:Type TabControl}">
         <Setter Property="Foreground" Value="{StaticResource ChatBrush}" />
-        <Setter Property="Foreground" Value="{StaticResource ChatBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">

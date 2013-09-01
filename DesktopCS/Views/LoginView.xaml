@@ -37,10 +37,10 @@
                     <xctk:DropDownButton.DropDownContent>
                         <xctk:ColorCanvas
                             UsingAlphaChannel="False" 
-                            SelectedColor="{Binding LoginData.ColorBrush, Converter={StaticResource BrushColorConverter}}" />
+                            SelectedColor="{Binding LoginData.Color}" />
                     </xctk:DropDownButton.DropDownContent>
                     
-                    <Label Background="{Binding LoginData.ColorBrush}" />
+                    <Label Background="{Binding LoginData.Color, Converter={StaticResource BrushColorConverter}}" />
                 </xctk:DropDownButton>
             </StackPanel>
 
@@ -49,7 +49,7 @@
             <Border Margin="20,0" Style="{StaticResource ContentBorder}">
                 <TextBlock Padding="3">
                     <Run x:Name="Time" Foreground="{StaticResource TimeBrush}" />
-                    <Run Foreground="{Binding LoginData.ColorBrush, TargetNullValue='#FFFFFFFF', FallbackValue='#FFFFFFFF'}" 
+                    <Run Foreground="{Binding LoginData.Color, Converter={StaticResource BrushColorConverter}, TargetNullValue='#FFFFFFFF', FallbackValue='#FFFFFFFF'}" 
                          Text="{Binding LoginData.Username, Converter={StaticResource PlaceholderConverter}, ConverterParameter='Username'}" />
                     I love this color!
                 </TextBlock>

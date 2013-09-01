@@ -10,6 +10,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource ChatBrush}" />
         <Setter Property="CaretBrush" Value="{StaticResource ChatBrush}" />

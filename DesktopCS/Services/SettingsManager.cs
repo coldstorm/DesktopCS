@@ -26,7 +26,7 @@ namespace DesktopCS.Services
         {
             string username = null;
             string password = null;
-            SolidColorBrush colorBrush = Brushes.White;
+            Color color = ColorHelper.ChatColor;
 
             try
             {
@@ -36,21 +36,21 @@ namespace DesktopCS.Services
                     password = this._settings.Password.DecryptString().ToInsecureString();
 
                 if (!String.IsNullOrWhiteSpace(this._settings.Color))
-                    colorBrush = (SolidColorBrush) new BrushConverter().ConvertFrom(this._settings.Color);
+                    color = ColorHelper.FromString(this._settings.Color);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Failed to load settings: " + ex);
             }
 
-            return new LoginData(username, password, colorBrush);
+            return new LoginData(username, password, color);
         }
 
         public void SetLoginData(LoginData loginData)
         {
             this._settings.Username = loginData.Username;
             this._settings.Password = loginData.Password.ToSecureString().EncryptString();
-            this._settings.Color = loginData.ColorBrush.ToString();
+            this._settings.Color = loginData.Color.ToString();
         }
 
         public void Save()

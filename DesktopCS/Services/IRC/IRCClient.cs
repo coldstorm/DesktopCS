@@ -2,12 +2,14 @@
 using DesktopCS.Helpers;
 using DesktopCS.Models;
 using NetIRC;
+using NetIRC.Messages.Send;
 
 namespace DesktopCS.Services.IRC
 {
     // Handles Connecting and reconnecting to the IRC network and managing other IRC classes
     public class IRCClient
     {
+        private IRCServer _ircServer;
         private readonly TabManager _tabManager;
         private readonly LoginData _loginData;
         private Client _client;
@@ -22,7 +24,9 @@ namespace DesktopCS.Services.IRC
 
         void _client_OnConnect(Client client)
         {
-            new IRCServer(this._tabManager, this._client);
+            _ircServer = new IRCServer(this._tabManager, client);
+
+            _client.JoinChannel("test");
         }
 
         void _client_OnChannelJoin(Client client, Channel channel)
@@ -37,13 +41,14 @@ namespace DesktopCS.Services.IRC
             this._client.OnChannelJoin += this._client_OnChannelJoin;
 
             var cc = CountryCodeHelper.GetCC();
-            var user = new User(this._loginData.Username, IdentHelper.Generate(this._loginData.ColorBrush, cc));
+            var user = new User(this._loginData.Username, IdentHelper.Generate(this._loginData.Color, cc));
             this._client.Connect("kaslai.us", 6667, false, user);
         }
 
         public void Chat(string text)
         {
-            throw new NotImplementedException();
+            _ircServer.Chat(text);
+            _client.Send(new UserPrivate(_tabManager.SelectedTab.Header, text));
         }
     }
 }

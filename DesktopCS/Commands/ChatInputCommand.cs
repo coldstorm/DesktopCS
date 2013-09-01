@@ -16,7 +16,7 @@ namespace DesktopCS.Commands
         #region ICommand Members
         public void Execute(object parameter)
         {
-            this._vm.Chat(parameter as string);
+            this._vm.Chat();
         }
 
         public bool CanExecute(object parameter)
