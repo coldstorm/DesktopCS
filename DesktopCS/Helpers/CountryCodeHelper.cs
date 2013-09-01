@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Xml;
 
 namespace DesktopCS.Helpers
@@ -9,11 +11,21 @@ namespace DesktopCS.Helpers
         {
             try
             {
-                var xml = new XmlDocument();
-                xml.Load("http://www.geoplugin.net/xml.gp");
-                XmlNode countryCode = xml.SelectSingleNode("/geoPlugin/geoplugin_countryCode");
-                if (countryCode != null)
-                    return countryCode.InnerText;
+                WebRequest request = WebRequest.Create("http://www.geoplugin.net/xml.gp");
+                request.Timeout = 2000;
+
+                using (WebResponse res = request.GetResponse())
+                {
+                    using (Stream responseStream = res.GetResponseStream())
+                    {
+                        var xml = new XmlDocument();
+                        if (responseStream != null)
+                            xml.Load(responseStream);
+                        XmlNode countryCode = xml.SelectSingleNode("/geoPlugin/geoplugin_countryCode");
+                        if (countryCode != null)
+                            return countryCode.InnerText;
+                    }
+                }
             }
             catch
             {
