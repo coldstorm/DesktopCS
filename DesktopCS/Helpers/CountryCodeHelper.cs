@@ -10,8 +10,8 @@ namespace DesktopCS.Helpers
             try
             {
                 var xml = new XmlDocument();
-                xml.Load("http://freegeoip.net/xml");
-                XmlNode countryCode = xml.SelectSingleNode("/Response/CountryCode");
+                xml.Load("http://www.geoplugin.net/xml.gp");
+                XmlNode countryCode = xml.SelectSingleNode("/geoPlugin/geoplugin_countryCode");
                 if (countryCode != null)
                     return countryCode.InnerText;
             }
