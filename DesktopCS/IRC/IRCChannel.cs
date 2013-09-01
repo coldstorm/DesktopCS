@@ -1,40 +1,31 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Threading;
-using DesktopCS.Helpers;
+﻿using DesktopCS.Helpers;
 using DesktopCS.Models;
 using DesktopCS.Tabs;
 using NetIRC;
 
 namespace DesktopCS.IRC
 {
-    class IRCChannel
+    public class IRCChannel
     {
-        private readonly Dispatcher _dispatcher;
-        private readonly Tab _tab;
+        private readonly Tab _channelTab;
         private readonly Channel _channel;
 
-        public IRCChannel(Tab tab, Channel channel)
+        public IRCChannel(TabManager tabManager, Channel channel)
         {
-            _dispatcher = Application.Current.Dispatcher;
-            _tab = tab;
             _channel = channel;
+            _channelTab = tabManager.AddChannel(channel.FullName);
 
              var line = new SystemMessageLine("You joined the room.");
-            _tab.AddChat(line, false);
+            _channelTab.AddChat(line, false);
 
             _channel.OnMessage += _channel_OnMessage;
         }
 
         void _channel_OnMessage(Channel source, User user, string message)
         {
-            _dispatcher.BeginInvoke(new Action(() =>
-                {
-                    var u = new UserListItem(user.NickName, IdentHelper.Parse(user.UserName));
-                    var line = new MessageLine(u, message);
-                    _tab.AddChat(line);
-                }));
-
+            var u = new UserListItem(user.NickName, IdentHelper.Parse(user.UserName));
+            var line = new MessageLine(u, message);
+            _channelTab.AddChat(line);
         }
     }
 }

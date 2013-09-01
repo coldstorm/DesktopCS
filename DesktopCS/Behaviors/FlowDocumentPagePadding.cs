@@ -11,10 +11,12 @@ namespace DesktopCS.Behaviors
         {
             return (Thickness)obj.GetValue(PagePaddingProperty);
         }
+
         public static void SetPagePadding(DependencyObject obj, Thickness value)
         {
             obj.SetValue(PagePaddingProperty, value);
         }
+
         public static readonly DependencyProperty PagePaddingProperty =
             DependencyProperty.RegisterAttached("PagePadding", typeof(Thickness), typeof(FlowDocumentPagePadding), new UIPropertyMetadata(new Thickness(double.NegativeInfinity), (o, args) =>
             {
@@ -25,6 +27,7 @@ namespace DesktopCS.Behaviors
                 fd.PagePadding = (Thickness)args.NewValue;
                 dpd.AddValueChanged(fd, PaddingChanged);
             }));
+
         public static void PaddingChanged(object s, EventArgs e)
         {
             ((FlowDocument)s).PagePadding = GetPagePadding((DependencyObject)s);

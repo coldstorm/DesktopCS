@@ -8,9 +8,10 @@
     <SolidColorBrush x:Key="SelectedTabBackgroundBrush" Color="#FF24272E" />
     <SolidColorBrush x:Key="SelectedTabForegroundBrush" Color="#FF8C9096" />
     <SolidColorBrush x:Key="UnreadTabForegroundBrush" Color="#FFFF921E" />
+    <SolidColorBrush x:Key="ThumbBrush" Color="#FF434956" />
+    <SolidColorBrush x:Key="ErrorBrush" Color="Red" />
+
     <SolidColorBrush x:Key="ChatBrush" Color="#FFBABBBF" />
     <SolidColorBrush x:Key="TimeBrush" Color="#FF373F4E" />
     <SolidColorBrush x:Key="MessageBrush" Color="#FF808080" />
-    <SolidColorBrush x:Key="ThumbBrush" Color="#FF434956" />
-    <SolidColorBrush x:Key="ErrorBrush" Color="Red" />
 </ResourceDictionary>

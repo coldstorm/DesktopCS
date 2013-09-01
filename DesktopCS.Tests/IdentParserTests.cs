@@ -27,7 +27,7 @@ namespace DesktopCS.Tests
             
 
             // assert
-            Assert.IsNotNull(expectedException);
+            Assert.IsNull(expectedException);
         }
 
         [TestMethod]
@@ -35,20 +35,12 @@ namespace DesktopCS.Tests
         {
             // arrange
             const string testIdent = "";
-            ArgumentException expectedException = null;
 
             // act
-            try
-            {
-                IdentHelper.Parse(testIdent);
-            }
-            catch (ArgumentException ex)
-            {
-                expectedException = ex;
-            }
+            var userMetadata = IdentHelper.Parse(testIdent);
 
             // assert
-            Assert.IsNotNull(expectedException);
+            Assert.IsNull(userMetadata);
         }
 
         [TestMethod]
@@ -68,6 +60,7 @@ namespace DesktopCS.Tests
                 expectedException = ex;
             }
 
+
             // assert
             Assert.IsNotNull(expectedException);
         }
@@ -77,20 +70,12 @@ namespace DesktopCS.Tests
         {
             // arrange
             const string testIdent = "QQ";
-            ArgumentException expectedException = null;
 
             // act
-            try
-            {
-                IdentHelper.Parse(testIdent);
-            }
-            catch (ArgumentException ex)
-            {
-                expectedException = ex;
-            }
+            var userMetadata = IdentHelper.Parse(testIdent);
 
             // assert
-            Assert.IsNotNull(expectedException);
+            Assert.IsNull(userMetadata);
         }
 
         [TestMethod]
@@ -98,20 +83,12 @@ namespace DesktopCS.Tests
         {
             // arrange
             const string testIdent = "GGGQQ";
-            ArgumentException expectedException = null;
 
             // act
-            try
-            {
-                IdentHelper.Parse(testIdent);
-            }
-            catch (ArgumentException ex)
-            {
-                expectedException = ex;
-            }
+            var userMetadata = IdentHelper.Parse(testIdent);
 
             // assert
-            Assert.IsNotNull(expectedException);
+            Assert.IsNull(userMetadata);
         }
 
 
@@ -120,20 +97,12 @@ namespace DesktopCS.Tests
         {
             // arrange
             const string testIdent = "12345QQ";
-            ArgumentException expectedException = null;
 
             // act
-            try
-            {
-                IdentHelper.Parse(testIdent);
-            }
-            catch (ArgumentException ex)
-            {
-                expectedException = ex;
-            }
+            var userMetadata = IdentHelper.Parse(testIdent);
 
             // assert
-            Assert.IsNotNull(expectedException);
+            Assert.IsNull(userMetadata);
         }
 
         [TestMethod]

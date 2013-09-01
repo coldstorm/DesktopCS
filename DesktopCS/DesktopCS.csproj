@@ -72,19 +72,21 @@
     <Compile Include="Behaviors\AutoScrollBehavior.cs" />
     <Compile Include="Behaviors\ListBoxSelectionBehavior.cs" />
     <Compile Include="Behaviors\PasswordBoxAssistant.cs" />
+    <Compile Include="Commands\ChatInputCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Converters\BrushColorConverter.cs" />
     <Compile Include="Converters\FlagToImageConverter.cs" />
     <Compile Include="Converters\PlaceholderConverter.cs" />
     <Compile Include="Helpers\BrushHelper.cs" />
-    <Compile Include="Helpers\CompositeCollection.cs" />
-    <Compile Include="Helpers\NetIRCExtentions.cs" />
+    <Compile Include="Helpers\NetIRCHelper.cs" />
     <Compile Include="Helpers\CountryCodeHelper.cs" />
     <Compile Include="Helpers\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\IdentHelper.cs" />
-    <Compile Include="IRC\IRCChannel.cs" />
     <Compile Include="IRC\IRCClient.cs" />
+    <Compile Include="IRC\IRCChannel.cs" />
+    <Compile Include="IRC\IRCServer.cs" />
+    <Compile Include="IRC\IRCUser.cs" />
     <Compile Include="Tabs\ServerTab.cs" />
     <Compile Include="Tabs\Tab.cs" />
     <Compile Include="Tabs\ChatLine.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Models\UserMetadata.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="Tabs\TabManager.cs" />
+    <Compile Include="UIInvoker.cs" />
     <Compile Include="Views\ChatTabContentView.xaml.cs">
       <DependentUpon>ChatTabContentView.xaml</DependentUpon>
     </Compile>

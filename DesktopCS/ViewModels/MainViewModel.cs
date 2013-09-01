@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Data;
 using DesktopCS.Controls;
+using DesktopCS.IRC;
 using DesktopCS.Models;
 using DesktopCS.Tabs;
 
@@ -8,17 +10,11 @@ namespace DesktopCS.ViewModels
     class MainViewModel
     {
         private readonly TabManager _tabManager;
-        private IRCClient _irc;
+        private readonly IRCClient _irc;
+        
+        private readonly CompositeCollection _tabs;
 
-        public MainViewModel(SettingsManager settings, IRCClient irc)
-        {
-            _tabManager = new TabManager();
-            _tabs = _tabManager.Tabs;
-        }
-
-        private readonly ObservableCollection<CSTabItem> _tabs;
-
-        public ObservableCollection<CSTabItem> Tabs
+        public CompositeCollection Tabs
         {
             get { return _tabs; }
         }
@@ -28,6 +24,16 @@ namespace DesktopCS.ViewModels
             _tabManager = new TabManager();
             _tabs = _tabManager.Tabs;
             _irc = new IRCClient(_tabManager, loginData);
+        }
+
+        public bool CanChat
+        {
+            get { return true; }
+        }
+
+        public void Chat(string text)
+        {
+            _irc.Chat(text);
         }
     }
 }

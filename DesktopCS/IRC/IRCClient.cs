@@ -1,68 +1,53 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Threading;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using DesktopCS.Helpers;
-using DesktopCS.IRC;
 using DesktopCS.Models;
 using DesktopCS.Tabs;
 using NetIRC;
 
-namespace DesktopCS
+namespace DesktopCS.IRC
 {
+    // Handles Connecting and reconnecting to the IRC network and managing other IRC classes
     public class IRCClient
     {
-        private readonly Dispatcher _dispatcher;
         private readonly TabManager _tabManager;
-        private readonly Tab _serverTab;
-        private readonly Client _irc;
-        
+        private readonly LoginData _loginData;
+        private Client _client;
 
         public IRCClient(TabManager tabManager, LoginData loginData)
         {
-            _dispatcher = Application.Current.Dispatcher;
             _tabManager = tabManager;
+            _loginData = loginData;
 
-            _serverTab = _tabManager.AddServer("Server");
+            Connect();
+        }
 
-            _irc = new Client();
-            _irc.OnConnect += irc_OnConnect;
-            _irc.OnChannelJoin += _irc_OnChannelJoin;
-            _irc.OnNotice += _irc_OnNotice;
+        void _client_OnConnect(Client client)
+        {
+            new IRCServer(_tabManager, _client);
+        }
+
+        void _client_OnChannelJoin(Client client, Channel channel)
+        {
+            new IRCChannel(_tabManager, channel);
+        }
+
+        public void Connect()
+        {
+            _client = new Client();
+            _client.OnConnect += _client_OnConnect;
+            _client.OnChannelJoin += _client_OnChannelJoin;
 
             var cc = CountryCodeHelper.GetCC();
-            var user = new User(loginData.Username, IdentHelper.Generate(loginData.ColorBrush, cc));
-            _irc.Connect("frogbox.es", 6667, false, user);
+            var user = new User(_loginData.Username, IdentHelper.Generate(_loginData.ColorBrush, cc));
+            _client.Connect("kaslai.us", 6667, false, user);
         }
 
-        void _irc_OnNotice(Client client, User source, string notice)
+        public void Chat(string text)
         {
-                _dispatcher.BeginInvoke(new Action(() =>
-                    {
-
-                        UserListItem u = null;
-                        if (source != null)
-                            u = new UserListItem(source.NickName, IdentHelper.Parse(source.UserName));
-                        var line = new MessageLine(u, notice);
-                        _serverTab.AddChat(line);
-
-                    }));
-            
-        }
-
-        void _irc_OnChannelJoin(Client client, Channel channel)
-        {
-            _dispatcher.BeginInvoke(new Action(() =>
-                {
-
-                    new IRCChannel(_tabManager.AddChannel(channel.FullName), channel);
-                    
-                }));
-        }
-
-        void irc_OnConnect(Client client)
-        {
-            _irc.JoinChannel("test");
+            throw new NotImplementedException();
         }
     }
 }

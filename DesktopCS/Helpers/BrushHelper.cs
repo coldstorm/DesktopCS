@@ -1,14 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
+using System.Windows;
 using System.Windows.Media;
 
 namespace DesktopCS.Helpers
 {
     public static class BrushHelper
     {
+        public static readonly SolidColorBrush TimeBrush =
+            (SolidColorBrush) new BrushConverter().ConvertFrom("#FF373F4E");
+
+        public static readonly SolidColorBrush ChatBrush =
+            (SolidColorBrush) new BrushConverter().ConvertFrom("#FFBABBBF");
+
+        public static readonly SolidColorBrush MessageBrush =
+            (SolidColorBrush) new BrushConverter().ConvertFrom("#FF808080");
+
         public static string ToHexWithoutHash(SolidColorBrush brush)
         {
             var c = brush.Color;

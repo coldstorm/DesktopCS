@@ -22,7 +22,7 @@ namespace DesktopCS.Behaviors
 
         private void _scrollViewer_LayoutUpdated(object sender, EventArgs e)
         {
-            if (_scrollViewer.VerticalOffset == _scrollViewer.ScrollableHeight)
+            if ((int)_scrollViewer.VerticalOffset == (int)_scrollViewer.ScrollableHeight)
                 _scrollViewer.ScrollToBottom();
         }
 
