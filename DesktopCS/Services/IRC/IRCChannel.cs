@@ -1,9 +1,8 @@
 ﻿using DesktopCS.Helpers;
 using DesktopCS.Models;
-using DesktopCS.Tabs;
 using NetIRC;
 
-namespace DesktopCS.IRC
+namespace DesktopCS.Services.IRC
 {
     public class IRCChannel
     {

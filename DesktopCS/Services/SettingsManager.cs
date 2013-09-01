@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Windows.Media;
 using DesktopCS.Helpers;
 using DesktopCS.Models;
 using DesktopCS.Properties;
 
-namespace DesktopCS
+namespace DesktopCS.Services
 {
     public class SettingsManager
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Data;
 using DesktopCS.Controls;
-using DesktopCS.IRC;
 using DesktopCS.Models;
-using DesktopCS.Tabs;
+using DesktopCS.Services;
+using DesktopCS.Services.IRC;
 
 namespace DesktopCS.ViewModels
 {

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows;
 using DesktopCS.Controls;
+using DesktopCS.Models;
 using DesktopCS.ViewModels;
 using DesktopCS.Views;
 
-namespace DesktopCS.Tabs
+namespace DesktopCS.Services
 {
     public class Tab : UIInvoker
     {

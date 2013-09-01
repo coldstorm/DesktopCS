@@ -2,6 +2,7 @@
 using System.Windows.Threading;
 using DesktopCS.Helpers;
 using DesktopCS.Properties;
+using DesktopCS.Services;
 using DesktopCS.ViewModels;
 
 namespace DesktopCS.Views

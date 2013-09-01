@@ -1,5 +1,6 @@
 ﻿using System;
 using DesktopCS.Properties;
+using DesktopCS.Services;
 using DesktopCS.Views;
 
 namespace DesktopCS

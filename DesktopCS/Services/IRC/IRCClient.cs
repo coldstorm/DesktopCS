@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DesktopCS.Helpers;
 using DesktopCS.Models;
-using DesktopCS.Tabs;
 using NetIRC;
 
-namespace DesktopCS.IRC
+namespace DesktopCS.Services.IRC
 {
     // Handles Connecting and reconnecting to the IRC network and managing other IRC classes
     public class IRCClient

@@ -83,20 +83,20 @@
     <Compile Include="Helpers\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\IdentHelper.cs" />
-    <Compile Include="IRC\IRCClient.cs" />
-    <Compile Include="IRC\IRCChannel.cs" />
-    <Compile Include="IRC\IRCServer.cs" />
-    <Compile Include="IRC\IRCUser.cs" />
-    <Compile Include="Tabs\ServerTab.cs" />
-    <Compile Include="Tabs\Tab.cs" />
-    <Compile Include="Tabs\ChatLine.cs" />
+    <Compile Include="Services\IRC\IRCClient.cs" />
+    <Compile Include="Services\IRC\IRCChannel.cs" />
+    <Compile Include="Services\IRC\IRCServer.cs" />
+    <Compile Include="Services\IRC\IRCUser.cs" />
+    <Compile Include="Models\ServerTab.cs" />
+    <Compile Include="Services\Tab.cs" />
+    <Compile Include="Models\ChatLine.cs" />
     <Compile Include="Models\LoginData.cs" />
-    <Compile Include="Tabs\MessageLine.cs" />
-    <Compile Include="Tabs\SystemMessageLine.cs" />
+    <Compile Include="Models\MessageLine.cs" />
+    <Compile Include="Services\SystemMessageLine.cs" />
     <Compile Include="Models\UserListItem.cs" />
     <Compile Include="Models\UserMetadata.cs" />
-    <Compile Include="SettingsManager.cs" />
-    <Compile Include="Tabs\TabManager.cs" />
+    <Compile Include="Services\SettingsManager.cs" />
+    <Compile Include="Services\TabManager.cs" />
     <Compile Include="UIInvoker.cs" />
     <Compile Include="Views\ChatTabContentView.xaml.cs">
       <DependentUpon>ChatTabContentView.xaml</DependentUpon>
@@ -967,7 +967,9 @@
   <ItemGroup>
     <Resource Include="Resources\coldstorm.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Tabs\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

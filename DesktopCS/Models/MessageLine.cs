@@ -1,7 +1,6 @@
 ﻿using DesktopCS.Helpers;
-using DesktopCS.Models;
 
-namespace DesktopCS.Tabs
+namespace DesktopCS.Models
 {
     class MessageLine : ChatLine
     {

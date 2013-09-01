@@ -2,9 +2,8 @@
 using System.Windows.Documents;
 using System.Windows.Media;
 using DesktopCS.Helpers;
-using DesktopCS.Models;
 
-namespace DesktopCS.Tabs
+namespace DesktopCS.Models
 {
     public class ChatLine
     {

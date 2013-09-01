@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using DesktopCS.Services;
 
-namespace DesktopCS.Tabs
+namespace DesktopCS.Models
 {
     class ServerTab : Tab
     {

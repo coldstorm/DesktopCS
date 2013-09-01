@@ -22,10 +22,10 @@ namespace DesktopCS.Behaviors
             {
                 var fd = o as FlowDocument;
                 if (fd == null) return;
-                var dpd = DependencyPropertyDescriptor.FromProperty(FlowDocument.PagePaddingProperty, typeof(FlowDocument));
-                dpd.RemoveValueChanged(fd, PaddingChanged);
+                var descriptor = DependencyPropertyDescriptor.FromProperty(FlowDocument.PagePaddingProperty, typeof(FlowDocument));
+                descriptor.RemoveValueChanged(fd, PaddingChanged);
                 fd.PagePadding = (Thickness)args.NewValue;
-                dpd.AddValueChanged(fd, PaddingChanged);
+                descriptor.AddValueChanged(fd, PaddingChanged);
             }));
 
         public static void PaddingChanged(object s, EventArgs e)

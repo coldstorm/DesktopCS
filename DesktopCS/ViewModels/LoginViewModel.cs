@@ -4,6 +4,7 @@ using DesktopCS.Commands;
 using DesktopCS.Helpers;
 using DesktopCS.Models;
 using DesktopCS.Properties;
+using DesktopCS.Services;
 using DesktopCS.Views;
 
 namespace DesktopCS.ViewModels
