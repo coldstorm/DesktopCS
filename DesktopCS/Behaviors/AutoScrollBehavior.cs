@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 
@@ -17,13 +14,13 @@ namespace DesktopCS.Behaviors
             base.OnAttached();
 
             this._scrollViewer = this.AssociatedObject;
-            this._scrollViewer.LayoutUpdated += this._scrollViewer_LayoutUpdated;
+            this._scrollViewer.ScrollChanged += this._scrollViewer_ScrollChanged;
         }
 
-        private void _scrollViewer_LayoutUpdated(object sender, EventArgs e)
+        private void _scrollViewer_ScrollChanged(object sender, EventArgs e)
         {
             if ((int)this._scrollViewer.VerticalOffset == (int)this._scrollViewer.ScrollableHeight)
-                this._scrollViewer.ScrollToBottom();
+                this._scrollViewer.ScrollToEnd();
         }
 
         protected override void OnDetaching()
@@ -31,7 +28,7 @@ namespace DesktopCS.Behaviors
             base.OnDetaching();
 
             if (this._scrollViewer != null)
-                this._scrollViewer.LayoutUpdated -= this._scrollViewer_LayoutUpdated;
+                this._scrollViewer.ScrollChanged -= this._scrollViewer_ScrollChanged;
         }
     }
 }
