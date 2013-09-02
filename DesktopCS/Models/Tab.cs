@@ -1,29 +1,30 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using DesktopCS.Controls;
-using DesktopCS.Models;
+using DesktopCS.MVVM;
 using DesktopCS.ViewModels;
 using DesktopCS.Views;
 
-namespace DesktopCS.Services
+namespace DesktopCS.Models
 {
     public class Tab : UIInvoker
     {
-        private string _header;
+        private readonly ChatTabContentViewModel _tabVM;
+        
         public string Header
         {
-            get { return this._header; }
+            get { return (string)this.TabItem.Header; }
             set
             {
-                var original = value;
-                this._header = value;
+                var original = (string)this.TabItem.Header;
+                if (original == value) return;
+
                 this.TabItem.Header = value;
                 this.OnHeaderChange(original);
             }
         }
 
-        public ChatTabContentView TabView { get; private set; }
-        public ChatTabContentViewModel TabVM { get; private set; }
         public CSTabItem TabItem { get; private set; }
 
         public delegate void HeaderChangeHandler(object sender, string oldValue);
@@ -45,9 +46,9 @@ namespace DesktopCS.Services
 
         public Tab(string header)
         {
-            this.TabVM = new ChatTabContentViewModel();
-            this.TabView = new ChatTabContentView(this.TabVM);
-            this.TabItem = new CSTabItem {Content = this.TabView};
+            this._tabVM = new ChatTabContentViewModel();
+            var tabView = new ChatTabContentView(this._tabVM);
+            this.TabItem = new CSTabItem { Content = tabView };
             this.Header = header;
 
             this.TabItem.CloseTab += this.TabItem_CloseTab;
@@ -60,21 +61,21 @@ namespace DesktopCS.Services
             this.OnClose();
         }
 
-        public void AddChat(ChatLine line, bool markUnread = true)
+        public void AddChat(ChatLine line)
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(() => this.AddChat(line, markUnread));
+                this.Invoke(() => this.AddChat(line));
                 return;
             }
 
-            if (markUnread)
+            if (line is MessageLine)
                 this.MarkUnread();
 
-            this.TabVM.FlowDocument.Blocks.Add(line.ToParagraph());
+            this._tabVM.FlowDocument.Blocks.Add(line.ToParagraph());
         }
 
-        public void MarkUnread()
+        public virtual void MarkUnread()
         {
             if (!this.TabItem.IsSelected)
                 this.TabItem.IsUnread = true;

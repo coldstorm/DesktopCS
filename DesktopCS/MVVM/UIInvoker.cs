@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace DesktopCS.Services
+namespace DesktopCS.MVVM
 {
     public abstract class UIInvoker
     {

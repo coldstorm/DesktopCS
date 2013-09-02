@@ -7,32 +7,41 @@ namespace DesktopCS.Services.IRC
     public class IRCServer
     {
         private readonly Tab _serverTab;
-        private readonly TabManager _tabManager;
+        private readonly IRCClient _ircClient;
         private readonly Client _client;
 
-        public IRCServer(TabManager tabManager, Client client)
+        public IRCServer(IRCClient ircClient, Tab serverTab, Client client)
         {
-            this._tabManager = tabManager;
-            this._serverTab = tabManager.AddServer("Server");
+            this._ircClient = ircClient;
+            this._ircClient.Input += _ircClient_Input;
+
+            this._serverTab = serverTab;
 
             this._client = client;
             this._client.OnNotice += this.ClientOnNotice;
         }
 
-        void ClientOnNotice(Client client, User source, string notice)
+        void _ircClient_Input(object sender, string text)
         {
-            UserListItem u = null;
-            if (source != null)
-                u = new UserListItem(source.NickName, IdentHelper.Parse(source.UserName));
-            var line = new MessageLine(u, notice);
-            this._serverTab.AddChat(line);
+            this.ShowInActive(_client.User, text);
         }
 
-        public void Chat(string text)
+        void ClientOnNotice(Client client, User source, string notice)
         {
-            var u = new UserListItem(_client.User.NickName, IdentHelper.Parse(_client.User.UserName));
-            var line = new MessageLine(u, text);
-            this._tabManager.SelectedTab.AddChat(line);
+            if (source != null)
+            {
+                this.ShowInActive(source, notice);
+            }
+            else
+            {
+                this._serverTab.AddChat(null, u => new MessageLine(u, notice));
+            }
+        }
+
+        private void ShowInActive(User user, string text)
+        {
+            Tab selectedTab = this._ircClient.SelectedTab ?? this._serverTab;
+            selectedTab.AddChat(user, u => new MessageLine(u, text));
         }
     }
 }

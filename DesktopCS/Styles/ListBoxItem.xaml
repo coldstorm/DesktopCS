@@ -5,7 +5,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                    <ContentPresenter Content="{TemplateBinding Content}" />
+                    <ContentPresenter />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

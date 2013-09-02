@@ -7,19 +7,45 @@ using System.Windows.Data;
 using DesktopCS.Commands;
 using DesktopCS.Controls;
 using DesktopCS.Models;
+using DesktopCS.MVVM;
 using DesktopCS.Services;
 using DesktopCS.Services.IRC;
 
 namespace DesktopCS.ViewModels
 {
-    class MainViewModel 
+    class MainViewModel : INotifyPropertyChanged
     {
         private readonly TabManager _tabManager;
         private readonly IRCClient _irc;
+        private int _selectedIndex = -1;
+        private ObservableCollection<UserItem> _users;
+
+        public int SelectedIndex
+        {
+            get { return this._selectedIndex; }
+            set
+            {
+                this._selectedIndex = value;
+
+                var channelTab = _tabManager.SelectedTab as ChannelTab;
+                this.Users = channelTab != null ? channelTab.Users : null;
+            }
+        }
+
+        public ObservableCollection<UserItem> Users
+        {
+            get { return this._users; }
+            private set
+            {
+                this._users = value;
+                this.OnPropertyChanged("Users");
+            }
+        }
 
         public ChatData ChatData { get; private set; }
-        public CompositeCollection Tabs { get; private set; }
         public ChatInputCommand ChatInputCommand { get; private set; }
+
+        public CompositeCollection<CSTabItem> Tabs { get; private set; }
 
         public MainViewModel(SettingsManager settingsManager, LoginData loginData)
         {
@@ -42,5 +68,17 @@ namespace DesktopCS.ViewModels
             this._irc.Chat(ChatData.InputText);
             this.ChatData.InputText = String.Empty;
         }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
     }
 }

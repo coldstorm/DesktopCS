@@ -8,10 +8,15 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:UserlistItem}">
                     <StackPanel Margin="2">
-                        <DockPanel>
-                            <ContentPresenter DockPanel.Dock="Left" Width="16" ContentSource="Flag" />
-                            <ContentPresenter Cursor="Hand" Margin="4,0,0,0" />
-                        </DockPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ContentPresenter ContentSource="Flag" />
+                            <ContentPresenter Cursor="Hand" Margin="4,0,0,0" Grid.Column="1"/>
+                        </Grid>
 
                         <StackPanel x:Name="ContentRow" Margin="20,1,0,0">
                             <Button Style="{StaticResource TextButtonStyle}" x:Name="PART_Query">QUERY</Button>

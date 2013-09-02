@@ -3,40 +3,57 @@ using System.Windows;
 using DesktopCS.Helpers;
 using DesktopCS.Models;
 using NetIRC;
+using NetIRC.Messages.Send;
 
 namespace DesktopCS.Services.IRC
 {
     public class IRCChannel
     {
-        private readonly Tab _channelTab;
+        private readonly IRCClient _ircClient;
+        private readonly ChannelTab _channelTab;
         private readonly Channel _channel;
 
-        public IRCChannel(TabManager tabManager, Channel channel)
+        public IRCChannel(IRCClient ircClient, ChannelTab channelTab, Channel channel)
         {
+            this._ircClient = ircClient;
+            this._ircClient.Input += this._ircClient_Input;
+
+            this._channelTab = channelTab;
+            this._channelTab.AddChat(new SystemMessageLine("You joined the room."));
+
             this._channel = channel;
-            this._channelTab = tabManager.AddChannel(channel.FullName);
-
-             var line = new SystemMessageLine("You joined the room.");
-            this._channelTab.AddChat(line, false);
-
             this._channel.OnMessage += this._channel_OnMessage;
+            this._channel.OnJoin += _channel_OnJoin;
+            this._channel.OnLeave += _channel_OnLeave;
+            this._channel.OnWho += _channel_OnWho;
+        }
+
+        private void _ircClient_Input(object sender, string text)
+        {
+            if (_channelTab.TabItem.IsSelected)
+            {
+                this._ircClient.Send(new ChannelPrivate(_channel, text));
+            }
+        }
+
+        void _channel_OnWho(Channel source, string message)
+        {
+            
+        }
+
+        void _channel_OnLeave(Channel source, User user)
+        {
+            _channelTab.RemoveUser(user.ToUserItem());
+        }
+
+        void _channel_OnJoin(Channel source, User user)
+        {
+            _channelTab.AddUser(user.ToUserItem());
         }
 
         private void _channel_OnMessage(Channel source, User user, string message)
         {
-            UserListItem u = null;
-            MessageLine line = null;
-            Application.Current.Dispatcher.Invoke(new Action(
-                () =>
-                {
-                    
-
-
-                }));
-            u = new UserListItem(user.NickName, IdentHelper.Parse(user.UserName));
-            line = new MessageLine(u, message);
-            this._channelTab.AddChat(line);
-
+            _channelTab.AddChat(user, u => new MessageLine(u, message));
         }
     }
 }

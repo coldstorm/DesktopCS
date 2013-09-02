@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Data;
 using DesktopCS.Controls;
+using DesktopCS.Models;
+using DesktopCS.MVVM;
 
 namespace DesktopCS.Services
 {
@@ -14,19 +16,11 @@ namespace DesktopCS.Services
         private readonly ObservableCollection<CSTabItem> _userTabs = new ObservableCollection<CSTabItem>();
         private readonly Dictionary<string, Tab> _tabDictionary = new Dictionary<string, Tab>();
 
-        public CompositeCollection Tabs { get; private set; }
+        public CompositeCollection<CSTabItem> Tabs { get; private set; }
 
         public TabManager()
         {
-            this.Tabs = new CompositeCollection();
-
-            var serverContainer = new CollectionContainer { Collection = this._serverTabs };
-            var channelContainer = new CollectionContainer { Collection = this._channelTabs };
-            var userContainer = new CollectionContainer { Collection = this._userTabs };
-
-            this.Tabs.Add(serverContainer);
-            this.Tabs.Add(channelContainer);
-            this.Tabs.Add(userContainer);
+            this.Tabs = new CompositeCollection<CSTabItem>(this._serverTabs, this._channelTabs, this._userTabs);
         }
 
         void channel_Close(object sender, EventArgs e)
@@ -54,6 +48,12 @@ namespace DesktopCS.Services
         {
             get
             {
+                if (this.InvokeRequired)
+                {
+                    Tab value = null;
+                    this.Invoke(() => value = this.SelectedTab);
+                    return value;
+                }
                 return _tabDictionary.Values.FirstOrDefault(t => t.TabItem.IsSelected);
             }
             set
@@ -62,18 +62,18 @@ namespace DesktopCS.Services
             }
         }
 
-        public Tab AddServer(string tabName)
+        public ServerTab AddServer(string tabName)
         {
             if (this.InvokeRequired)
             {
-                Tab value = null;
+                ServerTab value = null;
                 this.Invoke(() => value = this.AddServer(tabName));
                 return value;
             }
 
             if (this._tabDictionary.ContainsKey(tabName))
             {
-                return this._tabDictionary[tabName];
+                return (ServerTab)this._tabDictionary[tabName];
             }
 
             var server = new ServerTab(tabName);
@@ -83,21 +83,21 @@ namespace DesktopCS.Services
             return server;
         }
 
-        public Tab AddChannel(string tabName)
+        public ChannelTab AddChannel(string tabName)
         {
             if (this.InvokeRequired)
             {
-                Tab value = null;
+                ChannelTab value = null;
                 this.Invoke(() => value = this.AddChannel(tabName));
                 return value;
             }
 
             if (this._tabDictionary.ContainsKey(tabName))
             {
-                return this._tabDictionary[tabName];
+                return (ChannelTab)this._tabDictionary[tabName];
             }
 
-            var channel = new Tab(tabName);
+            var channel = new ChannelTab(tabName);
             channel.Close += this.channel_Close;
             this._tabDictionary.Add(tabName, channel);
             this._channelTabs.Add(channel.TabItem);

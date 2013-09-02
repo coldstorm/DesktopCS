@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using DesktopCS.Models;
+using DesktopCS.Services;
 using NetIRC;
 
 namespace DesktopCS.Helpers
@@ -24,5 +27,19 @@ namespace DesktopCS.Helpers
                     '+'
                 }
             };
+
+        public static UserItem ToUserItem(this User user)
+        {
+            return new UserItem(user.NickName, IdentHelper.Parse(user.UserName));
+        }
+
+        public static void AddChat(this Tab tab, User user, Func<UserItem, ChatLine> callback)
+        {
+            UserItem u = null;
+            if (user != null)
+                u = user.ToUserItem();
+            ChatLine line = callback(u); ;
+            tab.AddChat(line);
+        }
     }
 }

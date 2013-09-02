@@ -45,15 +45,10 @@
       <HintPath>..\Lib\NetIRC.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -80,25 +75,27 @@
     <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\NetIRCHelper.cs" />
     <Compile Include="Helpers\CountryCodeHelper.cs" />
+    <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="Helpers\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\IdentHelper.cs" />
     <Compile Include="Models\ChatData.cs" />
+    <Compile Include="Models\ChannelTab.cs" />
+    <Compile Include="MVVM\CompositeCollection.cs" />
     <Compile Include="Services\IRC\IRCClient.cs" />
     <Compile Include="Services\IRC\IRCChannel.cs" />
     <Compile Include="Services\IRC\IRCServer.cs" />
-    <Compile Include="Services\IRC\IRCUser.cs" />
-    <Compile Include="Services\ServerTab.cs" />
-    <Compile Include="Services\Tab.cs" />
+    <Compile Include="Models\ServerTab.cs" />
+    <Compile Include="Models\Tab.cs" />
     <Compile Include="Models\ChatLine.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\MessageLine.cs" />
     <Compile Include="Models\SystemMessageLine.cs" />
-    <Compile Include="Models\UserListItem.cs" />
+    <Compile Include="Models\UserItem.cs" />
     <Compile Include="Models\UserMetadata.cs" />
     <Compile Include="Services\SettingsManager.cs" />
     <Compile Include="Services\TabManager.cs" />
-    <Compile Include="Services\UIInvoker.cs" />
+    <Compile Include="MVVM\UIInvoker.cs" />
     <Compile Include="Views\ChatTabContentView.xaml.cs">
       <DependentUpon>ChatTabContentView.xaml</DependentUpon>
     </Compile>
@@ -876,7 +873,7 @@
     <Resource Include="Resources\Flags\zw.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Flags\a1.png" />
+    <Resource Include="Resources\Flags\aa.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Flags\ad.png" />

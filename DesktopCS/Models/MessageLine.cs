@@ -4,7 +4,7 @@ namespace DesktopCS.Models
 {
     class MessageLine : ChatLine
     {
-        public MessageLine(UserListItem user, string message)
+        public MessageLine(UserItem user, string message)
             : base(user, ColorHelper.ChatColor, message)
         {
         }

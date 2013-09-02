@@ -8,7 +8,7 @@ namespace DesktopCS.Models
     public class ChatLine
     {
         public string Timestamp { get; private set; }
-        public UserListItem User { get; private set; }
+        public UserItem User { get; private set; }
         public Color ChatColor { get; private set; }
         public string Chat { get; private set; }
 
@@ -27,7 +27,7 @@ namespace DesktopCS.Models
             this.Chat = chat;
         }
 
-        public ChatLine(UserListItem user, Color chatColor, string chat)
+        public ChatLine(UserItem user, Color chatColor, string chat)
         {
             this.ChatColor = chatColor;
             this.Timestamp = TimeHelper.CreateTimeStamp();
@@ -35,7 +35,7 @@ namespace DesktopCS.Models
             this.User = user;
         }
 
-        public ChatLine(UserListItem user, Color chatColor, string chat, string timestamp)
+        public ChatLine(UserItem user, Color chatColor, string chat, string timestamp)
         {
             this.ChatColor = chatColor;
             this.Timestamp = timestamp;
