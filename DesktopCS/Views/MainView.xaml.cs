@@ -18,7 +18,7 @@ namespace DesktopCS.Views
         //Keep the focus on InputTextBox all the time
         private void PreviewWindow_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            InputTextBox.Focus();
+            this.InputTextBox.Focus();
         }
     }
 }

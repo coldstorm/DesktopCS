@@ -26,7 +26,7 @@ namespace DesktopCS.ViewModels
             {
                 this._selectedItem = value;
 
-                var channelTab = TabManager.SelectedTab as ChannelTab;
+                var channelTab = this.TabManager.SelectedTab as ChannelTab;
                 this.Users = channelTab != null ? channelTab.Users : null;
             }
         }
@@ -63,7 +63,7 @@ namespace DesktopCS.ViewModels
 
         public void Chat()
         {
-            this._irc.Chat(ChatData.InputText);
+            this._irc.Chat(this.ChatData.InputText);
             this.ChatData.InputText = String.Empty;
         }
 
@@ -73,7 +73,7 @@ namespace DesktopCS.ViewModels
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
+            PropertyChangedEventHandler handler = this.PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 

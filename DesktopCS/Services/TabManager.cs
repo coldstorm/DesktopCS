@@ -48,7 +48,7 @@ namespace DesktopCS.Services
         {
             get
             {
-                return _tabDictionary.Values.FirstOrDefault(t => t.IsSelected);
+                return this._tabDictionary.Values.FirstOrDefault(t => t.IsSelected);
             }
             set
             {

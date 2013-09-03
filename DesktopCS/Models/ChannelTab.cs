@@ -9,7 +9,7 @@ namespace DesktopCS.Models
 
         public ChannelTab(string header) : base(header)
         {
-            Users = new SortedObservableCollection<UserItem>();
+            this.Users = new SortedObservableCollection<UserItem>();
         }
 
         public void AddUser(UserItem user)

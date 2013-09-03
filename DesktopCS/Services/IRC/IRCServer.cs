@@ -14,8 +14,8 @@ namespace DesktopCS.Services.IRC
         public IRCServer(IRCClient ircClient, Tab serverTab, Client client)
         {
             this._ircClient = ircClient;
-            this._ircClient.Input += _ircClient_Input;
-            this._ircClient.Text += _ircClient_OnText;
+            this._ircClient.Input += this._ircClient_Input;
+            this._ircClient.Text += this._ircClient_OnText;
 
             this._serverTab = serverTab;
 
@@ -30,9 +30,9 @@ namespace DesktopCS.Services.IRC
 
         private void _ircClient_Input(object sender, string text)
         {
-            if (!_serverTab.IsSelected)
+            if (!this._serverTab.IsSelected)
             {
-                this.ShowInActive(_client.User, text);
+                this.ShowInActive(this._client.User, text);
             }
         }
 
