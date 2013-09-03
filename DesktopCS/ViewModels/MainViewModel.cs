@@ -16,15 +16,15 @@ namespace DesktopCS.ViewModels
     class MainViewModel : INotifyPropertyChanged
     {
         private readonly IRCClient _irc;
-        private int _selectedIndex = -1;
+        private CSTabItem _selectedItem;
         private ObservableCollection<UserItem> _users;
 
-        public int SelectedIndex
+        public CSTabItem SelectedItem
         {
-            get { return this._selectedIndex; }
+            get { return this._selectedItem; }
             set
             {
-                this._selectedIndex = value;
+                this._selectedItem = value;
 
                 var channelTab = TabManager.SelectedTab as ChannelTab;
                 this.Users = channelTab != null ? channelTab.Users : null;

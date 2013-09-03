@@ -36,7 +36,7 @@
 
             <TextBox Grid.ColumnSpan="4" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" />
 
-            <TabControl Grid.Row="1" Grid.Column="0" SelectedIndex="{Binding SelectedIndex}">
+            <TabControl Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedItem}">
                 <TabControl.Resources>
                     <CollectionViewSource Source="{Binding TabManager.ServerTabs}" x:Key="ServerTabs" />
                     <CollectionViewSource Source="{Binding TabManager.ChannelTabs}" x:Key="ChannelTabs" />
