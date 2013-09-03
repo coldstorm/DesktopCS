@@ -54,7 +54,7 @@
             <Border Padding="4" Grid.Row="3" Grid.Column="0" Style="{StaticResource ContentBorder}" FocusManager.IsFocusScope="True">
                 <ScrollViewer MaxHeight="64" VerticalScrollBarVisibility="Auto">
                     <TextBox x:Name="InputTextBox" SpellCheck.IsEnabled="True" Language="en" TextWrapping="Wrap"
-						Text="{Binding ChatData.InputText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                        Text="{Binding ChatData.InputText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                         <TextBox.InputBindings>
                             <KeyBinding Command="{Binding ChatInputCommand}" Key="Enter" />
                             <KeyBinding Key="Tab" />

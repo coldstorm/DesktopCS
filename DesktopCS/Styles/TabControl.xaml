@@ -11,7 +11,7 @@
                 <ControlTemplate TargetType="{x:Type TabControl}">
                     <Grid KeyboardNavigation.TabNavigation="Local">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" MinHeight="21" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
