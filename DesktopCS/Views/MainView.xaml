@@ -36,7 +36,20 @@
 
             <TextBox Grid.ColumnSpan="4" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" />
 
-            <TabControl Grid.Row="1" Grid.Column="0" SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding TabManager.Tabs}"/>          
+            <TabControl Grid.Row="1" Grid.Column="0" SelectedIndex="{Binding SelectedIndex}">
+                <TabControl.Resources>
+                    <CollectionViewSource Source="{Binding TabManager.ServerTabs}" x:Key="ServerTabs" />
+                    <CollectionViewSource Source="{Binding TabManager.ChannelTabs}" x:Key="ChannelTabs" />
+                    <CollectionViewSource Source="{Binding TabManager.UserTabs}" x:Key="UserTabs" />
+                </TabControl.Resources>
+                <TabControl.ItemsSource>
+                    <CompositeCollection>
+                        <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=ServerTabs}}" />
+                        <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=ChannelTabs}}" />
+                        <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=UserTabs}}" />
+                    </CompositeCollection>
+                </TabControl.ItemsSource>
+            </TabControl>         
 
             <Border Padding="4" Grid.Row="3" Grid.Column="0" Style="{StaticResource ContentBorder}">
                 <ScrollViewer MaxHeight="64" VerticalScrollBarVisibility="Auto">

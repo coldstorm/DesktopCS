@@ -11,30 +11,30 @@ namespace DesktopCS.Services
 {
     public class TabManager : UIInvoker
     {
-        private readonly ObservableCollection<CSTabItem> _serverTabs = new ObservableCollection<CSTabItem>();
-        private readonly ObservableCollection<CSTabItem> _channelTabs = new ObservableCollection<CSTabItem>();
-        private readonly ObservableCollection<CSTabItem> _userTabs = new ObservableCollection<CSTabItem>();
+        public ObservableCollection<CSTabItem> ServerTabs { get; private set; }
+        public ObservableCollection<CSTabItem> ChannelTabs { get; private set; }
+        public ObservableCollection<CSTabItem> UserTabs { get; private set; }
         private readonly Dictionary<string, Tab> _tabDictionary = new Dictionary<string, Tab>();
-
-        public CompositeCollection<CSTabItem> Tabs { get; private set; }
 
         public TabManager()
         {
-            this.Tabs = new CompositeCollection<CSTabItem>(this._serverTabs, this._channelTabs, this._userTabs);
+            this.ServerTabs = new ObservableCollection<CSTabItem>();
+            this.ChannelTabs = new ObservableCollection<CSTabItem>();
+            this.UserTabs = new ObservableCollection<CSTabItem>();
         }
 
         void channel_Close(object sender, EventArgs e)
         {
             var tab = (Tab)sender;
             this._tabDictionary.Remove(tab.Header);
-            this._channelTabs.Remove(tab.TabItem);
+            this.ChannelTabs.Remove(tab.TabItem);
         }
 
         void user_Close(object sender, EventArgs e)
         {
             var tab = (Tab)sender;
             this._tabDictionary.Remove(tab.Header);
-            this._userTabs.Remove(tab.TabItem);
+            this.UserTabs.Remove(tab.TabItem);
         }
 
         void user_HeaderChange(object sender, string oldValue)
@@ -72,7 +72,7 @@ namespace DesktopCS.Services
 
             var server = new ServerTab(tabName);
             this._tabDictionary.Add(tabName, server);
-            this._serverTabs.Add(server.TabItem);
+            this.ServerTabs.Add(server.TabItem);
 
             return server;
         }
@@ -94,7 +94,7 @@ namespace DesktopCS.Services
             var channel = new ChannelTab(tabName);
             channel.Close += this.channel_Close;
             this._tabDictionary.Add(tabName, channel);
-            this._channelTabs.Add(channel.TabItem);
+            this.ChannelTabs.Add(channel.TabItem);
 
             return channel;
         }
@@ -117,7 +117,7 @@ namespace DesktopCS.Services
             user.Close += this.user_Close;
             user.HeaderChange += this.user_HeaderChange;
             this._tabDictionary.Add(tabName, user);
-            this._userTabs.Add(user.TabItem);
+            this.UserTabs.Add(user.TabItem);
 
             return user;
         }
