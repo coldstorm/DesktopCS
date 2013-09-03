@@ -1,6 +1,7 @@
 ﻿using System;
 using DesktopCS.Helpers;
 using DesktopCS.Models;
+using DesktopCS.MVVM;
 using DesktopCS.Services.IRC.Messages.Receive.Numerics;
 using DesktopCS.Services.IRC.Messages.Send;
 using NetIRC;
@@ -9,7 +10,7 @@ using NetIRC.Messages;
 namespace DesktopCS.Services.IRC
 {
     // Handles Connecting and reconnecting to the IRC network and managing other IRC classes
-    public class IRCClient : IDisposable
+    public class IRCClient : UIInvoker, IDisposable
     {
         private readonly TabManager _tabManager;
         private readonly LoginData _loginData;
@@ -62,25 +63,6 @@ namespace DesktopCS.Services.IRC
             this.Connect();
         }
 
-        private void IRCClient_ReceiveText(object sender, string text)
-        {
-            if (sender == this._client)
-            {
-                this.OnText(text);
-            }
-        }
-
-        void _client_OnConnect(Client client)
-        {
-            //_client.JoinChannel("test");
-        }
-
-        void _client_OnChannelJoin(Client client, Channel channel)
-        {
-            ChannelTab tab = this._tabManager.AddChannel(channel.FullName);
-            new IRCChannel(this, tab, channel);
-        }
-
         public void Connect()
         {
             this._client = new Client();
@@ -110,10 +92,43 @@ namespace DesktopCS.Services.IRC
             }
         }
 
+        #region Event Handlers
+
         public void Send(ISendMessage message)
         {
             this._client.Send(message);
         }
+
+        private void IRCClient_ReceiveText(object sender, string text)
+        {
+            Run(() =>
+            {
+                if (sender == this._client)
+                {
+                    this.OnText(text);
+                }
+            });
+        }
+
+        private void _client_OnConnect(Client client)
+        {
+            //Run(() =>
+            //{
+            //   _client.JoinChannel("test");
+            //});
+        }
+
+        private void _client_OnChannelJoin(Client client, Channel channel)
+        {
+            Run(() =>
+            {
+                ChannelTab tab = this._tabManager.AddChannel(channel.FullName);
+                new IRCChannel(this, tab, channel);
+            });
+        }
+
+        #endregion
+
 
         #region IDisposable Members
 

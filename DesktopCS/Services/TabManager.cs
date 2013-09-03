@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Data;
 using DesktopCS.Controls;
 using DesktopCS.Models;
-using DesktopCS.MVVM;
 
 namespace DesktopCS.Services
 {
-    public class TabManager : UIInvoker
+    public class TabManager
     {
         public ObservableCollection<CSTabItem> ServerTabs { get; private set; }
         public ObservableCollection<CSTabItem> ChannelTabs { get; private set; }
@@ -58,13 +56,6 @@ namespace DesktopCS.Services
 
         public ServerTab AddServer(string tabName)
         {
-            if (this.InvokeRequired)
-            {
-                ServerTab value = null;
-                this.Invoke(() => value = this.AddServer(tabName));
-                return value;
-            }
-
             if (this._tabDictionary.ContainsKey(tabName))
             {
                 return (ServerTab)this._tabDictionary[tabName];
@@ -79,13 +70,6 @@ namespace DesktopCS.Services
 
         public ChannelTab AddChannel(string tabName)
         {
-            if (this.InvokeRequired)
-            {
-                ChannelTab value = null;
-                this.Invoke(() => value = this.AddChannel(tabName));
-                return value;
-            }
-
             if (this._tabDictionary.ContainsKey(tabName))
             {
                 return (ChannelTab)this._tabDictionary[tabName];
@@ -101,13 +85,6 @@ namespace DesktopCS.Services
 
         public Tab AddOrGetUser(string tabName)
         {
-            if (this.InvokeRequired)
-            {
-                Tab value = null;
-                this.Invoke(() => value = this.AddOrGetUser(tabName));
-                return value;
-            }
-
             if (this._tabDictionary.ContainsKey(tabName))
             {
                 return this._tabDictionary[tabName];

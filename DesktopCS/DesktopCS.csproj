@@ -81,6 +81,7 @@
     <Compile Include="Helpers\IdentHelper.cs" />
     <Compile Include="Models\ChatData.cs" />
     <Compile Include="Models\ChannelTab.cs" />
+    <Compile Include="MVVM\ObservableObject.cs" />
     <Compile Include="MVVM\SortedObservableCollection.cs" />
     <Compile Include="Services\IRC\IRCChannelUser.cs" />
     <Compile Include="Services\IRC\IRCClient.cs" />

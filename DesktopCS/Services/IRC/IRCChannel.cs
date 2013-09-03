@@ -1,11 +1,12 @@
 ﻿using DesktopCS.Helpers;
 using DesktopCS.Models;
+using DesktopCS.MVVM;
 using NetIRC;
 using NetIRC.Messages.Send;
 
 namespace DesktopCS.Services.IRC
 {
-    public class IRCChannel
+    public class IRCChannel : UIInvoker
     {
         private readonly IRCClient _ircClient;
         private readonly ChannelTab _channelTab;
@@ -33,35 +34,46 @@ namespace DesktopCS.Services.IRC
             new IRCChannelUser(userItem, user, channel);
         }
 
-        void _channel_OnNames(Channel source, string[] users)
+        #region Event Handlers
+
+        private void _channel_OnNames(Channel source, string[] users)
         {
-            foreach (var user in this._channel.Users.Values)
+            Run(() =>
             {
-                this.AddUser(this._channel, user);
-            }
+                foreach (var user in this._channel.Users.Values)
+                {
+                    this.AddUser(this._channel, user);
+                }
+            });
         }
 
         private void _ircClient_Input(object sender, string text)
         {
-            if (this._channelTab.IsSelected)
+            Run(() =>
             {
-                this._ircClient.Send(new ChannelPrivate(this._channel, text));
-            }
+                if (this._channelTab.IsSelected)
+                {
+                    this._ircClient.Send(new ChannelPrivate(this._channel, text));
+                }
+            });
         }
 
-        void _channel_OnLeave(Channel source, User user)
+        private void _channel_OnLeave(Channel source, User user)
         {
-            this._channelTab.RemoveUser(user.ToUserItem());
+            Run(() => this._channelTab.RemoveUser(user.ToUserItem()));
         }
 
-        void _channel_OnJoin(Channel source, User user)
+        private void _channel_OnJoin(Channel source, User user)
         {
-            this.AddUser(this._channel, user);
+            Run(() => this.AddUser(this._channel, user));
         }
 
         private void _channel_OnMessage(Channel source, User user, string message)
         {
-            this._channelTab.AddChat(user, u => new MessageLine(u, message));
+            Run(() => this._channelTab.AddChat(user, u => new MessageLine(u, message)));
         }
+
+        #endregion
+
     }
 }

@@ -14,23 +14,11 @@ namespace DesktopCS.Models
 
         public void AddUser(UserItem user)
         {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(() => this.AddUser(user));
-                return;
-            }
-
             this.Users.Add(user);
         }
 
         public void RemoveUser(UserItem user)
         {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(() => this.RemoveUser(user));
-                return;
-            }
-
             this.Users.Remove(user);
         }
     }

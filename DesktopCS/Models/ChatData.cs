@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
+using DesktopCS.MVVM;
 
 namespace DesktopCS.Models
 {
-    class ChatData : INotifyPropertyChanged, IDataErrorInfo
+    class ChatData : ObservableObject, IDataErrorInfo
     {
         private string _inputText;
 
@@ -19,16 +18,6 @@ namespace DesktopCS.Models
                 this.OnPropertyChanged("InputText");
             }
         }
-
-        #region INotifyPropertyChanged Members
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
 
         #region IDataErrorInfo Members
         public string this[string columnName]

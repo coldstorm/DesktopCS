@@ -1,9 +1,5 @@
-﻿using System;
-using System.Windows.Media;
-using DesktopCS.Commands;
-using DesktopCS.Helpers;
+﻿using DesktopCS.Commands;
 using DesktopCS.Models;
-using DesktopCS.Properties;
 using DesktopCS.Services;
 using DesktopCS.Views;
 

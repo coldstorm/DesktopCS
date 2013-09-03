@@ -1,11 +1,12 @@
 ﻿using System;
 using DesktopCS.Helpers;
 using DesktopCS.Models;
+using DesktopCS.MVVM;
 using NetIRC;
 
 namespace DesktopCS.Services.IRC
 {
-    public class IRCChannelUser : IDisposable
+    public class IRCChannelUser : UIInvoker, IDisposable
     {
         private readonly UserItem _userItem;
         private readonly User _user;
@@ -23,25 +24,33 @@ namespace DesktopCS.Services.IRC
             this._channel.OnLeave += this._channel_OnLeave;
         }
 
-        void _channel_OnLeave(Channel source, User user)
+        #region Event Handlers
+
+        private void _channel_OnLeave(Channel source, User user)
         {
-            if (user == this._user)
+            Run(() =>
             {
-                this.Dispose();
-            }
+                if (user == this._user)
+                {
+                    this.Dispose();
+                }
+            });
         }
 
-        void _user_OnUserNameChange(User user, string original)
+        private void _user_OnUserNameChange(User user, string original)
         {
-            this._userItem.Metadata = user.ToUserItem().Metadata;
+            Run(() => { this._userItem.Metadata = user.ToUserItem().Metadata; });
         }
 
-        void _user_OnNickNameChange(User user, string original)
+        private void _user_OnNickNameChange(User user, string original)
         {
-            this._userItem.NickName = this._user.NickName;
+            Run(() => { this._userItem.NickName = this._user.NickName; });
         }
 
-        #region Implementation of IDisposable
+        #endregion
+
+
+        #region IDisposable Members
 
         public void Dispose()
         {

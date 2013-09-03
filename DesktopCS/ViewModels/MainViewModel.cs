@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows.Data;
 using DesktopCS.Commands;
 using DesktopCS.Controls;
 using DesktopCS.Models;
@@ -13,7 +10,7 @@ using DesktopCS.Services.IRC;
 
 namespace DesktopCS.ViewModels
 {
-    class MainViewModel : INotifyPropertyChanged
+    class MainViewModel : ObservableObject
     {
         private readonly IRCClient _irc;
         private CSTabItem _selectedItem;
@@ -66,17 +63,5 @@ namespace DesktopCS.ViewModels
             this._irc.Chat(this.ChatData.InputText);
             this.ChatData.InputText = String.Empty;
         }
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
     }
 }

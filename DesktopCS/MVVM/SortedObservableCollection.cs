@@ -42,8 +42,6 @@ namespace DesktopCS.MVVM
 
         private void ContainedElementChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.OnPropertyChanged(e);
-
             // Tell the Collection that the property has changed
             base.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, sender, sender));
         }

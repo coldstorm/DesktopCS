@@ -7,7 +7,7 @@ using DesktopCS.Views;
 
 namespace DesktopCS.Models
 {
-    public class Tab : UIInvoker
+    public class Tab
     {
         private readonly ChatTabContentViewModel _tabVM;
         
@@ -30,23 +30,10 @@ namespace DesktopCS.Models
         {
             get
             {
-                if (this.InvokeRequired)
-                {
-                    bool value = false;
-                    this.Invoke(() => value = this.IsSelected);
-                    return value;
-                }
-
                 return this.TabItem.IsSelected;
             }
             set
             {
-                if (this.InvokeRequired)
-                {
-                    this.Invoke(() => this.IsSelected = value);
-                    return;
-                }
-
                 this.TabItem.IsSelected = value;
             }
         }
@@ -87,12 +74,6 @@ namespace DesktopCS.Models
 
         public void AddChat(ChatLine line)
         {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(() => this.AddChat(line));
-                return;
-            }
-
             if (line is MessageLine)
                 this.MarkUnread();
 

@@ -2,10 +2,11 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Media;
+using DesktopCS.MVVM;
 
 namespace DesktopCS.Models
 {
-    public class LoginData : INotifyPropertyChanged, IDataErrorInfo
+    public class LoginData : ObservableObject, IDataErrorInfo
     {
         private string _username;
         private string _password;
@@ -47,17 +48,6 @@ namespace DesktopCS.Models
                 this.OnPropertyChanged("Color");
             }
         }
-
-
-        #region INotifyPropertyChanged Members
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
 
         #region IDataErrorInfo Members
         public string this[string columnName]

@@ -21,5 +21,17 @@ namespace DesktopCS.MVVM
         {
             this._dispatcher.Invoke(action);
         }
+
+        protected void Run(Action action)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(action);
+            }
+            else
+            {
+                action();
+            }
+        }
     }
 }

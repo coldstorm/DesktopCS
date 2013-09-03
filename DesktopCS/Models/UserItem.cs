@@ -3,7 +3,7 @@ using DesktopCS.MVVM;
 
 namespace DesktopCS.Models
 {
-    public class UserItem : UIInvoker, INotifyPropertyChanged
+    public class UserItem : ObservableObject
     {
         private string _nickName;
         private UserMetadata _metadata;
@@ -45,22 +45,6 @@ namespace DesktopCS.Models
         {
             return !(x == y);
         }
-
-        #region INotifyPropertyChanged Members
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(() => this.OnPropertyChanged(propertyName));
-                return;
-            }
-
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
 
         #region Equality members
 

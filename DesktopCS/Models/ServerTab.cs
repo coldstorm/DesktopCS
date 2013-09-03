@@ -1,6 +1,4 @@
-﻿using DesktopCS.Services;
-
-namespace DesktopCS.Models
+﻿namespace DesktopCS.Models
 {
     public class ServerTab : Tab
     {
