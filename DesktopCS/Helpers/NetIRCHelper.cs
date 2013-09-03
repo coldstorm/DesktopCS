@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using DesktopCS.Models;
-using DesktopCS.Services;
 using NetIRC;
 
 namespace DesktopCS.Helpers

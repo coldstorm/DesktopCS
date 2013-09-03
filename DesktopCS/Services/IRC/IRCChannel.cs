@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using DesktopCS.Helpers;
+﻿using DesktopCS.Helpers;
 using DesktopCS.Models;
 using NetIRC;
 using NetIRC.Messages.Send;
