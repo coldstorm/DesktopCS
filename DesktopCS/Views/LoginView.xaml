@@ -4,9 +4,8 @@
         xmlns:converters="clr-namespace:DesktopCS.Converters"
         xmlns:behaviors="clr-namespace:DesktopCS.Behaviors"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        Title="Login" Height="410" Width="372" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
-        Style="{StaticResource WindowStyle}"
-        UseLayoutRounding="True">
+        Title="Login" Height="410" Width="372" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" UseLayoutRounding="True"
+        Style="{StaticResource WindowStyle}">
 
     <Window.Resources>
         <converters:PlaceholderConverter x:Key="PlaceholderConverter" />

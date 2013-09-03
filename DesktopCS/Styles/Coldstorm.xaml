@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:DesktopCS.Controls">
 
     <SolidColorBrush x:Key="WindowBgBrush" Color="#FF1A1E1F" />
     <SolidColorBrush x:Key="BackgroundBrush" Color="#FF212226" />
@@ -15,7 +16,8 @@
     <SolidColorBrush x:Key="TimeBrush" Color="#FF373F4E" />
     <SolidColorBrush x:Key="MessageBrush" Color="#FF808080" />
 
-    <Style x:Key="{x:Static SystemParameters.FocusVisualStyleKey}">
-        <Setter Property="Control.Template" Value="{x:Null}" />
+    <Style TargetType="{x:Type ContentControl}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False" />
     </Style>
 </ResourceDictionary>
