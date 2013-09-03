@@ -13,6 +13,12 @@ namespace DesktopCS.Views
         {
             this.InitializeComponent();
             this.DataContext = new MainViewModel(settings, loginData);
+        } 
+        
+        //Keep the focus on InputTextBox all the time
+        private void PreviewWindow_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            InputTextBox.Focus();
         }
     }
 }

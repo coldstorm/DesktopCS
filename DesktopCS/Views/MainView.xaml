@@ -1,13 +1,13 @@
-﻿<Window x:Class="DesktopCS.Views.MainView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:behaviors="clr-namespace:DesktopCS.Behaviors"
         xmlns:controls="clr-namespace:DesktopCS.Controls"
         xmlns:converters="clr-namespace:DesktopCS.Converters"
         xmlns:models="clr-namespace:DesktopCS.Models"
-        Title="Coldstorm" Height="350" Width="550" MinHeight="200" MinWidth="300"
-        Style="{StaticResource WindowStyle}"
-        UseLayoutRounding="True">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="DesktopCS.Views.MainView"
+        Title="Coldstorm" Height="350" Width="550" MinHeight="200" MinWidth="300" UseLayoutRounding="True"
+        PreviewMouseUp="PreviewWindow_MouseUp"
+        Style="{StaticResource WindowStyle}">
 
     <Window.Resources>
         <converters:FlagToImageConverter x:Key="FlagToImageConverter" />
@@ -34,7 +34,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBox Grid.ColumnSpan="4" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" />
+            <TextBox Grid.ColumnSpan="4" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" Focusable="False" />
 
             <TabControl Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedItem}">
                 <TabControl.Resources>
@@ -49,14 +49,15 @@
                         <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=UserTabs}}" />
                     </CompositeCollection>
                 </TabControl.ItemsSource>
-            </TabControl>         
+            </TabControl>
 
-            <Border Padding="4" Grid.Row="3" Grid.Column="0" Style="{StaticResource ContentBorder}">
+            <Border Padding="4" Grid.Row="3" Grid.Column="0" Style="{StaticResource ContentBorder}" FocusManager.IsFocusScope="True">
                 <ScrollViewer MaxHeight="64" VerticalScrollBarVisibility="Auto">
-                    <TextBox SpellCheck.IsEnabled="True" Language="en" TextWrapping="Wrap" 
-                             Text="{Binding ChatData.InputText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                    <TextBox x:Name="InputTextBox" SpellCheck.IsEnabled="True" Language="en" TextWrapping="Wrap"
+						Text="{Binding ChatData.InputText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                         <TextBox.InputBindings>
-                            <KeyBinding Command="{Binding Path=ChatInputCommand}" Key="Enter" />
+                            <KeyBinding Command="{Binding ChatInputCommand}" Key="Enter" />
+                            <KeyBinding Key="Tab" />
                         </TextBox.InputBindings>
                     </TextBox>
                 </ScrollViewer>
@@ -68,9 +69,9 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type models:UserItem}">
                                 <controls:UserlistItem 
-                                    Flag="{Binding Metadata.CountryCode, Converter={StaticResource FlagToImageConverter}}"
-                                    Content="{Binding Nickname}"
-                                    Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}"/>
+									Flag="{Binding Metadata.CountryCode, Converter={StaticResource FlagToImageConverter}}"
+									Content="{Binding Nickname}"
+									Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
