@@ -58,7 +58,7 @@ namespace DesktopCS.Models
                 return;
             }
 
-            PropertyChangedEventHandler handler = PropertyChanged;
+            PropertyChangedEventHandler handler = this.PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
@@ -73,7 +73,7 @@ namespace DesktopCS.Models
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is UserItem && Equals((UserItem)obj);
+            return obj is UserItem && this.Equals((UserItem)obj);
         }
 
         public override int GetHashCode()

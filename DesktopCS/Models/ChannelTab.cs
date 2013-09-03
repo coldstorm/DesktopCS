@@ -5,7 +5,7 @@ namespace DesktopCS.Models
 {
     public class ChannelTab : Tab
     {
-        public SortedObservableCollection<UserItem> Users { get; private set; }
+        public ObservableCollection<UserItem> Users { get; private set; }
 
         public ChannelTab(string header) : base(header)
         {

@@ -45,17 +45,17 @@ namespace DesktopCS.Services.IRC
         {
             get
             {
-                return _tabManager.SelectedTab;
+                return this._tabManager.SelectedTab;
             }
             set
             {
-                _tabManager.SelectedTab = value;
+                this._tabManager.SelectedTab = value;
             }
         }
 
         public IRCClient(TabManager tabManager, LoginData loginData)
         {
-            ReceiveText += IRCClient_ReceiveText;
+            ReceiveText += this.IRCClient_ReceiveText;
 
             this._tabManager = tabManager;
             this._loginData = loginData;
@@ -78,7 +78,7 @@ namespace DesktopCS.Services.IRC
 
         void _client_OnChannelJoin(Client client, Channel channel)
         {
-            ChannelTab tab = _tabManager.AddChannel(channel.FullName);
+            ChannelTab tab = this._tabManager.AddChannel(channel.FullName);
             new IRCChannel(this, tab, channel);
         }
 
@@ -91,8 +91,8 @@ namespace DesktopCS.Services.IRC
             this._client.OnConnect += this._client_OnConnect;
             this._client.OnChannelJoin += this._client_OnChannelJoin;
 
-            ServerTab tab = _tabManager.AddServer("Server");
-            new IRCServer(this, tab, _client);
+            ServerTab tab = this._tabManager.AddServer("Server");
+            new IRCServer(this, tab, this._client);
 
             var cc = CountryCodeHelper.GetCC();
             var user = new User(this._loginData.Username, IdentHelper.Generate(this._loginData.Color, cc));
@@ -113,14 +113,14 @@ namespace DesktopCS.Services.IRC
 
         public void Send(ISendMessage message)
         {
-            _client.Send(message);
+            this._client.Send(message);
         }
 
         #region IDisposable Members
 
         public void Dispose()
         {
-            ReceiveText -= IRCClient_ReceiveText;
+            ReceiveText -= this.IRCClient_ReceiveText;
         }
 
         #endregion

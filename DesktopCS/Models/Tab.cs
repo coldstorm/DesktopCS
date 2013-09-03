@@ -44,7 +44,7 @@ namespace DesktopCS.Models
             {
                 if (this.InvokeRequired)
                 {
-                    this.Invoke(() => IsSelected = value);
+                    this.Invoke(() => this.IsSelected = value);
                     return;
                 }
 

@@ -17,7 +17,7 @@ namespace DesktopCS.MVVM
         protected override void ClearItems()
         {
             foreach (T element in this)
-                element.PropertyChanged -= ContainedElementChanged;
+                element.PropertyChanged -= this.ContainedElementChanged;
 
             base.ClearItems();
         }
@@ -27,7 +27,7 @@ namespace DesktopCS.MVVM
             if (iList != null)
             {
                 foreach (T element in iList)
-                    element.PropertyChanged += ContainedElementChanged;
+                    element.PropertyChanged += this.ContainedElementChanged;
             }
         }
 
@@ -36,7 +36,7 @@ namespace DesktopCS.MVVM
             if (iList != null)
             {
                 foreach (T element in iList)
-                    element.PropertyChanged -= ContainedElementChanged;
+                    element.PropertyChanged -= this.ContainedElementChanged;
             }
         }
 

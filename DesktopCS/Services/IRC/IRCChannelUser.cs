@@ -16,11 +16,11 @@ namespace DesktopCS.Services.IRC
             this._userItem = userItem;
 
             this._user = user;
-            this._user.OnNickNameChange += _user_OnNickNameChange;
-            this._user.OnUserNameChange += _user_OnUserNameChange;
+            this._user.OnNickNameChange += this._user_OnNickNameChange;
+            this._user.OnUserNameChange += this._user_OnUserNameChange;
 
             this._channel = channel;
-            this._channel.OnLeave += _channel_OnLeave;
+            this._channel.OnLeave += this._channel_OnLeave;
         }
 
         void _channel_OnLeave(Channel source, User user)
@@ -33,12 +33,12 @@ namespace DesktopCS.Services.IRC
 
         void _user_OnUserNameChange(User user, string original)
         {
-            _userItem.Metadata = user.ToUserItem().Metadata;
+            this._userItem.Metadata = user.ToUserItem().Metadata;
         }
 
         void _user_OnNickNameChange(User user, string original)
         {
-            _userItem.NickName = _user.NickName;
+            this._userItem.NickName = this._user.NickName;
         }
 
         #region Implementation of IDisposable
