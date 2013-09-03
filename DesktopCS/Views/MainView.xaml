@@ -14,69 +14,81 @@
         <converters:BrushColorConverter x:Key="BrushColorConverter" />
     </Window.Resources>
 
-    <Border
-        Style="{StaticResource ContentBorder}"
-        Background="{StaticResource BackgroundBrush}"
-        BorderBrush="{StaticResource SelectedTabBackgroundBrush}" 
-        Margin="20">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="16*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="9*"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border
+            Style="{StaticResource ContentBorder}"
+            Background="{StaticResource BackgroundBrush}"
+            BorderBrush="{StaticResource SelectedTabBackgroundBrush}" 
+            Margin="0,0,0,0" Grid.Row="1" Grid.Column="1">
 
-        <Grid Margin="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="15*" />
-                <ColumnDefinition Width="4"/>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="4"/>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+            <Grid Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*" />
+                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="4"/>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            <TextBox Grid.ColumnSpan="4" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" Focusable="False" />
+                <TextBox Grid.ColumnSpan="4" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" Focusable="False" />
 
-            <TabControl Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedItem}">
-                <TabControl.Resources>
-                    <CollectionViewSource Source="{Binding TabManager.ServerTabs}" x:Key="ServerTabs" />
-                    <CollectionViewSource Source="{Binding TabManager.ChannelTabs}" x:Key="ChannelTabs" />
-                    <CollectionViewSource Source="{Binding TabManager.UserTabs}" x:Key="UserTabs" />
-                </TabControl.Resources>
-                <TabControl.ItemsSource>
-                    <CompositeCollection>
-                        <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=ServerTabs}}" />
-                        <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=ChannelTabs}}" />
-                        <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=UserTabs}}" />
-                    </CompositeCollection>
-                </TabControl.ItemsSource>
-            </TabControl>
+                <TabControl Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedItem}">
+                    <TabControl.Resources>
+                        <CollectionViewSource Source="{Binding TabManager.ServerTabs}" x:Key="ServerTabs" />
+                        <CollectionViewSource Source="{Binding TabManager.ChannelTabs}" x:Key="ChannelTabs" />
+                        <CollectionViewSource Source="{Binding TabManager.UserTabs}" x:Key="UserTabs" />
+                    </TabControl.Resources>
+                    <TabControl.ItemsSource>
+                        <CompositeCollection>
+                            <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=ServerTabs}}" />
+                            <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=ChannelTabs}}" />
+                            <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=UserTabs}}" />
+                        </CompositeCollection>
+                    </TabControl.ItemsSource>
+                </TabControl>
 
-            <Border Padding="4" Grid.Row="3" Grid.Column="0" Style="{StaticResource ContentBorder}" FocusManager.IsFocusScope="True">
-                <ScrollViewer MaxHeight="64" VerticalScrollBarVisibility="Auto">
-                    <TextBox x:Name="InputTextBox" SpellCheck.IsEnabled="True" Language="en" TextWrapping="Wrap"
-                        Text="{Binding ChatData.InputText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
-                        <TextBox.InputBindings>
-                            <KeyBinding Command="{Binding ChatInputCommand}" Key="Enter" />
-                            <KeyBinding Key="Tab" />
-                        </TextBox.InputBindings>
-                    </TextBox>
-                </ScrollViewer>
-            </Border>
+                <Border Padding="4" Grid.Row="3" Grid.Column="0" Style="{StaticResource ContentBorder}" FocusManager.IsFocusScope="True">
+                    <ScrollViewer MaxHeight="64" VerticalScrollBarVisibility="Auto">
+                        <TextBox x:Name="InputTextBox" SpellCheck.IsEnabled="True" Language="en" TextWrapping="Wrap"
+                            Text="{Binding ChatData.InputText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Command="{Binding ChatInputCommand}" Key="Enter" />
+                                <KeyBinding Key="Tab" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                    </ScrollViewer>
+                </Border>
 
-            <Border Margin="0,21,0,0" Grid.RowSpan="3" Grid.Row="1"  Grid.Column="2" Style="{StaticResource ContentBorder}" Grid.ColumnSpan="2">
-                <ScrollViewer Margin="2" VerticalScrollBarVisibility="Auto">
-                    <ListBox behaviors:ListBoxSelectionBehavior.ClickSelection="True" ItemsSource="{Binding Users}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="{x:Type models:UserItem}">
-                                <controls:UserlistItem 
+                <Border Margin="0,21,0,0" Grid.RowSpan="3" Grid.Row="1"  Grid.Column="2" Style="{StaticResource ContentBorder}" Grid.ColumnSpan="2">
+                    <ScrollViewer Margin="2" VerticalScrollBarVisibility="Auto">
+                        <ListBox behaviors:ListBoxSelectionBehavior.ClickSelection="True" ItemsSource="{Binding Users}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type models:UserItem}">
+                                    <controls:UserlistItem 
 									Flag="{Binding Metadata.CountryCode, Converter={StaticResource FlagToImageConverter}}"
 									Content="{Binding Nickname}"
 									Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </ScrollViewer>
-            </Border>
-        </Grid>
-    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
 </Window>
