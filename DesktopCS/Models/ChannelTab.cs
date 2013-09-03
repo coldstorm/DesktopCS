@@ -1,14 +1,15 @@
 ﻿using System.Collections.ObjectModel;
+using DesktopCS.MVVM;
 
 namespace DesktopCS.Models
 {
     public class ChannelTab : Tab
     {
-        public ObservableCollection<UserItem> Users { get; private set; }
+        public SortedObservableCollection<UserItem> Users { get; private set; }
 
         public ChannelTab(string header) : base(header)
         {
-            Users = new ObservableCollection<UserItem>();
+            Users = new SortedObservableCollection<UserItem>();
         }
 
         public void AddUser(UserItem user)

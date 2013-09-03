@@ -4,7 +4,9 @@
         xmlns:controls="clr-namespace:DesktopCS.Controls"
         xmlns:converters="clr-namespace:DesktopCS.Converters"
         xmlns:models="clr-namespace:DesktopCS.Models"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="DesktopCS.Views.MainView"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        mc:Ignorable="d" x:Class="DesktopCS.Views.MainView"
         Title="Coldstorm" Height="350" Width="550" MinHeight="200" MinWidth="300" UseLayoutRounding="True"
         PreviewMouseUp="PreviewWindow_MouseUp"
         Style="{StaticResource WindowStyle}">
@@ -76,7 +78,7 @@
 
                 <Border Margin="0,21,0,0" Grid.RowSpan="3" Grid.Row="1"  Grid.Column="2" Style="{StaticResource ContentBorder}" Grid.ColumnSpan="2">
                     <ScrollViewer Margin="2" VerticalScrollBarVisibility="Auto">
-                        <ListBox behaviors:ListBoxSelectionBehavior.ClickSelection="True" ItemsSource="{Binding Users}">
+                        <ListBox behaviors:ListBoxSelectionBehavior.ClickSelection="True">
                             <ListBox.ItemTemplate>
                                 <DataTemplate DataType="{x:Type models:UserItem}">
                                     <controls:UserlistItem 
@@ -85,6 +87,16 @@
 									Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}"/>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
+                            <ListBox.Resources>
+                                <CollectionViewSource Source="{Binding Users}" x:Key="Users">
+                                    <CollectionViewSource.SortDescriptions>
+                                        <componentModel:SortDescription PropertyName="NickName" Direction="Ascending" />
+                                    </CollectionViewSource.SortDescriptions>
+                                </CollectionViewSource>
+                            </ListBox.Resources>
+                            <ListBox.ItemsSource>
+                                <Binding Source="{StaticResource ResourceKey=Users}" />
+                            </ListBox.ItemsSource>
                         </ListBox>
                     </ScrollViewer>
                 </Border>

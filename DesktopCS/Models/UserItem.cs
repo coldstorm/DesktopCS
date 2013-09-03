@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using DesktopCS.MVVM;
 
 namespace DesktopCS.Models
 {
-    public class UserItem : INotifyPropertyChanged
+    public class UserItem : UIInvoker, INotifyPropertyChanged
     {
         private string _nickName;
         private UserMetadata _metadata;
@@ -51,6 +52,12 @@ namespace DesktopCS.Models
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(() => this.OnPropertyChanged(propertyName));
+                return;
+            }
+
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }

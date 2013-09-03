@@ -27,7 +27,7 @@ namespace DesktopCS.Services.IRC
         {
             if (user == this._user)
             {
-
+                this.Dispose();
             }
         }
 
