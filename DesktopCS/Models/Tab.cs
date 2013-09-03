@@ -27,6 +27,31 @@ namespace DesktopCS.Models
 
         public CSTabItem TabItem { get; private set; }
 
+        public bool IsSelected
+        {
+            get
+            {
+                if (this.InvokeRequired)
+                {
+                    bool value = false;
+                    this.Invoke(() => value = this.IsSelected);
+                    return value;
+                }
+
+                return this.TabItem.IsSelected;
+            }
+            set
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(() => IsSelected = value);
+                    return;
+                }
+
+                this.TabItem.IsSelected = value;
+            }
+        }
+
         public delegate void HeaderChangeHandler(object sender, string oldValue);
         public event HeaderChangeHandler HeaderChange;
 
@@ -77,7 +102,7 @@ namespace DesktopCS.Models
 
         public virtual void MarkUnread()
         {
-            if (!this.TabItem.IsSelected)
+            if (!this.IsSelected)
                 this.TabItem.IsUnread = true;
         }
     }

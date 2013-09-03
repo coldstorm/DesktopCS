@@ -15,7 +15,6 @@ namespace DesktopCS.ViewModels
 {
     class MainViewModel : INotifyPropertyChanged
     {
-        private readonly TabManager _tabManager;
         private readonly IRCClient _irc;
         private int _selectedIndex = -1;
         private ObservableCollection<UserItem> _users;
@@ -27,7 +26,7 @@ namespace DesktopCS.ViewModels
             {
                 this._selectedIndex = value;
 
-                var channelTab = _tabManager.SelectedTab as ChannelTab;
+                var channelTab = TabManager.SelectedTab as ChannelTab;
                 this.Users = channelTab != null ? channelTab.Users : null;
             }
         }
@@ -45,14 +44,13 @@ namespace DesktopCS.ViewModels
         public ChatData ChatData { get; private set; }
         public ChatInputCommand ChatInputCommand { get; private set; }
 
-        public CompositeCollection<CSTabItem> Tabs { get; private set; }
+        public TabManager TabManager { get; private set; }
 
         public MainViewModel(SettingsManager settingsManager, LoginData loginData)
         {
-            this._tabManager = new TabManager();
-            this.Tabs = this._tabManager.Tabs;
+            this.TabManager = new TabManager();
 
-            this._irc = new IRCClient(this._tabManager, loginData);
+            this._irc = new IRCClient(this.TabManager, loginData);
 
             this.ChatData = new ChatData();
             this.ChatInputCommand = new ChatInputCommand(this);

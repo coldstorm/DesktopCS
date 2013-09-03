@@ -36,7 +36,7 @@
 
             <TextBox Grid.ColumnSpan="4" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" />
 
-            <TabControl Grid.Row="1" Grid.Column="0" SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding Tabs}"/>          
+            <TabControl Grid.Row="1" Grid.Column="0" SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding TabManager.Tabs}"/>          
 
             <Border Padding="4" Grid.Row="3" Grid.Column="0" Style="{StaticResource ContentBorder}">
                 <ScrollViewer MaxHeight="64" VerticalScrollBarVisibility="Auto">

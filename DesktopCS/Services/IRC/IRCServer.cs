@@ -1,5 +1,6 @@
 ﻿using DesktopCS.Helpers;
 using DesktopCS.Models;
+using DesktopCS.Services.IRC.Messages.Send;
 using NetIRC;
 
 namespace DesktopCS.Services.IRC
@@ -14,6 +15,7 @@ namespace DesktopCS.Services.IRC
         {
             this._ircClient = ircClient;
             this._ircClient.Input += _ircClient_Input;
+            this._ircClient.Text += _ircClient_OnText;
 
             this._serverTab = serverTab;
 
@@ -21,12 +23,20 @@ namespace DesktopCS.Services.IRC
             this._client.OnNotice += this.ClientOnNotice;
         }
 
-        void _ircClient_Input(object sender, string text)
+        void _ircClient_OnText(object sender, string text)
         {
-            this.ShowInActive(_client.User, text);
+            this.ShowInServer(text);
         }
 
-        void ClientOnNotice(Client client, User source, string notice)
+        private void _ircClient_Input(object sender, string text)
+        {
+            if (!_serverTab.IsSelected)
+            {
+                this.ShowInActive(_client.User, text);
+            }
+        }
+
+        private void ClientOnNotice(Client client, User source, string notice)
         {
             if (source != null)
             {
@@ -34,7 +44,7 @@ namespace DesktopCS.Services.IRC
             }
             else
             {
-                this._serverTab.AddChat(null, u => new MessageLine(u, notice));
+                this.ShowInServer(notice);
             }
         }
 
@@ -42,6 +52,11 @@ namespace DesktopCS.Services.IRC
         {
             Tab selectedTab = this._ircClient.SelectedTab ?? this._serverTab;
             selectedTab.AddChat(user, u => new MessageLine(u, text));
+        }
+
+        private void ShowInServer(string text)
+        {
+            this._serverTab.AddChat(null, u => new MessageLine(u, text));
         }
     }
 }

@@ -48,13 +48,7 @@ namespace DesktopCS.Services
         {
             get
             {
-                if (this.InvokeRequired)
-                {
-                    Tab value = null;
-                    this.Invoke(() => value = this.SelectedTab);
-                    return value;
-                }
-                return _tabDictionary.Values.FirstOrDefault(t => t.TabItem.IsSelected);
+                return _tabDictionary.Values.FirstOrDefault(t => t.IsSelected);
             }
             set
             {

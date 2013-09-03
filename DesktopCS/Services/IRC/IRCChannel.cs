@@ -25,20 +25,23 @@ namespace DesktopCS.Services.IRC
             this._channel.OnMessage += this._channel_OnMessage;
             this._channel.OnJoin += _channel_OnJoin;
             this._channel.OnLeave += _channel_OnLeave;
-            this._channel.OnWho += _channel_OnWho;
+            this._channel.OnNames += _channel_OnNames;
+        }
+
+        void _channel_OnNames(Channel source, string[] users)
+        {
+            foreach (var user in _channel.Users.Values)
+            {
+                _channelTab.AddUser(user.ToUserItem());
+            }
         }
 
         private void _ircClient_Input(object sender, string text)
         {
-            if (_channelTab.TabItem.IsSelected)
+            if (_channelTab.IsSelected)
             {
                 this._ircClient.Send(new ChannelPrivate(_channel, text));
             }
-        }
-
-        void _channel_OnWho(Channel source, string message)
-        {
-            
         }
 
         void _channel_OnLeave(Channel source, User user)
