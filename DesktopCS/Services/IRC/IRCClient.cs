@@ -53,7 +53,6 @@ namespace DesktopCS.Services.IRC
             }
         }
 
-
         public IRCClient(TabManager tabManager, LoginData loginData)
         {
             ReceiveText += IRCClient_ReceiveText;

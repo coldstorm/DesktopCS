@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Media;
-using DesktopCS.Helpers;
 
 namespace DesktopCS.Models
 {

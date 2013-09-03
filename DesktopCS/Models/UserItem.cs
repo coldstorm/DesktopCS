@@ -1,35 +1,66 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace DesktopCS.Models
 {
-    public class UserItem
+    public class UserItem : INotifyPropertyChanged
     {
+        private string _nickName;
+        private UserMetadata _metadata;
+
         public UserItem(string nick, UserMetadata metadata)
         {
-            this.Nickname = nick;
+            this.NickName = nick;
             this.Metadata = metadata;
         }
 
-        public string Nickname { get; private set; }
-        public UserMetadata Metadata { get; private set; }
+        public string NickName
+        {
+            get { return this._nickName; }
+            set
+            {
+                this._nickName = value;
+                this.OnPropertyChanged("NickName");
+            }
+        }
+
+        public UserMetadata Metadata
+        {
+            get { return this._metadata; }
+            set
+            {
+                this._metadata = value;
+                this.OnPropertyChanged("Metadata");
+            }
+        }
 
         public static bool operator ==(UserItem x, UserItem y)
         {
             if (ReferenceEquals(null, x) || ReferenceEquals(null, y))
                 return ReferenceEquals(x, y);;
 
-            return  x.Nickname == y.Nickname;
+            return  x.NickName == y.NickName;
         }
         public static bool operator !=(UserItem x, UserItem y)
         {
             return !(x == y);
         }
 
+        #region INotifyPropertyChanged Members
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
         #region Equality members
 
         public bool Equals(UserItem other)
         {
-            return string.Equals(this.Nickname, other.Nickname);
+            return string.Equals(this.NickName, other.NickName);
         }
 
         public override bool Equals(object obj)
@@ -40,7 +71,7 @@ namespace DesktopCS.Models
 
         public override int GetHashCode()
         {
-            return (this.Nickname != null ? this.Nickname.GetHashCode() : 0);
+            return (this.NickName != null ? this.NickName.GetHashCode() : 0);
         }
 
         #endregion

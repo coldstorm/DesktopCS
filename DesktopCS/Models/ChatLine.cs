@@ -62,7 +62,7 @@ namespace DesktopCS.Models
             {
                 Color color = this.User.Metadata.Color;
 
-                var usernameRun = new Run(this.User.Nickname) { Foreground = new SolidColorBrush(color) };
+                var usernameRun = new Run(this.User.NickName) { Foreground = new SolidColorBrush(color) };
                 p.Inlines.Add(usernameRun);
                 p.Inlines.Add(" ");
             }

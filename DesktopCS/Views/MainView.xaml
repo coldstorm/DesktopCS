@@ -81,7 +81,7 @@
                                 <DataTemplate DataType="{x:Type models:UserItem}">
                                     <controls:UserlistItem 
 									Flag="{Binding Metadata.CountryCode, Converter={StaticResource FlagToImageConverter}}"
-									Content="{Binding Nickname}"
+									Content="{Binding NickName}"
 									Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}"/>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

@@ -28,11 +28,18 @@ namespace DesktopCS.Services.IRC
             this._channel.OnNames += _channel_OnNames;
         }
 
+        private void AddUser(Channel channel, User user)
+        {
+            UserItem userItem = user.ToUserItem();
+            _channelTab.AddUser(userItem);
+            new IRCChannelUser(userItem, user, channel);
+        }
+
         void _channel_OnNames(Channel source, string[] users)
         {
             foreach (var user in _channel.Users.Values)
             {
-                _channelTab.AddUser(user.ToUserItem());
+                this.AddUser(_channel, user);
             }
         }
 
@@ -51,7 +58,7 @@ namespace DesktopCS.Services.IRC
 
         void _channel_OnJoin(Channel source, User user)
         {
-            _channelTab.AddUser(user.ToUserItem());
+            this.AddUser(_channel, user);
         }
 
         private void _channel_OnMessage(Channel source, User user, string message)
