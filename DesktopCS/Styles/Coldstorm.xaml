@@ -14,4 +14,8 @@
     <SolidColorBrush x:Key="ChatBrush" Color="#FFBABBBF" />
     <SolidColorBrush x:Key="TimeBrush" Color="#FF373F4E" />
     <SolidColorBrush x:Key="MessageBrush" Color="#FF808080" />
+
+    <Style x:Key="{x:Static SystemParameters.FocusVisualStyleKey}">
+        <Setter Property="Control.Template" Value="{x:Null}" />
+    </Style>
 </ResourceDictionary>
