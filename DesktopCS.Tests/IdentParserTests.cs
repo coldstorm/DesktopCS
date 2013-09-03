@@ -40,7 +40,7 @@ namespace DesktopCS.Tests
             var userMetadata = IdentHelper.Parse(testIdent);
 
             // assert
-            Assert.IsNull(userMetadata);
+            Assert.AreEqual(userMetadata.CountryCode, null);
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace DesktopCS.Tests
             var userMetadata = IdentHelper.Parse(testIdent);
 
             // assert
-            Assert.IsNull(userMetadata);
+            Assert.AreEqual(userMetadata.CountryCode, null);
         }
 
         [TestMethod]
@@ -88,7 +88,7 @@ namespace DesktopCS.Tests
             var userMetadata = IdentHelper.Parse(testIdent);
 
             // assert
-            Assert.IsNull(userMetadata);
+            Assert.AreEqual(userMetadata.CountryCode, null);
         }
 
 
@@ -102,7 +102,7 @@ namespace DesktopCS.Tests
             var userMetadata = IdentHelper.Parse(testIdent);
 
             // assert
-            Assert.IsNull(userMetadata);
+            Assert.AreEqual(userMetadata.CountryCode, null);
         }
 
         [TestMethod]

@@ -60,9 +60,7 @@ namespace DesktopCS.Models
             // User
             if (this.User != null)
             {
-                Color color = ColorHelper.ChatColor;
-                if (this.User.Metadata != null)
-                    color = this.User.Metadata.Color;
+                Color color = this.User.Metadata.Color;
 
                 var usernameRun = new Run(this.User.Nickname) { Foreground = new SolidColorBrush(color) };
                 p.Inlines.Add(usernameRun);

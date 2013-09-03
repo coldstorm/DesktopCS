@@ -18,7 +18,7 @@ namespace DesktopCS.Helpers
                 return new UserMetadata(color, flag);
             }
 
-            return null;
+            return new UserMetadata(ColorHelper.ChatColor, null);
         }
 
         public static string Generate(Color color, string cc)
