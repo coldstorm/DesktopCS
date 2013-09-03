@@ -1,4 +1,5 @@
-﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window x:Class="DesktopCS.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:behaviors="clr-namespace:DesktopCS.Behaviors"
         xmlns:controls="clr-namespace:DesktopCS.Controls"
@@ -6,7 +7,9 @@
         xmlns:models="clr-namespace:DesktopCS.Models"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-        mc:Ignorable="d" x:Class="DesktopCS.Views.MainView"
+        xmlns:viewModels="clr-namespace:DesktopCS.ViewModels"
+        mc:Ignorable="d" 
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         Title="Coldstorm" Height="350" Width="550" MinHeight="200" MinWidth="300" UseLayoutRounding="True"
         PreviewMouseUp="PreviewWindow_MouseUp"
         Style="{StaticResource WindowStyle}">

@@ -4,8 +4,14 @@
         xmlns:converters="clr-namespace:DesktopCS.Converters"
         xmlns:behaviors="clr-namespace:DesktopCS.Behaviors"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:DesktopCS.ViewModels"
+        d:DataContext="{d:DesignInstance viewModels:LoginViewModel}"
+        mc:Ignorable="d"
         Title="Login" Height="410" Width="372" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" UseLayoutRounding="True"
-        Style="{StaticResource WindowStyle}">
+        behaviors:BindableDialogResult.DialogResult="{Binding DialogResult}"
+        Style="{StaticResource WindowStyle}" >
 
     <Window.Resources>
         <converters:PlaceholderConverter x:Key="PlaceholderConverter" />

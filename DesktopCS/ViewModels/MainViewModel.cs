@@ -43,7 +43,7 @@ namespace DesktopCS.ViewModels
 
         public TabManager TabManager { get; private set; }
 
-        public MainViewModel(SettingsManager settingsManager, LoginData loginData)
+        public MainViewModel(LoginData loginData)
         {
             this.TabManager = new TabManager();
 
