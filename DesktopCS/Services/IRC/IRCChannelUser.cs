@@ -8,12 +8,16 @@ namespace DesktopCS.Services.IRC
 {
     public class IRCChannelUser : UIInvoker, IDisposable
     {
+        private readonly IRCClient _ircClient;
         private readonly UserItem _userItem;
         private readonly User _user;
         private readonly Channel _channel;
 
-        public IRCChannelUser(UserItem userItem, User user, Channel channel)
+        public IRCChannelUser(IRCClient ircClient, UserItem userItem, User user, Channel channel)
         {
+            this._ircClient = ircClient;
+            this._ircClient.ChannelLeave += _ircClient_ChannelLeave;
+
             this._userItem = userItem;
 
             this._user = user;
@@ -27,6 +31,14 @@ namespace DesktopCS.Services.IRC
         }
 
         #region Event Handlers
+
+        void _ircClient_ChannelLeave(object sender, Channel channel)
+        {
+            if (channel == this._channel)
+            {
+                this.Dispose();
+            }
+        }
 
         void _channel_OnRank(Channel source, User user, UserRank rank)
         {
@@ -67,9 +79,12 @@ namespace DesktopCS.Services.IRC
 
         public void Dispose()
         {
+            this._ircClient.ChannelLeave -= this._ircClient_ChannelLeave;
+
             this._user.OnNickNameChange -= this._user_OnNickNameChange;
             this._user.OnUserNameChange -= this._user_OnUserNameChange;
 
+            this._channel.OnRank -= this._channel_OnRank;
             this._channel.OnLeave -= this._channel_OnLeave;
         }
 

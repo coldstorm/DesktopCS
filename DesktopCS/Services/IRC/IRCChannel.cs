@@ -1,4 +1,5 @@
-﻿using DesktopCS.Helpers;
+﻿using System;
+using DesktopCS.Helpers;
 using DesktopCS.Models;
 using DesktopCS.MVVM;
 using NetIRC;
@@ -6,7 +7,7 @@ using NetIRC.Messages.Send;
 
 namespace DesktopCS.Services.IRC
 {
-    public class IRCChannel : UIInvoker
+    public class IRCChannel : UIInvoker, IDisposable
     {
         private readonly IRCClient _ircClient;
         private readonly ChannelTab _channelTab;
@@ -31,10 +32,19 @@ namespace DesktopCS.Services.IRC
         {
             UserItem userItem = user.ToUserItem(_channel);
             this._channelTab.AddUser(userItem);
-            new IRCChannelUser(userItem, user, channel);
+
+            new IRCChannelUser(this._ircClient, userItem, user, channel);
         }
 
         #region Event Handlers
+
+        private void _ircClient_Input(object sender, string text)
+        {
+            if (this._channelTab.IsSelected)
+            {
+                this._ircClient.Send(new ChannelPrivate(this._channel, text));
+            }
+        }
 
         private void _channel_OnNames(Channel source, string[] users)
         {
@@ -43,17 +53,6 @@ namespace DesktopCS.Services.IRC
                 foreach (var user in this._channel.Users.Values)
                 {
                     this.AddUser(this._channel, user);
-                }
-            });
-        }
-
-        private void _ircClient_Input(object sender, string text)
-        {
-            Run(() =>
-            {
-                if (this._channelTab.IsSelected)
-                {
-                    this._ircClient.Send(new ChannelPrivate(this._channel, text));
                 }
             });
         }
@@ -75,5 +74,14 @@ namespace DesktopCS.Services.IRC
 
         #endregion
 
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            this._ircClient.Input -= this._ircClient_Input;
+
+        }
+
+        #endregion
     }
 }

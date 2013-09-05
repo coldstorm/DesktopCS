@@ -33,6 +33,15 @@ namespace DesktopCS.Services.IRC
             if (eventHandler != null) eventHandler(this, text);
         }
 
+        public delegate void ChannelLeaveEventHandler(object sender, Channel channel);
+        public event ChannelLeaveEventHandler ChannelLeave;
+
+        protected virtual void OnChannelLeave(Channel channel)
+        {
+            ChannelLeaveEventHandler handler = this.ChannelLeave;
+            if (handler != null) handler(this, channel);
+        }
+
         public static event TextEventHandler ReceiveText;
 
         public static void OnReceiveText(object sender, string text)
@@ -71,6 +80,7 @@ namespace DesktopCS.Services.IRC
 
             this._client.OnConnect += this._client_OnConnect;
             this._client.OnChannelJoin += this._client_OnChannelJoin;
+            this._client.OnChannelLeave += _client_OnChannelLeave;
 
             ServerTab tab = this._tabManager.AddServer("Server");
             new IRCServer(this, tab, this._client);
@@ -92,12 +102,12 @@ namespace DesktopCS.Services.IRC
             }
         }
 
-        #region Event Handlers
-
         public void Send(ISendMessage message)
         {
             this._client.Send(message);
         }
+
+        #region Event Handlers
 
         private void IRCClient_ReceiveText(object sender, string text)
         {
@@ -125,6 +135,11 @@ namespace DesktopCS.Services.IRC
                 ChannelTab tab = this._tabManager.AddChannel(channel.FullName);
                 new IRCChannel(this, tab, channel);
             });
+        }
+
+        void _client_OnChannelLeave(Client client, Channel channel)
+        {
+            Run(() => this.OnChannelLeave(channel));
         }
 
         #endregion

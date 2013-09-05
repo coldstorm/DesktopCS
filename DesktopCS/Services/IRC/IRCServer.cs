@@ -38,18 +38,15 @@ namespace DesktopCS.Services.IRC
 
         private void _ircClient_OnText(object sender, string text)
         {
-            Run(() => this.ShowInServer(text));
+            this.ShowInServer(text);
         }
 
         private void _ircClient_Input(object sender, string text)
         {
-            Run(() =>
+            if (!this._serverTab.IsSelected)
             {
-                if (!this._serverTab.IsSelected)
-                {
-                    this.ShowInActive(this._client.User, text);
-                }
-            });
+                this.ShowInActive(this._client.User, text);
+            }
         }
 
         private void _client_OnNotice(Client client, User source, string notice)
