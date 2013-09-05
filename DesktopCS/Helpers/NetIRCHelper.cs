@@ -8,24 +8,24 @@ namespace DesktopCS.Helpers
     public static class NetIRCHelper
     {
         internal static Dictionary<ChannelType, char> TypeChars = new Dictionary<ChannelType, char>
+        {
             {
-                {
-                    ChannelType.Network,
-                    '#'
-                },
-                {
-                    ChannelType.Local,
-                    '&'
-                },
-                {
-                    ChannelType.Safe,
-                    '!'
-                },
-                {
-                    ChannelType.Unmoderated,
-                    '+'
-                }
-            };
+                ChannelType.Network,
+                '#'
+            },
+            {
+                ChannelType.Local,
+                '&'
+            },
+            {
+                ChannelType.Safe,
+                '!'
+            },
+            {
+                ChannelType.Unmoderated,
+                '+'
+            }
+        };
 
         public static UserItem ToUserItem(this User user)
         {
