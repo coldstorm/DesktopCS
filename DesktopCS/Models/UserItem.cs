@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Linq;
+using DesktopCS.Helpers;
 using DesktopCS.MVVM;
 using NetIRC;
 
@@ -16,7 +17,15 @@ namespace DesktopCS.Models
                 this._rank = value;
                 this.OnPropertyChanged("Rank");
             }
-        }   
+        }
+
+        public UserRank HighestRank
+        {
+            get
+            {
+                return this._rank.GetFlags().Max(); ;
+            }
+        }  
         
         private string _nickName;
 

@@ -17,6 +17,7 @@
     <Window.Resources>
         <converters:FlagToImageConverter x:Key="FlagToImageConverter" />
         <converters:BrushColorConverter x:Key="BrushColorConverter" />
+        <converters:RankConverter x:Key="RankConverter" />
     </Window.Resources>
 
     <Grid>
@@ -87,13 +88,17 @@
                                     <controls:UserlistItem 
 									Flag="{Binding Metadata.CountryCode, Converter={StaticResource FlagToImageConverter}}"
 									Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}">
-                                        <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding NickName}" ToolTip="{Binding NickName}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Rank, Converter={StaticResource RankConverter}}"/>
+                                            <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding NickName}" ToolTip="{Binding NickName}"/>
+                                        </StackPanel>
                                     </controls:UserlistItem>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                             <ListBox.Resources>
                                 <CollectionViewSource Source="{Binding Users}" x:Key="Users">
                                     <CollectionViewSource.SortDescriptions>
+                                        <componentModel:SortDescription PropertyName="HighestRank" Direction="Descending" />
                                         <componentModel:SortDescription PropertyName="NickName" Direction="Ascending" />
                                     </CollectionViewSource.SortDescriptions>
                                 </CollectionViewSource>

@@ -22,9 +22,22 @@ namespace DesktopCS.Services.IRC
 
             this._channel = channel;
             this._channel.OnLeave += this._channel_OnLeave;
+            this._channel.OnRank += _channel_OnRank;
+            
         }
 
         #region Event Handlers
+
+        void _channel_OnRank(Channel source, User user, UserRank rank)
+        {
+            Run(() =>
+            {
+                if (user == this._user)
+                {
+                    this._userItem.Rank = rank;
+                }
+            });
+        }
 
         private void _channel_OnLeave(Channel source, User user)
         {

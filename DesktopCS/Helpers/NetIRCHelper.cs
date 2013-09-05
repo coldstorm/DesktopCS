@@ -27,6 +27,30 @@ namespace DesktopCS.Helpers
             }
         };
 
+        internal static Dictionary<UserRank, char> RankChars = new Dictionary<UserRank, char>
+        {
+            {
+                UserRank.Owner,
+                '~'
+            },
+            {
+                UserRank.Admin,
+                '&'
+            },
+            {
+                UserRank.Op,
+                '@'
+            },
+            {
+                UserRank.HalfOp,
+                '#' // CS specific
+            },
+            {
+                UserRank.Voice,
+                '+'
+            }
+        };
+
         public static UserItem ToUserItem(this User user)
         {
             return user.ToUserItem(null);
