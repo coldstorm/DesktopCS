@@ -1,22 +1,15 @@
-﻿using DesktopCS.Commands;
+﻿using System.Windows.Input;
 using DesktopCS.Models;
 using DesktopCS.MVVM;
-using DesktopCS.Services;
-using DesktopCS.Views;
 
 namespace DesktopCS.ViewModels
 {
     class LoginViewModel : ObservableObject
     {
-        private readonly LoginData _loginData;
+        public LoginData LoginData { get; private set; }
+        public ICommand LoginCommand { get; private set; }
+
         private bool? _dialogResult;
-
-        public LoginCommand LoginCommand { get; private set; }
-
-        public LoginData LoginData
-        {
-            get { return this._loginData; }
-        }
 
         public bool? DialogResult
         {
@@ -30,9 +23,9 @@ namespace DesktopCS.ViewModels
 
         public LoginViewModel(LoginData loginData)
         {
-            this._loginData = loginData;
+            this.LoginData = loginData;
 
-            this.LoginCommand = new LoginCommand(this);
+            this.LoginCommand = new RelayCommand(param => Login(), param => CanLogin);
         }
 
         public bool CanLogin

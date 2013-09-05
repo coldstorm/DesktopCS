@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using DesktopCS.Commands;
+using System.Windows.Input;
 using DesktopCS.Controls;
 using DesktopCS.Models;
 using DesktopCS.MVVM;
@@ -13,8 +12,12 @@ namespace DesktopCS.ViewModels
     class MainViewModel : ObservableObject
     {
         private readonly IRCClient _irc;
+
+        public ChatData ChatData { get; private set; }
+        public TabManager TabManager { get; private set; }
+        public ICommand ChatInputCommand { get; private set; }
+
         private CSTabItem _selectedItem;
-        private ObservableCollection<UserItem> _users;
 
         public CSTabItem SelectedItem
         {
@@ -28,6 +31,8 @@ namespace DesktopCS.ViewModels
             }
         }
 
+        private ObservableCollection<UserItem> _users;
+
         public ObservableCollection<UserItem> Users
         {
             get { return this._users; }
@@ -38,11 +43,6 @@ namespace DesktopCS.ViewModels
             }
         }
 
-        public ChatData ChatData { get; private set; }
-        public ChatInputCommand ChatInputCommand { get; private set; }
-
-        public TabManager TabManager { get; private set; }
-
         public MainViewModel(LoginData loginData)
         {
             this.TabManager = new TabManager();
@@ -50,7 +50,7 @@ namespace DesktopCS.ViewModels
             this._irc = new IRCClient(this.TabManager, loginData);
 
             this.ChatData = new ChatData();
-            this.ChatInputCommand = new ChatInputCommand(this);
+            this.ChatInputCommand = new RelayCommand(param => Chat(), param => CanChat);
         }
 
         public bool CanChat

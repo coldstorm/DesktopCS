@@ -68,8 +68,6 @@
     <Compile Include="Behaviors\BindableDialogResult.cs" />
     <Compile Include="Behaviors\ListBoxSelectionBehavior.cs" />
     <Compile Include="Behaviors\PasswordBoxAssistant.cs" />
-    <Compile Include="Commands\ChatInputCommand.cs" />
-    <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Converters\BrushColorConverter.cs" />
     <Compile Include="Converters\FlagToImageConverter.cs" />
     <Compile Include="Converters\PlaceholderConverter.cs" />
@@ -83,6 +81,7 @@
     <Compile Include="Models\ChatData.cs" />
     <Compile Include="Models\ChannelTab.cs" />
     <Compile Include="MVVM\ObservableObject.cs" />
+    <Compile Include="MVVM\RelayCommand.cs" />
     <Compile Include="MVVM\SortedObservableCollection.cs" />
     <Compile Include="Services\IRC\IRCChannelUser.cs" />
     <Compile Include="Services\IRC\IRCClient.cs" />

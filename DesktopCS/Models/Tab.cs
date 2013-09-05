@@ -10,7 +10,9 @@ namespace DesktopCS.Models
     public class Tab
     {
         private readonly ChatTabContentViewModel _tabVM;
-        
+
+        public CSTabItem TabItem { get; private set; }
+
         public string Header
         {
             get { return (string)this.TabItem.Header; }
@@ -23,8 +25,6 @@ namespace DesktopCS.Models
                 this.OnHeaderChange(original);
             }
         }
-
-        public CSTabItem TabItem { get; private set; }
 
         public bool IsSelected
         {

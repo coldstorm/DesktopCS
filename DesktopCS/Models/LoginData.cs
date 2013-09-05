@@ -9,15 +9,6 @@ namespace DesktopCS.Models
     public class LoginData : ObservableObject, IDataErrorInfo
     {
         private string _username;
-        private string _password;
-        private Color _color;
-
-        public LoginData(string username, string password, Color color)
-        {
-            this._username = username;
-            this._password = password;
-            this._color = color;
-        }
 
         public string Username
         {
@@ -29,6 +20,8 @@ namespace DesktopCS.Models
             }
         }
 
+        private string _password;
+
         public string Password
         {
             get { return this._password; }
@@ -39,6 +32,8 @@ namespace DesktopCS.Models
             }
         }
 
+        private Color _color;
+
         public Color Color
         {
             get { return this._color; }
@@ -47,6 +42,13 @@ namespace DesktopCS.Models
                 this._color = value;
                 this.OnPropertyChanged("Color");
             }
+        }
+
+        public LoginData(string username, string password, Color color)
+        {
+            this._username = username;
+            this._password = password;
+            this._color = color;
         }
 
         #region IDataErrorInfo Members
