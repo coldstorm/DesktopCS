@@ -83,7 +83,7 @@ namespace DesktopCS.Services
             return channel;
         }
 
-        public Tab AddOrGetUser(string tabName)
+        public Tab AddUser(string tabName)
         {
             if (this._tabDictionary.ContainsKey(tabName))
             {

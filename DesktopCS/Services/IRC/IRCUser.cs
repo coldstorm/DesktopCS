@@ -1,4 +1,5 @@
 ﻿using System;
+using DesktopCS.Helpers;
 using DesktopCS.Models;
 using DesktopCS.MVVM;
 using NetIRC;
@@ -16,6 +17,8 @@ namespace DesktopCS.Services.IRC
         {
             this._ircClient = ircClient;
             this._ircClient.Input += _ircClient_Input;
+            this._ircClient.Ping += _ircClient_Ping;
+            this._ircClient.Message += _ircClient_Message;
 
             this._tab = tab;
             this._tab.Close += _tab_Close;
@@ -30,6 +33,22 @@ namespace DesktopCS.Services.IRC
         private void _tab_Close(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void _ircClient_Ping(object sender, PingEventArgs e)
+        {
+            if (e.Target == _user.NickName)
+            {
+                e.Handled = true;
+            }
+        }
+
+        void _ircClient_Message(object sender, User user, string message)
+        {
+            if (user == this._user)
+            {
+                _tab.AddChat(user, message);
+            }
         }
 
         private void _ircClient_Input(object sender, string text)
@@ -57,6 +76,7 @@ namespace DesktopCS.Services.IRC
         public void Dispose()
         {
             this._ircClient.Input -= this._ircClient_Input;
+            this._ircClient.Ping -= this._ircClient_Ping;
 
             this._tab.Close -= this._tab_Close;
 

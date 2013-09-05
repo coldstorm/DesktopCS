@@ -42,6 +42,23 @@ namespace DesktopCS.Services.IRC
             if (handler != null) handler(this, channel);
         }
 
+        public event EventHandler<PingEventArgs> Ping;
+
+        protected virtual void OnPing(PingEventArgs e)
+        {
+            EventHandler<PingEventArgs> handler = this.Ping;
+            if (handler != null) handler(this, e);
+        }
+
+        public delegate void MessageHandler(object sender, User user, string message);
+        public event MessageHandler Message;
+
+        protected virtual void OnMessage(User user, string message)
+        {
+            MessageHandler handler = this.Message;
+            if (handler != null) handler(this, user, message);
+        }
+
         public static event TextEventHandler ReceiveText;
 
         public static void OnReceiveText(object sender, string text)
@@ -81,6 +98,7 @@ namespace DesktopCS.Services.IRC
             this._client.OnConnect += this._client_OnConnect;
             this._client.OnChannelJoin += this._client_OnChannelJoin;
             this._client.OnChannelLeave += _client_OnChannelLeave;
+            this._client.OnMessage += _client_OnMessage;
 
             ServerTab tab = this._tabManager.AddServer("Server");
             new IRCServer(this, tab, this._client);
@@ -117,6 +135,22 @@ namespace DesktopCS.Services.IRC
                 {
                     this.OnText(text);
                 }
+            });
+        }
+
+        void _client_OnMessage(Client client, User source, string message)
+        {
+            Run(() =>
+            {
+                var args = new PingEventArgs(source.NickName);
+                this.OnPing(args);
+                // If no IRCUser object for this tab exists
+                if (!args.Handled)
+                {
+                    new IRCUser(this, _tabManager.AddUser(source.NickName), source);
+                }
+
+                this.OnMessage(source, message);
             });
         }
 
