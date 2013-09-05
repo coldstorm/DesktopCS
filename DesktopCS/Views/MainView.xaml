@@ -62,7 +62,9 @@
                     <TabControl.ItemsSource>
                         <CompositeCollection>
                             <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=ServerTabs}}" />
+                            <TabItem Style="{StaticResource SeparatorTabItem}" />
                             <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=ChannelTabs}}" />
+                            <TabItem Style="{StaticResource SeparatorTabItem}" />
                             <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=UserTabs}}" />
                         </CompositeCollection>
                     </TabControl.ItemsSource>

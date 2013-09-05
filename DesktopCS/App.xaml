@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="Styles/RichTextBox.xaml" />
                 <ResourceDictionary Source="Styles/ScrollViewer.xaml" />
                 <ResourceDictionary Source="Styles/TabControl.xaml" />
+                <ResourceDictionary Source="Styles/TabItem.xaml" />
                 <ResourceDictionary Source="Styles/TextBox.xaml" />
                 <ResourceDictionary Source="Styles/Window.xaml" />
 
