@@ -29,7 +29,7 @@ namespace DesktopCS.Services.IRC
 
         private void AddUser(Channel channel, User user)
         {
-            UserItem userItem = user.ToUserItem();
+            UserItem userItem = user.ToUserItem(_channel);
             this._channelTab.AddUser(userItem);
             new IRCChannelUser(userItem, user, channel);
         }
@@ -60,7 +60,7 @@ namespace DesktopCS.Services.IRC
 
         private void _channel_OnLeave(Channel source, User user)
         {
-            Run(() => this._channelTab.RemoveUser(user.ToUserItem()));
+            Run(() => this._channelTab.RemoveUser(user.ToUserItem(source)));
         }
 
         private void _channel_OnJoin(Channel source, User user)
@@ -70,7 +70,7 @@ namespace DesktopCS.Services.IRC
 
         private void _channel_OnMessage(Channel source, User user, string message)
         {
-            Run(() => this._channelTab.AddChat(user, u => new MessageLine(u, message)));
+            Run(() => this._channelTab.AddChat(user, _channel, message));
         }
 
         #endregion

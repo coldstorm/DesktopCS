@@ -26,12 +26,12 @@ namespace DesktopCS.Services.IRC
         private void ShowInActive(User user, string text)
         {
             Tab selectedTab = this._ircClient.SelectedTab ?? this._serverTab;
-            selectedTab.AddChat(user, u => new MessageLine(u, text));
+            selectedTab.AddChat(user, text);
         }
 
         private void ShowInServer(string text)
         {
-            this._serverTab.AddChat(null, u => new MessageLine(u, text));
+            this._serverTab.AddChat(text);
         }
 
         #region Event Handlers

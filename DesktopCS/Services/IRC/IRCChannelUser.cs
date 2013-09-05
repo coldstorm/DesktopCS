@@ -39,7 +39,7 @@ namespace DesktopCS.Services.IRC
 
         private void _user_OnUserNameChange(User user, string original)
         {
-            Run(() => { this._userItem.Metadata = user.ToUserItem().Metadata; });
+            Run(() => { this._userItem.Metadata = user.ToUserItem(_channel).Metadata; });
         }
 
         private void _user_OnNickNameChange(User user, string original)

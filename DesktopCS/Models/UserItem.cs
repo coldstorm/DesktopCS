@@ -1,18 +1,24 @@
 ﻿using System.ComponentModel;
 using DesktopCS.MVVM;
+using NetIRC;
 
 namespace DesktopCS.Models
 {
     public class UserItem : ObservableObject
     {
-        private string _nickName;
-        private UserMetadata _metadata;
+        private UserRank _rank;
 
-        public UserItem(string nick, UserMetadata metadata)
+        public UserRank Rank
         {
-            this.NickName = nick;
-            this.Metadata = metadata;
-        }
+            get { return this._rank; }
+            set
+            {
+                this._rank = value;
+                this.OnPropertyChanged("Rank");
+            }
+        }   
+        
+        private string _nickName;
 
         public string NickName
         {
@@ -24,6 +30,8 @@ namespace DesktopCS.Models
             }
         }
 
+        private UserMetadata _metadata;
+
         public UserMetadata Metadata
         {
             get { return this._metadata; }
@@ -33,6 +41,14 @@ namespace DesktopCS.Models
                 this.OnPropertyChanged("Metadata");
             }
         }
+
+        public UserItem(UserRank rank, string nick, UserMetadata metadata)
+        {
+            this.Rank = rank;
+            this.NickName = nick;
+            this.Metadata = metadata;
+        }
+
 
         public static bool operator ==(UserItem x, UserItem y)
         {
