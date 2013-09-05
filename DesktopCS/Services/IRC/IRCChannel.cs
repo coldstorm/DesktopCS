@@ -3,7 +3,6 @@ using DesktopCS.Helpers;
 using DesktopCS.Models;
 using DesktopCS.MVVM;
 using NetIRC;
-using NetIRC.Messages.Send;
 
 namespace DesktopCS.Services.IRC
 {
@@ -19,6 +18,7 @@ namespace DesktopCS.Services.IRC
             this._ircClient.Input += this._ircClient_Input;
 
             this._channelTab = channelTab;
+            this._channelTab.Close += _channelTab_Close;
             this._channelTab.AddChat(new SystemMessageLine("You joined the room."));
 
             this._channel = channel;
@@ -38,11 +38,17 @@ namespace DesktopCS.Services.IRC
 
         #region Event Handlers
 
+        private void _channelTab_Close(object sender, EventArgs e)
+        {
+            this._ircClient.Send(this._channel.Part());
+            this.Dispose();
+        }
+
         private void _ircClient_Input(object sender, string text)
         {
             if (this._channelTab.IsSelected)
             {
-                this._ircClient.Send(new ChannelPrivate(this._channel, text));
+                this._ircClient.Send(this._channel.SendMessage(text));
             }
         }
 
@@ -79,7 +85,6 @@ namespace DesktopCS.Services.IRC
         public void Dispose()
         {
             this._ircClient.Input -= this._ircClient_Input;
-
         }
 
         #endregion

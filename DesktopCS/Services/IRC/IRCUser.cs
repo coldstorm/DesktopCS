@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DesktopCS.Models;
+using DesktopCS.MVVM;
 using NetIRC;
 using NetIRC.Messages.Send;
 
 namespace DesktopCS.Services.IRC
 {
-    public class IRCUser : IDisposable
+    public class IRCUser : UIInvoker, IDisposable
     {
         private readonly IRCClient _ircClient;
         private readonly Tab _tab;
@@ -28,12 +26,12 @@ namespace DesktopCS.Services.IRC
 
         #region Event Handlers
 
-        void _tab_Close(object sender, EventArgs e)
+        private void _tab_Close(object sender, EventArgs e)
         {
             this.Dispose();
         }
 
-        void _ircClient_Input(object sender, string text)
+        private void _ircClient_Input(object sender, string text)
         {
             if (this._tab.IsSelected)
             {
@@ -41,9 +39,9 @@ namespace DesktopCS.Services.IRC
             }
         }
 
-        void _user_OnNickNameChange(User user, string original)
+        private void _user_OnNickNameChange(User user, string original)
         {
-            this._tab.Header = _user.NickName;
+            Run(() => { this._tab.Header = _user.NickName; });
         }
 
         #endregion

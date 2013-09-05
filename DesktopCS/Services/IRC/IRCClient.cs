@@ -137,7 +137,7 @@ namespace DesktopCS.Services.IRC
             });
         }
 
-        void _client_OnChannelLeave(Client client, Channel channel)
+        private void _client_OnChannelLeave(Client client, Channel channel)
         {
             Run(() => this.OnChannelLeave(channel));
         }

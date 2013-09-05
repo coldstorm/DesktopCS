@@ -27,12 +27,11 @@ namespace DesktopCS.Services.IRC
             this._channel = channel;
             this._channel.OnLeave += this._channel_OnLeave;
             this._channel.OnRank += _channel_OnRank;
-            
         }
 
         #region Event Handlers
 
-        void _ircClient_ChannelLeave(object sender, Channel channel)
+        private void _ircClient_ChannelLeave(object sender, Channel channel)
         {
             if (channel == this._channel)
             {
@@ -40,7 +39,7 @@ namespace DesktopCS.Services.IRC
             }
         }
 
-        void _channel_OnRank(Channel source, User user, UserRank rank)
+        private void _channel_OnRank(Channel source, User user, UserRank rank)
         {
             Run(() =>
             {
