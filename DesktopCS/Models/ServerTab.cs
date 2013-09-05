@@ -4,7 +4,7 @@
     {
         public ServerTab(string header) : base(header)
         {
-            this.TabItem.IsClosable = false;
+            this.IsClosable = false;
         }
 
         public override void MarkUnread()

@@ -38,6 +38,17 @@ namespace DesktopCS.Models
             }
         }
 
+        public bool IsClosable {
+            get
+            {
+                return this.TabItem.IsClosable;
+            }
+            set
+            {
+                this.TabItem.IsClosable = value;
+            }
+        }
+
         public delegate void HeaderChangeHandler(object sender, string oldValue);
         public event HeaderChangeHandler HeaderChange;
 

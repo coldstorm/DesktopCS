@@ -50,7 +50,7 @@ namespace DesktopCS.Services
             }
             set
             {
-                value.TabItem.IsSelected = true;
+                value.IsSelected = true;
             }
         }
 
