@@ -74,7 +74,7 @@ namespace DesktopCS.Services
             {
                 return (ChannelTab)this._tabDictionary[tabName];
             }
-
+            
             var channel = new ChannelTab(tabName);
             channel.Close += this.channel_Close;
             this._tabDictionary.Add(tabName, channel);

@@ -16,6 +16,7 @@ namespace DesktopCS.Services.IRC
         {
             this._ircClient = ircClient;
             this._ircClient.Input += this._ircClient_Input;
+            this._ircClient.ChannelLeave += _ircClient_ChannelLeave;
 
             this._channelTab = channelTab;
             this._channelTab.Close += _channelTab_Close;
@@ -52,6 +53,11 @@ namespace DesktopCS.Services.IRC
             }
         }
 
+        private void _ircClient_ChannelLeave(object sender, Channel channel)
+        {
+            Run(this.Dispose);
+        }
+
         private void _channel_OnNames(Channel source, string[] users)
         {
             Run(() =>
@@ -85,6 +91,14 @@ namespace DesktopCS.Services.IRC
         public void Dispose()
         {
             this._ircClient.Input -= this._ircClient_Input;
+            this._ircClient.ChannelLeave -= this._ircClient_ChannelLeave;
+
+            this._channelTab.Close -= this._channelTab_Close;
+
+            this._channel.OnMessage -= this._channel_OnMessage;
+            this._channel.OnJoin -= this._channel_OnJoin;
+            this._channel.OnLeave -= this._channel_OnLeave;
+            this._channel.OnNames -= this._channel_OnNames;
         }
 
         #endregion

@@ -22,6 +22,7 @@ namespace DesktopCS.Services.IRC
 
             this._user = user;
             this._user.OnNickNameChange += _user_OnNickNameChange;
+            this._user.OnQuit += _user_OnQuit;
         }
 
         #region Event Handlers
@@ -39,6 +40,11 @@ namespace DesktopCS.Services.IRC
             }
         }
 
+        private void _user_OnQuit(User user, string reason)
+        {
+            Run(this.Dispose);
+        }
+
         private void _user_OnNickNameChange(User user, string original)
         {
             Run(() => { this._tab.Header = _user.NickName; });
@@ -52,7 +58,10 @@ namespace DesktopCS.Services.IRC
         {
             this._ircClient.Input -= this._ircClient_Input;
 
+            this._tab.Close -= this._tab_Close;
+
             this._user.OnNickNameChange -= _user_OnNickNameChange;
+            this._user.OnQuit -= _user_OnQuit;
         }
 
         #endregion
