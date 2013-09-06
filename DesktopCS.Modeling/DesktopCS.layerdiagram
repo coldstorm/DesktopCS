@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="ee743625-08d1-4de0-a9b3-22c77713ec98" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="0c709fae-0468-4c7a-a013-a8a78d0fe2d9" name="MVVM">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="2a21c680-bb59-4216-8c0f-5907a4365e25" direction="Forward">
+          <layerMoniker Id="49913cd8-fb5b-42c2-8be4-301911936bd0" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="c78b4497-6cb6-42b3-81d5-29a5ff4c280e" name="Views">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="bcef57d3-e908-4a18-a382-85432d0b8750" direction="Forward">
+              <layerMoniker Id="4ef60baa-45ab-4f61-aa99-063f6cf2c90a" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="3922aa5e-c8d8-4a41-841d-6e1bc76ca43f" name="DesktopCS‎.Views">
+              <ArtifactNode Label="DesktopCS‎.Views" Category="CodeSchema_Namespace" Id="(Namespace=DesktopCS.Views)" />
+              <ExpandedNode Id="(Assembly=DesktopCS)" Label="DesktopCS.exe" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=DesktopCS.Views)" Label="DesktopCS‎.Views" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="4ef60baa-45ab-4f61-aa99-063f6cf2c90a" name="ViewModels">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="2415ae9c-d165-4cc0-943f-3d1155537f73" direction="Forward">
+              <layerMoniker Id="e6079ae6-865f-4312-be84-d3d4d1826f62" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="4667965e-32b6-4ac0-b13d-4c6a711d57a2" direction="Forward">
+              <layerMoniker Id="9d1fd627-3e99-4b93-bd7f-9c374ed9204f" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="c8ef8c1e-5f55-47c8-af07-c492199f7261" name="DesktopCS‎.ViewModels">
+              <ArtifactNode Label="DesktopCS‎.ViewModels" Category="CodeSchema_Namespace" Id="(Namespace=DesktopCS.ViewModels)" />
+              <ExpandedNode Id="(Assembly=DesktopCS)" Label="DesktopCS.exe" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=DesktopCS.ViewModels)" Label="DesktopCS‎.ViewModels" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="9d1fd627-3e99-4b93-bd7f-9c374ed9204f" name="Models">
+          <references>
+            <reference Id="251afe9c-2f0e-426a-9f45-824596c60496" name="DesktopCS‎.Models">
+              <ArtifactNode Label="DesktopCS‎.Models" Category="CodeSchema_Namespace" Id="(Namespace=DesktopCS.Models)" />
+              <ExpandedNode Id="(Namespace=DesktopCS.Models)" Label="DesktopCS‎.Models" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+      <references>
+        <reference Id="846e52be-d8dc-4730-9e63-0cd1af55f84e" name="DesktopCS‎.Converters">
+          <ArtifactNode Label="DesktopCS‎.Converters" Category="CodeSchema_Namespace" Id="(Namespace=DesktopCS.Converters)" />
+          <ExpandedNode Id="(Assembly=DesktopCS)" Label="DesktopCS.exe" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=DesktopCS.Converters)" Label="DesktopCS‎.Converters" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+        <reference Id="16264495-9769-4591-a560-ec5768c6f686" name="DesktopCS‎.Behaviors">
+          <ArtifactNode Label="DesktopCS‎.Behaviors" Category="CodeSchema_Namespace" Id="(Namespace=DesktopCS.Behaviors)" />
+          <ExpandedNode Id="(Assembly=DesktopCS)" Label="DesktopCS.exe" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=DesktopCS.Behaviors)" Label="DesktopCS‎.Behaviors" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+        <reference Id="613b5413-dfca-4254-b053-1e174a05d614" name="DesktopCS‎.Controls1">
+          <ArtifactNode Label="DesktopCS‎.Controls" Category="CodeSchema_Namespace" Id="(Namespace=DesktopCS.Controls)" />
+          <ExpandedNode Id="(Assembly=DesktopCS)" Label="DesktopCS.exe" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=DesktopCS.Controls)" Label="DesktopCS‎.Controls" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="e6079ae6-865f-4312-be84-d3d4d1826f62" name="Services">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="44888ba6-bd2c-4cf9-8d49-7dbe1e25e4e3" direction="Forward">
+          <layerMoniker Id="9d1fd627-3e99-4b93-bd7f-9c374ed9204f" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="5801acb3-92f8-4ebc-bc4d-418160dccb1f" direction="Forward">
+          <layerMoniker Id="49913cd8-fb5b-42c2-8be4-301911936bd0" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="5f6abc6f-6ec1-4515-adcc-f26817d78159" name="DesktopCS‎.Services‎.IRC">
+          <ArtifactNode Label="DesktopCS‎.Services‎.IRC" Category="CodeSchema_Namespace" Id="(Namespace=DesktopCS.Services.IRC)" />
+          <ExpandedNode Id="(Assembly=DesktopCS)" Label="DesktopCS.exe" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=DesktopCS.Services.IRC)" Label="DesktopCS‎.Services‎.IRC" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="49913cd8-fb5b-42c2-8be4-301911936bd0" name="Helpers">
+      <childLayers>
+        <layer Id="0d43c461-83d0-4f0f-9487-6b532553aa82" name="DesktopCS‎.MVVM">
+          <references>
+            <reference Id="6d70369c-ebc7-4308-b30f-58a07e25f4a3" name="DesktopCS‎.MVVM">
+              <ArtifactNode Label="DesktopCS‎.MVVM" Category="CodeSchema_Namespace" Id="(Namespace=DesktopCS.MVVM)" />
+              <ExpandedNode Id="(Assembly=DesktopCS)" Label="DesktopCS.exe" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=DesktopCS.MVVM)" Label="DesktopCS‎.MVVM" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="8443d136-f071-4e3a-af98-b3c56019d9e5" name="DesktopCS‎.Helpers">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="67d48ec9-f5b1-4ad9-9b3a-019ae82d7c6a" direction="Forward">
+              <layerMoniker Id="9d1fd627-3e99-4b93-bd7f-9c374ed9204f" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="63751564-1472-4004-bb16-0879a8542438" name="DesktopCS‎.Helpers">
+              <ArtifactNode Label="DesktopCS‎.Helpers" Category="CodeSchema_Namespace" Id="(Namespace=DesktopCS.Helpers)" />
+              <ExpandedNode Id="(Assembly=DesktopCS)" Label="DesktopCS.exe" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=DesktopCS.Helpers)" Label="DesktopCS‎.Helpers" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="b0b20d4b-c178-4cf3-aa16-fcab5f94046c" name="App.xaml">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="3bd6ca8b-c2b1-46e4-b792-598a8bbb7a1e" direction="Forward">
+          <layerMoniker Id="0c709fae-0468-4c7a-a013-a8a78d0fe2d9" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="a1983111-2719-4429-9a75-5d4d4abd7cf0" name="App">
+          <ArtifactNode Label="App" Category="CodeSchema_Class" Id="(Assembly=&quot;$(PersonalUri)/GitHub/DesktopCS/DesktopCS/bin/Debug/DesktopCS.exe&quot; Namespace=DesktopCS Type=App)" />
+          <ExpandedNode Id="(Assembly=DesktopCS Namespace=DesktopCS Type=App)" Label="App" Category="CodeSchema_Class">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>
