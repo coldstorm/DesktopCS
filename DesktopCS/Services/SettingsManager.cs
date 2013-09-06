@@ -9,9 +9,11 @@ namespace DesktopCS.Services
 {
     public class SettingsManager
     {
+        public static SettingsManager Value = new SettingsManager(Settings.Default);
+        
         private readonly Settings _settings;
 
-        internal SettingsManager(Settings settings)
+        private SettingsManager(Settings settings)
         {
             this._settings = settings;
 

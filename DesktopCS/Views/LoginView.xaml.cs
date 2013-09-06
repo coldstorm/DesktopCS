@@ -14,10 +14,10 @@ namespace DesktopCS.Views
     {
         private readonly DispatcherTimer _timeTimer = new DispatcherTimer();
 
-        public LoginView(LoginData loginData)
+        public LoginView()
         {
             this.InitializeComponent();
-            this.DataContext = new LoginViewModel(loginData);
+            this.DataContext = new LoginViewModel();
             
             this._timeTimer.Tick += this.timeTimer_Tick;
             this._timeTimer.Start();

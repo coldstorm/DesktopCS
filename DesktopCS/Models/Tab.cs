@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Documents;
 using DesktopCS.Controls;
-using DesktopCS.MVVM;
 using DesktopCS.ViewModels;
 using DesktopCS.Views;
 
@@ -9,7 +9,7 @@ namespace DesktopCS.Models
 {
     public class Tab
     {
-        private readonly ChatTabContentViewModel _tabVM;
+        private readonly FlowDocument _flowDoc;
 
         public CSTabItem TabItem { get; private set; }
 
@@ -66,11 +66,10 @@ namespace DesktopCS.Models
             if (handler != null) handler(this, EventArgs.Empty);
         }
 
-        public Tab(string header)
+        public Tab(string header, FlowDocument flowDoc, CSTabItem tabItem)
         {
-            this._tabVM = new ChatTabContentViewModel();
-            var tabView = new ChatTabContentView(this._tabVM);
-            this.TabItem = new CSTabItem { Content = tabView };
+            this._flowDoc = flowDoc;
+            this.TabItem = tabItem;
             this.Header = header;
 
             this.TabItem.CloseTab += this.TabItem_CloseTab;
@@ -88,7 +87,7 @@ namespace DesktopCS.Models
             if (line is MessageLine)
                 this.MarkUnread();
 
-            this._tabVM.FlowDocument.Blocks.Add(line.ToParagraph());
+            this._flowDoc.Blocks.Add(line.ToParagraph());
         }
 
         public virtual void MarkUnread()

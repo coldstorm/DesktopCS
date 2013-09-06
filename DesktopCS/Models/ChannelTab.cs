@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Documents;
+using DesktopCS.Controls;
 using DesktopCS.MVVM;
 
 namespace DesktopCS.Models
@@ -7,7 +9,8 @@ namespace DesktopCS.Models
     {
         public ObservableCollection<UserItem> Users { get; private set; }
 
-        public ChannelTab(string header) : base(header)
+        public ChannelTab(string header, FlowDocument flowDoc, CSTabItem tabItem) 
+            : base(header, flowDoc, tabItem)
         {
             this.Users = new SortedObservableCollection<UserItem>();
         }

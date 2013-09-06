@@ -43,10 +43,11 @@ namespace DesktopCS.ViewModels
             }
         }
 
-        public MainViewModel(LoginData loginData)
+        public MainViewModel()
         {
             this.TabManager = new TabManager();
 
+            LoginData loginData = SettingsManager.Value.GetLoginData();
             this._irc = new IRCClient(this.TabManager, loginData);
 
             this.ChatData = new ChatData();

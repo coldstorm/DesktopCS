@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using DesktopCS.Models;
 using DesktopCS.MVVM;
+using DesktopCS.Services;
 
 namespace DesktopCS.ViewModels
 {
@@ -21,9 +22,9 @@ namespace DesktopCS.ViewModels
             }
         }
 
-        public LoginViewModel(LoginData loginData)
+        public LoginViewModel()
         {
-            this.LoginData = loginData;
+            this.LoginData = SettingsManager.Value.GetLoginData();
 
             this.LoginCommand = new RelayCommand(param => Login(), param => CanLogin);
         }
@@ -35,6 +36,7 @@ namespace DesktopCS.ViewModels
 
         public void Login()
         {
+            SettingsManager.Value.SetLoginData(this.LoginData);
             this.DialogResult = true;
         }
     }

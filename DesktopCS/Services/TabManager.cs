@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Documents;
 using DesktopCS.Controls;
 using DesktopCS.Models;
+using DesktopCS.ViewModels;
+using DesktopCS.Views;
 
 namespace DesktopCS.Services
 {
@@ -61,7 +64,7 @@ namespace DesktopCS.Services
                 return (ServerTab)this._tabDictionary[tabName];
             }
 
-            var server = new ServerTab(tabName);
+            var server = (ServerTab)this.CreateTab((f, t) => new ServerTab(tabName, f, t));
             this._tabDictionary.Add(tabName, server);
             this.ServerTabs.Add(server.TabItem);
 
@@ -74,8 +77,8 @@ namespace DesktopCS.Services
             {
                 return (ChannelTab)this._tabDictionary[tabName];
             }
-            
-            var channel = new ChannelTab(tabName);
+
+            var channel = (ChannelTab)this.CreateTab((f, t) => new ChannelTab(tabName, f, t));
             channel.Close += this.channel_Close;
             this._tabDictionary.Add(tabName, channel);
             this.ChannelTabs.Add(channel.TabItem);
@@ -90,13 +93,21 @@ namespace DesktopCS.Services
                 return this._tabDictionary[tabName];
             }
 
-            var user = new Tab(tabName);
+            var user = this.CreateTab((f, t) => new Tab(tabName, f, t));
             user.Close += this.user_Close;
             user.HeaderChange += this.user_HeaderChange;
             this._tabDictionary.Add(tabName, user);
             this.UserTabs.Add(user.TabItem);
 
             return user;
+        }
+
+        private Tab CreateTab(Func<FlowDocument, CSTabItem, Tab> callback)
+        {
+            var vm = new ChatTabContentViewModel();
+            var tabView = new ChatTabContentView(vm);
+            var tabItem = new CSTabItem { Content = tabView };
+            return callback(vm.FlowDocument, tabItem);
         }
     }
 } 

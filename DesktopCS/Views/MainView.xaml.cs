@@ -9,10 +9,10 @@ namespace DesktopCS.Views
     /// </summary>
     public partial class MainView
     {
-        public MainView(LoginData loginData)
+        public MainView()
         {
             this.InitializeComponent();
-            this.DataContext = new MainViewModel(loginData);
+            this.DataContext = new MainViewModel();
         } 
         
         //Keep the focus on InputTextBox all the time
