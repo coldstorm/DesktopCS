@@ -12,6 +12,7 @@ namespace DesktopCS.Services.IRC.Messages.Receive.Numerics
             "315", // RPL_ENDOFWHO	
             "331", // RPL_NOTOPIC
             "332", // RPL_TOPIC
+            "333", // RPL_TOPICWHOTIME
             "347", // RPL_ENDOFINVITELIST
             "349", // RPL_ENDOFEXCEPTLIST
             "352", // RPL_WHOREPLY
