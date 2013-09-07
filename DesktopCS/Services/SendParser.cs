@@ -11,9 +11,16 @@ namespace DesktopCS.Services
 {
     public class SendParser
     {
+        private readonly Client _client;
+
+        public SendParser(Client client)
+        {
+            this._client = client;
+        }
+
         public ISendMessage Parse(string message)
         {
-            var parsedMessage = new ParsedMessage(null, message);
+            var parsedMessage = new ParsedMessage(_client, message);
 
             switch (parsedMessage.Command.ToUpper())
             {
@@ -29,7 +36,11 @@ namespace DesktopCS.Services
                     {
                         return new Away(parsedMessage.Parameters[0]);
                     }
-                    break;
+                    if (!_client.User.IsAway)
+                    {
+                        return new Away("AFK");
+                    }
+                    return new NotAway();
 
                 case "BACK":
                     return new NotAway();
