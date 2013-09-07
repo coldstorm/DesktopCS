@@ -14,7 +14,7 @@ namespace DesktopCS.Services.IRC.Messages.Receive.Numerics
                    message.Parameters.Length == 3 &&
                    message.Message.Split(':').Length >= 2 &&
                    message.Parameters[1].Length >= 1 &&
-                   !NetIRCHelper.TypeChars.ContainsValue(message.Parameters[1][0]);
+                   !NetIRCHelper.IsChannel(message.Parameters[1]);
         }
 
         #region IReceiveMessage Members

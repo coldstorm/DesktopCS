@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Documents;
 using DesktopCS.Controls;
 using DesktopCS.Models;
+using DesktopCS.MVVM;
 using DesktopCS.ViewModels;
 using DesktopCS.Views;
 

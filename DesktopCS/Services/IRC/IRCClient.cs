@@ -113,7 +113,7 @@ namespace DesktopCS.Services.IRC
         {
             if (text.StartsWith("/", StringComparison.Ordinal))
             {
-                ISendMessage message = new SendParser(this._client).Parse(text.Substring(1));
+                ISendMessage message = new SendParser(this._client).Parse(this._tabManager.SelectedTab.Header, text.Substring(1));
                 this.Send(message);
             }
             else

@@ -51,6 +51,11 @@ namespace DesktopCS.Helpers
             }
         };
 
+        public static bool IsChannel(string name)
+        {
+            return TypeChars.ContainsValue(name[0]);
+        }
+
         public static UserItem ToUserItem(this User user)
         {
             return user.ToUserItem(null);
@@ -60,7 +65,8 @@ namespace DesktopCS.Helpers
         {
             var rank = UserRank.None;
             if (channel != null)
-                rank = user.Ranks[channel.Name];
+                if (user.Ranks.ContainsKey(channel.Name))
+                    rank = user.Ranks[channel.Name];
 
             return new UserItem(rank, user.NickName, IdentHelper.Parse(user.UserName));
         }
