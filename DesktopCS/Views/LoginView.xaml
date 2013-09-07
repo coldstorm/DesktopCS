@@ -29,7 +29,7 @@
             
             <StackPanel Margin="0,10">
                 <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Username" />
-                <TextBox Style="{StaticResource InputTextBox}" Text="{Binding LoginData.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBox Style="{StaticResource InputTextBox}" MaxLength="30" Text="{Binding LoginData.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             </StackPanel>
 
             <StackPanel Margin="0,10">

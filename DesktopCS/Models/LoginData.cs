@@ -88,7 +88,7 @@ namespace DesktopCS.Models
 
         private string ValidateUsername()
         {
-            var regex = new Regex(@"^[a-z_\-\[\]\\^{}|`][a-z0-9_\-\[\]\\^{}|`]*$", RegexOptions.IgnoreCase);
+            var regex = new Regex(@"^[a-z_\-\[\]\\^{}|`][a-z0-9_\-\[\]\\^{}|`]{0,30}$", RegexOptions.IgnoreCase);
             if (this.Username == null || !regex.IsMatch(this.Username)) 
                return "Invalid Username.";
 
