@@ -55,7 +55,11 @@ namespace DesktopCS.Services.IRC
 
         private void _ircClient_ChannelLeave(object sender, Channel channel)
         {
-            this.Run(this.Dispose);
+            this.Run(() =>
+            {
+                this._channelTab.Users.Clear();
+                this.Dispose();
+            });
         }
 
         private void _channel_OnNames(Channel source, string[] users)
