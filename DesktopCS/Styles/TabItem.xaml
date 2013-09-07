@@ -4,6 +4,7 @@
     <Style x:Key="SeparatorTabItem" TargetType="{x:Type TabItem}">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsEnabled" Value="False" />
         
         <Setter Property="Template">
             <Setter.Value>

@@ -53,7 +53,22 @@
 
                 <TextBox Grid.ColumnSpan="4" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" Focusable="False" />
 
-                <TabControl Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedItem}" SelectedIndex="0" ItemsSource="{Binding TabManager.Tabs}"/>          
+                <TabControl Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedItem}">
+                    <TabControl.Resources>
+                        <CollectionViewSource Source="{Binding TabManager.ServerTabs}" x:Key="ServerTabs" />
+                        <CollectionViewSource Source="{Binding TabManager.ChannelTabs}" x:Key="ChannelTabs" />
+                        <CollectionViewSource Source="{Binding TabManager.UserTabs}" x:Key="UserTabs" />
+                    </TabControl.Resources>
+                    <TabControl.ItemsSource>
+                        <CompositeCollection>
+                            <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=ServerTabs}}" />
+                            <TabItem Style="{StaticResource SeparatorTabItem}" />
+                            <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=ChannelTabs}}" />
+                            <TabItem Style="{StaticResource SeparatorTabItem}" />
+                            <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=UserTabs}}" />
+                        </CompositeCollection>
+                    </TabControl.ItemsSource>
+                </TabControl>
 
                 <Border Padding="4" Grid.Row="3" Grid.Column="0" Style="{StaticResource ContentBorder}" FocusManager.IsFocusScope="True">
                     <ScrollViewer MaxHeight="64" VerticalScrollBarVisibility="Auto">

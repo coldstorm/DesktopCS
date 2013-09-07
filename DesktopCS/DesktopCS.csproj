@@ -87,7 +87,6 @@
     <Compile Include="MVVM\SortedObservableCollection.cs" />
     <Compile Include="Services\IRC\IRCBase.cs" />
     <Compile Include="Services\IRC\IRCChannelUser.cs" />
-    <Compile Include="MVVM\CompositeCollection.cs" />
     <Compile Include="Services\IRC\IRCClient.cs" />
     <Compile Include="Services\IRC\IRCChannel.cs" />
     <Compile Include="Services\IRC\IRCServer.cs" />
