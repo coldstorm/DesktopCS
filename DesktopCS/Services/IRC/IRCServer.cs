@@ -1,6 +1,5 @@
 ﻿using DesktopCS.Helpers;
 using DesktopCS.Models;
-using DesktopCS.MVVM;
 using NetIRC;
 
 namespace DesktopCS.Services.IRC
@@ -16,12 +15,13 @@ namespace DesktopCS.Services.IRC
         {
             this._ircClient = ircClient;
             this._ircClient.Input += this._ircClient_Input;
-            this._ircClient.Text += this._ircClient_Text;
+            IRCClient.ReceiveText += this.IRCClient_ReceiveText;
 
             this._tab = tab;
 
             this._client = client;
             this._client.OnNotice += this._client_OnNotice;
+            this._client.OnDisconnect += this._client_OnDisconnect;
         }
 
         private void ShowInActive(User user, string text)
@@ -37,10 +37,6 @@ namespace DesktopCS.Services.IRC
 
         #region Event Handlers
 
-        private void _ircClient_Text(object sender, string text)
-        {
-            this.ShowInServer(text);
-        }
 
         private void _ircClient_Input(object sender, string text)
         {
@@ -50,9 +46,19 @@ namespace DesktopCS.Services.IRC
             }
         }
 
+        private void _client_OnDisconnect(Client client)
+        {
+            this.Run(this.Dispose);
+        }
+
+        private void IRCClient_ReceiveText(object sender, string text)
+        {
+            this.Run(() => this.ShowInServer(text));
+        }
+
         private void _client_OnNotice(Client client, User source, string notice)
         {
-            Run(() =>
+            this.Run(() =>
             {
                 if (source != null)
                 {
@@ -74,9 +80,10 @@ namespace DesktopCS.Services.IRC
             base.Dispose();
 
             this._ircClient.Input -= this._ircClient_Input;
-            this._ircClient.Text -= this._ircClient_Text;
+            IRCClient.ReceiveText -= this.IRCClient_ReceiveText;
 
             this._client.OnNotice -= this._client_OnNotice;
+            this._client.OnDisconnect -= this._client_OnDisconnect;
         }
 
         #endregion

@@ -16,7 +16,7 @@ namespace DesktopCS.Services.IRC
         public IRCChannelUser(IRCClient ircClient, UserItem userItem, User user, Channel channel)
         {
             this._ircClient = ircClient;
-            this._ircClient.ChannelLeave += _ircClient_ChannelLeave;
+            this._ircClient.ChannelLeave += this._ircClient_ChannelLeave;
 
             this._userItem = userItem;
 
@@ -26,7 +26,7 @@ namespace DesktopCS.Services.IRC
 
             this._channel = channel;
             this._channel.OnLeave += this._channel_OnLeave;
-            this._channel.OnRank += _channel_OnRank;
+            this._channel.OnRank += this._channel_OnRank;
         }
 
         #region Event Handlers
@@ -41,7 +41,7 @@ namespace DesktopCS.Services.IRC
 
         private void _channel_OnRank(Channel source, User user, UserRank rank)
         {
-            Run(() =>
+            this.Run(() =>
             {
                 if (user == this._user)
                 {
@@ -52,7 +52,7 @@ namespace DesktopCS.Services.IRC
 
         private void _channel_OnLeave(Channel source, User user)
         {
-            Run(() =>
+            this.Run(() =>
             {
                 if (user == this._user)
                 {
@@ -63,12 +63,12 @@ namespace DesktopCS.Services.IRC
 
         private void _user_OnUserNameChange(User user, string original)
         {
-            Run(() => { this._userItem.Metadata = user.ToUserItem(_channel).Metadata; });
+            this.Run(() => { this._userItem.Metadata = user.ToUserItem(this._channel).Metadata; });
         }
 
         private void _user_OnNickNameChange(User user, string original)
         {
-            Run(() => { this._userItem.NickName = this._user.NickName; });
+            this.Run(() => { this._userItem.NickName = this._user.NickName; });
         }
 
         #endregion

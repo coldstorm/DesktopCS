@@ -21,7 +21,7 @@ namespace DesktopCS.MVVM
         protected void VerifyPropertyName(String propertyName)
         {
             if (TypeDescriptor.GetProperties(this)[propertyName] == null)
-                throw new Exception(String.Format("Invalid property name. Type: {0}, Name: {1}", GetType(), propertyName));
+                throw new Exception(String.Format("Invalid property name. Type: {0}, Name: {1}", this.GetType(), propertyName));
         }
 
         #endregion

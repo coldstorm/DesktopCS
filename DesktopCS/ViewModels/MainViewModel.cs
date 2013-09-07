@@ -51,7 +51,7 @@ namespace DesktopCS.ViewModels
             this._irc = new IRCClient(this.TabManager, loginData);
 
             this.ChatData = new ChatData();
-            this.ChatInputCommand = new RelayCommand(param => Chat(), param => CanChat);
+            this.ChatInputCommand = new RelayCommand(param => this.Chat(), param => this.CanChat);
         }
 
         public bool CanChat

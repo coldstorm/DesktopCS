@@ -12,14 +12,14 @@ namespace DesktopCS.Services.IRC
         public IRCBase(IRCClient ircClient, Tab tab)
         {
             this._ircClient = ircClient;
-            this._ircClient.Ping += _ircClient_Ping;
+            this._ircClient.Ping += this._ircClient_Ping;
 
             this._tab = tab;
         }
 
         private void _ircClient_Ping(object sender, PingEventArgs e)
         {
-            if (e.Target == _tab.Header)
+            if (e.Target == this._tab.Header)
                 e.Handled = true;
         }
 
@@ -27,7 +27,7 @@ namespace DesktopCS.Services.IRC
 
         public virtual void Dispose()
         {
-            this._ircClient.Ping -= _ircClient_Ping;
+            this._ircClient.Ping -= this._ircClient_Ping;
         }
 
         #endregion

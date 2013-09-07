@@ -26,7 +26,7 @@ namespace DesktopCS.ViewModels
         {
             this.LoginData = SettingsManager.Value.GetLoginData();
 
-            this.LoginCommand = new RelayCommand(param => Login(), param => CanLogin);
+            this.LoginCommand = new RelayCommand(param => this.Login(), param => this.CanLogin);
         }
 
         public bool CanLogin

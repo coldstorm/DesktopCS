@@ -25,8 +25,8 @@ namespace DesktopCS.MVVM
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
             if (execute == null) throw new ArgumentNullException("execute");
-            _execute = execute;
-            _canExecute = canExecute;
+            this._execute = execute;
+            this._canExecute = canExecute;
         }
 
         #endregion // Constructors
@@ -47,7 +47,7 @@ namespace DesktopCS.MVVM
 
         public void Execute(object parameter)
         {
-            _execute(parameter);
+            this._execute(parameter);
         }
 
         #endregion // ICommand Members 

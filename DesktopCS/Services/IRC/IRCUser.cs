@@ -1,7 +1,6 @@
 ﻿using System;
 using DesktopCS.Helpers;
 using DesktopCS.Models;
-using DesktopCS.MVVM;
 using NetIRC;
 using NetIRC.Messages.Send;
 
@@ -17,15 +16,15 @@ namespace DesktopCS.Services.IRC
             : base(ircClient, tab)
         {
             this._ircClient = ircClient;
-            this._ircClient.Input += _ircClient_Input;
-            this._ircClient.Message += _ircClient_Message;
+            this._ircClient.Input += this._ircClient_Input;
+            this._ircClient.Message += this._ircClient_Message;
 
             this._tab = tab;
-            this._tab.Close += _tab_Close;
+            this._tab.Close += this._tab_Close;
 
             this._user = user;
-            this._user.OnNickNameChange += _user_OnNickNameChange;
-            this._user.OnQuit += _user_OnQuit;
+            this._user.OnNickNameChange += this._user_OnNickNameChange;
+            this._user.OnQuit += this._user_OnQuit;
         }
 
         #region Event Handlers
@@ -39,7 +38,7 @@ namespace DesktopCS.Services.IRC
         {
             if (user == this._user)
             {
-                _tab.AddChat(user, message);
+                this._tab.AddChat(user, message);
             }
         }
 
@@ -53,12 +52,12 @@ namespace DesktopCS.Services.IRC
 
         private void _user_OnQuit(User user, string reason)
         {
-            Run(this.Dispose);
+            this.Run(this.Dispose);
         }
 
         private void _user_OnNickNameChange(User user, string original)
         {
-            Run(() => { this._tab.Header = _user.NickName; });
+            this.Run(() => { this._tab.Header = this._user.NickName; });
         }
 
         #endregion
@@ -73,8 +72,8 @@ namespace DesktopCS.Services.IRC
 
             this._tab.Close -= this._tab_Close;
 
-            this._user.OnNickNameChange -= _user_OnNickNameChange;
-            this._user.OnQuit -= _user_OnQuit;
+            this._user.OnNickNameChange -= this._user_OnNickNameChange;
+            this._user.OnQuit -= this._user_OnQuit;
         }
 
         #endregion
