@@ -20,6 +20,7 @@ namespace DesktopCS.Services.IRC
 
             this._channelTab = channelTab;
             this._channelTab.Close += this._channelTab_Close;
+            this._channelTab.Header = channel.FullName; // Correct case
             this._channelTab.AddChat(new SystemMessageLine("You joined the room."));
 
             this._channel = channel;

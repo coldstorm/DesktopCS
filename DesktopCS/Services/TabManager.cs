@@ -27,22 +27,22 @@ namespace DesktopCS.Services
         void channel_Close(object sender, EventArgs e)
         {
             var tab = (Tab)sender;
-            this._tabDictionary.Remove(tab.Header);
+            this._tabDictionary.Remove(tab.Header.ToLower());
             this.ChannelTabs.Remove(tab.TabItem);
         }
 
         void user_Close(object sender, EventArgs e)
         {
             var tab = (Tab)sender;
-            this._tabDictionary.Remove(tab.Header);
+            this._tabDictionary.Remove(tab.Header.ToLower());
             this.UserTabs.Remove(tab.TabItem);
         }
 
-        void user_HeaderChange(object sender, string oldValue)
+        void tab_HeaderChange(object sender, string oldValue)
         {
             var tab = (Tab)sender;
-            this._tabDictionary.Remove(oldValue);
-            this._tabDictionary.Add(tab.Header, tab);
+            this._tabDictionary.Remove(oldValue.ToLower());
+            this._tabDictionary.Add(tab.Header.ToLower(), tab);
         }
 
         public Tab SelectedTab
@@ -59,13 +59,13 @@ namespace DesktopCS.Services
 
         public ServerTab AddServer(string tabName)
         {
-            if (this._tabDictionary.ContainsKey(tabName))
+            if (this._tabDictionary.ContainsKey(tabName.ToLower()))
             {
-                return (ServerTab)this._tabDictionary[tabName];
+                return (ServerTab)this._tabDictionary[tabName.ToLower()];
             }
 
             var server = (ServerTab)this.CreateTab((f, t) => new ServerTab(tabName, f, t));
-            this._tabDictionary.Add(tabName, server);
+            this._tabDictionary.Add(tabName.ToLower(), server);
             this.ServerTabs.Add(server.TabItem);
 
             return server;
@@ -73,14 +73,15 @@ namespace DesktopCS.Services
 
         public ChannelTab AddChannel(string tabName)
         {
-            if (this._tabDictionary.ContainsKey(tabName))
+            if (this._tabDictionary.ContainsKey(tabName.ToLower()))
             {
-                return (ChannelTab)this._tabDictionary[tabName];
+                return (ChannelTab)this._tabDictionary[tabName.ToLower()];
             }
 
             var channel = (ChannelTab)this.CreateTab((f, t) => new ChannelTab(tabName, f, t));
             channel.Close += this.channel_Close;
-            this._tabDictionary.Add(tabName, channel);
+            channel.HeaderChange += this.tab_HeaderChange;
+            this._tabDictionary.Add(tabName.ToLower(), channel);
             this.ChannelTabs.Add(channel.TabItem);
 
             return channel;
@@ -88,15 +89,15 @@ namespace DesktopCS.Services
 
         public Tab AddUser(string tabName)
         {
-            if (this._tabDictionary.ContainsKey(tabName))
+            if (this._tabDictionary.ContainsKey(tabName.ToLower()))
             {
-                return this._tabDictionary[tabName];
+                return this._tabDictionary[tabName.ToLower()];
             }
 
             var user = this.CreateTab((f, t) => new Tab(tabName, f, t));
             user.Close += this.user_Close;
-            user.HeaderChange += this.user_HeaderChange;
-            this._tabDictionary.Add(tabName, user);
+            user.HeaderChange += this.tab_HeaderChange;
+            this._tabDictionary.Add(tabName.ToLower(), user);
             this.UserTabs.Add(user.TabItem);
 
             return user;

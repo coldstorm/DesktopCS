@@ -21,6 +21,7 @@ namespace DesktopCS.Services.IRC
 
             this._tab = tab;
             this._tab.Close += this._tab_Close;
+            this._tab.Header = user.NickName; // Correct case
 
             this._user = user;
             this._user.OnNickNameChange += this._user_OnNickNameChange;
