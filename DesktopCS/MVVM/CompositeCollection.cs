@@ -14,15 +14,15 @@ namespace DesktopCS.MVVM
 
         public CompositeCollection(params ObservableCollection<T>[] subCollections)
         {
-            _subCollections = subCollections;
-            SubscribeToSubCollectionChanges();
+            this._subCollections = subCollections;
+            this.SubscribeToSubCollectionChanges();
         }
 
         private void SubscribeToSubCollectionChanges()
         {
-            foreach (var collection in _subCollections)
+            foreach (var collection in this._subCollections)
             {
-                collection.CollectionChanged += OnSubCollectionChanged;
+                collection.CollectionChanged += this.OnSubCollectionChanged;
             }
         }
 
@@ -31,7 +31,7 @@ namespace DesktopCS.MVVM
             var collection = (ObservableCollection<T>)sender;
             int startingIndex = 0;
 
-            foreach (var c in _subCollections)
+            foreach (var c in this._subCollections)
             {
                 if (c != collection)
                     startingIndex += c.Count();

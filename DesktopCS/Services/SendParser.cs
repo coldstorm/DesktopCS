@@ -20,7 +20,7 @@ namespace DesktopCS.Services
 
         public ISendMessage Parse(string message)
         {
-            var parsedMessage = new ParsedMessage(_client, message);
+            var parsedMessage = new ParsedMessage(this._client, message);
 
             switch (parsedMessage.Command.ToUpper())
             {
@@ -36,7 +36,7 @@ namespace DesktopCS.Services
                     {
                         return new Away(parsedMessage.Parameters[0]);
                     }
-                    if (!_client.User.IsAway)
+                    if (!this._client.User.IsAway)
                     {
                         return new Away("AFK");
                     }

@@ -92,6 +92,7 @@ namespace DesktopCS.Services.IRC
             client.OnChannelLeave += this._client_OnChannelLeave;
             client.OnMessage += this._client_OnMessage;
             client.OnConnect += this.client_OnConnect;
+            client.OnSend += this.client_OnSend;
             client.OnDisconnect += this.client_OnDisconnect;
 
             this.AddServer(client);
@@ -112,7 +113,7 @@ namespace DesktopCS.Services.IRC
         {
             if (text.StartsWith("/", StringComparison.Ordinal))
             {
-                ISendMessage message = new SendParser(_client).Parse(text.Substring(1));
+                ISendMessage message = new SendParser(this._client).Parse(text.Substring(1));
                 this.Send(message);
             }
             else
@@ -208,6 +209,19 @@ namespace DesktopCS.Services.IRC
         private void _client_OnChannelLeave(Client client, Channel channel)
         {
             this.Run(() => this.OnChannelLeave(channel));
+        }
+
+
+        void client_OnSend(Client client, SendMessageEventArgs e)
+        {
+            this.Run(() =>
+            {
+                var joinMessage = e.Message as Join;
+                if (joinMessage != null)
+                {
+                    this._tabManager.AddChannel(joinMessage.ChannelName).IsSelected = true;
+                }
+            });
         }
 
         #endregion
