@@ -37,7 +37,6 @@ namespace DesktopCS.Services.IRC
 
         #region Event Handlers
 
-
         private void _ircClient_Input(object sender, string text)
         {
             if (!this._tab.IsSelected)
