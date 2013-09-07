@@ -5,19 +5,20 @@ using NetIRC;
 
 namespace DesktopCS.Services.IRC
 {
-    public class IRCServer : UIInvoker
+    public class IRCServer : IRCBase
     {
-        private readonly Tab _serverTab;
+        private readonly Tab _tab;
         private readonly IRCClient _ircClient;
         private readonly Client _client;
 
-        public IRCServer(IRCClient ircClient, Tab serverTab, Client client)
+        public IRCServer(IRCClient ircClient, Tab tab, Client client)
+            : base(ircClient, tab)
         {
             this._ircClient = ircClient;
             this._ircClient.Input += this._ircClient_Input;
-            this._ircClient.Text += this._ircClient_OnText;
+            this._ircClient.Text += this._ircClient_Text;
 
-            this._serverTab = serverTab;
+            this._tab = tab;
 
             this._client = client;
             this._client.OnNotice += this._client_OnNotice;
@@ -25,25 +26,25 @@ namespace DesktopCS.Services.IRC
 
         private void ShowInActive(User user, string text)
         {
-            Tab selectedTab = this._ircClient.SelectedTab ?? this._serverTab;
+            Tab selectedTab = this._ircClient.SelectedTab ?? this._tab;
             selectedTab.AddChat(user, text);
         }
 
         private void ShowInServer(string text)
         {
-            this._serverTab.AddChat(text);
+            this._tab.AddChat(text);
         }
 
         #region Event Handlers
 
-        private void _ircClient_OnText(object sender, string text)
+        private void _ircClient_Text(object sender, string text)
         {
             this.ShowInServer(text);
         }
 
         private void _ircClient_Input(object sender, string text)
         {
-            if (!this._serverTab.IsSelected)
+            if (!this._tab.IsSelected)
             {
                 this.ShowInActive(this._client.User, text);
             }
@@ -66,5 +67,18 @@ namespace DesktopCS.Services.IRC
 
         #endregion
 
+        #region IDisposable Members
+
+        public override void Dispose()
+        {
+            base.Dispose();
+
+            this._ircClient.Input -= this._ircClient_Input;
+            this._ircClient.Text -= this._ircClient_Text;
+
+            this._client.OnNotice -= this._client_OnNotice;
+        }
+
+        #endregion
     }
 }

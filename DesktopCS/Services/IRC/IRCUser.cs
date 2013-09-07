@@ -7,17 +7,17 @@ using NetIRC.Messages.Send;
 
 namespace DesktopCS.Services.IRC
 {
-    public class IRCUser : UIInvoker, IDisposable
+    public class IRCUser : IRCBase
     {
         private readonly IRCClient _ircClient;
         private readonly Tab _tab;
         private readonly User _user;
 
         public IRCUser(IRCClient ircClient, Tab tab, User user)
+            : base(ircClient, tab)
         {
             this._ircClient = ircClient;
             this._ircClient.Input += _ircClient_Input;
-            this._ircClient.Ping += _ircClient_Ping;
             this._ircClient.Message += _ircClient_Message;
 
             this._tab = tab;
@@ -35,15 +35,7 @@ namespace DesktopCS.Services.IRC
             this.Dispose();
         }
 
-        private void _ircClient_Ping(object sender, PingEventArgs e)
-        {
-            if (e.Target == _user.NickName)
-            {
-                e.Handled = true;
-            }
-        }
-
-        void _ircClient_Message(object sender, User user, string message)
+        private void _ircClient_Message(object sender, User user, string message)
         {
             if (user == this._user)
             {
@@ -73,10 +65,11 @@ namespace DesktopCS.Services.IRC
 
         #region IDisposable Members
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
+
             this._ircClient.Input -= this._ircClient_Input;
-            this._ircClient.Ping -= this._ircClient_Ping;
 
             this._tab.Close -= this._tab_Close;
 
