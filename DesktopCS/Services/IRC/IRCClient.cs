@@ -86,7 +86,6 @@ namespace DesktopCS.Services.IRC
         {
             var client = new Client();
             client.RegisterMessage(typeof(Message));
-            client.RegisterMessage(typeof(ParamMessage));
 
             client.OnChannelJoin += this._client_OnChannelJoin;
             client.OnChannelLeave += this._client_OnChannelLeave;
@@ -182,8 +181,11 @@ namespace DesktopCS.Services.IRC
         {
             this.Run(() =>
             {
-                var message = new UserPrivate(PasswordService, "IDENTIFY " + this._loginData.Password);
-                this._client.Send(message);
+                if (!String.IsNullOrWhiteSpace(this._loginData.Password))
+                {
+                    var message = new UserPrivate(PasswordService, "IDENTIFY " + this._loginData.Password);
+                    this._client.Send(message);
+                }
             });
         }
 

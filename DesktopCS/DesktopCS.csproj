@@ -99,7 +99,6 @@
     <Compile Include="Models\UserItem.cs" />
     <Compile Include="Models\UserMetadata.cs" />
     <Compile Include="Services\IRC\IRCUser.cs" />
-    <Compile Include="Services\IRC\Messages\Receive\Numerics\ParamMessage.cs" />
     <Compile Include="Services\IRC\Messages\Receive\Numerics\Message.cs" />
     <Compile Include="Services\IRC\Messages\Send\Raw.cs" />
     <Compile Include="Services\IRC\PingEventArgs.cs" />
@@ -454,9 +453,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Flags\il.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Flags\im.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Flags\in.png" />
@@ -980,7 +976,9 @@
   <ItemGroup>
     <Resource Include="Resources\coldstorm.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Flags\im.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
