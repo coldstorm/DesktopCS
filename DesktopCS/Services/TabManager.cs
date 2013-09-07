@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using DesktopCS.Controls;
 using DesktopCS.Models;
@@ -13,16 +15,29 @@ namespace DesktopCS.Services
 {
     public class TabManager
     {
-        private readonly ObservableCollection<CSTabItem> _serverTabs = new ObservableCollection<CSTabItem>();
-        private readonly ObservableCollection<CSTabItem> _channelTabs = new ObservableCollection<CSTabItem>();
-        private readonly ObservableCollection<CSTabItem> _userTabs = new ObservableCollection<CSTabItem>();
+        private readonly ObservableCollection<TabItem> _serverTabs = new ObservableCollection<TabItem>();
+        private readonly ObservableCollection<TabItem> _channelTabs = new ObservableCollection<TabItem>();
+        private readonly ObservableCollection<TabItem> _userTabs = new ObservableCollection<TabItem>();
         private readonly Dictionary<string, Tab> _tabDictionary = new Dictionary<string, Tab>();
 
-        public CompositeCollection<CSTabItem> Tabs { get; private set; }
+        public CompositeCollection<TabItem> Tabs { get; private set; }
 
         public TabManager()
         {
-            this.Tabs = new CompositeCollection<CSTabItem>(this._serverTabs, this._channelTabs, this._userTabs);
+            this.Tabs = new CompositeCollection<TabItem>(this._serverTabs, this.GetSeparator(), this._channelTabs, this.GetSeparator(), this._userTabs);
+        }
+
+        private ObservableCollection<TabItem> GetSeparator()
+        {
+            return
+                new ObservableCollection<TabItem>(
+                    new[]
+                    {
+                        new TabItem
+                        {
+                            Style = Application.Current.FindResource("SeparatorTabItem") as Style
+                        }
+                    });
         }
 
         void channel_Close(object sender, EventArgs e)
