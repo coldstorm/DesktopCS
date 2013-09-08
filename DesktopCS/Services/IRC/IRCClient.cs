@@ -2,6 +2,7 @@
 using DesktopCS.Helpers;
 using DesktopCS.Models;
 using DesktopCS.MVVM;
+using DesktopCS.Services.Command;
 using DesktopCS.Services.IRC.Messages.Receive.Numerics;
 using DesktopCS.Services.IRC.Messages.Send;
 using NetIRC;
@@ -15,6 +16,7 @@ namespace DesktopCS.Services.IRC
     {
         private const string PasswordService = "NickServ";
 
+        private readonly CommandExecutor _commandExecutor = new CommandExecutor();
         private readonly TabManager _tabManager;
         private readonly LoginData _loginData;
         private Client _client;
@@ -113,7 +115,7 @@ namespace DesktopCS.Services.IRC
         {
             if (text.StartsWith("/", StringComparison.Ordinal))
             {
-                ISendMessage message = new SendParser(this._client).Parse(this._tabManager.SelectedTab.Header, text.Substring(1));
+                ISendMessage message = this._commandExecutor.Execute(this._client, this._tabManager.SelectedTab, text.Substring(1));
                 this.Send(message);
             }
             else
@@ -230,7 +232,7 @@ namespace DesktopCS.Services.IRC
                 var joinMessage = e.Message as Join;
                 if (joinMessage != null)
                 {
-                    _joining = true;
+                    this._joining = true;
                 }
             });
         }
