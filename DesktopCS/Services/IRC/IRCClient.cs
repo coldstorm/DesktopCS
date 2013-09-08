@@ -18,6 +18,7 @@ namespace DesktopCS.Services.IRC
         private readonly TabManager _tabManager;
         private readonly LoginData _loginData;
         private Client _client;
+        private bool _joining;
 
         public Tab SelectedTab
         {
@@ -205,7 +206,15 @@ namespace DesktopCS.Services.IRC
 
         private void _client_OnChannelJoin(Client client, Channel channel)
         {
-            this.Run(() => this.AddChannel(channel));
+            this.Run(() =>
+            {
+                if (this._joining)
+                {
+                    this._joining = false;
+                    this._tabManager.AddChannel(channel.FullName).IsSelected = true;
+                }
+                this.AddChannel(channel);
+            });
         }
 
         private void _client_OnChannelLeave(Client client, Channel channel)
@@ -221,13 +230,7 @@ namespace DesktopCS.Services.IRC
                 var joinMessage = e.Message as Join;
                 if (joinMessage != null)
                 {
-                    this._tabManager.AddChannel(joinMessage.ChannelName).IsSelected = true;
-                }
-
-                var privMessage = e.Message as UserPrivate;
-                if (privMessage != null)
-                {
-                    this._tabManager.AddUser(privMessage.Nick).IsSelected = true;
+                    _joining = true;
                 }
             });
         }
