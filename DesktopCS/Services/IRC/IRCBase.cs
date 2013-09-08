@@ -19,8 +19,9 @@ namespace DesktopCS.Services.IRC
 
         private void _ircClient_Ping(object sender, PingEventArgs e)
         {
-            if (e.Target == this._tab.Header)
-                e.Handled = true;
+            if (e.Handled == false)
+                if (e.Target == this._tab.Header)
+                        e.Handled = true;
         }
 
         #region IDisposable Members

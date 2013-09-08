@@ -6,14 +6,15 @@ using NetIRC;
 
 namespace DesktopCS.Services.IRC
 {
-    public class IRCChannelUser : UIInvoker, IDisposable
+    public class IRCChannelUser : IRCUserBase
     {
         private readonly IRCClient _ircClient;
         private readonly UserItem _userItem;
         private readonly User _user;
         private readonly Channel _channel;
 
-        public IRCChannelUser(IRCClient ircClient, UserItem userItem, User user, Channel channel)
+        public IRCChannelUser(IRCClient ircClient, ChannelTab tab, UserItem userItem, User user, Channel channel)
+            : base(ircClient, tab, user)
         {
             this._ircClient = ircClient;
             this._ircClient.ChannelLeave += this._ircClient_ChannelLeave;
@@ -81,8 +82,10 @@ namespace DesktopCS.Services.IRC
 
         #region IDisposable Members
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
+
             this._ircClient.ChannelLeave -= this._ircClient_ChannelLeave;
 
             this._user.OnNickNameChange -= this._user_OnNickNameChange;

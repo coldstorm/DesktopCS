@@ -6,14 +6,14 @@ using NetIRC.Messages.Send;
 
 namespace DesktopCS.Services.IRC
 {
-    public class IRCUser : IRCBase
+    public class IRCUser : IRCUserBase
     {
         private readonly IRCClient _ircClient;
         private readonly Tab _tab;
         private readonly User _user;
 
         public IRCUser(IRCClient ircClient, Tab tab, User user)
-            : base(ircClient, tab)
+            : base(ircClient, tab, user)
         {
             this._ircClient = ircClient;
             this._ircClient.Input += this._ircClient_Input;

@@ -35,7 +35,7 @@ namespace DesktopCS.Services.IRC
             UserItem userItem = user.ToUserItem(this._channel);
             this._channelTab.AddUser(userItem);
 
-            new IRCChannelUser(this._ircClient, userItem, user, channel);
+            new IRCChannelUser(this._ircClient, this._channelTab, userItem, user, channel);
         }
 
         #region Event Handlers

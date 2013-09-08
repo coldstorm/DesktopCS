@@ -105,6 +105,7 @@
     <Compile Include="Models\UserItem.cs" />
     <Compile Include="Models\UserMetadata.cs" />
     <Compile Include="Services\IRC\IRCUser.cs" />
+    <Compile Include="Services\IRC\IRCUserBase.cs" />
     <Compile Include="Services\IRC\Messages\Receive\Numerics\Message.cs" />
     <Compile Include="Services\IRC\Messages\Send\Raw.cs" />
     <Compile Include="Services\IRC\Messages\Send\SendCollection.cs" />
