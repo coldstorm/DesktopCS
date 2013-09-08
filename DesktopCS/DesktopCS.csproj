@@ -101,6 +101,7 @@
     <Compile Include="Services\IRC\IRCUser.cs" />
     <Compile Include="Services\IRC\Messages\Receive\Numerics\Message.cs" />
     <Compile Include="Services\IRC\Messages\Send\Raw.cs" />
+    <Compile Include="Services\IRC\Messages\Send\SendCollection.cs" />
     <Compile Include="Services\IRC\PingEventArgs.cs" />
     <Compile Include="Services\SendParser.cs" />
     <Compile Include="Services\SettingsManager.cs" />

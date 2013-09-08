@@ -28,7 +28,9 @@ namespace DesktopCS.Services
                 case "JOIN":
                     if (parsedMessage.Parameters.Length >= 1)
                     {
-                        return new Join(new Channel(parsedMessage.Parameters[0]));
+                        return new SendCollection(
+                            this.GetChannels(parsedMessage.Parameters[0])
+                                .Select(channel => new Join(channel)));
                     }
                     if (NetIRCHelper.IsChannel(selectedItem))
                     {
@@ -40,11 +42,15 @@ namespace DesktopCS.Services
                     if (parsedMessage.Parameters.Length >= 2)
                     {
                         string reason = String.Join(" ", parsedMessage.Parameters.Skip(1));
-                        return new Part(new Channel(parsedMessage.Parameters[0]), reason);
+                        return new SendCollection(
+                            this.GetChannels(parsedMessage.Parameters[0])
+                                .Select(channel => new Part(channel, reason)));
                     }
                     if (parsedMessage.Parameters.Length == 1)
                     {
-                        return new Part(new Channel(parsedMessage.Parameters[0]));
+                        return new SendCollection(
+                            this.GetChannels(parsedMessage.Parameters[0])
+                                .Select(channel => new Part(channel)));
                     }
                     if (NetIRCHelper.IsChannel(selectedItem))
                     {
@@ -76,6 +82,11 @@ namespace DesktopCS.Services
             }
 
             return new Raw(message);
+        }
+
+        private IEnumerable<Channel> GetChannels(string channels)
+        {
+            return channels.Split(',').Select(channel => new Channel(channel));
         }
     }
 }
