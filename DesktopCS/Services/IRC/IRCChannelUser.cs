@@ -9,6 +9,7 @@ namespace DesktopCS.Services.IRC
     public class IRCChannelUser : IRCUserBase
     {
         private readonly IRCClient _ircClient;
+        private readonly ChannelTab _tab;
         private readonly UserItem _userItem;
         private readonly User _user;
         private readonly Channel _channel;
@@ -17,6 +18,7 @@ namespace DesktopCS.Services.IRC
             : base(ircClient, tab, user)
         {
             this._ircClient = ircClient;
+            this._tab = tab;
             this._ircClient.ChannelLeave += this._ircClient_ChannelLeave;
 
             this._userItem = userItem;
@@ -25,6 +27,7 @@ namespace DesktopCS.Services.IRC
             this._user.OnNickNameChange += this._user_OnNickNameChange;
             this._user.OnUserNameChange += this._user_OnUserNameChange;
             this._user.OnIsAwayChange += this._user_OnIsAwayChange;
+            this._user.OnQuit += _user_OnQuit;
 
             this._channel = channel;
             this._channel.OnLeave += this._channel_OnLeave;
@@ -76,6 +79,11 @@ namespace DesktopCS.Services.IRC
         private void _user_OnIsAwayChange(User user)
         {
             this.Run(() => { this._userItem.IsAway = this._user.IsAway; });
+        }
+
+        void _user_OnQuit(User user, string reason)
+        {
+            this.Run(() => this._tab.RemoveUser(this._user.ToUserItem()));
         }
 
         #endregion
