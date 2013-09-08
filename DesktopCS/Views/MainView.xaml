@@ -94,7 +94,13 @@
                                             <TextBlock Text="{Binding Rank, Converter={StaticResource RankConverter}}"/>
                                             <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding NickName}" ToolTip="{Binding NickName}"/>
                                         </StackPanel>
+
                                     </controls:UserlistItem>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsAway}" Value="True">
+                                            <Setter Property="Opacity" Value="0.5"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                             <ListBox.Resources>

@@ -23,6 +23,7 @@ namespace DesktopCS.Services.IRC
             this._user = user;
             this._user.OnNickNameChange += this._user_OnNickNameChange;
             this._user.OnUserNameChange += this._user_OnUserNameChange;
+            this._user.OnIsAwayChange += this._user_OnIsAwayChange;
 
             this._channel = channel;
             this._channel.OnLeave += this._channel_OnLeave;
@@ -71,8 +72,12 @@ namespace DesktopCS.Services.IRC
             this.Run(() => { this._userItem.NickName = this._user.NickName; });
         }
 
-        #endregion
+        private void _user_OnIsAwayChange(User user)
+        {
+            this.Run(() => { this._userItem.IsAway = this._user.IsAway; });
+        }
 
+        #endregion
 
         #region IDisposable Members
 
@@ -82,6 +87,7 @@ namespace DesktopCS.Services.IRC
 
             this._user.OnNickNameChange -= this._user_OnNickNameChange;
             this._user.OnUserNameChange -= this._user_OnUserNameChange;
+            this._user.OnIsAwayChange -= this._user_OnIsAwayChange;
 
             this._channel.OnRank -= this._channel_OnRank;
             this._channel.OnLeave -= this._channel_OnLeave;

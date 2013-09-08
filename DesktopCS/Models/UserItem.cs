@@ -51,6 +51,18 @@ namespace DesktopCS.Models
             }
         }
 
+        private bool _isAway;
+
+        public bool IsAway
+        {
+            get { return this._isAway; }
+            set
+            {
+                this._isAway = value;
+                this.OnPropertyChanged("IsAway");
+            }
+        }
+
         public UserItem(UserRank rank, string nick, UserMetadata metadata)
         {
             this.Rank = rank;
