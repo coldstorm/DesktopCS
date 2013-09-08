@@ -18,6 +18,7 @@ namespace DesktopCS.Services.IRC
             this._ircClient = ircClient;
             this._ircClient.Input += this._ircClient_Input;
             this._ircClient.Message += this._ircClient_Message;
+            this._ircClient.Action += this._ircClient_Action;
 
             this._tab = tab;
             this._tab.Close += this._tab_Close;
@@ -40,6 +41,14 @@ namespace DesktopCS.Services.IRC
             if (user == this._user)
             {
                 this._tab.AddChat(user, message);
+            }
+        }
+
+        private void _ircClient_Action(object sender, User user, string message)
+        {
+            if (user == this._user)
+            {
+                this._tab.AddAction(user, message);
             }
         }
 
@@ -70,6 +79,8 @@ namespace DesktopCS.Services.IRC
             base.Dispose();
 
             this._ircClient.Input -= this._ircClient_Input;
+            this._ircClient.Message -= this._ircClient_Message;
+            this._ircClient.Action -= this._ircClient_Action;
 
             this._tab.Close -= this._tab_Close;
 

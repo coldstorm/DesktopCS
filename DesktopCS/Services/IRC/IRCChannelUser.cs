@@ -18,6 +18,7 @@ namespace DesktopCS.Services.IRC
             : base(ircClient, tab, user)
         {
             this._ircClient = ircClient;
+
             this._tab = tab;
             this._ircClient.ChannelLeave += this._ircClient_ChannelLeave;
 

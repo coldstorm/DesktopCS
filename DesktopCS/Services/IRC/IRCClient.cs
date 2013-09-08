@@ -93,6 +93,7 @@ namespace DesktopCS.Services.IRC
             client.OnChannelJoin += this._client_OnChannelJoin;
             client.OnChannelLeave += this._client_OnChannelLeave;
             client.OnMessage += this._client_OnMessage;
+            client.OnAction += this._client_OnAction;
             client.OnConnect += this.client_OnConnect;
             client.OnSend += this.client_OnSend;
             client.OnDisconnect += this.client_OnDisconnect;
@@ -168,6 +169,14 @@ namespace DesktopCS.Services.IRC
             MessageHandler handler = this.Message;
             if (handler != null) handler(this, user, message);
         }
+        
+        public event MessageHandler Action;
+
+        protected virtual void OnAction(User user, string message)
+        {
+            MessageHandler handler = this.Action;
+            if (handler != null) handler(this, user, message);
+        }
 
         public static event TextEventHandler ReceiveText;
 
@@ -203,6 +212,15 @@ namespace DesktopCS.Services.IRC
             {
                 this.AddUser(source);
                 this.OnMessage(source, message);
+            });
+        }
+        
+        private void _client_OnAction(Client client, User source, string action)
+        {
+            this.Run(() =>
+            {
+                this.AddUser(source);
+                this.OnAction(source, action);
             });
         }
 

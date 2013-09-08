@@ -1,6 +1,7 @@
 ﻿using System;
 using DesktopCS.Models;
 using DesktopCS.Services.Command;
+using NetIRC;
 
 namespace DesktopCS.Helpers
 {
@@ -14,6 +15,16 @@ namespace DesktopCS.Helpers
         public static void AddSystemChat(this Tab tab, string message)
         {
             tab.AddChat(new SystemMessageLine(message));
+        }
+
+        public static void AddAction(this Tab tab, User user, string message)
+        {
+            tab.AddChat(user, String.Format("\0009{0}\0009", message));
+        }
+
+        public static void AddAction(this Tab tab, UserItem user, string message)
+        {
+            tab.AddChat(new MessageLine(user, String.Format("\0009{0}\0009", message)));
         }
 
         public static void AddNickChange(this Tab tab, string oldNick, string newNick)
