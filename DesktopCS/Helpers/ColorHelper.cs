@@ -9,6 +9,7 @@ namespace DesktopCS.Helpers
         public static readonly Color TimeColor = FromString("#FF373F4E");
         public static readonly Color ChatColor = FromString("#FFBABBBF");
         public static readonly Color MessageColor = FromString("#FF808080");
+        public static readonly Color ErrorColor = FromString("Orange");
 
         public static string ToHexWithoutHash(Color color)
         {

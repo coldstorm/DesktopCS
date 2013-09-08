@@ -42,7 +42,7 @@ namespace DesktopCS.Services.Command
                     }
                     catch (CommandException ex)
                     {
-                        // TODO: Report error
+                        tab.AddException(ex);
                         return null;
                     }
                 }
@@ -66,7 +66,7 @@ namespace DesktopCS.Services.Command
                 return new Join(new Channel(arg.Tab.Header));
             }
 
-            throw InvalidUsage(this._commands["JOIN"]);
+            throw new CommandException("/JOIN expects a channel");
         }
 
         private ISendMessage PartCallback(CommandArgs arg)
@@ -92,7 +92,7 @@ namespace DesktopCS.Services.Command
                 return new Part(new Channel(arg.Tab.Header));
             }
 
-            throw InvalidUsage(this._commands["PART"]);
+            throw new CommandException("/PART expects a channel");
         }
 
         private ISendMessage QueryCallback(CommandArgs arg)
@@ -135,7 +135,7 @@ namespace DesktopCS.Services.Command
 
         private static CommandException InvalidUsage(Command command)
         {
-            throw new NotImplementedException();
+            return new CommandException("Invalid usage:" + command.Usage);
         }
     }
 }

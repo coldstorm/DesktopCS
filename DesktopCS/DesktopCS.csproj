@@ -76,12 +76,14 @@
     <Compile Include="Helpers\EnumExtentions.cs" />
     <Compile Include="Helpers\NetIRCHelper.cs" />
     <Compile Include="Helpers\CountryCodeHelper.cs" />
+    <Compile Include="Helpers\OutputMessages.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="Helpers\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\IdentHelper.cs" />
     <Compile Include="Models\ChatData.cs" />
     <Compile Include="Models\ChannelTab.cs" />
+    <Compile Include="Models\ErrorLine.cs" />
     <Compile Include="MVVM\ObservableObject.cs" />
     <Compile Include="MVVM\RelayCommand.cs" />
     <Compile Include="MVVM\SortedObservableCollection.cs" />
