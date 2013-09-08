@@ -223,6 +223,12 @@ namespace DesktopCS.Services.IRC
                 {
                     this._tabManager.AddChannel(joinMessage.ChannelName).IsSelected = true;
                 }
+
+                var privMessage = e.Message as UserPrivate;
+                if (privMessage != null)
+                {
+                    this._tabManager.AddUser(privMessage.Nick).IsSelected = true;
+                }
             });
         }
 

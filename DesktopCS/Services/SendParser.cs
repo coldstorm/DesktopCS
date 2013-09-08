@@ -65,6 +65,14 @@ namespace DesktopCS.Services
 
                 case "BACK":
                     return new NotAway();
+
+                case "QUERY": case "MSG":
+                    if (parsedMessage.Parameters.Length >= 2)
+                    {
+                        string text = String.Join(" ", parsedMessage.Parameters.Skip(1));
+                        return new UserPrivate(parsedMessage.Parameters[0], text);
+                    }
+                    break;
             }
 
             return new Raw(message);
