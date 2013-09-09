@@ -19,12 +19,12 @@ namespace DesktopCS.Helpers
 
         public static void AddAction(this Tab tab, User user, string message)
         {
-            tab.AddChat(user, String.Format("\0009{0}\0009", message));
+            tab.AddChat(user, MIRCHelper.ItalicChar + message + MIRCHelper.ItalicChar);
         }
 
         public static void AddAction(this Tab tab, UserItem user, string message)
         {
-            tab.AddChat(new MessageLine(user, String.Format("\0009{0}\0009", message)));
+            tab.AddChat(new MessageLine(user, MIRCHelper.ItalicChar + message + MIRCHelper.ItalicChar));
         }
 
         public static void AddNickChange(this Tab tab, string oldNick, string newNick)

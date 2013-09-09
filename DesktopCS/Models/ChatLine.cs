@@ -71,8 +71,8 @@ namespace DesktopCS.Models
             {
                 Color color = this.ChatColor;
 
-                var chatRun = new Run(this.Chat) {Foreground = new SolidColorBrush(color)};
-                p.Inlines.Add(chatRun);
+                Span chatSpan = MIRCHelper.Parse(this.Chat, color);
+                p.Inlines.Add(chatSpan);
             }
 
             return p;
