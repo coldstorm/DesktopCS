@@ -56,7 +56,7 @@ namespace DesktopCS.Services.IRC
             });
         }
 
-        private void _channel_OnLeave(Channel source, User user)
+        private void _channel_OnLeave(Channel source, User user, string reason)
         {
             this.Run(() =>
             {

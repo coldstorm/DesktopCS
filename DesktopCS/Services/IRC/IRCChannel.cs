@@ -77,12 +77,11 @@ namespace DesktopCS.Services.IRC
             });
         }
 
-        private void _channel_OnLeave(Channel source, User user)
+        private void _channel_OnLeave(Channel source, User user, string reason)
         {
             this.Run(() =>
             {
-                // TODO: Add reason
-                this._channelTab.AddLeave(user.NickName, null);
+                this._channelTab.AddLeave(user.NickName, reason);
                 this._channelTab.RemoveUser(user.ToUserItem(source));
             });
         }
