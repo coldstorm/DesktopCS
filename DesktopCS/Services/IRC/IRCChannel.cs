@@ -70,6 +70,7 @@ namespace DesktopCS.Services.IRC
         {
             this.Run(() =>
             {
+                this._channelTab.Users.Clear();
                 foreach (var user in this._channel.Users.Values)
                 {
                     this.AddUser(this._channel, user);
