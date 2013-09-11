@@ -23,7 +23,7 @@ namespace DesktopCS.Helpers
             bool isItalic = false;
             bool isUnderline = false;
 
-            int foreground = 0;
+            int foreground = -1;
             int background = -1;
 
             var flushBuffer = new Action(() =>
@@ -37,7 +37,7 @@ namespace DesktopCS.Helpers
             var resetColors = new Action(() =>
             {
                 // ReSharper disable AccessToModifiedClosure
-                foreground = 0;
+                foreground = -1;
                 background = -1;
                 // ReSharper restore AccessToModifiedClosure
             });
@@ -117,15 +117,13 @@ namespace DesktopCS.Helpers
             return span;
         }
 
-        private static Color GetColor(int color, Color defaultForecolor, Color defaultColor)
+        private static Color GetColor(int color, Color defaultColor)
         {
             // Source: http://www.ircbeginner.com/ircinfo/colors.html
             switch (color)
             {
-                case -1:
-                    return Colors.Transparent; // No background color is set
                 case 0:
-                    return defaultForecolor; // Colors.White;
+                    return Colors.White;
                 case 1:
                     return Colors.Black;
                 case 2:
@@ -164,8 +162,8 @@ namespace DesktopCS.Helpers
         private static Inline GetInline(string text, bool isBold, bool isItalic, bool underline, int foreground, int background, Color defaultForecolor)
         {
             Inline inline = new Run(text);
-            inline.Foreground = new SolidColorBrush(GetColor(foreground, defaultForecolor, defaultForecolor));
-            inline.Background = new SolidColorBrush(GetColor(background, defaultForecolor, Colors.Transparent));
+            inline.Foreground = new SolidColorBrush(GetColor(foreground, defaultForecolor));
+            inline.Background = new SolidColorBrush(GetColor(background, Colors.Transparent));
 
             if (isBold)
                 inline = new Bold(inline);
