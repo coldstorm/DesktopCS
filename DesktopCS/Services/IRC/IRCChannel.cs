@@ -58,8 +58,11 @@ namespace DesktopCS.Services.IRC
         {
             this.Run(() =>
             {
-                this._channelTab.Users.Clear();
-                this.Dispose();
+                if (channel == _channel)
+                {
+                    this._channelTab.Users.Clear();
+                    this.Dispose();
+                }
             });
         }
 
