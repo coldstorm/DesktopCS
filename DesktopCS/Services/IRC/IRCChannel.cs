@@ -21,7 +21,7 @@ namespace DesktopCS.Services.IRC
             this._channelTab = channelTab;
             this._channelTab.Close += this._channelTab_Close;
             this._channelTab.Header = channel.FullName; // Correct case
-            this._channelTab.AddChat(new SystemMessageLine("You joined the room."));
+            this._channelTab.AddJoin();
 
             this._channel = channel;
             this._channel.OnMessage += this._channel_OnMessage;
@@ -76,12 +76,21 @@ namespace DesktopCS.Services.IRC
 
         private void _channel_OnLeave(Channel source, User user)
         {
-            this.Run(() => this._channelTab.RemoveUser(user.ToUserItem(source)));
+            this.Run(() =>
+            {
+                // TODO: Add reason
+                this._channelTab.AddLeave(user.NickName, null);
+                this._channelTab.RemoveUser(user.ToUserItem(source));
+            });
         }
 
         private void _channel_OnJoin(Channel source, User user)
         {
-            this.Run(() => this.AddUser(this._channel, user));
+            this.Run(() =>
+            {
+                this._channelTab.AddJoin(user.NickName);
+                this.AddUser(this._channel, user);
+            });
         }
 
         private void _channel_OnMessage(Channel source, User user, string message)
