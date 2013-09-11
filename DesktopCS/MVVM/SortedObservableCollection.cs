@@ -42,8 +42,9 @@ namespace DesktopCS.MVVM
 
         private void ContainedElementChanged(object sender, PropertyChangedEventArgs e)
         {
-            // Tell the Collection that the property has changed
-            base.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, sender, sender));
+            // Remove and add the item so that it is resorted
+            base.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, sender));
+            base.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, sender));
         }
     }
 }
