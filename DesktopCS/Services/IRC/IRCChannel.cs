@@ -20,7 +20,6 @@ namespace DesktopCS.Services.IRC
 
             this._channelTab = channelTab;
             this._channelTab.Close += this._channelTab_Close;
-            this._channelTab.Header = channel.FullName; // Correct case
             this._channelTab.AddJoin();
 
             this._channel = channel;

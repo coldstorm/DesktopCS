@@ -122,12 +122,25 @@ namespace DesktopCS.Services.IRC
             else
             {
                 this.OnInput(text);
+
+                Tab target = this._tabManager.SelectedTab;
+
+                // Check if the tab is alive, if not (user left or new query tab) handle the send manually
+                if (!this.DoPing(target.Header))
+                {
+                    this.Send(new UserPrivate(target.Header, text));
+                }
             }
         }
 
         public void Send(ISendMessage message)
         {
             this._client.Send(message);
+        }
+
+        public void Query(string nick)
+        {
+            this._tabManager.AddUser(nick).IsSelected = true;
         }
 
         #region Events

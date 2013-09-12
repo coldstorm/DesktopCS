@@ -16,6 +16,7 @@ namespace DesktopCS.ViewModels
         public ChatData ChatData { get; private set; }
         public TabManager TabManager { get; private set; }
         public ICommand ChatInputCommand { get; private set; }
+        public ICommand QueryCommand { get; private set; }
 
         private CSTabItem _selectedItem;
 
@@ -73,6 +74,7 @@ namespace DesktopCS.ViewModels
 
             this.ChatData = new ChatData();
             this.ChatInputCommand = new RelayCommand(param => this.Chat(), param => this.CanChat);
+            this.QueryCommand = new RelayCommand(param => this.Query((string)param));
         }
 
         public bool CanChat
@@ -84,6 +86,11 @@ namespace DesktopCS.ViewModels
         {
             this._irc.Chat(this.ChatData.InputText);
             this.ChatData.InputText = String.Empty;
+        }
+
+        public void Query(string nick)
+        {
+            this._irc.Query(nick);
         }
     }
 }

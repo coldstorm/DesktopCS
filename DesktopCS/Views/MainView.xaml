@@ -114,9 +114,12 @@
                                         </controls:UserlistItem.Header>
 
                                         <StackPanel>
-                                            <Button Style="{StaticResource TextButtonStyle}">QUERY</Button>
-                                            <Button Style="{StaticResource TextButtonStyle}">KICK</Button>
-                                            <Button Style="{StaticResource TextButtonStyle}">BAN</Button>
+                                            <Button Style="{StaticResource TextButtonStyle}"
+                                                    Command="{Binding DataContext.QueryCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding NickName}">
+                                                query
+                                            </Button>
+                                            <Button Style="{StaticResource TextButtonStyle}">kick</Button>
+                                            <Button Style="{StaticResource TextButtonStyle}">ban</Button>
                                         </StackPanel>
                                     </controls:UserlistItem>
                                     <DataTemplate.Triggers>
