@@ -65,7 +65,7 @@
                         <Paragraph TextAlignment="Right">
                             <Run Text="{Binding Topic.Content}"/> (By
                             <Run Foreground="{Binding Topic.Author.Metadata.Color, Converter={StaticResource BrushColorConverter}}" 
-                                  Text="{Binding Topic.Author.NickName}"/>)
+                                 Text="{Binding Topic.Author.NickName}"/>)
                         </Paragraph>
                     </FlowDocument>
                 </RichTextBox>
@@ -115,7 +115,8 @@
 
                                         <StackPanel>
                                             <Button Style="{StaticResource TextButtonStyle}"
-                                                    Command="{Binding DataContext.QueryCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding NickName}">
+                                                    Command="{Binding DataContext.QueryCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                                                    CommandParameter="{Binding NickName}">
                                                 query
                                             </Button>
                                             <Button Style="{StaticResource TextButtonStyle}">kick</Button>
