@@ -51,7 +51,24 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBox Grid.ColumnSpan="4" IsReadOnly="True" TextAlignment="Right" Foreground="{StaticResource MessageBrush}" Focusable="False" />
+                <RichTextBox Name="TopicRichTextBox" Grid.ColumnSpan="4" IsReadOnly="True" Foreground="{StaticResource MessageBrush}">
+                    <RichTextBox.Style>
+                        <Style TargetType="{x:Type RichTextBox}" BasedOn="{StaticResource {x:Type RichTextBox}}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Topic.Content, FallbackValue='', TargetNullValue=''}" Value="">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RichTextBox.Style>
+                    <FlowDocument behaviors:FlowDocumentPagePadding.PagePadding="0">
+                        <Paragraph TextAlignment="Right">
+                            <Run Text="{Binding Topic.Content}"/> (By
+                            <Run Foreground="{Binding Topic.Author.Metadata.Color, Converter={StaticResource BrushColorConverter}}" 
+                                  Text="{Binding Topic.Author.NickName}"/>)
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
 
                 <TabControl Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedItem}">
                     <TabControl.Resources>

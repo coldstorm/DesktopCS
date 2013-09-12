@@ -27,7 +27,16 @@ namespace DesktopCS.ViewModels
                 this._selectedItem = value;
 
                 var channelTab = this.TabManager.SelectedTab as ChannelTab;
-                this.Users = channelTab != null ? channelTab.Users : null;
+                if (channelTab != null)
+                {
+                    this.Users = channelTab.Users;
+                    this.Topic = channelTab.Topic;
+                }
+                else
+                {
+                    this.Users = null;
+                    this.Topic = null;
+                }
             }
         }
 
@@ -40,6 +49,18 @@ namespace DesktopCS.ViewModels
             {
                 this._users = value;
                 this.OnPropertyChanged("Users");
+            }
+        }
+
+        private Topic _topic;
+
+        public Topic Topic
+        {
+            get { return this._topic; }
+            private set
+            {
+                this._topic = value;
+                this.OnPropertyChanged("Topic");
             }
         }
 

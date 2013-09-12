@@ -16,6 +16,7 @@ namespace DesktopCS.Converters
             var flag = (string)value;
             var uri = String.Format("Resources/Flags/{0}.png", flag);
 
+            // BUG: This is taking too much processing time
             if (!ResourceHelper.ResourceExists(uri))
             {
                 uri = "Resources/Flags/QQ.png"; 
@@ -28,7 +29,7 @@ namespace DesktopCS.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         #endregion

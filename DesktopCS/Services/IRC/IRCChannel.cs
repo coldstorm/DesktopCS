@@ -28,6 +28,7 @@ namespace DesktopCS.Services.IRC
             this._channel.OnJoin += this._channel_OnJoin;
             this._channel.OnLeave += this._channel_OnLeave;
             this._channel.OnNames += this._channel_OnNames;
+            this._channel.OnTopicChange += this._channel_OnTopicChange;
         }
 
         private void AddUser(Channel channel, User user)
@@ -101,6 +102,12 @@ namespace DesktopCS.Services.IRC
             this.Run(() => this._channelTab.AddChat(user, this._channel, message));
         }
 
+        private void _channel_OnTopicChange(Channel source, ChannelTopic topic)
+        {
+            this._channelTab.Topic.Author = topic.Author.ToUserItem();
+            this._channelTab.Topic.Content = topic.Message;
+        }
+
         #endregion
 
         #region IDisposable Members
@@ -118,6 +125,7 @@ namespace DesktopCS.Services.IRC
             this._channel.OnJoin -= this._channel_OnJoin;
             this._channel.OnLeave -= this._channel_OnLeave;
             this._channel.OnNames -= this._channel_OnNames;
+            this._channel.OnTopicChange -= this._channel_OnTopicChange;
         }
 
         #endregion

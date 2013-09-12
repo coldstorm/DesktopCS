@@ -85,6 +85,7 @@
     <Compile Include="Models\ChatData.cs" />
     <Compile Include="Models\ChannelTab.cs" />
     <Compile Include="Models\ErrorLine.cs" />
+    <Compile Include="Models\Topic.cs" />
     <Compile Include="MVVM\ObservableObject.cs" />
     <Compile Include="MVVM\RelayCommand.cs" />
     <Compile Include="MVVM\SortedObservableCollection.cs" />
