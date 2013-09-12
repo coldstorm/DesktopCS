@@ -41,9 +41,6 @@
     <ApplicationIcon>Resources\coldstorm.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NetIRC">
-      <HintPath>..\Lib\NetIRC.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -987,6 +984,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Flags\im.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\NetIRC\NetIRC\NetIRC.csproj">
+      <Project>{4aee2d87-d356-4ca1-ba02-7536b1af2b8c}</Project>
+      <Name>NetIRC</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
