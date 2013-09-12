@@ -10,6 +10,7 @@
         d:DataContext="{d:DesignInstance viewModels:LoginViewModel}"
         mc:Ignorable="d"
         Title="Login" Width="372" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SizeToContent="Height"
+        Closed="Window_Closed"
         behaviors:BindableDialogResult.DialogResult="{Binding DialogResult}"
         Style="{StaticResource WindowStyle}">
 

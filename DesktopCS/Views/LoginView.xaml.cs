@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
 using DesktopCS.Helpers;
-using DesktopCS.Models;
-using DesktopCS.Services;
 using DesktopCS.ViewModels;
 
 namespace DesktopCS.Views
@@ -27,6 +25,11 @@ namespace DesktopCS.Views
         {
             this._timeTimer.Interval = new TimeSpan(0, 0, 60 - DateTime.Now.Second);
             this.Time.Text = TimeHelper.CreateTimeStamp();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            _timeTimer.Stop();
         }
     }
 }
