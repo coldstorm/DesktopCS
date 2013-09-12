@@ -30,9 +30,10 @@ namespace DesktopCS.Services.IRC
             selectedTab.AddChat(user, text);
         }
 
-        private void ShowInServer(string text)
+        private void ShowInActive(string text)
         {
-            this._tab.AddChat(text);
+            Tab selectedTab = this._ircClient.SelectedTab ?? this._tab;
+            selectedTab.AddChat(text);
         }
 
         #region Event Handlers
@@ -52,7 +53,7 @@ namespace DesktopCS.Services.IRC
 
         private void IRCClient_ReceiveText(object sender, string text)
         {
-            this.Run(() => this.ShowInServer(text));
+            this.Run(() => this.ShowInActive(text));
         }
 
         private void _client_OnNotice(Client client, User source, string notice)
@@ -65,7 +66,7 @@ namespace DesktopCS.Services.IRC
                 }
                 else
                 {
-                    this.ShowInServer(notice);
+                    this.ShowInActive(notice);
                 }
             });
         }
