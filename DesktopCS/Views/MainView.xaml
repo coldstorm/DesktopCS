@@ -104,14 +104,20 @@
                         <ListBox behaviors:ListBoxSelectionBehavior.ClickSelection="True">
                             <ListBox.ItemTemplate>
                                 <DataTemplate DataType="{x:Type models:UserItem}">
-                                    <controls:UserlistItem 
-									Flag="{Binding Metadata.CountryCode, Converter={StaticResource FlagToImageConverter}}"
-									Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Rank, Converter={StaticResource RankConverter}}"/>
-                                            <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding NickName}" ToolTip="{Binding NickName}"/>
-                                        </StackPanel>
+                                    <controls:UserlistItem Flag="{Binding Metadata.CountryCode, Converter={StaticResource FlagToImageConverter}}"
+                                                           Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}">
+                                        <controls:UserlistItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Rank, Converter={StaticResource RankConverter}}"/>
+                                                <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding NickName}" ToolTip="{Binding NickName}"/>
+                                            </StackPanel>
+                                        </controls:UserlistItem.Header>
 
+                                        <StackPanel>
+                                            <Button Style="{StaticResource TextButtonStyle}">QUERY</Button>
+                                            <Button Style="{StaticResource TextButtonStyle}">KICK</Button>
+                                            <Button Style="{StaticResource TextButtonStyle}">BAN</Button>
+                                        </StackPanel>
                                     </controls:UserlistItem>
                                     <DataTemplate.Triggers>
                                         <DataTrigger Binding="{Binding IsAway}" Value="True">

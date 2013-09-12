@@ -9,21 +9,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:UserlistItem}">
                     <StackPanel Margin="2">
-                        <Grid>
+                        <Grid Cursor="Hand">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                             <ContentPresenter ContentSource="Flag" />
-                            <ContentPresenter Cursor="Hand" Margin="4,0,0,0" Grid.Column="1"/>
+                            <ContentPresenter ContentSource="Header" Margin="4,0,0,0" Grid.Column="1"/>
                         </Grid>
 
-                        <StackPanel x:Name="ContentRow" Margin="20,1,0,0">
-                            <Button Style="{StaticResource TextButtonStyle}" x:Name="PART_Query">QUERY</Button>
-                            <Button Style="{StaticResource TextButtonStyle}" x:Name="PART_Kick">KICK</Button>
-                            <Button Style="{StaticResource TextButtonStyle}" x:Name="PART_Ban">BAN</Button>
-                        </StackPanel>
+                        <ContentPresenter x:Name="ContentRow" Margin="20,1,0,0" />
                     </StackPanel>
                     
                     <ControlTemplate.Triggers>
