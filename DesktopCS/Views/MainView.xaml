@@ -69,7 +69,7 @@
                                 </TextBlock>
                             </Paragraph.ToolTip>
                             
-                            <Run Text="{Binding Topic.Content}"/> (By
+                            <Span behaviors:MIRC.Text="{Binding Topic.Content}"/> (By
                             <Run Foreground="{Binding Topic.Author.Metadata.Color, Converter={StaticResource BrushColorConverter}}" 
                                  Text="{Binding Topic.Author.NickName}"/>)
                         </Paragraph>
