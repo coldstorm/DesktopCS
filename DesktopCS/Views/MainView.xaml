@@ -51,7 +51,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <RichTextBox Name="TopicRichTextBox" Grid.ColumnSpan="4" IsReadOnly="True" Foreground="{StaticResource MessageBrush}">
+                <RichTextBox Name="TopicRichTextBox" Grid.ColumnSpan="4" IsReadOnly="True" Foreground="{StaticResource MessageBrush}" IsDocumentEnabled="True">
                     <RichTextBox.Style>
                         <Style TargetType="{x:Type RichTextBox}" BasedOn="{StaticResource {x:Type RichTextBox}}">
                             <Style.Triggers>
@@ -63,6 +63,12 @@
                     </RichTextBox.Style>
                     <FlowDocument behaviors:FlowDocumentPagePadding.PagePadding="0">
                         <Paragraph TextAlignment="Right">
+                            <Paragraph.ToolTip>
+                                <TextBlock>
+                                    Topic set on <Run Text="{Binding Topic.AuthorDate}" />
+                                </TextBlock>
+                            </Paragraph.ToolTip>
+                            
                             <Run Text="{Binding Topic.Content}"/> (By
                             <Run Foreground="{Binding Topic.Author.Metadata.Color, Converter={StaticResource BrushColorConverter}}" 
                                  Text="{Binding Topic.Author.NickName}"/>)
