@@ -118,6 +118,7 @@ namespace DesktopCS.Services.IRC
         {
             this._channelTab.Topic.Author = topic.Author.ToUserItem();
             this._channelTab.Topic.Content = topic.Message;
+            this._channelTab.Topic.AuthorDate = topic.LastUpdated;
         }
 
         #endregion
