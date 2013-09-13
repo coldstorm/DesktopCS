@@ -31,5 +31,17 @@ namespace DesktopCS.Models
                 this.OnPropertyChanged("Content");
             }
         }
+
+        private DateTime _authorDate;
+
+        public DateTime AuthorDate
+        {
+            get { return this._authorDate; }
+            set
+            {
+                this._authorDate = value;
+                this.OnPropertyChanged("AuthorDate");
+            }
+        }
     }
 }
