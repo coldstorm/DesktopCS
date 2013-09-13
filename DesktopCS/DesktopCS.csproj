@@ -79,6 +79,7 @@
     <Compile Include="Helpers\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\IdentHelper.cs" />
+    <Compile Include="Helpers\URLHelper.cs" />
     <Compile Include="Models\ChatData.cs" />
     <Compile Include="Models\ChannelTab.cs" />
     <Compile Include="Models\ErrorLine.cs" />

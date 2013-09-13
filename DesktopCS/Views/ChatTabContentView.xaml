@@ -9,7 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
              
     <ScrollViewer>
-        <RichTextBox Name="ChatRichTextBox" IsReadOnly="True" IsTabStop="False" />
+        <RichTextBox Name="ChatRichTextBox" IsReadOnly="True" IsTabStop="False" IsDocumentEnabled="True" />
         <i:Interaction.Behaviors>
             <behaviors:AutoScrollBehavior />
         </i:Interaction.Behaviors>

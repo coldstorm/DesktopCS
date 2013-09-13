@@ -161,7 +161,8 @@ namespace DesktopCS.Helpers
 
         private static Inline GetInline(string text, bool isBold, bool isItalic, bool underline, int foreground, int background, Color defaultForecolor)
         {
-            Inline inline = new Run(text);
+            // Search and add hyperlinks
+            Inline inline = URLHelper.Parse(text);
             inline.Foreground = new SolidColorBrush(GetColor(foreground, defaultForecolor));
             inline.Background = new SolidColorBrush(GetColor(background, Colors.Transparent));
 
