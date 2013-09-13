@@ -9,10 +9,7 @@ namespace DesktopCS.Helpers
 {
     public class URLHelper
     {
-        // Copied from http://geekswithblogs.net/casualjim/archive/2005/12/01/61722.aspx
-        private static readonly Regex _urlRegex =
-            new Regex(
-                @"(?#Protocol)(?<domainURL>(?:(?:ht|f)tp(?:s?)\:\/\/|~/|/)?(?#Username:Password)(?:\w+:\w+@)?(?#Subdomains)(?:(?:[-\w]+\.)+(?#TopLevel Domains)(?:com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|travel|[a-z]{2})))(?#Port)(?::[\d]{1,5})?(?#Directories)(?:(?:(?:/(?:[-\w~!$+|.,=]|%[a-f\d]{2})+)+|/)+|\?|#)?(?#Query)(?:(?:\?(?:[-\w~!$+|.,*:]|%[a-f\d{2}])+=(?:[-\w~!$+|.,*:=]|%[a-f\d]{2})*)(?:&(?:[-\w~!$+|.,*:]|%[a-f\d{2}])+=(?:[-\w~!$+|.,*:=]|%[a-f\d]{2})*)*)*(?#Anchor)(?:#(?:[-\w~!$+|.,*:=]|%[a-f\d]{2})*)?");
+        private static readonly Regex _urlRegex = new Regex(@"(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?");
 
         public static Inline Parse(string text)
         {
@@ -32,7 +29,7 @@ namespace DesktopCS.Helpers
                 // Create a hyperlink for the match
                 var link = new Hyperlink(new Run(match.Value))
                 {
-                    NavigateUri = new Uri(match.Value, UriKind.RelativeOrAbsolute)
+                    NavigateUri = new Uri(match.Value)
                 };
                 link.Click += OnUrlClick;
 
