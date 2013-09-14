@@ -166,6 +166,12 @@ namespace DesktopCS.Helpers
             inline.Foreground = new SolidColorBrush(GetColor(foreground, defaultForecolor));
             inline.Background = new SolidColorBrush(GetColor(background, Colors.Transparent));
 
+            if (foreground != -1 && foreground == background)
+            {
+                inline.MouseEnter += inline_InvertColor;
+                inline.MouseLeave += inline_InvertColor;
+            }
+
             if (isBold)
                 inline = new Bold(inline);
             if (isItalic)
@@ -174,6 +180,25 @@ namespace DesktopCS.Helpers
                 inline = new Underline(inline);
 
             return inline;
+        }
+
+        static void inline_InvertColor(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            var inline = (Inline)sender;
+            inline.Foreground = InvertBrush((SolidColorBrush)inline.Foreground);
+        }
+
+        private static Color InvertColor(Color color)
+        {
+            return Color.FromRgb(
+                (byte)(255 - color.R), 
+                (byte)(255 - color.G), 
+                (byte)(255 - color.B));
+        }
+
+        private static SolidColorBrush InvertBrush(SolidColorBrush brush)
+        {
+            return new SolidColorBrush(InvertColor(brush.Color));
         }
     }
 }
