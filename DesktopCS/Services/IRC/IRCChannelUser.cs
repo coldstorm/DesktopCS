@@ -26,6 +26,7 @@ namespace DesktopCS.Services.IRC
             this._user.OnNickNameChange += this._user_OnNickNameChange;
             this._user.OnUserNameChange += this._user_OnUserNameChange;
             this._user.OnIsAwayChange += this._user_OnIsAwayChange;
+            this._user.OnAwayMessageChange += this._user_OnAwayMessageChange;
             this._user.OnQuit += _user_OnQuit;
 
             this._channel = channel;
@@ -81,6 +82,11 @@ namespace DesktopCS.Services.IRC
         private void _user_OnIsAwayChange(User user)
         {
             this.Run(() => { this._userItem.IsAway = this._user.IsAway; });
+        }
+
+        private void _user_OnAwayMessageChange(User user, string original)
+        {
+            this.Run(() => { this._userItem.AwayMessage = this._user.AwayMessage; });
         }
 
         void _user_OnQuit(User user, string reason)

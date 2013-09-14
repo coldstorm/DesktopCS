@@ -63,6 +63,18 @@ namespace DesktopCS.Models
             }
         }
 
+        private string _awayMessage;
+
+        public string AwayMessage
+        {
+            get { return this._awayMessage; }
+            set 
+            {
+                this._awayMessage = value;
+                this.OnPropertyChanged("AwayMessage");
+            }
+        }
+
         public UserItem(UserRank rank, string nick, UserMetadata metadata)
         {
             this.Rank = rank;
