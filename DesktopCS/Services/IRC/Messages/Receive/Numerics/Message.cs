@@ -9,7 +9,16 @@ namespace DesktopCS.Services.IRC.Messages.Receive.Numerics
     {
         private static readonly string[] _blacklist =
         {
+            "301", // RPL_AWAY
+            "307", //RPL_USERIP
+            "311", // RPL_WHOISUSER
+            "312", // RPL_WHOISSERVER
+            "313", // RPL_WHOISOPERATOR
             "315", // RPL_ENDOFWHO	
+            "317", // RPL_WHOISIDLE
+            "318", // RPL_ENDOFWHOIS
+            "319", // RPL_WHOISCHANNELS
+            "330", // RPL_WHOWAS_TIME
             "331", // RPL_NOTOPIC
             "332", // RPL_TOPIC
             "333", // RPL_TOPICWHOTIME
@@ -19,7 +28,9 @@ namespace DesktopCS.Services.IRC.Messages.Receive.Numerics
             "353", // RPL_NAMREPLY
             "366", // RPL_ENDOFNAMES
             "367", // RPL_BANLIST
-            "368"  // RPL_ENDOFBANLIST
+            "368", // RPL_ENDOFBANLIST
+            "378", //RPL_MOTD
+            "379"  //RPL_KICKLINKED
         };
 
         public static bool CheckMessage(ParsedMessage message, Client client)
