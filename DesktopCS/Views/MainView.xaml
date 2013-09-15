@@ -51,7 +51,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <RichTextBox Name="TopicRichTextBox" Grid.ColumnSpan="4" IsReadOnly="True" Foreground="{StaticResource MessageBrush}" IsDocumentEnabled="True">
+                <RichTextBox Name="TopicRichTextBox" Padding="0,0,0,4" Grid.ColumnSpan="4" IsReadOnly="True" Foreground="{StaticResource MessageBrush}" IsDocumentEnabled="True">
                     <RichTextBox.Style>
                         <Style TargetType="{x:Type RichTextBox}" BasedOn="{StaticResource {x:Type RichTextBox}}">
                             <Style.Triggers>
@@ -110,11 +110,12 @@
                         <ListBox behaviors:ListBoxSelectionBehavior.ClickSelection="True">
                             <ListBox.ItemTemplate>
                                 <DataTemplate DataType="{x:Type models:UserItem}">
-                                    <controls:UserlistItem Flag="{Binding Metadata.CountryCode, Converter={StaticResource FlagToImageConverter}}"
-                                                           Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}">
+                                    <controls:UserlistItem Flag="{Binding Metadata.CountryCode, Converter={StaticResource FlagToImageConverter}}">
                                         <controls:UserlistItem.Header>
-                                            <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding NickName}">
-                                                <Run Text="{Binding Rank, Converter={StaticResource RankConverter}}" /><Run Text="{Binding NickName}" />
+                                            <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding NickName}" Foreground="{StaticResource ChatBrush}">
+                                                <Span Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}">
+                                                    <Run Text="{Binding Rank, Converter={StaticResource RankConverter}}" /><Run Text="{Binding NickName}" />
+                                                </Span><Run Text="{Binding AwayMessage, Mode=OneWay, TargetNullValue='', StringFormat=^{0}}"/>
                                             </TextBlock>
                                         </controls:UserlistItem.Header>
 
