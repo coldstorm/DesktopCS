@@ -31,6 +31,7 @@ namespace DesktopCS.Services.IRC
             this._channel.OnLeave += this._channel_OnLeave;
             this._channel.OnNames += this._channel_OnNames;
             this._channel.OnTopicChange += this._channel_OnTopicChange;
+            this._channel.OnWho += this._channel_OnWho;
 
             this._whoTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 30)};
             this._whoTimer.Tick += this._whoTimer_Tick;
@@ -120,6 +121,12 @@ namespace DesktopCS.Services.IRC
             this._channelTab.Topic.AuthorDate = topic.LastUpdated;
         }
 
+        private void _channel_OnWho(Channel source, User user, string message)
+        {
+            if (user.IsAway)
+                _ircClient.Send(new Whois(user));
+        }
+
         #endregion
 
         #region IDisposable Members
@@ -138,6 +145,7 @@ namespace DesktopCS.Services.IRC
             this._channel.OnLeave -= this._channel_OnLeave;
             this._channel.OnNames -= this._channel_OnNames;
             this._channel.OnTopicChange -= this._channel_OnTopicChange;
+            this._channel.OnWho -= this._channel_OnWho;
 
             this._whoTimer.Stop();
         }

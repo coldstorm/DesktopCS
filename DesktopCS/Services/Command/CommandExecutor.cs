@@ -111,7 +111,7 @@ namespace DesktopCS.Services.Command
             // /away message
             if (arg.Parameters.Length >= 1)
             {
-                return new Away(arg.Parameters[0]);
+                return new Away(String.Join(" ", arg.Parameters));
             }
             // /away
             if (!arg.Client.User.IsAway)
