@@ -1,6 +1,5 @@
 ﻿using DesktopCS.Helpers.Extentions;
 using DesktopCS.Models;
-using DesktopCS.Helpers;
 using NetIRC;
 
 namespace DesktopCS.Services.IRC

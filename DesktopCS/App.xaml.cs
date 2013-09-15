@@ -1,6 +1,4 @@
-﻿using DesktopCS.Models;
-using DesktopCS.Properties;
-using DesktopCS.Services;
+﻿using DesktopCS.Services;
 using DesktopCS.Views;
 
 namespace DesktopCS

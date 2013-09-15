@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Threading;
-using DesktopCS.Helpers;
 using DesktopCS.Helpers.Extentions;
 using DesktopCS.Models;
 using NetIRC;

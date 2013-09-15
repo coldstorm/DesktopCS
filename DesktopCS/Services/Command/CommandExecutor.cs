@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using DesktopCS.Helpers;
+using DesktopCS.Helpers.Extentions;
 using DesktopCS.Models;
 using DesktopCS.Services.IRC.Messages.Send;
 using NetIRC;
 using NetIRC.Messages;
 using NetIRC.Messages.Send;
-using OutputMessages = DesktopCS.Helpers.Extentions.OutputMessages;
+using NetIRCHelper = DesktopCS.Helpers.NetIRCHelper;
 
 namespace DesktopCS.Services.Command
 {

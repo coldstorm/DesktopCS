@@ -2,8 +2,6 @@
 using System.Windows;
 using System.Windows.Documents;
 using DesktopCS.Controls;
-using DesktopCS.ViewModels;
-using DesktopCS.Views;
 
 namespace DesktopCS.Models
 {

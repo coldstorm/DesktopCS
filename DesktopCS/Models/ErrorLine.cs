@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DesktopCS.Helpers;
+﻿using DesktopCS.Helpers;
 
 namespace DesktopCS.Models
 {
