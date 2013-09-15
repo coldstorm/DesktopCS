@@ -5,12 +5,13 @@ using System.Windows.Media;
 
 namespace DesktopCS.Helpers.Parsers
 {
-    class MIRCHelper
+    public static class MIRCHelper
     {
         public const char BoldChar = (char)2;
         public const char ItalicChar = (char)29;
         public const char UnderlineChar = (char)31;
-        public const char ReverseChar = (char)22;
+        public const char ReverseChar = (char)18;
+        public const char InverseChar = (char)22;
         public const char ResetChar = (char)15;
         public const char ColorChar = (char)3;
 
@@ -62,7 +63,7 @@ namespace DesktopCS.Helpers.Parsers
                         isUnderline = !isUnderline;
                         break;
 
-                    case ReverseChar:
+                    case ReverseChar: case InverseChar:
                         flushBuffer();
                         int tempInt = foreground;
                         foreground = background;

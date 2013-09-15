@@ -73,10 +73,12 @@
     <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\Extentions\EnumExtentions.cs" />
     <Compile Include="Helpers\Extentions\NetIRCHelper.cs" />
+    <Compile Include="Helpers\Parsers\InputHelper.cs" />
     <Compile Include="Helpers\Parsers\MIRCHelper.cs" />
     <Compile Include="Helpers\NetIRCHelper.cs" />
     <Compile Include="Helpers\CountryCodeHelper.cs" />
     <Compile Include="Helpers\Extentions\OutputMessages.cs" />
+    <Compile Include="Helpers\Parsers\OutputHelper.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="Helpers\Extentions\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />

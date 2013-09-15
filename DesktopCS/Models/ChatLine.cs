@@ -72,7 +72,7 @@ namespace DesktopCS.Models
             {
                 Color color = this.ChatColor;
 
-                Span chatSpan = MIRCHelper.Parse(this.Chat, color);
+                Span chatSpan = OutputHelper.Parse(this.Chat, color);
                 p.Inlines.Add(chatSpan);
             }
 

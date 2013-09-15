@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DesktopCS.Controls;
+using DesktopCS.Helpers.Parsers;
 using DesktopCS.Models;
 using DesktopCS.MVVM;
 using DesktopCS.Services;
@@ -84,7 +85,7 @@ namespace DesktopCS.ViewModels
 
         public void Chat()
         {
-            this._irc.Chat(this.ChatData.InputText);
+            this._irc.Chat(InputHelper.Parse(this.ChatData.InputText));
             this.ChatData.InputText = String.Empty;
         }
 

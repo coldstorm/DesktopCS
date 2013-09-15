@@ -36,7 +36,7 @@ namespace DesktopCS.Behaviors
             if (string.IsNullOrEmpty(newText))
                 return;
 
-            textBlock.Inlines.Add(MIRCHelper.Parse(newText, ColorHelper.MessageColor));
+            textBlock.Inlines.Add(OutputHelper.Parse(newText, ColorHelper.MessageColor));
         }
     }
 }
