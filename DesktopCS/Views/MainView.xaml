@@ -112,10 +112,10 @@
                                 <DataTemplate DataType="{x:Type models:UserItem}">
                                     <controls:UserlistItem Flag="{Binding Metadata.CountryCode, Converter={StaticResource FlagToImageConverter}}">
                                         <controls:UserlistItem.Header>
-                                            <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding NickName}" Foreground="{StaticResource ChatBrush}">
-                                                <Span Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}">
+                                            <TextBlock TextTrimming="CharacterEllipsis" Foreground="{StaticResource ChatBrush}">
+                                                <Span ToolTip="{Binding NickName}" Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}">
                                                     <Run Text="{Binding Rank, Converter={StaticResource RankConverter}}" /><Run Text="{Binding NickName}" />
-                                                </Span><Run Text="{Binding AwayMessage, Mode=OneWay, TargetNullValue='', StringFormat=^{0}}"/>
+                                                </Span><Run ToolTip="{Binding AwayMessage}" Text="{Binding AwayMessage, Mode=OneWay, TargetNullValue='', StringFormat=^{0}}"/>
                                             </TextBlock>
                                         </controls:UserlistItem.Header>
 
