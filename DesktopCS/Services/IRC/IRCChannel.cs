@@ -35,7 +35,7 @@ namespace DesktopCS.Services.IRC
             this._channel.OnTopicChange += this._channel_OnTopicChange;
 
             this._whoTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 30)};
-            this._whoTimer.Tick += _whoTimer_Tick;
+            this._whoTimer.Tick += this._whoTimer_Tick;
             this._whoTimer.Start();
         }
 
@@ -72,7 +72,7 @@ namespace DesktopCS.Services.IRC
         {
             this.Run(() =>
             {
-                if (channel == _channel)
+                if (channel == this._channel)
                 {
                     this._channelTab.Users.Clear();
                     this.Dispose();

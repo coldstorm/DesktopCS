@@ -28,7 +28,7 @@ namespace DesktopCS.Services.IRC
             this._user.OnUserNameChange += this._user_OnUserNameChange;
             this._user.OnIsAwayChange += this._user_OnIsAwayChange;
             this._user.OnAwayMessageChange += this._user_OnAwayMessageChange;
-            this._user.OnQuit += _user_OnQuit;
+            this._user.OnQuit += this._user_OnQuit;
 
             this._channel = channel;
             this._channel.OnLeave += this._channel_OnLeave;

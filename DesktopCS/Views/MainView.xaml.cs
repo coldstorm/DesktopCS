@@ -1,6 +1,4 @@
-﻿using DesktopCS.Models;
-using DesktopCS.Services;
-using DesktopCS.ViewModels;
+﻿using DesktopCS.ViewModels;
 
 namespace DesktopCS.Views
 {

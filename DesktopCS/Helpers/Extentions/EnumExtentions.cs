@@ -6,7 +6,6 @@ namespace DesktopCS.Helpers.Extentions
 {
     public static class EnumExtensions
     {
-
         /// <summary>Enumerates get flags in this collection.</summary>
         ///
         /// <param name="value">The value.

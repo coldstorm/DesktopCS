@@ -29,7 +29,7 @@ namespace DesktopCS.Views
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            _timeTimer.Stop();
+            this._timeTimer.Stop();
         }
     }
 }

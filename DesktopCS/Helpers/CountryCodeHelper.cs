@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace DesktopCS.Helpers
 {
-    static class CountryCodeHelper
+    public static class CountryCodeHelper
     {
         public static string GetCC()
         {

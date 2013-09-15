@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Media;
-using DesktopCS.Helpers;
 using DesktopCS.Helpers.Parsers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

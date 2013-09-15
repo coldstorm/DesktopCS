@@ -5,7 +5,6 @@ using DesktopCS.Models;
 using DesktopCS.MVVM;
 using DesktopCS.Services.Command;
 using DesktopCS.Services.IRC.Messages.Receive.Numerics;
-using DesktopCS.Services.IRC.Messages.Send;
 using NetIRC;
 using NetIRC.Messages;
 using NetIRC.Messages.Send;

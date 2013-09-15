@@ -2,7 +2,7 @@
 
 namespace DesktopCS.Helpers
 {
-    static class TimeHelper
+    public static class TimeHelper
     {
         public static string CreateTimeStamp()
         {
