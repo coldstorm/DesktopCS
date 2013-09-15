@@ -34,8 +34,7 @@
         <Border
             Style="{StaticResource ContentBorder}"
             Background="{StaticResource BackgroundBrush}"
-            BorderBrush="{StaticResource SelectedTabBackgroundBrush}" 
-            Margin="0,0,0,0" Grid.Row="1" Grid.Column="1">
+            BorderBrush="{StaticResource SelectedTabBackgroundBrush}" Grid.Row="1" Grid.Column="1">
 
             <Grid Margin="4">
                 <Grid.ColumnDefinitions>
@@ -46,12 +45,13 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="4" />
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="4"/>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <RichTextBox Name="TopicRichTextBox" Padding="0,0,0,4" Grid.ColumnSpan="4" IsReadOnly="True" Foreground="{StaticResource MessageBrush}" IsDocumentEnabled="True">
+                <RichTextBox Name="TopicRichTextBox" Grid.ColumnSpan="4" IsReadOnly="True" Foreground="{StaticResource MessageBrush}" IsDocumentEnabled="True">
                     <RichTextBox.Style>
                         <Style TargetType="{x:Type RichTextBox}" BasedOn="{StaticResource {x:Type RichTextBox}}">
                             <Style.Triggers>
@@ -68,7 +68,7 @@
                                     Topic set on <Run Text="{Binding Topic.AuthorDate}" />
                                 </TextBlock>
                             </Paragraph.ToolTip>
-                            
+
                             <Span behaviors:MIRC.Text="{Binding Topic.Content}"/> (By
                             <Run Foreground="{Binding Topic.Author.Metadata.Color, Converter={StaticResource BrushColorConverter}}" 
                                  Text="{Binding Topic.Author.NickName}"/>)
@@ -76,7 +76,7 @@
                     </FlowDocument>
                 </RichTextBox>
 
-                <TabControl Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedItem}">
+                <TabControl Grid.Row="2" Grid.Column="0" SelectedItem="{Binding SelectedItem}">
                     <TabControl.Resources>
                         <CollectionViewSource Source="{Binding TabManager.ServerTabs}" x:Key="ServerTabs" />
                         <CollectionViewSource Source="{Binding TabManager.ChannelTabs}" x:Key="ChannelTabs" />
@@ -93,7 +93,7 @@
                     </TabControl.ItemsSource>
                 </TabControl>
 
-                <Border Padding="4" Grid.Row="3" Grid.Column="0" Style="{StaticResource ContentBorder}" FocusManager.IsFocusScope="True">
+                <Border Padding="4" Grid.Row="4" Grid.Column="0" Style="{StaticResource ContentBorder}" FocusManager.IsFocusScope="True">
                     <ScrollViewer MaxHeight="64" VerticalScrollBarVisibility="Auto">
                         <TextBox x:Name="InputTextBox" SpellCheck.IsEnabled="True" Language="en" TextWrapping="Wrap"
                                  Text="{Binding ChatData.InputText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
@@ -105,7 +105,7 @@
                     </ScrollViewer>
                 </Border>
 
-                <Border Margin="0,21,0,0" Grid.RowSpan="3" Grid.Row="1"  Grid.Column="2" Style="{StaticResource ContentBorder}" Grid.ColumnSpan="2">
+                <Border Margin="0,21,0,0" Grid.RowSpan="3" Grid.Row="2"  Grid.Column="2" Style="{StaticResource ContentBorder}" Grid.ColumnSpan="2">
                     <ScrollViewer Margin="2" VerticalScrollBarVisibility="Auto">
                         <ListBox behaviors:ListBoxSelectionBehavior.ClickSelection="True">
                             <ListBox.ItemTemplate>
