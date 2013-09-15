@@ -6,7 +6,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using Microsoft.Win32;
 
-namespace DesktopCS.Helpers
+namespace DesktopCS.Helpers.Parsers
 {
     public class URLHelper
     {

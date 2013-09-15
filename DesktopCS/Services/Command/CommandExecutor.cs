@@ -9,6 +9,7 @@ using DesktopCS.Services.IRC.Messages.Send;
 using NetIRC;
 using NetIRC.Messages;
 using NetIRC.Messages.Send;
+using OutputMessages = DesktopCS.Helpers.Extentions.OutputMessages;
 
 namespace DesktopCS.Services.Command
 {
@@ -42,7 +43,7 @@ namespace DesktopCS.Services.Command
                     }
                     catch (CommandException ex)
                     {
-                        tab.AddException(ex);
+                        OutputMessages.AddException(tab, ex);
                         return null;
                     }
                 }

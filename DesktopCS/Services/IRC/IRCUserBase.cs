@@ -1,4 +1,5 @@
-﻿using DesktopCS.Models;
+﻿using DesktopCS.Helpers.Extentions;
+using DesktopCS.Models;
 using DesktopCS.Helpers;
 using NetIRC;
 

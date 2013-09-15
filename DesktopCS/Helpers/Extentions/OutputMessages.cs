@@ -1,9 +1,10 @@
 ﻿using System;
+using DesktopCS.Helpers.Parsers;
 using DesktopCS.Models;
 using DesktopCS.Services.Command;
 using NetIRC;
 
-namespace DesktopCS.Helpers
+namespace DesktopCS.Helpers.Extentions
 {
     public static class OutputMessages
     {

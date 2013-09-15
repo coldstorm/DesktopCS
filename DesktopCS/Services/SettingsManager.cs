@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Media;
 using DesktopCS.Helpers;
+using DesktopCS.Helpers.Extentions;
 using DesktopCS.Models;
 using DesktopCS.Properties;
 

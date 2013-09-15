@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Data;
 using DesktopCS.Helpers;
 using NetIRC;
+using EnumExtensions = DesktopCS.Helpers.Extentions.EnumExtensions;
 
 namespace DesktopCS.Converters
 {
@@ -14,7 +15,7 @@ namespace DesktopCS.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var rank = (UserRank)value;
-            UserRank highest = rank.GetFlags().Max();
+            UserRank highest = EnumExtensions.GetFlags(rank).Max();
             if (NetIRCHelper.RankChars.ContainsKey(highest))
                 return NetIRCHelper.RankChars[highest];
 

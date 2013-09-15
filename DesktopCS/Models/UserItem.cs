@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using DesktopCS.Helpers;
+using DesktopCS.Helpers.Extentions;
 using DesktopCS.MVVM;
 using NetIRC;
 

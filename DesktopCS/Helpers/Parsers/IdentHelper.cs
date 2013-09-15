@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using DesktopCS.Models;
 
-namespace DesktopCS.Helpers
+namespace DesktopCS.Helpers.Parsers
 {
     public static class IdentHelper
     {

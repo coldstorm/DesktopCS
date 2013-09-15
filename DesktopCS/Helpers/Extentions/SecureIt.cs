@@ -5,7 +5,7 @@ using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace DesktopCS.Helpers
+namespace DesktopCS.Helpers.Extentions
 {
     public static class SecureIt
     {

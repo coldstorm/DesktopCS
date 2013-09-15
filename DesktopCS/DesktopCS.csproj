@@ -71,16 +71,17 @@
     <Compile Include="Converters\PlaceholderConverter.cs" />
     <Compile Include="Converters\RankConverter.cs" />
     <Compile Include="Helpers\ColorHelper.cs" />
-    <Compile Include="Helpers\EnumExtentions.cs" />
-    <Compile Include="Helpers\MIRCHelper.cs" />
+    <Compile Include="Helpers\Extentions\EnumExtentions.cs" />
+    <Compile Include="Helpers\Extentions\NetIRCHelper.cs" />
+    <Compile Include="Helpers\Parsers\MIRCHelper.cs" />
     <Compile Include="Helpers\NetIRCHelper.cs" />
     <Compile Include="Helpers\CountryCodeHelper.cs" />
-    <Compile Include="Helpers\OutputMessages.cs" />
+    <Compile Include="Helpers\Extentions\OutputMessages.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
-    <Compile Include="Helpers\SecureIt.cs" />
+    <Compile Include="Helpers\Extentions\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
-    <Compile Include="Helpers\IdentHelper.cs" />
-    <Compile Include="Helpers\URLHelper.cs" />
+    <Compile Include="Helpers\Parsers\IdentHelper.cs" />
+    <Compile Include="Helpers\Parsers\URLHelper.cs" />
     <Compile Include="Models\ChatData.cs" />
     <Compile Include="Models\ChannelTab.cs" />
     <Compile Include="Models\ErrorLine.cs" />
@@ -993,6 +994,7 @@
       <Name>NetIRC</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
