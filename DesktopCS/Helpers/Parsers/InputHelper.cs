@@ -8,7 +8,7 @@ namespace DesktopCS.Helpers.Parsers
         public static string Parse(string text)
         {
             // Spoiler
-            var regexp = new Regex(@"::(?<spoiler>.+)::", RegexOptions.ExplicitCapture);
+            var regexp = new Regex(@"::(?<spoiler>.+?)::", RegexOptions.ExplicitCapture);
             text = regexp.Replace(text, MIRCHelper.ColorChar + "1,1${spoiler}" + MIRCHelper.ColorChar);
 
             // Bold
