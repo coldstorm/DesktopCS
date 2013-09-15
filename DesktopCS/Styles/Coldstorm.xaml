@@ -7,8 +7,8 @@
     <SolidColorBrush x:Key="BorderBrush" Color="#FF2A2E36" />
     <SolidColorBrush x:Key="SelectedTabBackgroundBrush" Color="#FF24272E" />
     <SolidColorBrush x:Key="SelectedTabForegroundBrush" Color="#FF8C9096" />
-    <SolidColorBrush x:Key="UnreadTabForegroundBrush" Color="#FFFF921E" />
     <SolidColorBrush x:Key="ThumbBrush" Color="#FF434956" />
+    <SolidColorBrush x:Key="WarningBrush" Color="#FFFF921E" />
     <SolidColorBrush x:Key="ErrorBrush" Color="Red" />
 
     <SolidColorBrush x:Key="ChatBrush" Color="#FFBABBBF" />

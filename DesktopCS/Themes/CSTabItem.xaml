@@ -57,8 +57,8 @@
                         </Trigger>
 
                         <Trigger Property="IsUnread" Value="True">
-                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{StaticResource UnreadTabForegroundBrush}" />
-                            <Setter TargetName="PART_Close" Property="TextElement.Foreground" Value="{StaticResource UnreadTabForegroundBrush}" />
+                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{StaticResource WarningBrush}" />
+                            <Setter TargetName="PART_Close" Property="TextElement.Foreground" Value="{StaticResource WarningBrush}" />
                         </Trigger>
 
 

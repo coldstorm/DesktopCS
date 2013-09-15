@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Media;
 using Microsoft.Win32;
 
 namespace DesktopCS.Helpers
@@ -29,7 +30,8 @@ namespace DesktopCS.Helpers
                 // Create a hyperlink for the match
                 var link = new Hyperlink(new Run(match.Value))
                 {
-                    NavigateUri = new Uri(match.Value)
+                    NavigateUri = new Uri(match.Value),
+                    Foreground = new SolidColorBrush(ColorHelper.HyperlinkColor)
                 };
                 link.Click += OnUrlClick;
 
