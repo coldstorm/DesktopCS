@@ -16,7 +16,6 @@ namespace DesktopCS.Services.IRC
             : base(ircClient, tab, user)
         {
             this._ircClient = ircClient;
-            this._ircClient.Input += this._ircClient_Input;
             this._ircClient.Message += this._ircClient_Message;
             this._ircClient.Action += this._ircClient_Action;
 
@@ -51,14 +50,6 @@ namespace DesktopCS.Services.IRC
             }
         }
 
-        private void _ircClient_Input(object sender, string text)
-        {
-            if (this._tab.IsSelected)
-            {
-                this._ircClient.Send(new UserPrivate(this._user, text));
-            }
-        }
-
         private void _user_OnQuit(User user, string reason)
         {
             this.Run(this.Dispose);
@@ -77,7 +68,6 @@ namespace DesktopCS.Services.IRC
         {
             base.Dispose();
 
-            this._ircClient.Input -= this._ircClient_Input;
             this._ircClient.Message -= this._ircClient_Message;
             this._ircClient.Action -= this._ircClient_Action;
 

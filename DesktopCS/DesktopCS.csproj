@@ -73,6 +73,7 @@
     <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\Extentions\EnumExtentions.cs" />
     <Compile Include="Helpers\Extentions\NetIRCHelper.cs" />
+    <Compile Include="Helpers\Extentions\StringExtentions.cs" />
     <Compile Include="Helpers\Parsers\InputHelper.cs" />
     <Compile Include="Helpers\Parsers\MIRCHelper.cs" />
     <Compile Include="Helpers\NetIRCHelper.cs" />

@@ -85,7 +85,17 @@ namespace DesktopCS.ViewModels
 
         public void Chat()
         {
-            this._irc.Chat(InputHelper.Parse(this.ChatData.InputText));
+            string chat = this.ChatData.InputText;
+            chat = InputHelper.Parse(chat);
+
+            foreach (var line in chat.Split(Environment.NewLine.ToCharArray()))
+            {
+                if (!String.IsNullOrWhiteSpace(line))
+                {
+                    this._irc.Chat(line);
+                }
+            }
+            
             this.ChatData.InputText = String.Empty;
         }
 

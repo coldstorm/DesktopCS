@@ -18,7 +18,6 @@ namespace DesktopCS.Services.IRC
             : base(ircClient, channelTab)
         {
             this._ircClient = ircClient;
-            this._ircClient.Input += this._ircClient_Input;
             this._ircClient.ChannelLeave += this._ircClient_ChannelLeave;
 
             this._channelTab = channelTab;
@@ -57,14 +56,6 @@ namespace DesktopCS.Services.IRC
         {
             this._ircClient.Send(this._channel.Part());
             this.Dispose();
-        }
-
-        private void _ircClient_Input(object sender, string text)
-        {
-            if (this._channelTab.IsSelected)
-            {
-                this._ircClient.Send(this._channel.SendMessage(text));
-            }
         }
 
         private void _ircClient_ChannelLeave(object sender, Channel channel)
@@ -135,7 +126,6 @@ namespace DesktopCS.Services.IRC
         {
             base.Dispose();
 
-            this._ircClient.Input -= this._ircClient_Input;
             this._ircClient.ChannelLeave -= this._ircClient_ChannelLeave;
 
             this._channelTab.Close -= this._channelTab_Close;

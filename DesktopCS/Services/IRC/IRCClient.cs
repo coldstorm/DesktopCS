@@ -1,6 +1,7 @@
 ﻿using System;
 using DesktopCS.Helpers;
 using DesktopCS.Helpers.Parsers;
+using DesktopCS.Helpers.Extentions;
 using DesktopCS.Models;
 using DesktopCS.MVVM;
 using DesktopCS.Services.Command;
@@ -15,6 +16,7 @@ namespace DesktopCS.Services.IRC
     public class IRCClient : UIInvoker
     {
         private const string PasswordService = "NickServ";
+        private const int MaxInputLenght = 400;
 
         private readonly CommandExecutor _commandExecutor = new CommandExecutor();
         private readonly TabManager _tabManager;
@@ -124,11 +126,12 @@ namespace DesktopCS.Services.IRC
                 this.OnInput(text);
 
                 Tab target = this._tabManager.SelectedTab;
-
-                // Check if the tab is alive, if not (user left or new query tab) handle the send manually
-                if (!this.DoPing(target.Header))
+                if (!(target is ServerTab))
                 {
-                    this.Send(new UserPrivate(target.Header, text));
+                    foreach (var part in text.SplitByLength(MaxInputLenght))
+                    {
+                        this.Send(new UserPrivate(target.Header, part));
+                    }
                 }
             }
         }
@@ -137,6 +140,7 @@ namespace DesktopCS.Services.IRC
         {
             this._client.Send(message);
         }
+
 
         public void Query(string nick)
         {
