@@ -9,6 +9,7 @@ using DesktopCS.Services.IRC.Messages.Receive.Numerics;
 using NetIRC;
 using NetIRC.Messages;
 using NetIRC.Messages.Send;
+using NetIRCHelper = DesktopCS.Helpers.NetIRCHelper;
 
 namespace DesktopCS.Services.IRC
 {
@@ -123,14 +124,18 @@ namespace DesktopCS.Services.IRC
             }
             else
             {
-                this.OnInput(text);
-
                 Tab target = this._tabManager.SelectedTab;
                 if (!(target is ServerTab))
                 {
                     foreach (var part in text.SplitByLength(MaxInputLenght))
                     {
-                        this.Send(new UserPrivate(target.Header, part));
+                        ISendMessage message;
+                        if (NetIRCHelper.IsChannel(target.Header))
+                            message = new ChannelPrivate(target.Header, part);
+                        else
+                            message = new UserPrivate(target.Header, part);
+
+                        this.Send(message);
                     }
                 }
             }
@@ -267,7 +272,22 @@ namespace DesktopCS.Services.IRC
                 var joinMessage = e.Message as Join;
                 if (joinMessage != null)
                 {
+                    this._tabManager.AddChannel(joinMessage.ChannelName).IsSelected = true;
                     this._joining = true;
+                }
+
+                var userPrivateMessage = e.Message as UserPrivate;
+                if (userPrivateMessage != null)
+                {
+                    this._tabManager.AddUser(userPrivateMessage.Nick).IsSelected = true;
+                    this.OnInput(userPrivateMessage.Message);
+                }
+
+                var channelPrivateMessage = e.Message as ChannelPrivate;
+                if (channelPrivateMessage != null)
+                {
+                    this._tabManager.AddChannel(channelPrivateMessage.ChannelName).IsSelected = true;
+                    this.OnInput(channelPrivateMessage.Message);
                 }
             });
         }

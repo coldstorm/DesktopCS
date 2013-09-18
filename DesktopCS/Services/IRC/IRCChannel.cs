@@ -20,10 +20,6 @@ namespace DesktopCS.Services.IRC
             this._ircClient = ircClient;
             this._ircClient.ChannelLeave += this._ircClient_ChannelLeave;
 
-            this._channelTab = channelTab;
-            this._channelTab.Close += this._channelTab_Close;
-            this._channelTab.AddJoin();
-
             this._channel = channel;
             this._channel.OnMessage += this._channel_OnMessage;
             this._channel.OnJoin += this._channel_OnJoin;
@@ -31,6 +27,11 @@ namespace DesktopCS.Services.IRC
             this._channel.OnNames += this._channel_OnNames;
             this._channel.OnTopicChange += this._channel_OnTopicChange;
             this._channel.OnWho += this._channel_OnWho;
+
+            this._channelTab = channelTab;
+            this._channelTab.Close += this._channelTab_Close;
+            this._channelTab.AddJoin();
+            this._channelTab.Header = this._channel.FullName; // Correct casing
 
             this._whoTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 30)};
             this._whoTimer.Tick += this._whoTimer_Tick;

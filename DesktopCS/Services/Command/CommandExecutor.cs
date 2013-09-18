@@ -100,7 +100,15 @@ namespace DesktopCS.Services.Command
             if (arg.Parameters.Length >= 2)
             {
                 string text = String.Join(" ", arg.Parameters.Skip(1));
-                return new UserPrivate(arg.Parameters[0], text);
+                string target = arg.Parameters[0];
+
+                ISendMessage message;
+                if (NetIRCHelper.IsChannel(target))
+                    message = new ChannelPrivate(target, text);
+                else
+                    message = new UserPrivate(target, text);
+
+                return message;
             }
 
             throw InvalidUsage(this._commands["QUERY"]);

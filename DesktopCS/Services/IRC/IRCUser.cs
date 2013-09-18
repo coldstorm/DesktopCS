@@ -19,12 +19,13 @@ namespace DesktopCS.Services.IRC
             this._ircClient.Message += this._ircClient_Message;
             this._ircClient.Action += this._ircClient_Action;
 
-            this._tab = tab;
-            this._tab.Close += this._tab_Close;
-
             this._user = user;
             this._user.OnNickNameChange += this._user_OnNickNameChange;
             this._user.OnQuit += this._user_OnQuit;
+
+            this._tab = tab;
+            this._tab.Close += this._tab_Close;
+            this._tab.Header = this._user.NickName; // Correct casing
         }
 
         #region Event Handlers
