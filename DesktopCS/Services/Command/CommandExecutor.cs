@@ -134,7 +134,7 @@ namespace DesktopCS.Services.Command
 
         private static CommandException InvalidUsage(Command command)
         {
-            return new CommandException("Invalid usage:" + command.Usage);
+            return new CommandException("Invalid usage: " + command.Usage);
         }
     }
 }
