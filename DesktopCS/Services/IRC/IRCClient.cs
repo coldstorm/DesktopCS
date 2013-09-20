@@ -191,7 +191,7 @@ namespace DesktopCS.Services.IRC
             MessageHandler handler = this.Message;
             if (handler != null) handler(this, user, message);
         }
-        
+
         public event MessageHandler Action;
 
         protected virtual void OnAction(User user, string message)
@@ -211,6 +211,7 @@ namespace DesktopCS.Services.IRC
         #endregion
 
         #region Event Handlers
+
         private void client_OnConnect(Client client)
         {
             this.Run(() =>
@@ -223,7 +224,7 @@ namespace DesktopCS.Services.IRC
             });
         }
 
-        void client_OnDisconnect(Client client)
+        private void client_OnDisconnect(Client client)
         {
             this.Run(this.Connect);
         }
@@ -236,7 +237,7 @@ namespace DesktopCS.Services.IRC
                 this.OnMessage(source, message);
             });
         }
-        
+
         private void _client_OnAction(Client client, User source, string action)
         {
             this.Run(() =>
@@ -264,8 +265,7 @@ namespace DesktopCS.Services.IRC
             this.Run(() => this.OnChannelLeave(channel));
         }
 
-
-        void client_OnSend(Client client, SendMessageEventArgs e)
+        private void client_OnSend(Client client, SendMessageEventArgs e)
         {
             this.Run(() =>
             {
@@ -274,20 +274,6 @@ namespace DesktopCS.Services.IRC
                 {
                     this._tabManager.AddChannel(joinMessage.ChannelName).IsSelected = true;
                     this._joining = true;
-                }
-
-                var userPrivateMessage = e.Message as UserPrivate;
-                if (userPrivateMessage != null)
-                {
-                    this._tabManager.AddUser(userPrivateMessage.Nick).IsSelected = true;
-                    this.OnInput(userPrivateMessage.Message);
-                }
-
-                var channelPrivateMessage = e.Message as ChannelPrivate;
-                if (channelPrivateMessage != null)
-                {
-                    this._tabManager.AddChannel(channelPrivateMessage.ChannelName).IsSelected = true;
-                    this.OnInput(channelPrivateMessage.Message);
                 }
             });
         }
