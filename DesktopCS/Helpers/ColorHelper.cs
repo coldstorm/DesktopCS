@@ -11,6 +11,7 @@ namespace DesktopCS.Helpers
         public static readonly Color MessageColor = FromString("#FF808080");
         public static readonly Color HyperlinkColor = FromString("#FF4A7691");
         public static readonly Color WarningColor = FromString("#FFFF921E");
+        public static readonly Color HighlightColor = FromString("#FFFF921E");
 
         public static string ToHexWithoutHash(Color color)
         {

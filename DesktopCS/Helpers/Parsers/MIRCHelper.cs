@@ -15,7 +15,7 @@ namespace DesktopCS.Helpers.Parsers
         public const char ResetChar = (char)15;
         public const char ColorChar = (char)3;
 
-        public static Span Parse(string text, Color defaultForecolor)
+        public static Span Parse(string text, Color defaultForecolor, ParseArgs args)
         {
             string buffer = String.Empty;
             var span = new Span();
@@ -163,7 +163,7 @@ namespace DesktopCS.Helpers.Parsers
         private static Inline GetInline(string text, bool isBold, bool isItalic, bool underline, int foreground, int background, Color defaultForecolor)
         {
             // Search and add hyperlinks
-            Inline inline = URLHelper.Parse(text);
+            Inline inline = URLHelper.Parse(text, null);
             inline.Foreground = new SolidColorBrush(GetColor(foreground, defaultForecolor));
             inline.Background = new SolidColorBrush(GetColor(background, Colors.Transparent));
 
