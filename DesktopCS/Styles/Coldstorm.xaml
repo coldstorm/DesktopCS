@@ -14,6 +14,7 @@
     <SolidColorBrush x:Key="ChatBrush" Color="#FFBABBBF" />
     <SolidColorBrush x:Key="TimeBrush" Color="#FF373F4E" />
     <SolidColorBrush x:Key="MessageBrush" Color="#FF808080" />
+    <SolidColorBrush x:Key="HighlightBrush" Color="#FFFF921E" />
 
     <Style TargetType="{x:Type ContentControl}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />

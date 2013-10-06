@@ -8,7 +8,7 @@ namespace DesktopCS.Helpers.Parsers
         public static Span Parse(string text, Color foreground)
         {
             var newText = InputHelper.Parse(text);
-            return MIRCHelper.Parse(newText, foreground);
+            return MIRCHelper.Parse(newText, foreground, null);
         }
     }
 }
