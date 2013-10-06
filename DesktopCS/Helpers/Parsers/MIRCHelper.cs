@@ -171,6 +171,8 @@ namespace DesktopCS.Helpers.Parsers
             {
                 inline.MouseEnter += inline_InvertColor;
                 inline.MouseLeave += inline_InvertColor;
+                inline.MouseDown += inline_InvertColor;
+                inline.MouseUp += inline_InvertColor;
             }
 
             if (isBold)
@@ -186,7 +188,12 @@ namespace DesktopCS.Helpers.Parsers
         static void inline_InvertColor(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var inline = (Inline)sender;
-            inline.Foreground = InvertBrush((SolidColorBrush)inline.Foreground);
+            var brush = (SolidColorBrush)inline.Background;
+
+            if (inline.IsMouseOver || e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+                brush = InvertBrush(brush);
+
+            inline.Foreground = brush;
         }
 
         private static Color InvertColor(Color color)
