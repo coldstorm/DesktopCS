@@ -7,8 +7,10 @@ using DesktopCS.MVVM;
 using DesktopCS.Services.Command;
 using DesktopCS.Services.IRC.Messages.Receive.Numerics;
 using NetIRC;
+using NetIRC.IRCv3;
 using NetIRC.Messages;
 using NetIRC.Messages.Send;
+using NetIRC.Messages.Send.IRCv3;
 using NetIRCHelper = DesktopCS.Helpers.NetIRCHelper;
 
 namespace DesktopCS.Services.IRC
@@ -216,6 +218,9 @@ namespace DesktopCS.Services.IRC
         {
             this.Run(() =>
             {
+                this._client.Send(new CapabilityRequest(Capability.AwayNotify));
+                this._client.Send(new CapabilityEnd());
+
                 if (!String.IsNullOrWhiteSpace(this._loginData.Password))
                 {
                     var message = new UserPrivate(PasswordService, "IDENTIFY " + this._loginData.Password);
