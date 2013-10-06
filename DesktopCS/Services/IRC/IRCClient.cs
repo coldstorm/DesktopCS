@@ -124,19 +124,20 @@ namespace DesktopCS.Services.IRC
             }
             else
             {
-                Tab target = this._tabManager.SelectedTab;
-                if (!(target is ServerTab))
-                {
-                    foreach (var part in text.SplitByLength(MaxInputLenght))
-                    {
-                        ISendMessage message;
-                        if (NetIRCHelper.IsChannel(target.Header))
-                            message = new ChannelPrivate(target.Header, part);
-                        else
-                            message = new UserPrivate(target.Header, part);
+                this.OnInput(text);
 
-                        this.Send(message);
-                    }
+                Tab target = this._tabManager.SelectedTab;
+                if (target is ServerTab) return;
+
+                foreach (var part in text.SplitByLength(MaxInputLenght))
+                {
+                    ISendMessage message;
+                    if (NetIRCHelper.IsChannel(target.Header))
+                        message = new ChannelPrivate(target.Header, part);
+                    else
+                        message = new UserPrivate(target.Header, part);
+
+                    this.Send(message);
                 }
             }
         }
@@ -145,8 +146,7 @@ namespace DesktopCS.Services.IRC
         {
             this._client.Send(message);
         }
-
-
+        
         public void Query(string nick)
         {
             this._tabManager.AddUser(nick).IsSelected = true;
