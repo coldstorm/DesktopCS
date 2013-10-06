@@ -12,7 +12,7 @@ namespace DesktopCS.Helpers.Parsers
     {
         private static readonly Regex _urlRegex = new Regex(@"(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?");
 
-        public static Inline Parse(string text, ParseArgs args)
+        public static Span Parse(string text, ParseArgs args)
         {
             var span = new Span();
 

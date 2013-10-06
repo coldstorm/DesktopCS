@@ -22,37 +22,37 @@ namespace DesktopCS.Helpers.Extentions
             return new UserItem(rank, user.NickName, IdentHelper.Parse(user.UserName));
         }
 
-        public static void AddChat(this Tab tab, string text)
+        public static void AddChat(this Tab tab, string text, ParseArgs args)
         {
-            tab.AddChat(u => new MessageLine(u, text));
+            tab.AddChat(u => new MessageLine(u, text), args);
         }
 
-        public static void AddChat(this Tab tab, User user, string text)
+        public static void AddChat(this Tab tab, User user, string text, ParseArgs args)
         {
-            tab.AddChat(user, u => new MessageLine(u, text));
+            tab.AddChat(user, u => new MessageLine(u, text), args);
         }
 
-        public static void AddChat(this Tab tab, User user, Channel channel, string text)
+        public static void AddChat(this Tab tab, User user, Channel channel, string text, ParseArgs args)
         {
-            tab.AddChat(user, channel, u => new MessageLine(u, text));
+            tab.AddChat(user, channel, u => new MessageLine(u, text), args);
         }
 
-        public static void AddChat(this Tab tab, Func<UserItem, ChatLine> callback)
+        public static void AddChat(this Tab tab, Func<UserItem, ChatLine> callback, ParseArgs args)
         {
-            AddChat(tab, null, callback);
+            AddChat(tab, null, callback, args);
         }
 
-        public static void AddChat(this Tab tab, User user, Func<UserItem, ChatLine> callback)
+        public static void AddChat(this Tab tab, User user, Func<UserItem, ChatLine> callback, ParseArgs args)
         {
-            AddChat(tab, user, null, callback);
+            AddChat(tab, user, null, callback, args);
         }
 
-        public static void AddChat(this Tab tab, User user, Channel channel, Func<UserItem, ChatLine> callback)
+        public static void AddChat(this Tab tab, User user, Channel channel, Func<UserItem, ChatLine> callback, ParseArgs args)
         {
             UserItem u = null;
             if (user != null)
                 u = user.ToUserItem(channel);
-            ChatLine line = callback(u); ;
+            ChatLine line = callback(u);
             tab.AddChat(line);
         }
     }

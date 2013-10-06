@@ -27,6 +27,14 @@ namespace DesktopCS.Services.IRC
         private Client _client;
         private bool _joining;
 
+        public User User
+        {
+            get
+            {
+                return this._client.User;
+            }
+        }
+
         public Tab SelectedTab
         {
             get

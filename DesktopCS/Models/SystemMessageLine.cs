@@ -1,4 +1,5 @@
 ﻿using DesktopCS.Helpers;
+using DesktopCS.Helpers.Parsers;
 
 namespace DesktopCS.Models
 {
@@ -7,6 +8,13 @@ namespace DesktopCS.Models
         public SystemMessageLine(string message)
             : base(ColorHelper.MessageColor, message)
         {
+
+        }
+
+        public SystemMessageLine(string message, ParseArgs args)
+            : base(ColorHelper.MessageColor, message, args)
+        {
+
         }
     }
 }

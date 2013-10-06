@@ -12,13 +12,15 @@ namespace DesktopCS.Models
         public UserItem User { get; private set; }
         public Color ChatColor { get; private set; }
         public string Chat { get; private set; }
+        public ParseArgs Args { get; private set; }
 
-        public ChatLine(Color chatColor, string chat, string timestamp)
+        public ChatLine(Color chatColor, string chat, string timestamp, ParseArgs args)
         {
             this.ChatColor = chatColor;
             this.Timestamp = TimeHelper.CreateTimeStamp();
             this.Chat = chat;
             this.Timestamp = timestamp;
+            this.Args = args;
         }
 
         public ChatLine(Color chatColor, string chat)
@@ -26,6 +28,13 @@ namespace DesktopCS.Models
             this.ChatColor = chatColor;
             this.Timestamp = TimeHelper.CreateTimeStamp();
             this.Chat = chat;
+        }
+
+        public ChatLine(Color chatColor, string chat, ParseArgs args)
+        {
+            this.ChatColor = chatColor;
+            this.Chat = chat;
+            this.Args = args;
         }
 
         public ChatLine(UserItem user, Color chatColor, string chat)
@@ -36,12 +45,21 @@ namespace DesktopCS.Models
             this.User = user;
         }
 
-        public ChatLine(UserItem user, Color chatColor, string chat, string timestamp)
+        public ChatLine(UserItem user, Color chatColor, string chat, string timestamp, ParseArgs args)
         {
             this.ChatColor = chatColor;
             this.Timestamp = timestamp;
             this.Chat = chat;
             this.User = user;
+            this.Args = args;
+        }
+
+        public ChatLine(UserItem user, Color chatColor, string chat, ParseArgs args)
+        {
+            this.ChatColor = chatColor;
+            this.Chat = chat;
+            this.User = user;
+            this.Args = args;
         }
 
         public Paragraph ToParagraph()
@@ -72,7 +90,7 @@ namespace DesktopCS.Models
             {
                 Color color = this.ChatColor;
 
-                Span chatSpan = OutputHelper.Parse(this.Chat, color);
+                Span chatSpan = OutputHelper.Parse(this.Chat, color, this.Args);
                 p.Inlines.Add(chatSpan);
             }
 

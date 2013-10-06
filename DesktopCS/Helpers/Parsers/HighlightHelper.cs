@@ -12,7 +12,7 @@ namespace DesktopCS.Helpers.Parsers
 {
     public static class HighlightHelper
     {
-        public static Inline Parse(string text, ParseArgs args)
+        public static Span Parse(string text, ParseArgs args)
         {
             Regex _highlightRegex = new Regex(args.HostNickname, RegexOptions.ExplicitCapture);
 

@@ -1,4 +1,5 @@
 ﻿using DesktopCS.Helpers;
+using DesktopCS.Helpers.Parsers;
 
 namespace DesktopCS.Models
 {
@@ -8,6 +9,12 @@ namespace DesktopCS.Models
             : base(ColorHelper.WarningColor, error)
         {
             
+        }
+
+        public ErrorLine(string error, ParseArgs args)
+            : base(ColorHelper.WarningColor, error, args)
+        {
+
         }
     }
 }

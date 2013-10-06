@@ -18,9 +18,9 @@ namespace DesktopCS.Helpers.Extentions
             tab.AddChat(new SystemMessageLine(message));
         }
 
-        public static void AddAction(this Tab tab, User user, string message)
+        public static void AddAction(this Tab tab, User user, string message, ParseArgs args)
         {
-            tab.AddChat(user, MIRCHelper.ItalicChar + message + MIRCHelper.ItalicChar);
+            tab.AddChat(user, MIRCHelper.ItalicChar + message + MIRCHelper.ItalicChar, args);
         }
 
         public static void AddAction(this Tab tab, UserItem user, string message)

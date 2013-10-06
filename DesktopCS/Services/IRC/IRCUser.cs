@@ -3,6 +3,7 @@ using DesktopCS.Helpers.Extentions;
 using DesktopCS.Models;
 using NetIRC;
 using NetIRC.Messages.Send;
+using DesktopCS.Helpers.Parsers;
 
 namespace DesktopCS.Services.IRC
 {
@@ -39,7 +40,7 @@ namespace DesktopCS.Services.IRC
         {
             if (user == this._user)
             {
-                this._tab.AddChat(user, message);
+                this._tab.AddChat(user, message, new ParseArgs(_ircClient.User.NickName));
             }
         }
 
@@ -47,7 +48,7 @@ namespace DesktopCS.Services.IRC
         {
             if (user == this._user)
             {
-                this._tab.AddAction(user, message);
+                this._tab.AddAction(user, message, new ParseArgs(_ircClient.User.NickName));
             }
         }
 
