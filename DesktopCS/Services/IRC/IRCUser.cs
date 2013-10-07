@@ -1,5 +1,5 @@
 ﻿using System;
-using DesktopCS.Helpers.Extentions;
+using DesktopCS.Helpers.Extensions;
 using DesktopCS.Models;
 using NetIRC;
 using NetIRC.Messages.Send;

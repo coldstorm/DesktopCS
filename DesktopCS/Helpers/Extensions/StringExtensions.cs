@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DesktopCS.Helpers.Extentions
+namespace DesktopCS.Helpers.Extensions
 {
     public static class StringExtentions
     {

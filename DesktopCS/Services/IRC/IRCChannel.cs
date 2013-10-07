@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
-using DesktopCS.Helpers.Extentions;
+using DesktopCS.Helpers.Extensions;
 using DesktopCS.Models;
 using NetIRC;
 using NetIRC.Messages.Send;
@@ -94,7 +94,7 @@ namespace DesktopCS.Services.IRC
 
         private void _channel_OnMessage(Channel source, User user, string message)
         {
-            this.Run(() => this._channelTab.AddChat(user, this._channel, message, new ParseArgs(_ircClient.User.NickName)));
+            this.Run(() => this._channelTab.AddChat(user, this._channel, message, this.GetArgs()));
         }
 
         private void _channel_OnTopicChange(Channel source, ChannelTopic topic)

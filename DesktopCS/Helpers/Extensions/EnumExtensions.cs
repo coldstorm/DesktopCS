@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DesktopCS.Helpers.Extentions
+namespace DesktopCS.Helpers.Extensions
 {
     public static class EnumExtensions
     {

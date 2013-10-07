@@ -1,4 +1,4 @@
-﻿using DesktopCS.Helpers.Extentions;
+﻿using DesktopCS.Helpers.Extensions;
 using DesktopCS.Helpers.Parsers;
 using DesktopCS.Models;
 using NetIRC;
@@ -28,13 +28,13 @@ namespace DesktopCS.Services.IRC
         private void ShowInActive(User user, string text)
         {
             Tab selectedTab = this._ircClient.SelectedTab ?? this._tab;
-            selectedTab.AddChat(user, text, new ParseArgs(_client.User.NickName));
+            selectedTab.AddChat(user, text, this.GetArgs());
         }
 
         private void ShowInActive(string text)
         {
             Tab selectedTab = this._ircClient.SelectedTab ?? this._tab;
-            selectedTab.AddChat(text, new ParseArgs(_client.User.NickName));
+            selectedTab.AddChat(text, this.GetArgs());
         }
 
         #region Event Handlers

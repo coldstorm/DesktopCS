@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using DesktopCS.Helpers.Extentions;
+using DesktopCS.Helpers.Extensions;
 using DesktopCS.MVVM;
 using NetIRC;
 

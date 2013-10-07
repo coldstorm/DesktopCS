@@ -3,7 +3,7 @@ using DesktopCS.Helpers.Parsers;
 using DesktopCS.Models;
 using NetIRC;
 
-namespace DesktopCS.Helpers.Extentions
+namespace DesktopCS.Helpers.Extensions
 {
     public static class NetIRCHelper
     {

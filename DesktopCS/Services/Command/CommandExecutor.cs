@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DesktopCS.Helpers.Extentions;
+using DesktopCS.Helpers.Extensions;
 using DesktopCS.Helpers.Parsers;
 using DesktopCS.Models;
 using DesktopCS.Services.IRC.Messages.Send;

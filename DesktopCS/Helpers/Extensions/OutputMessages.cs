@@ -4,7 +4,7 @@ using DesktopCS.Models;
 using DesktopCS.Services.Command;
 using NetIRC;
 
-namespace DesktopCS.Helpers.Extentions
+namespace DesktopCS.Helpers.Extensions
 {
     public static class OutputMessages
     {
