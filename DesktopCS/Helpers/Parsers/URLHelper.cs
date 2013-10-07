@@ -4,15 +4,14 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
+using DesktopCS.Services.IRC.Messages.Send;
 using Microsoft.Win32;
 
 namespace DesktopCS.Helpers.Parsers
 {
     public static class URLHelper
     {
-        private static readonly Regex _urlRegex = new Regex(@"(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?");
-
-        public static Span Parse(string text, ParseArgs args)
+        public static Span Parse(string text, ParseArgs args, Func<string, Inline> callback)
         {
             var span = new Span();
 
@@ -24,7 +23,8 @@ namespace DesktopCS.Helpers.Parsers
                 if (match.Index != lastPos)
                 {
                     var rawText = text.Substring(lastPos, match.Index - lastPos);
-                    span.Inlines.Add(new Run(rawText));
+                    Inline inline = callback(rawText);
+                    span.Inlines.Add(inline);
                 }
 
                 // Create a hyperlink for the match
@@ -43,10 +43,16 @@ namespace DesktopCS.Helpers.Parsers
 
             // Finally, copy the remainder of the string
             if (lastPos < text.Length)
-                span.Inlines.Add(new Run(text.Substring(lastPos)));
+            {
+                Inline inline = callback(text.Substring(lastPos));
+                span.Inlines.Add(inline);
+            }
+            
 
             return span;
         }
+
+        private static readonly Regex _urlRegex = new Regex(@"(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?");
 
         private static void OnUrlClick(object sender, RoutedEventArgs e)
         {

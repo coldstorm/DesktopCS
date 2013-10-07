@@ -14,8 +14,8 @@ namespace DesktopCS.Helpers.Parsers
         public const char InverseChar = (char)22;
         public const char ResetChar = (char)15;
         public const char ColorChar = (char)3;
-
-        public static Span Parse(string text, Color defaultForecolor, ParseArgs args)
+        
+        public static Span Parse(string text, ParseArgs args, Func<string, Inline> callback)
         {
             string buffer = String.Empty;
             var span = new Span();
@@ -30,7 +30,7 @@ namespace DesktopCS.Helpers.Parsers
             var flushBuffer = new Action(() =>
             {
                 // ReSharper disable AccessToModifiedClosure
-                span.Inlines.Add(GetInline(buffer, isBold, isItalic, isUnderline, foreground, background, defaultForecolor));
+                span.Inlines.Add(GetInline(buffer, isBold, isItalic, isUnderline, foreground, background, args, callback));
                 buffer = String.Empty;
                 // ReSharper restore AccessToModifiedClosure
             });
@@ -160,11 +160,11 @@ namespace DesktopCS.Helpers.Parsers
             }
         }
 
-        private static Inline GetInline(string text, bool isBold, bool isItalic, bool underline, int foreground, int background, Color defaultForecolor)
+        private static Inline GetInline(string text, bool isBold, bool isItalic, bool underline, int foreground, int background, ParseArgs args, Func<string, Inline> callback)
         {
             // Search and add hyperlinks
-            Inline inline = URLHelper.Parse(text, null);
-            inline.Foreground = new SolidColorBrush(GetColor(foreground, defaultForecolor));
+            Inline inline = callback(text);
+            inline.Foreground = new SolidColorBrush(GetColor(foreground, args.Forecolor));
             inline.Background = new SolidColorBrush(GetColor(background, Colors.Transparent));
 
             if (foreground != -1 && foreground == background)
@@ -185,7 +185,7 @@ namespace DesktopCS.Helpers.Parsers
             return inline;
         }
 
-        static void inline_InvertColor(object sender, System.Windows.Input.MouseEventArgs e)
+        private static void inline_InvertColor(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var inline = (Inline)sender;
             var brush = (SolidColorBrush)inline.Background;

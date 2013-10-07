@@ -1,10 +1,18 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Windows.Documents;
 
 namespace DesktopCS.Helpers.Parsers
 {
-    public static class InputHelper
+    public static class InputHelper 
     {
+        public static Span Parse(string text, ParseArgs args, Func<string, Inline> callback)
+        {
+            string newText = Parse(text);
+            Inline inline = callback(newText);
+            return new Span(inline);
+        }
+
         public static string Parse(string text)
         {
             // Spoiler

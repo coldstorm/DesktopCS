@@ -36,7 +36,8 @@ namespace DesktopCS.Behaviors
             if (string.IsNullOrEmpty(newText))
                 return;
 
-            textBlock.Inlines.Add(OutputHelper.Parse(newText, ColorHelper.MessageColor, null));
+            var args = new ParseArgs(ColorHelper.MessageColor);
+            textBlock.Inlines.Add(OutputHelper.Parse(newText, args));
         }
     }
 }

@@ -74,9 +74,9 @@ namespace DesktopCS.Models
 
             // Message
             {
-                Color color = this.ChatColor;
+                this.Args.Forecolor = this.ChatColor;
 
-                Span chatSpan = OutputHelper.Parse(this.Chat, color, this.Args);
+                Span chatSpan = OutputHelper.Parse(this.Chat, this.Args);
                 p.Inlines.Add(chatSpan);
             }
 

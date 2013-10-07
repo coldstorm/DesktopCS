@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -7,19 +8,20 @@ namespace DesktopCS.Helpers.Parsers
 {
     public static class HighlightHelper
     {
-        public static Span Parse(string text, ParseArgs args)
+        public static Span Parse(string text, ParseArgs args, Func<string, Inline> callback)
         {
-            Regex _highlightRegex = new Regex(args.HostNickname, RegexOptions.ExplicitCapture);
+            Regex highlightRegex = new Regex(args.HostNickname, RegexOptions.ExplicitCapture);
 
             var span = new Span();
 
             int lastPos = 0;
-            foreach (Match match in _highlightRegex.Matches(text))
+            foreach (Match match in highlightRegex.Matches(text))
             {
                 if (match.Index != lastPos)
                 {
                     var rawText = text.Substring(lastPos, match.Index - lastPos);
-                    span.Inlines.Add(rawText);
+                    Inline inline = callback(rawText);
+                    span.Inlines.Add(inline);
                 }
 
                 var highlight = new Run(match.Value)
@@ -34,7 +36,10 @@ namespace DesktopCS.Helpers.Parsers
             }
 
             if (lastPos < text.Length)
-                span.Inlines.Add(new Run(text.Substring(lastPos)));
+            {
+                Inline inline = callback(text.Substring(lastPos));
+                span.Inlines.Add(inline);
+            }
 
             return span;
         }
