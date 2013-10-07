@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
+using DesktopCS.Helpers;
 using DesktopCS.Helpers.Extensions;
 using NetIRC;
-using NetIRCHelper = DesktopCS.Helpers.NetIRCHelper;
 
 namespace DesktopCS.Converters
 {

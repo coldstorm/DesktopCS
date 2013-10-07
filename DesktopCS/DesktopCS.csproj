@@ -72,7 +72,7 @@
     <Compile Include="Converters\RankConverter.cs" />
     <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\Extensions\EnumExtensions.cs" />
-    <Compile Include="Helpers\Extensions\NetIRCHelper.cs" />
+    <Compile Include="Helpers\Extensions\NetIRCExtensions.cs" />
     <Compile Include="Helpers\Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\Parsers\HighlightHelper.cs" />
     <Compile Include="Helpers\Parsers\InputHelper.cs" />

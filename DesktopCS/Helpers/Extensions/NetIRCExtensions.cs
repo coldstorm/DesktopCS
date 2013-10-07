@@ -5,7 +5,7 @@ using NetIRC;
 
 namespace DesktopCS.Helpers.Extensions
 {
-    public static class NetIRCHelper
+    public static class NetIRCExtensions
     {
         public static UserItem ToUserItem(this User user)
         {

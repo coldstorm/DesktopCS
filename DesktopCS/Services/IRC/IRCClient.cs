@@ -11,7 +11,6 @@ using NetIRC.IRCv3;
 using NetIRC.Messages;
 using NetIRC.Messages.Send;
 using NetIRC.Messages.Send.IRCv3;
-using NetIRCHelper = DesktopCS.Helpers.NetIRCHelper;
 
 namespace DesktopCS.Services.IRC
 {

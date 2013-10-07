@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DesktopCS.Helpers;
 using DesktopCS.Helpers.Extensions;
 using DesktopCS.Helpers.Parsers;
 using DesktopCS.Models;
@@ -8,7 +9,6 @@ using DesktopCS.Services.IRC.Messages.Send;
 using NetIRC;
 using NetIRC.Messages;
 using NetIRC.Messages.Send;
-using NetIRCHelper = DesktopCS.Helpers.NetIRCHelper;
 
 namespace DesktopCS.Services.Command
 {
