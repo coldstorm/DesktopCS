@@ -13,43 +13,18 @@ namespace DesktopCS.Helpers.Parsers
     {
         public static Span Parse(string text, ParseArgs args, Func<string, Inline> callback)
         {
-            var span = new Span();
-
-            // Find all URLs using a regular expression
-            int lastPos = 0;
-            foreach (Match match in _urlRegex.Matches(text))
-            {
-                // Copy raw string from the last position up to the match
-                if (match.Index != lastPos)
+            return RegexHelper.Parse(text, _urlRegex, args, callback,
+                s =>
                 {
-                    var rawText = text.Substring(lastPos, match.Index - lastPos);
-                    Inline inline = callback(rawText);
-                    span.Inlines.Add(inline);
-                }
+                    var link = new Hyperlink(new Run(s))
+                    {
+                        NavigateUri = new Uri(s),
+                        Foreground = new SolidColorBrush(ColorHelper.HyperlinkColor)
+                    };
+                    link.Click += OnUrlClick;
 
-                // Create a hyperlink for the match
-                var link = new Hyperlink(new Run(match.Value))
-                {
-                    NavigateUri = new Uri(match.Value),
-                    Foreground = new SolidColorBrush(ColorHelper.HyperlinkColor)
-                };
-                link.Click += OnUrlClick;
-
-                span.Inlines.Add(link);
-
-                // Update the last matched position
-                lastPos = match.Index + match.Length;
-            }
-
-            // Finally, copy the remainder of the string
-            if (lastPos < text.Length)
-            {
-                Inline inline = callback(text.Substring(lastPos));
-                span.Inlines.Add(inline);
-            }
-            
-
-            return span;
+                    return link;
+                });
         }
 
         private static readonly Regex _urlRegex = new Regex(@"(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?");

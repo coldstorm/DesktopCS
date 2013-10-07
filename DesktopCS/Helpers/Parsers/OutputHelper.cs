@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Documents;
-using System.Windows.Media;
+﻿using System.Windows.Documents;
 
 namespace DesktopCS.Helpers.Parsers
 {

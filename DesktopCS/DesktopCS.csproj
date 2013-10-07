@@ -82,6 +82,7 @@
     <Compile Include="Helpers\Extensions\OutputMessages.cs" />
     <Compile Include="Helpers\Parsers\OutputHelper.cs" />
     <Compile Include="Helpers\Parsers\ParseArgs.cs" />
+    <Compile Include="Helpers\Parsers\RegexHelper.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="Helpers\Extensions\SecureIt.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
