@@ -32,7 +32,6 @@ namespace DesktopCS.Services.IRC
             this._channel.OnRank += this._channel_OnRank;
 
             this._userItem = userItem;
-            this._userItem.IsAway = this._user.IsAway;
         }
 
         #region Event Handlers

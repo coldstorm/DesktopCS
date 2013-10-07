@@ -75,11 +75,13 @@ namespace DesktopCS.Models
             }
         }
 
-        public UserItem(UserRank rank, string nick, UserMetadata metadata)
+        public UserItem(UserRank rank, string nick, UserMetadata metadata, bool isAway, string awayMessage)
         {
             this.Rank = rank;
             this.NickName = nick;
             this.Metadata = metadata;
+            this.IsAway = isAway;
+            this.AwayMessage = awayMessage;
         }
 
 
