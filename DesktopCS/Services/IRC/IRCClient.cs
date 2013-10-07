@@ -226,6 +226,8 @@ namespace DesktopCS.Services.IRC
         {
             this.Run(() =>
             {
+                client.User.OnIsAwayChange += User_OnIsAwayChange;
+
                 this._client.Send(new CapabilityRequest(Capability.AwayNotify));
                 this._client.Send(new CapabilityEnd());
 
@@ -289,6 +291,11 @@ namespace DesktopCS.Services.IRC
                     this._joining = true;
                 }
             });
+        }
+
+        private void User_OnIsAwayChange(User user)
+        {
+            this.Send(new Whois(user));
         }
 
         #endregion

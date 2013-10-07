@@ -13,7 +13,6 @@ namespace DesktopCS.Services.IRC
         private readonly IRCClient _ircClient;
         private readonly ChannelTab _channelTab;
         private readonly Channel _channel;
-        private readonly DispatcherTimer _whoTimer;
 
         public IRCChannel(IRCClient ircClient, ChannelTab channelTab, Channel channel) 
             : base(ircClient, channelTab)
@@ -33,15 +32,6 @@ namespace DesktopCS.Services.IRC
             this._channelTab.Close += this._channelTab_Close;
             this._channelTab.AddJoin();
             this._channelTab.Header = this._channel.FullName; // Correct casing
-
-            this._whoTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 30)};
-            this._whoTimer.Tick += this._whoTimer_Tick;
-            this._whoTimer.Start();
-        }
-
-        private void _whoTimer_Tick(object sender, EventArgs e)
-        {
-            this._ircClient.Send(new Who(this._channel));
         }
 
         private void AddUser(Channel channel, User user)
@@ -138,8 +128,6 @@ namespace DesktopCS.Services.IRC
             this._channel.OnNames -= this._channel_OnNames;
             this._channel.OnTopicChange -= this._channel_OnTopicChange;
             this._channel.OnWho -= this._channel_OnWho;
-
-            this._whoTimer.Stop();
         }
 
         #endregion
