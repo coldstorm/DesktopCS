@@ -2,7 +2,7 @@
 
 namespace DesktopCS.Helpers.Extensions
 {
-    public static class StringExtentions
+    public static class StringExtensions
     {
         public static IEnumerable<string> SplitByLength(this string str, int maxLength)
         {
