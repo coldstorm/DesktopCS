@@ -24,30 +24,30 @@ namespace DesktopCS.Helpers.Extentions
 
         public static void AddChat(this Tab tab, string text, ParseArgs args)
         {
-            tab.AddChat(u => new MessageLine(u, text), args);
+            tab.AddChat(u => new MessageLine(u, text, args));
         }
 
         public static void AddChat(this Tab tab, User user, string text, ParseArgs args)
         {
-            tab.AddChat(user, u => new MessageLine(u, text), args);
+            tab.AddChat(user, u => new MessageLine(u, text, args));
         }
 
         public static void AddChat(this Tab tab, User user, Channel channel, string text, ParseArgs args)
         {
-            tab.AddChat(user, channel, u => new MessageLine(u, text), args);
+            tab.AddChat(user, channel, u => new MessageLine(u, text, args));
         }
 
-        public static void AddChat(this Tab tab, Func<UserItem, ChatLine> callback, ParseArgs args)
+        public static void AddChat(this Tab tab, Func<UserItem, ChatLine> callback)
         {
-            AddChat(tab, null, callback, args);
+            AddChat(tab, null, callback);
         }
 
-        public static void AddChat(this Tab tab, User user, Func<UserItem, ChatLine> callback, ParseArgs args)
+        public static void AddChat(this Tab tab, User user, Func<UserItem, ChatLine> callback)
         {
-            AddChat(tab, user, null, callback, args);
+            AddChat(tab, user, null, callback);
         }
 
-        public static void AddChat(this Tab tab, User user, Channel channel, Func<UserItem, ChatLine> callback, ParseArgs args)
+        public static void AddChat(this Tab tab, User user, Channel channel, Func<UserItem, ChatLine> callback)
         {
             UserItem u = null;
             if (user != null)

@@ -9,7 +9,11 @@ namespace DesktopCS.Helpers.Parsers
     {
         public String HostNickname { get; private set; }
 
-        public ParseArgs(String hostNickname)
+        public ParseArgs()
+        {
+        }
+
+        public ParseArgs(string hostNickname)
         {
             this.HostNickname = hostNickname;
         }

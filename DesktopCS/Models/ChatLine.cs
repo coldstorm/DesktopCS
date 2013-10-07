@@ -23,34 +23,19 @@ namespace DesktopCS.Models
             this.Args = args;
         }
 
-        public ChatLine(Color chatColor, string chat)
-        {
-            this.ChatColor = chatColor;
-            this.Timestamp = TimeHelper.CreateTimeStamp();
-            this.Chat = chat;
-        }
-
-        public ChatLine(Color chatColor, string chat, ParseArgs args)
-        {
-            this.ChatColor = chatColor;
-            this.Chat = chat;
-            this.Args = args;
-        }
-
-        public ChatLine(UserItem user, Color chatColor, string chat)
-        {
-            this.ChatColor = chatColor;
-            this.Timestamp = TimeHelper.CreateTimeStamp();
-            this.Chat = chat;
-            this.User = user;
-        }
-
         public ChatLine(UserItem user, Color chatColor, string chat, string timestamp, ParseArgs args)
         {
             this.ChatColor = chatColor;
             this.Timestamp = timestamp;
             this.Chat = chat;
             this.User = user;
+            this.Args = args;
+        }
+
+        public ChatLine(Color chatColor, string chat, ParseArgs args)
+        {
+            this.ChatColor = chatColor;
+            this.Chat = chat;
             this.Args = args;
         }
 

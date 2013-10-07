@@ -30,7 +30,7 @@ namespace DesktopCS.Services.IRC
 
             this._channelTab = channelTab;
             this._channelTab.Close += this._channelTab_Close;
-            this._channelTab.AddJoin();
+            this._channelTab.AddJoin(this.GetArgs());
             this._channelTab.Header = this._channel.FullName; // Correct casing
         }
 
@@ -78,7 +78,7 @@ namespace DesktopCS.Services.IRC
         {
             this.Run(() =>
             {
-                this._channelTab.AddLeave(user.NickName, reason);
+                this._channelTab.AddLeave(user.NickName, reason, this.GetArgs());
                 this._channelTab.RemoveUser(user.ToUserItem(source));
             });
         }
@@ -87,7 +87,7 @@ namespace DesktopCS.Services.IRC
         {
             this.Run(() =>
             {
-                this._channelTab.AddJoin(user.NickName);
+                this._channelTab.AddJoin(user.NickName, this.GetArgs());
                 this.AddUser(this._channel, user);
             });
         }

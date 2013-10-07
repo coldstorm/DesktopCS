@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DesktopCS.Helpers.Extentions;
+using DesktopCS.Helpers.Parsers;
 using DesktopCS.Models;
 using DesktopCS.Services.IRC.Messages.Send;
 using NetIRC;
@@ -41,7 +42,7 @@ namespace DesktopCS.Services.Command
                     }
                     catch (CommandException ex)
                     {
-                        OutputMessages.AddException(tab, ex);
+                        OutputMessages.AddException(tab, ex, new ParseArgs());
                         return null;
                     }
                 }

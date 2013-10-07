@@ -1,4 +1,5 @@
 ﻿using System;
+using DesktopCS.Helpers.Parsers;
 using DesktopCS.Models;
 using DesktopCS.MVVM;
 
@@ -15,6 +16,11 @@ namespace DesktopCS.Services.IRC
             this._ircClient.Ping += this._ircClient_Ping;
 
             this._tab = tab;
+        }
+
+        protected ParseArgs GetArgs()
+        {
+            return new ParseArgs(_ircClient.User.NickName);
         }
 
         private void _ircClient_Ping(object sender, PingEventArgs e)

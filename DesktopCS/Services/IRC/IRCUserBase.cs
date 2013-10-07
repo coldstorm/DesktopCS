@@ -23,12 +23,12 @@ namespace DesktopCS.Services.IRC
 
         private void _user_OnNickNameChange(User user, string original)
         {
-            this.Run(() => this._tab.AddNickChange(original, this._user.NickName));
+            this.Run(() => this._tab.AddNickChange(original, this._user.NickName, this.GetArgs()));
         }
 
         private void _user_OnQuit(User user, string reason)
         {
-            this.Run(() => this._tab.AddQuit(this._user.NickName, reason));
+            this.Run(() => this._tab.AddQuit(this._user.NickName, reason, this.GetArgs()));
         }
 
         #endregion

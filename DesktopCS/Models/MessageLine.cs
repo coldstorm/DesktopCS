@@ -5,12 +5,6 @@ namespace DesktopCS.Models
 {
     class MessageLine : ChatLine
     {
-        public MessageLine(UserItem user, string message)
-            : base(user, ColorHelper.ChatColor, message)
-        {
-
-        }
-
         public MessageLine(UserItem user, string message, ParseArgs args)
             : base(user, ColorHelper.ChatColor, message, args)
         {
