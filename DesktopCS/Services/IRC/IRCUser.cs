@@ -1,9 +1,8 @@
 ﻿using System;
 using DesktopCS.Helpers.Extensions;
+using DesktopCS.Helpers.Parsers;
 using DesktopCS.Models;
 using NetIRC;
-using NetIRC.Messages.Send;
-using DesktopCS.Helpers.Parsers;
 
 namespace DesktopCS.Services.IRC
 {
