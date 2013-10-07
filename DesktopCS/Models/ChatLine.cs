@@ -17,9 +17,8 @@ namespace DesktopCS.Models
         public ChatLine(Color chatColor, string chat, string timestamp, ParseArgs args)
         {
             this.ChatColor = chatColor;
-            this.Timestamp = TimeHelper.CreateTimeStamp();
-            this.Chat = chat;
             this.Timestamp = timestamp;
+            this.Chat = chat;
             this.Args = args;
         }
 
@@ -34,6 +33,7 @@ namespace DesktopCS.Models
 
         public ChatLine(Color chatColor, string chat, ParseArgs args)
         {
+            this.Timestamp = TimeHelper.CreateTimeStamp();
             this.ChatColor = chatColor;
             this.Chat = chat;
             this.Args = args;
@@ -41,6 +41,7 @@ namespace DesktopCS.Models
 
         public ChatLine(UserItem user, Color chatColor, string chat, ParseArgs args)
         {
+            this.Timestamp = TimeHelper.CreateTimeStamp();
             this.ChatColor = chatColor;
             this.Chat = chat;
             this.User = user;
