@@ -227,14 +227,24 @@ namespace DesktopCS.Services.IRC
             {
                 client.User.OnIsAwayChange += User_OnIsAwayChange;
 
+                // Enable Capabilities
                 this._client.Send(new CapabilityRequest(Capability.AwayNotify));
                 this._client.Send(new CapabilityEnd());
 
+                // NickServ
                 if (!String.IsNullOrWhiteSpace(this._loginData.Password))
                 {
                     var message = new UserPrivate(PasswordService, "IDENTIFY " + this._loginData.Password);
                     this._client.Send(message);
                 }
+
+                // Default channels
+#if DEBUG
+                this.Send(new Join("#test"));
+#else
+                this.Send(new Join("#Coldstorm"));
+                this.Send(new Join("#2"));
+#endif
             });
         }
 
