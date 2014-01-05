@@ -23,6 +23,11 @@ namespace DesktopCS.Services.IRC
             return new ParseArgs(_ircClient.User.NickName);
         }
 
+        protected ParseArgs GetArgs(bool pingSound)
+        {
+            return new ParseArgs(_ircClient.User.NickName, pingSound);
+        }
+
         private void _ircClient_Ping(object sender, PingEventArgs e)
         {
             if (e.Handled == false)

@@ -39,7 +39,7 @@ namespace DesktopCS.Services.IRC
         private void ShowInServer(string text)
         {
             Tab selectedTab = this._tab;//this._ircClient.SelectedTab ??
-            selectedTab.AddChat(text, this.GetArgs());
+            selectedTab.AddChat(text, this.GetArgs(false));
         }
 
         #region Event Handlers

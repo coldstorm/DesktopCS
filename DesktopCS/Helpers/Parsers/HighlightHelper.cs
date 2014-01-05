@@ -16,7 +16,9 @@ namespace DesktopCS.Helpers.Parsers
             return RegexHelper.Parse(text, highlightRegex, args, callback,
                 s =>
                 {
-                    SoundHelper.PlaySound(SoundHelper.PingUri);
+                    // Play the ping sound if it is enabled
+                    if (args.PingSound)
+                        SoundHelper.PlaySound(SoundHelper.PingUri);
 
                     return new Run(s)
                     {
