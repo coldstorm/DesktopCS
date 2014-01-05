@@ -19,7 +19,8 @@ namespace DesktopCS.Helpers.Parsers
                     var link = new Hyperlink(new Run(s))
                     {
                         NavigateUri = new Uri(s),
-                        Foreground = new SolidColorBrush(ColorHelper.HyperlinkColor)
+                        Foreground = new SolidColorBrush(ColorHelper.HyperlinkColor),
+                        TextDecorations = null
                     };
                     link.Click += OnUrlClick;
 
