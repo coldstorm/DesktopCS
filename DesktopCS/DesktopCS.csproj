@@ -106,6 +106,7 @@
     <Compile Include="Behaviors\ListBoxSelectionBehavior.cs" />
     <Compile Include="Behaviors\MIRC.cs" />
     <Compile Include="Behaviors\PasswordBoxAssistant.cs" />
+    <Compile Include="Behaviors\TabCompleteBehavior.cs" />
     <Compile Include="Converters\BrushColorConverter.cs" />
     <Compile Include="Converters\FlagToImageConverter.cs" />
     <Compile Include="Converters\PlaceholderConverter.cs" />

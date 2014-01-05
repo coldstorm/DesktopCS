@@ -15,5 +15,12 @@ namespace DesktopCS.Helpers.Extensions
 
             yield return str.Substring(index);
         }
+
+        public static string ReplaceLastOccurrence(this string source, string find, string replace)
+        {
+            int place = source.LastIndexOf(find, System.StringComparison.Ordinal);
+            string result = source.Remove(place, find.Length).Insert(place, replace);
+            return result;
+        }
     }
 }

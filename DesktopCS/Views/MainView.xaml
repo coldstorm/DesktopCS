@@ -8,6 +8,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:viewModels="clr-namespace:DesktopCS.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d" 
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         Title="Coldstorm" Height="350" Width="550" MinHeight="200" MinWidth="300" UseLayoutRounding="True"
@@ -101,6 +102,9 @@
                                 <KeyBinding Command="{Binding ChatInputCommand}" Key="Enter" />
                                 <KeyBinding Key="Tab" />
                             </TextBox.InputBindings>
+                            <i:Interaction.Behaviors>
+                                <behaviors:TabCompleteBehavior Items="{Binding Users}"/>
+                            </i:Interaction.Behaviors>
                         </TextBox>
                     </ScrollViewer>
                 </Border>
