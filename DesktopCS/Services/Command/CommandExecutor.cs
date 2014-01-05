@@ -42,7 +42,7 @@ namespace DesktopCS.Services.Command
                     }
                     catch (CommandException ex)
                     {
-                        OutputMessages.AddException(tab, ex, new ParseArgs());
+                        tab.AddException(ex, new ParseArgs());
                         return null;
                     }
                 }
