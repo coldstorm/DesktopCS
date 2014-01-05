@@ -5,6 +5,7 @@ using DesktopCS.Helpers;
 using DesktopCS.Helpers.Extensions;
 using DesktopCS.Models;
 using DesktopCS.Properties;
+using NetIRC.Messages.Receive;
 
 namespace DesktopCS.Services
 {
@@ -54,6 +55,16 @@ namespace DesktopCS.Services
             this._settings.Username = loginData.Username;
             this._settings.Password = loginData.Password.ToSecureString().EncryptString();
             this._settings.Color = loginData.Color.ToString();
+        }
+
+        public bool GetPingSound()
+        {
+            return this._settings.PingSound;
+        }
+
+        public void SetPingSound(bool pingSound)
+        {
+            this._settings.PingSound = pingSound;
         }
 
         public void Save()
