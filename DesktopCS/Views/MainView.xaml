@@ -51,7 +51,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <RichTextBox Name="TopicRichTextBox" Grid.ColumnSpan="4" IsReadOnly="True" Foreground="{StaticResource MessageBrush}" IsDocumentEnabled="True">
+                <RichTextBox Name="TopicRichTextBox" Grid.ColumnSpan="4" IsReadOnly="True" Foreground="{StaticResource MessageBrush}" IsDocumentEnabled="True" IsTabStop="False">
                     <RichTextBox.Style>
                         <Style TargetType="{x:Type RichTextBox}" BasedOn="{StaticResource {x:Type RichTextBox}}">
                             <Style.Triggers>
