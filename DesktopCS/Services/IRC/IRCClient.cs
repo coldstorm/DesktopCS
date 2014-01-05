@@ -23,6 +23,7 @@ namespace DesktopCS.Services.IRC
         private readonly CommandExecutor _commandExecutor = new CommandExecutor();
         private readonly TabManager _tabManager;
         private readonly LoginData _loginData;
+        private readonly IRCSettings _ircSettings;
         private Client _client;
         private bool _joining;
 
@@ -31,6 +32,14 @@ namespace DesktopCS.Services.IRC
             get
             {
                 return this._client.User;
+            }
+        }
+
+        public bool PingSound
+        {
+            get
+            {
+                return this._ircSettings.PingSound;
             }
         }
 
@@ -46,10 +55,11 @@ namespace DesktopCS.Services.IRC
             }
         }
 
-        public IRCClient(TabManager tabManager, LoginData loginData)
+        public IRCClient(TabManager tabManager, LoginData loginData, IRCSettings ircSettings)
         {
             this._tabManager = tabManager;
             this._loginData = loginData;
+            this._ircSettings = ircSettings;
 
             this.Connect();
         }

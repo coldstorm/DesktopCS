@@ -71,7 +71,8 @@ namespace DesktopCS.ViewModels
             this.TabManager = new TabManager();
 
             LoginData loginData = SettingsManager.Value.GetLoginData();
-            this._irc = new IRCClient(this.TabManager, loginData);
+            IRCSettings ircSettings = SettingsManager.Value.GetIRCSettings();
+            this._irc = new IRCClient(this.TabManager, loginData, ircSettings);
 
             this.ChatData = new ChatData();
             this.ChatInputCommand = new RelayCommand(param => this.Chat(), param => this.CanChat);

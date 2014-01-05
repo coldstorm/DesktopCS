@@ -20,7 +20,7 @@ namespace DesktopCS.Services.IRC
 
         protected ParseArgs GetArgs()
         {
-            return new ParseArgs(_ircClient.User.NickName);
+            return new ParseArgs(_ircClient.User.NickName, _ircClient.PingSound);
         }
 
         protected ParseArgs GetArgs(bool pingSound)

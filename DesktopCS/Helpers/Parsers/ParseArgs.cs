@@ -13,12 +13,6 @@ namespace DesktopCS.Helpers.Parsers
         {
         }
 
-        public ParseArgs(string hostNickname)
-        {
-            this.HostNickname = hostNickname;
-            this.PingSound = true;
-        }
-
         public ParseArgs(string hostNickname, bool pingSound)
         {
             this.HostNickname = hostNickname;

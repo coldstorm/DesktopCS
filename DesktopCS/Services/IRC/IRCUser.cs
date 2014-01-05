@@ -39,7 +39,7 @@ namespace DesktopCS.Services.IRC
         {
             if (user == this._user)
             {
-                this._tab.AddChat(user, message, new ParseArgs(_ircClient.User.NickName));
+                this._tab.AddChat(user, message, this.GetArgs());
             }
         }
 
@@ -47,7 +47,7 @@ namespace DesktopCS.Services.IRC
         {
             if (user == this._user)
             {
-                this._tab.AddAction(user, message, new ParseArgs(_ircClient.User.NickName));
+                this._tab.AddAction(user, message, this.GetArgs());
             }
         }
 
