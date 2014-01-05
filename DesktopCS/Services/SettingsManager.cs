@@ -57,14 +57,16 @@ namespace DesktopCS.Services
             this._settings.Color = loginData.Color.ToString();
         }
 
-        public bool GetPingSound()
+        public IRCSettings GetIRCSettings()
         {
-            return this._settings.PingSound;
+            bool pingSound = this._settings.PingSound;
+
+            return new IRCSettings(pingSound);
         }
 
-        public void SetPingSound(bool pingSound)
+        public void SetIRCSettings(IRCSettings settings)
         {
-            this._settings.PingSound = pingSound;
+            this._settings.PingSound = settings.PingSound;
         }
 
         public void Save()
