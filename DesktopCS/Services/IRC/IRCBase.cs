@@ -20,12 +20,12 @@ namespace DesktopCS.Services.IRC
 
         protected ParseArgs GetArgs()
         {
-            return new ParseArgs(_ircClient.User.NickName, _ircClient.PingSound);
+            return this.GetArgs(_ircClient.PingSound);
         }
 
         protected ParseArgs GetArgs(bool pingSound)
         {
-            return new ParseArgs(_ircClient.User.NickName, pingSound);
+            return new ParseArgs(_ircClient.User.NickName, pingSound, str => _ircClient.Query(str));
         }
 
         private void _ircClient_Ping(object sender, PingEventArgs e)

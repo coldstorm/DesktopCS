@@ -27,7 +27,14 @@ namespace DesktopCS.Helpers.Extensions
             {
                 Color color = line.User.Metadata.Color;
 
-                var usernameRun = new Run(line.User.NickName) { Foreground = new SolidColorBrush(color) };
+                var usernameRun = new Hyperlink(new Run(line.User.NickName))
+                {
+                    Tag = line.Args.QueryCallback,
+                    Foreground = new SolidColorBrush(color),
+                    TextDecorations = null
+                };
+                usernameRun.Click += usernameRun_Click;
+
                 p.Inlines.Add(usernameRun);
                 p.Inlines.Add(" ");
             }
@@ -41,6 +48,14 @@ namespace DesktopCS.Helpers.Extensions
             }
 
             return p;
+        }
+
+        private static void usernameRun_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var link = (Hyperlink) sender;
+            var run = (Run) link.Inlines.FirstInline;
+            var callback = (Action<string>) link.Tag;
+            callback(run.Text);
         }
     }
 }
