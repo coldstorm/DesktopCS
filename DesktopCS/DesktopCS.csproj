@@ -125,6 +125,7 @@
     <Compile Include="Helpers\Parsers\RegexHelper.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="Helpers\Extensions\SecureIt.cs" />
+    <Compile Include="Helpers\SoundHelper.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\Parsers\IdentHelper.cs" />
     <Compile Include="Helpers\Parsers\URLHelper.cs" />
@@ -1145,6 +1146,9 @@
       <IncludeHash>True</IncludeHash>
       <FileType>Satellite</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cs_ping.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
