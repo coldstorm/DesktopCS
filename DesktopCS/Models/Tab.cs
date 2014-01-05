@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Documents;
 using DesktopCS.Controls;
+using DesktopCS.Helpers.Extensions;
 
 namespace DesktopCS.Models
 {

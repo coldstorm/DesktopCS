@@ -47,40 +47,5 @@ namespace DesktopCS.Models
             this.User = user;
             this.Args = args;
         }
-
-        public Paragraph ToParagraph()
-        {
-            var p = new Paragraph();
-
-            // Time
-            if (!String.IsNullOrEmpty(this.Timestamp))
-            {
-                Color timeColor = ColorHelper.TimeColor;
-
-                var timeRun = new Run(this.Timestamp) { Foreground = new SolidColorBrush(timeColor) };
-                p.Inlines.Add(timeRun);
-                p.Inlines.Add(" ");
-            }
-
-            // User
-            if (this.User != null)
-            {
-                Color color = this.User.Metadata.Color;
-
-                var usernameRun = new Run(this.User.NickName) { Foreground = new SolidColorBrush(color) };
-                p.Inlines.Add(usernameRun);
-                p.Inlines.Add(" ");
-            }
-
-            // Message
-            {
-                this.Args.Forecolor = this.ChatColor;
-
-                Span chatSpan = OutputHelper.Parse(this.Chat, this.Args);
-                p.Inlines.Add(chatSpan);
-            }
-
-            return p;
-        }
     }
 }
