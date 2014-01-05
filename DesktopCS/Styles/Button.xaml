@@ -42,12 +42,12 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Foreground" Value="{StaticResource ChatBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <ContentControl
-                        x:Name="ContentContainer" 
-                        Cursor="Hand"
+                        x:Name="ContentContainer"
                         ContentTemplate="{TemplateBinding ContentTemplate}" 
                         Content="{TemplateBinding Content}" 
                         Foreground="{TemplateBinding Foreground}" 
