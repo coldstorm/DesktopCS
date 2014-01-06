@@ -100,7 +100,6 @@
                                  Text="{Binding ChatData.InputText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                             <TextBox.InputBindings>
                                 <KeyBinding Command="{Binding ChatInputCommand}" Key="Enter" />
-                                <KeyBinding Key="Tab" />
                             </TextBox.InputBindings>
                             <i:Interaction.Behaviors>
                                 <behaviors:TabCompleteBehavior Items="{Binding Users}"/>

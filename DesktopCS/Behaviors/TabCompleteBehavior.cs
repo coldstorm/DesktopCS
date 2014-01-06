@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.PerformanceData;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interactivity;
-using DesktopCS.Helpers;
-using DesktopCS.Helpers.Extensions;
-using DesktopCS.Helpers.Parsers;
+using DesktopCS.Helpers.Extensions;                      
 using DesktopCS.Models;
 
 namespace DesktopCS.Behaviors
@@ -30,43 +26,54 @@ namespace DesktopCS.Behaviors
         }
 
         private TextBox _textBox;
-        private int _completeIndex;
+        private int _completeIndex = -1;
+        private string _lastWord = "";
 
         protected override void OnAttached()
         {
             base.OnAttached();
 
             this._textBox = this.AssociatedObject;
-            this._textBox.KeyDown += _textBox_KeyDown;
+            this._textBox.PreviewKeyDown += _textBox_PreviewKeyDown;
         }
-
         protected override void OnDetaching()
         {
             base.OnDetaching();
 
-            this._textBox.KeyDown -= this._textBox_KeyDown;
+            this._textBox.PreviewKeyDown -= this._textBox_PreviewKeyDown;
         }
 
-        void _textBox_KeyDown(object sender, KeyEventArgs e)
+        private void _textBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Tab && this.Items != null)
+            if (e.Key != Key.Tab)
             {
-                // TODO: Edit the current word and not the last one typed in
-                // TODO: If there are more than 1 enteries found, loop trough them
-
+                // Cancel current loop if any other key is pressed
+                this._completeIndex = -1;
+            }
+            else if (this.Items != null && this._textBox.CaretIndex == this._textBox.Text.Length)
+            {
                 var lastWord = this._textBox.Text.Split(' ').Last();
-                UserItem[] results = this.Items.Where(s => s.NickName.ToLower().StartsWith(lastWord.ToLower())).ToArray();
-
+                var replaceWord = this._completeIndex == -1 ? lastWord : this._lastWord;
+                
+                UserItem[] results = this.Items.Where(s => s.NickName.StartsWith(replaceWord, StringComparison.OrdinalIgnoreCase)).ToArray();
                 var count = results.Count();
-                if (count >= 1)
+
+                if (count > 0)
                 {
-                    this._textBox.Text = this._textBox.Text.ReplaceLastOccurrence(lastWord, results[0].NickName);
+                    if (count > 1)
+                    {
+                        if (_completeIndex == -1)
+                        {
+                            this._completeIndex = count - 1;
+                            this._lastWord = lastWord;
+                        }
+                        _completeIndex--;
+                    }
+
+                    this._textBox.Text = this._textBox.Text.ReplaceLastOccurrence(lastWord,
+                        results[_completeIndex + 1].NickName);
                     this._textBox.CaretIndex = this._textBox.Text.Length;
                 }
-            }
-            else
-            {
-                this._completeIndex = -1;
             }
         }
     }
