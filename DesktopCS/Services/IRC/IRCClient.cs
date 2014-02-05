@@ -131,7 +131,7 @@ namespace DesktopCS.Services.IRC
 
             var cc = CountryCodeHelper.GetCC();
             var user = new User(this._loginData.Username, IdentHelper.Generate(this._loginData.Color, cc));
-            this._client.Connect("kaslai.us", 6667, false, user);
+            this._client.Connect("irc.frogbox.es", 6667, false, user);
         }
 
         public void Chat(string text)
