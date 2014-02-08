@@ -106,16 +106,19 @@ namespace DesktopCS.Services.IRC
 
         private void _channel_OnTopicChange(Channel source, ChannelTopic topic)
         {
-            this._channelTab.Topic.Author = topic.Author.ToUserItem();
-            this._channelTab.Topic.Content = topic.Message;
-            this._channelTab.Topic.AuthorDate = topic.LastUpdated;
-            this.Run(() => this._channelTab.AddTopicChanged(topic.Author.NickName, this.GetArgs()));
+            this.Run(()=>
+            {
+                this._channelTab.Topic.Author = topic.Author.ToUserItem();
+                this._channelTab.Topic.Content = topic.Message;
+                this._channelTab.Topic.AuthorDate = topic.LastUpdated;
+                this._channelTab.AddTopicChanged(topic.Author.NickName, this.GetArgs());
+            });
         }
 
         private void _channel_OnWho(Channel source, User user, string message)
         {
             if (user.IsAway)
-                _ircClient.Send(new Whois(user));
+                this._ircClient.Send(new Whois(user));
         }
 
         #endregion
