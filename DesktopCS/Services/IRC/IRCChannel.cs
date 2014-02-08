@@ -100,6 +100,7 @@ namespace DesktopCS.Services.IRC
             this._channelTab.Topic.Author = topic.Author.ToUserItem();
             this._channelTab.Topic.Content = topic.Message;
             this._channelTab.Topic.AuthorDate = topic.LastUpdated;
+            this.Run(() => this._channelTab.AddTopicChanged(topic.Author.NickName, this.GetArgs()));
         }
 
         private void _channel_OnWho(Channel source, User user, string message)
