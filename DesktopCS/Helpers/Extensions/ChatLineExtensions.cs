@@ -27,7 +27,12 @@ namespace DesktopCS.Helpers.Extensions
             {
                 Color color = line.User.Metadata.Color;
 
-                var usernameRun = new Hyperlink(new Run(NetIRCHelper.RankChars[line.User.HighestRank] + line.User.NickName))
+                var rankRun = new Run(NetIRCHelper.RankChars[line.User.HighestRank].ToString())
+                {
+                    Foreground = new SolidColorBrush(color)
+                };
+
+                var usernameRun = new Hyperlink(new Run(line.User.NickName))
                 {
                     Tag = line.Args.QueryCallback,
                     Foreground = new SolidColorBrush(color),
@@ -35,6 +40,7 @@ namespace DesktopCS.Helpers.Extensions
                 };
                 usernameRun.Click += usernameRun_Click;
 
+                p.Inlines.Add(rankRun);
                 p.Inlines.Add(usernameRun);
                 p.Inlines.Add(" ");
             }
