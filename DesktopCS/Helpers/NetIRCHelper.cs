@@ -29,11 +29,11 @@ namespace DesktopCS.Helpers
         {
             {
                 UserRank.Owner,
-                '~'
+                '@'
             },
             {
                 UserRank.Admin,
-                '&'
+                '@'
             },
             {
                 UserRank.Op,
@@ -41,7 +41,7 @@ namespace DesktopCS.Helpers
             },
             {
                 UserRank.HalfOp,
-                '#' // CS specific
+                '#'
             },
             {
                 UserRank.Voice,
