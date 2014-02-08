@@ -98,15 +98,18 @@ namespace DesktopCS.Services.IRC
 
         private void _channel_OnTopic(Channel source, ChannelTopic topic)
         {
-            this._channelTab.Topic.Author = topic.Author.ToUserItem();
-            this._channelTab.Topic.Content = topic.Message;
-            this._channelTab.Topic.AuthorDate = topic.LastUpdated;
-            this.Run(() => this._channelTab.AddTopic(source.FullName, topic.Author.NickName, topic.LastUpdated, this.GetArgs()));
+            this.Run(() =>
+            {
+                this._channelTab.Topic.Author = topic.Author.ToUserItem();
+                this._channelTab.Topic.Content = topic.Message;
+                this._channelTab.Topic.AuthorDate = topic.LastUpdated;
+                this._channelTab.AddTopic(source.FullName, topic.Author.NickName, topic.LastUpdated, this.GetArgs());
+            });
         }
 
         private void _channel_OnTopicChange(Channel source, ChannelTopic topic)
         {
-            this.Run(()=>
+            this.Run(() =>
             {
                 this._channelTab.Topic.Author = topic.Author.ToUserItem();
                 this._channelTab.Topic.Content = topic.Message;
