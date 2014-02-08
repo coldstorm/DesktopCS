@@ -23,6 +23,7 @@ namespace DesktopCS.Services.IRC
             this._channel.OnJoin += this._channel_OnJoin;
             this._channel.OnLeave += this._channel_OnLeave;
             this._channel.OnNames += this._channel_OnNames;
+            this._channel.OnTopic += this._channel_OnTopic;
             this._channel.OnTopicChange += this._channel_OnTopicChange;
             this._channel.OnWho += this._channel_OnWho;
 
@@ -93,6 +94,14 @@ namespace DesktopCS.Services.IRC
         private void _channel_OnMessage(Channel source, User user, string message)
         {
             this.Run(() => this._channelTab.AddChat(user, this._channel, message, this.GetArgs()));
+        }
+
+        private void _channel_OnTopic(Channel source, ChannelTopic topic)
+        {
+            this._channelTab.Topic.Author = topic.Author.ToUserItem();
+            this._channelTab.Topic.Content = topic.Message;
+            this._channelTab.Topic.AuthorDate = topic.LastUpdated;
+            this.Run(() => this._channelTab.AddTopic(source.FullName, topic.Author.NickName, topic.LastUpdated, this.GetArgs()));
         }
 
         private void _channel_OnTopicChange(Channel source, ChannelTopic topic)

@@ -54,6 +54,11 @@ namespace DesktopCS.Helpers.Extensions
                 : String.Format("You left the room."), args);
         }
 
+        public static void AddTopic(this Tab tab, string channel, string nick, DateTime time, ParseArgs args)
+        {
+            tab.AddSystemChat(String.Format("Topic for {0} was set by {1} on {2}.", channel, nick, time), args);
+        }
+
         public static void AddTopicChanged(this Tab tab, string nick, ParseArgs args)
         {
             tab.AddSystemChat(String.Format("Topic was changed by {0}.", nick), args);
