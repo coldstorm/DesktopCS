@@ -25,7 +25,7 @@ namespace DesktopCS.Helpers
             }
         };
 
-        public static Dictionary<UserRank, char> RankChars = new Dictionary<UserRank, char>
+        public static Dictionary<UserRank, char?> RankChars = new Dictionary<UserRank, char?>
         {
             {
                 UserRank.Owner,
@@ -46,6 +46,10 @@ namespace DesktopCS.Helpers
             {
                 UserRank.Voice,
                 '+'
+            },
+            {
+                UserRank.None,
+                null
             }
         };
 

@@ -27,7 +27,7 @@ namespace DesktopCS.Helpers.Extensions
             {
                 Color color = line.User.Metadata.Color;
 
-                var usernameRun = new Hyperlink(new Run(line.User.NickName))
+                var usernameRun = new Hyperlink(new Run(NetIRCHelper.RankChars[line.User.HighestRank] + line.User.NickName))
                 {
                     Tag = line.Args.QueryCallback,
                     Foreground = new SolidColorBrush(color),
