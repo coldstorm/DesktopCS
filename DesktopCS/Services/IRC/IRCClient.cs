@@ -238,6 +238,7 @@ namespace DesktopCS.Services.IRC
                 client.User.OnIsAwayChange += User_OnIsAwayChange;
 
                 // Enable Capabilities
+                this._client.Send(new CapabilityRequest(Capability.MultiPrefix));
                 this._client.Send(new CapabilityRequest(Capability.AwayNotify));
                 this._client.Send(new CapabilityEnd());
 
