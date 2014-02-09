@@ -53,6 +53,30 @@ namespace DesktopCS.Helpers
             }
         };
 
+        public static Dictionary<char, UserRank> ModeChars = new Dictionary<char, UserRank>()
+        {
+            {
+                'q',
+                UserRank.Owner
+            },
+            {
+                'a',
+                UserRank.Admin
+            },
+            {
+                'o',
+                UserRank.Op
+            },
+            {
+                'h',
+                UserRank.HalfOp
+            },
+            {
+                'v',
+                UserRank.Voice
+            }
+        };
+
         public static bool IsChannel(string name)
         {
             return TypeChars.ContainsValue(name[0]);

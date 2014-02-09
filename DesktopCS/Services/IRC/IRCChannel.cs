@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using DesktopCS.Helpers.Extensions;
 using DesktopCS.Models;
 using NetIRC;
 using NetIRC.Messages.Send;
+using DesktopCS.Helpers;
 
 namespace DesktopCS.Services.IRC
 {
@@ -26,6 +28,7 @@ namespace DesktopCS.Services.IRC
             this._channel.OnTopic += this._channel_OnTopic;
             this._channel.OnTopicChange += this._channel_OnTopicChange;
             this._channel.OnWho += this._channel_OnWho;
+            this._channel.OnMode += this._channel_OnMode;
 
             this._channelTab = channelTab;
             this._channelTab.Close += this._channelTab_Close;
@@ -115,6 +118,28 @@ namespace DesktopCS.Services.IRC
                 this._channelTab.Topic.Content = topic.Message;
                 this._channelTab.Topic.AuthorDate = topic.LastUpdated;
                 this._channelTab.AddTopicChanged(topic.Author.NickName, this.GetArgs());
+            });
+        }
+
+        private void _channel_OnMode(Channel source, User setter, List<KeyValuePair<string, string>> changes)
+        {
+            this.Run(() =>
+            {
+                foreach (KeyValuePair<string, string> change in changes)
+                {
+                    if (NetIRCHelper.ModeChars.ContainsKey(change.Key[1]))
+                    {
+                        if (change.Key[0] == '+')
+                        {
+                            this._channelTab.AddRankGiven(setter.NickName, change.Value, NetIRCHelper.ModeChars[change.Key[1]], this.GetArgs());
+                        }
+
+                        else
+                        {
+                            this._channelTab.AddRankTaken(setter.NickName, change.Value, NetIRCHelper.ModeChars[change.Key[1]], this.GetArgs());
+                        }
+                    }
+                }
             });
         }
 

@@ -64,10 +64,16 @@ namespace DesktopCS.Helpers.Extensions
             tab.AddSystemChat(String.Format("Topic was changed by {0}.", nick), args);
         }
 
-        public static void AddMode(this Tab tab, string from, string to, UserRank rank, ParseArgs args)
+        public static void AddRankGiven(this Tab tab, string from, string to, UserRank rank, ParseArgs args)
         {
             string rankStr = rank.ToString().ToLower();
             tab.AddSystemChat(String.Format("{0} gave {2} to {1}.", from, to, rankStr), args);
+        }
+
+        public static void AddRankTaken(this Tab tab, string from, string to, UserRank rank, ParseArgs args)
+        {
+            string rankStr = rank.ToString().ToLower();
+            tab.AddSystemChat(String.Format("{0} took {2} from {1}.", from, to, rankStr), args);
         }
 
         #endregion
