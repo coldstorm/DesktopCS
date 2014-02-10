@@ -56,7 +56,12 @@ namespace DesktopCS.Behaviors
             {
                 // Cancel current loop if any other key is pressed
 
-                this.wordStart = this._textBox.Text.LastIndexOf(" ", this._textBox.CaretIndex) + 1;
+                if (this._textBox.CaretIndex - 1 >= 0)
+                    this.wordStart = this._textBox.Text.LastIndexOf(" ", this._textBox.CaretIndex - 1) + 1;
+
+                else
+                    this.wordStart = this._textBox.Text.LastIndexOf(" ", this._textBox.CaretIndex) + 1;
+
                 this.wordEnd = this._textBox.Text.IndexOf(" ", wordStart);
 
                 if (wordEnd == -1)
@@ -64,7 +69,7 @@ namespace DesktopCS.Behaviors
                     wordEnd = this._textBox.Text.Length;
                 }
 
-                replaceWord = this._textBox.Text.Substring(wordStart, wordEnd);
+                replaceWord = this._textBox.Text.Substring(wordStart, wordEnd - wordStart);
 
                 this._completeIndex = 0;
 
