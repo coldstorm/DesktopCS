@@ -21,6 +21,7 @@ namespace DesktopCS.Services.IRC
             this._ircClient.ChannelLeave += this._ircClient_ChannelLeave;
 
             this._channel = channel;
+            this._channel.OnAction += this._channel_OnAction;
             this._channel.OnMessage += this._channel_OnMessage;
             this._channel.OnJoin += this._channel_OnJoin;
             this._channel.OnLeave += this._channel_OnLeave;
@@ -140,6 +141,14 @@ namespace DesktopCS.Services.IRC
                         }
                     }
                 }
+            });
+        }
+
+        private void _channel_OnAction(Channel source, User user, string action)
+        {
+            this.Run(() =>
+            {
+                this._channelTab.AddAction(user, action, this.GetArgs());
             });
         }
 
