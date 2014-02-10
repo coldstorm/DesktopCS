@@ -25,54 +25,81 @@ namespace DesktopCS.Behaviors
             set { base.SetValue(ItemsProperty, value); }
         }
 
+        private UserItem[] results;
         private TextBox _textBox;
         private int _completeIndex = -1;
-        private string _lastWord = "";
+
+        private string replaceWord;
+        private int wordStart = -1;
+        private int wordEnd = -1;
 
         protected override void OnAttached()
         {
             base.OnAttached();
 
             this._textBox = this.AssociatedObject;
-            this._textBox.PreviewKeyDown += _textBox_PreviewKeyDown;
+            this._textBox.KeyUp += this._textBox_KeyUp;
+            this._textBox.KeyDown += this._textBox_KeyDown;
         }
+
         protected override void OnDetaching()
         {
             base.OnDetaching();
 
-            this._textBox.PreviewKeyDown -= this._textBox_PreviewKeyDown;
+            this._textBox.KeyUp -= this._textBox_KeyUp;
+            this._textBox.KeyDown -= this._textBox_KeyDown;
         }
 
-        private void _textBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        void _textBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key != Key.Tab)
+            if (e.Key != Key.Tab && this.Items != null)
             {
                 // Cancel current loop if any other key is pressed
-                this._completeIndex = -1;
-            }
-            else if (this.Items != null && this._textBox.CaretIndex == this._textBox.Text.Length)
-            {
-                var lastWord = this._textBox.Text.Split(' ').Last();
-                var replaceWord = this._completeIndex == -1 ? lastWord : this._lastWord;
-                
-                UserItem[] results = this.Items.Where(s => s.NickName.StartsWith(replaceWord, StringComparison.OrdinalIgnoreCase)).ToArray();
-                var count = results.Count();
 
-                if (count > 0)
+                if (this._textBox.CaretIndex - 1 >= 0)
+                    this.wordStart = this._textBox.Text.LastIndexOf(" ", this._textBox.CaretIndex - 1) + 1;
+
+                else
+                    this.wordStart = this._textBox.Text.LastIndexOf(" ", this._textBox.CaretIndex) + 1;
+
+                this.wordEnd = this._textBox.Text.IndexOf(" ", wordStart);
+
+                if (wordEnd == -1)
                 {
-                    if (count > 1)
+                    wordEnd = this._textBox.Text.Length;
+                }
+
+                replaceWord = this._textBox.Text.Substring(wordStart, wordEnd - wordStart);
+
+                this._completeIndex = 0;
+
+                this.results = this.Items.Where(s => s.NickName.StartsWith(replaceWord, StringComparison.OrdinalIgnoreCase)).ToArray();
+            }
+        }
+
+        void _textBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Tab)
+            {
+                if (results.Count() > 1)
+                {
+                    var replaceEnd = this._textBox.Text.IndexOf(" ", this.wordStart);
+
+                    if (replaceEnd == -1)
                     {
-                        if (_completeIndex == -1)
-                        {
-                            this._completeIndex = count - 1;
-                            this._lastWord = lastWord;
-                        }
-                        _completeIndex--;
+                        replaceEnd = this._textBox.Text.Length;
                     }
 
-                    this._textBox.Text = this._textBox.Text.ReplaceLastOccurrence(lastWord,
-                        results[_completeIndex + 1].NickName);
+                    this._textBox.Text = this._textBox.Text.Substring(0, this.wordStart) +
+                        this.results[this._completeIndex].NickName +
+                        this._textBox.Text.Substring(replaceEnd);
                     this._textBox.CaretIndex = this._textBox.Text.Length;
+
+                    this._completeIndex++;
+                    if (this._completeIndex == results.Count())
+                    {
+                        this._completeIndex = 0;
+                    }
                 }
             }
         }
