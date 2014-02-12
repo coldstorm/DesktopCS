@@ -81,6 +81,10 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NetIRC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=38892d9a464bc177, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\NetIRC.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -1029,12 +1033,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Flags\im.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\NetIRC\NetIRC\NetIRC.csproj">
-      <Project>{4aee2d87-d356-4ca1-ba02-7536b1af2b8c}</Project>
-      <Name>NetIRC</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
