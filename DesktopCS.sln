@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopCS.Tests", "DesktopC
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "DesktopCS.Modeling", "DesktopCS.Modeling\DesktopCS.Modeling.modelproj", "{8BD2256B-6CF2-4A20-B35F-975D86671324}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetIRC", "..\..\NetIRC\NetIRC\NetIRC.csproj", "{4AEE2D87-D356-4CA1-BA02-7536B1AF2B8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
