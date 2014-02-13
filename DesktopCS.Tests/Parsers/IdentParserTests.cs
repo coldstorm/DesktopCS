@@ -3,7 +3,7 @@ using System.Windows.Media;
 using DesktopCS.Helpers.Parsers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DesktopCS.Tests
+namespace DesktopCS.Tests.Parsers
 {
     [TestClass]
     public class IdentParserTests
