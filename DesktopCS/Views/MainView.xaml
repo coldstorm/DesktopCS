@@ -128,7 +128,11 @@
                                                     CommandParameter="{Binding NickName}">
                                                 query
                                             </Button>
-                                            <Button Style="{StaticResource TextButtonStyle}">kick</Button>
+                                            <Button Style="{StaticResource TextButtonStyle}"
+                                                    Command="{Binding DataContext.KickCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                                    CommandParameter="{Binding NickName}">
+                                                kick
+                                            </Button>
                                             <Button Style="{StaticResource TextButtonStyle}">ban</Button>
                                         </StackPanel>
                                     </controls:UserlistItem>

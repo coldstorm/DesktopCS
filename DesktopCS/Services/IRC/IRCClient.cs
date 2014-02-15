@@ -171,6 +171,11 @@ namespace DesktopCS.Services.IRC
             this._tabManager.AddUser(nick).IsSelected = true;
         }
 
+        public void Kick(string nick)
+        {
+            this._client.Send(new Kick(this.SelectedTab.Header, nick));
+        }
+
         #region Events
 
         public delegate void TextEventHandler(object sender, string text);
