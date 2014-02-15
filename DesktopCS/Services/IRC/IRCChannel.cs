@@ -30,6 +30,7 @@ namespace DesktopCS.Services.IRC
             this._channel.OnTopicChange += this._channel_OnTopicChange;
             this._channel.OnWho += this._channel_OnWho;
             this._channel.OnMode += this._channel_OnMode;
+            this._channel.OnKick += _channel_OnKick;
 
             this._channelTab = channelTab;
             this._channelTab.Close += this._channelTab_Close;
@@ -141,6 +142,15 @@ namespace DesktopCS.Services.IRC
                         }
                     }
                 }
+            });
+        }
+
+        private void _channel_OnKick(Channel source, User kicker, User user, string reason)
+        {
+            this.Run(() =>
+            {
+                this._channelTab.AddKick(kicker.NickName, user.NickName, reason, this.GetArgs());
+                this._channelTab.RemoveUser(user.ToUserItem(source));
             });
         }
 

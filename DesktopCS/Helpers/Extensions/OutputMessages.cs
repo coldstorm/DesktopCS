@@ -76,6 +76,14 @@ namespace DesktopCS.Helpers.Extensions
             tab.AddSystemChat(String.Format("{0} took {2} from {1}.", from, to, rankStr), args);
         }
 
+        public static void AddKick(this Tab tab, string kicker, string target, string reason, ParseArgs args)
+        {
+            if (reason != null)
+                tab.AddSystemChat(String.Format("{1} was kicked by {0} ({2}).", kicker, target, reason), args);
+            else
+                tab.AddSystemChat(String.Format("{1} was kicked by {0}.", kicker, target), args);
+        }
+
         #endregion
         
         #region User
