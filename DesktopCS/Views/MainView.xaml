@@ -133,7 +133,21 @@
                                                     CommandParameter="{Binding NickName}">
                                                 kick
                                             </Button>
-                                            <Button Style="{StaticResource TextButtonStyle}">ban</Button>
+                                            <Button Style="{StaticResource TextButtonStyle}"
+                                                    Command="{Binding DataContext.BanNickNameCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                                    CommandParameter="{Binding NickName}">
+                                                ban nick
+                                            </Button>
+                                            <Button Style="{StaticResource TextButtonStyle}"
+                                                    Command="{Binding DataContext.BanUserNameCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                                    CommandParameter="{Binding User.UserName}">
+                                                ban username
+                                            </Button>
+                                            <Button Style="{StaticResource TextButtonStyle}"
+                                                    Command="{Binding DataContext.BanHostNameCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                                    CommandParameter="{Binding User.HostName}">
+                                                ban hostname
+                                            </Button>
                                         </StackPanel>
                                     </controls:UserlistItem>
                                     <DataTemplate.Triggers>

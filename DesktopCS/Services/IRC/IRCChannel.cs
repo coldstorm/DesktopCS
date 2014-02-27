@@ -141,6 +141,19 @@ namespace DesktopCS.Services.IRC
                             this._channelTab.AddRankTaken(setter.NickName, change.Value, NetIRCHelper.ModeChars[change.Key[1]], this.GetArgs());
                         }
                     }
+
+                    else if (change.Key[1] == 'b')
+                    {
+                        if (change.Key[0] == '+')
+                        {
+                            this._channelTab.AddBanSet(setter.NickName, change.Value, this.GetArgs());
+                        }
+
+                        else
+                        {
+                            this._channelTab.AddBanRemoved(setter.NickName, change.Value, this.GetArgs());
+                        }
+                    }
                 }
             });
         }

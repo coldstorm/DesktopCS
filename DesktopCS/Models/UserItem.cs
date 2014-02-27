@@ -7,6 +7,18 @@ namespace DesktopCS.Models
 {
     public class UserItem : ObservableObject
     {
+        private User _user;
+
+        public User User
+        {
+            get { return this._user; }
+            set
+            {
+                this._user = value;
+                this.OnPropertyChanged("User");
+            }
+        }
+
         private UserRank _rank;
 
         public UserRank Rank
@@ -75,8 +87,9 @@ namespace DesktopCS.Models
             }
         }
 
-        public UserItem(UserRank rank, string nick, UserMetadata metadata, bool isAway, string awayMessage)
+        public UserItem(User user, UserRank rank, string nick, UserMetadata metadata, bool isAway, string awayMessage)
         {
+            this.User = user;
             this.Rank = rank;
             this.NickName = nick;
             this.Metadata = metadata;

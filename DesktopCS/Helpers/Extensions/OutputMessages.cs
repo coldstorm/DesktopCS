@@ -84,6 +84,16 @@ namespace DesktopCS.Helpers.Extensions
                 tab.AddSystemChat(String.Format("{1} was kicked by {0}.", kicker, target), args);
         }
 
+        public static void AddBanSet(this Tab tab, string setter, string mask, ParseArgs args)
+        {
+            tab.AddSystemChat(String.Format("{0} set ban on {1}.", setter, mask), args);
+        }
+
+        public static void AddBanRemoved(this Tab tab, string setter, string mask, ParseArgs args)
+        {
+            tab.AddSystemChat(String.Format("{0} removed ban on {1}.", setter, mask), args);
+        }
+
         #endregion
         
         #region User

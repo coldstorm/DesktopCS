@@ -176,6 +176,21 @@ namespace DesktopCS.Services.IRC
             this._client.Send(new Kick(this.SelectedTab.Header, nick));
         }
 
+        public void BanNickName(string nick)
+        {
+            this._client.Send(new ChannelMode(this.SelectedTab.Header, "+b", nick + "!*@*"));
+        }
+
+        public void BanUserName(string user)
+        {
+            this._client.Send(new ChannelMode(this.SelectedTab.Header, "+b", "*!" + user + "@*"));
+        }
+
+        public void BanHostName(string host)
+        {
+            this._client.Send(new ChannelMode(this.SelectedTab.Header, "+b", "*!*@" + host));
+        }
+
         #region Events
 
         public delegate void TextEventHandler(object sender, string text);

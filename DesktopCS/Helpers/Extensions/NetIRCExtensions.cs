@@ -19,7 +19,7 @@ namespace DesktopCS.Helpers.Extensions
                 if (user.Ranks.ContainsKey(channel.Name))
                     rank = user.Ranks[channel.Name];
 
-            return new UserItem(rank, user.NickName, IdentHelper.Parse(user.UserName), user.IsAway, user.AwayMessage);
+            return new UserItem(user, rank, user.NickName, IdentHelper.Parse(user.UserName), user.IsAway, user.AwayMessage);
         }
 
         public static void AddChat(this Tab tab, string text, ParseArgs args)

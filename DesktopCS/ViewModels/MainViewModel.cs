@@ -19,6 +19,9 @@ namespace DesktopCS.ViewModels
         public ICommand ChatInputCommand { get; private set; }
         public ICommand QueryCommand { get; private set; }
         public ICommand KickCommand { get; private set; }
+        public ICommand BanNickNameCommand { get; private set; }
+        public ICommand BanUserNameCommand { get; private set; }
+        public ICommand BanHostNameCommand { get; private set; }
 
         private CSTabItem _selectedItem;
 
@@ -79,6 +82,9 @@ namespace DesktopCS.ViewModels
             this.ChatInputCommand = new RelayCommand(param => this.Chat(), param => this.CanChat);
             this.QueryCommand = new RelayCommand(param => this.Query((string)param));
             this.KickCommand = new RelayCommand(param => this.Kick((string)param));
+            this.BanNickNameCommand = new RelayCommand(param => this.BanNickName((string)param));
+            this.BanUserNameCommand = new RelayCommand(param => this.BanUserName((string)param));
+            this.BanHostNameCommand = new RelayCommand(param => this.BanHostName((string)param));
         }
 
         public bool CanChat
@@ -110,6 +116,21 @@ namespace DesktopCS.ViewModels
         public void Kick(string nick)
         {
             this._irc.Kick(nick);
+        }
+
+        private void BanNickName(string nick)
+        {
+            this._irc.BanNickName(nick);
+        }
+
+        private void BanUserName(string user)
+        {
+            this._irc.BanUserName(user);
+        }
+
+        private void BanHostName(string host)
+        {
+            this._irc.BanHostName(host);
         }
     }
 }
