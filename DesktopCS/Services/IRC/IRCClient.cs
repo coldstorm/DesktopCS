@@ -35,11 +35,19 @@ namespace DesktopCS.Services.IRC
             }
         }
 
-        public bool PingSound
+        public bool SoundNotifications
         {
             get
             {
-                return this._ircSettings.PingSound;
+                return this._ircSettings.SoundNotifications;
+            }
+        }
+
+        public bool DesktopNotifications
+        {
+            get
+            {
+                return this._ircSettings.DesktopNotifications;
             }
         }
 

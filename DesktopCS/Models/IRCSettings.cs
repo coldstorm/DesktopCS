@@ -12,21 +12,34 @@ namespace DesktopCS.Models
 {
     public class IRCSettings : ObservableObject, IDataErrorInfo
     {
-        private bool _pingSound;
+        private bool _soundNotifications;
 
-        public bool PingSound
+        public bool SoundNotifications
         {
-            get { return this._pingSound; }
+            get { return this._soundNotifications; }
             set
             {
-                this._pingSound = value;
-                this.OnPropertyChanged("PingSound");
+                this._soundNotifications = value;
+                this.OnPropertyChanged("SoundNotifications");
             }
         }
 
-        public IRCSettings(bool pingSound)
+        private bool _desktopNotifications;
+
+        public bool DesktopNotifications
         {
-            this.PingSound = pingSound;
+            get { return this._desktopNotifications; }
+            set
+            {
+                this._desktopNotifications = value;
+                this.OnPropertyChanged("DesktopNotifications");
+            }
+        }
+
+        public IRCSettings(bool soundNotifications, bool desktopNotifications)
+        {
+            this.SoundNotifications = soundNotifications;
+            this.DesktopNotifications = desktopNotifications;
         }
 
         #region IDataErrorInfo Members
@@ -55,9 +68,6 @@ namespace DesktopCS.Models
 
         private string GetValidationError(string columnName)
         {
-            //switch (columnName)
-            //{
-            //}
             return null;
         }
 

@@ -14,7 +14,10 @@
     <Setting Name="HasUpgrade" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="PingSound" Type="System.Boolean" Scope="User">
+    <Setting Name="SoundNotifications" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DesktopNotifications" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>

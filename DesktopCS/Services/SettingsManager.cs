@@ -59,14 +59,15 @@ namespace DesktopCS.Services
 
         public IRCSettings GetIRCSettings()
         {
-            bool pingSound = this._settings.PingSound;
+            bool soundNotifications = this._settings.SoundNotifications;
+            bool desktopNotifications = this._settings.DesktopNotifications;
 
-            return new IRCSettings(pingSound);
+            return new IRCSettings(soundNotifications, desktopNotifications);
         }
 
         public void SetIRCSettings(IRCSettings settings)
         {
-            this._settings.PingSound = settings.PingSound;
+            this._settings.SoundNotifications = settings.SoundNotifications;
         }
 
         public void Save()
