@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using DesktopCS.Helpers.Extensions;
 
 namespace DesktopCS.Helpers.Parsers
 {
@@ -17,8 +18,13 @@ namespace DesktopCS.Helpers.Parsers
                 s =>
                 {
                     // Play the ping sound if it is enabled
-                    if (args.PingSound)
+                    if (args.SoundNotification)
                         SoundHelper.PlaySound(SoundHelper.PingUri);
+                    
+                    // Flash the window indefinitely if desktop notifications are enabled
+                    // TODO: Add setting for flashing window X number of times
+                    if (args.DesktopNotification)
+                        WindowExtensions.FlashWindow(Application.Current.MainWindow);
 
                     return new Run(s)
                     {

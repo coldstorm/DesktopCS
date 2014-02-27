@@ -1,5 +1,6 @@
 ﻿using DesktopCS.Services;
 using DesktopCS.Views;
+using DesktopCS.Helpers.Extensions;
 
 namespace DesktopCS
 {
@@ -20,6 +21,12 @@ namespace DesktopCS
             // Save settings and shut down
             SettingsManager.Value.Save();
             this.Shutdown();
+        }
+
+        private void Application_Activated(object sender, System.EventArgs e)
+        {
+            // Stop flashing window when it receives focus
+            WindowExtensions.StopFlashingWindow(App.Current.MainWindow);
         }
 
     }
