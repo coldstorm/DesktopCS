@@ -7,6 +7,7 @@ using DesktopCS.Models;
 using DesktopCS.MVVM;
 using DesktopCS.Services;
 using DesktopCS.Services.IRC;
+using DesktopCS.Views;
 
 namespace DesktopCS.ViewModels
 {
@@ -22,6 +23,7 @@ namespace DesktopCS.ViewModels
         public ICommand BanNickNameCommand { get; private set; }
         public ICommand BanUserNameCommand { get; private set; }
         public ICommand BanHostNameCommand { get; private set; }
+        public ICommand ShowSettingsCommand { get; private set; }
 
         private CSTabItem _selectedItem;
 
@@ -85,6 +87,7 @@ namespace DesktopCS.ViewModels
             this.BanNickNameCommand = new RelayCommand(param => this.BanNickName((string)param));
             this.BanUserNameCommand = new RelayCommand(param => this.BanUserName((string)param));
             this.BanHostNameCommand = new RelayCommand(param => this.BanHostName((string)param));
+            this.ShowSettingsCommand = new RelayCommand(param => this.ShowSettings());
         }
 
         public bool CanChat
@@ -131,6 +134,11 @@ namespace DesktopCS.ViewModels
         private void BanHostName(string host)
         {
             this._irc.BanHostName(host);
+        }
+
+        public void ShowSettings()
+        {
+            new SettingsView().ShowDialog();
         }
     }
 }

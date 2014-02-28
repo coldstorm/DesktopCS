@@ -79,8 +79,10 @@
                 </RichTextBox>
                 
                 <ToolBarPanel Grid.Row="2"  Grid.Column="2" Grid.ColumnSpan="2">
-                    <Button Style="{StaticResource TextButtonStyle}">
-                        <font:IconBlock FontSize="15" Icon="Cog" HorizontalAlignment="Right"/>
+                    <Button Style="{StaticResource TextButtonStyle}" 
+                            HorizontalAlignment="Right" 
+                            Command="{Binding ShowSettingsCommand}">
+                        <font:IconBlock FontSize="15" Icon="Cog"/>
                     </Button>
                 </ToolBarPanel>
 
