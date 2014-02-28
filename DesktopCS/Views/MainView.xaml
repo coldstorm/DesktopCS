@@ -9,6 +9,7 @@
         xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:viewModels="clr-namespace:DesktopCS.ViewModels"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:font="http://schemas.acid.cl/fontawesome"
         mc:Ignorable="d" 
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         Title="Coldstorm" Height="350" Width="550" MinHeight="200" MinWidth="300" UseLayoutRounding="True"
@@ -76,6 +77,12 @@
                         </Paragraph>
                     </FlowDocument>
                 </RichTextBox>
+                
+                <ToolBarPanel Grid.Row="2"  Grid.Column="2" Grid.ColumnSpan="2">
+                    <Button Style="{StaticResource TextButtonStyle}">
+                        <font:IconBlock FontSize="15" Icon="Cog" HorizontalAlignment="Right"/>
+                    </Button>
+                </ToolBarPanel>
 
                 <TabControl Grid.Row="2" Grid.Column="0" SelectedItem="{Binding SelectedItem}">
                     <TabControl.Resources>
