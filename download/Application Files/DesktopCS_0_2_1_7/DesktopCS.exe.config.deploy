@@ -22,6 +22,12 @@
             <setting name="HasUpgrade" serializeAs="String">
                 <value>False</value>
             </setting>
+            <setting name="SoundNotifications" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="DesktopNotifications" serializeAs="String">
+                <value>True</value>
+            </setting>
         </DesktopCS.Properties.Settings>
     </userSettings>
 </configuration>
