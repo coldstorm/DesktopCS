@@ -1,7 +1,4 @@
-DesktopCS
+DesktopCS [![Build status](https://ci.appveyor.com/api/projects/status/f52rvg0eufojkno3)](https://ci.appveyor.com/project/Coldstorm/DesktopCS)
 =================
 
-[![Build status](https://ci.appveyor.com/api/projects/status?id=f52rvg0eufojkno3)](https://ci.appveyor.com/project/DesktopCS)
-
-A WPF implementation of the Coldstorm client.
-
+The Coldstorm client built for your desktop.
