@@ -1,0 +1,18 @@
+branches:
+  except:
+    gh-pages
+
+os: Windows Server 2012
+
+init:
+  - git config --global user.email appveyor@coldstorm.tk
+  - git config --global user.name AppVeyor
+
+clone_folder: c:\projects\desktopcs
+
+configuration: Debug
+
+build:
+  project: AppVeyor.sln
+
+deploy_script: deploy.ps1
