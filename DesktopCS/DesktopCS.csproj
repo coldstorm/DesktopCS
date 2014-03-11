@@ -174,6 +174,7 @@
     <Compile Include="Services\SettingsManager.cs" />
     <Compile Include="Services\TabManager.cs" />
     <Compile Include="MVVM\UIInvoker.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\ChatTabContentView.xaml.cs">
       <DependentUpon>ChatTabContentView.xaml</DependentUpon>
     </Compile>
@@ -187,6 +188,10 @@
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Styles\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\TabItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
