@@ -1,4 +1,4 @@
-$version = $env:APP_VEYOR_BUILD_VERSION
+$version = $env:APPVEYOR_BUILD_VERSION
 
 git clone --quiet --branch=gh-pages https://github.com/coldstorm/DesktopCS.git "C:\projects\desktopcs\Deployment"
 
@@ -12,6 +12,6 @@ git add .
 
 git commit -m ("Release " + $version)
 
-git format-patch HEAD^ > ("deploy-" + $version + ".patch")
+git format-patch --stdout HEAD^ > ("deploy-" + $version + ".patch")
 
 appveyor PushArtifact ("deploy-" + $version + ".patch")
