@@ -4,7 +4,7 @@ git clone --quiet --branch=gh-pages https://github.com/coldstorm/DesktopCS.git "
 
 & 'C:\Program Files (x86)\MSBuild\12.0\bin\msbuild.exe' /target:publish /p:Configuration=Release /p:Platform=AnyCPU /p:ApplicationVersion=$version "C:\projects\desktopcs\DesktopCS\DesktopCS.csproj"
 
-robocopy "C:\projects\desktopcs\DesktopCS\app.publish" "C:\projects\desktopcs\Deployment\download" /S
+robocopy "C:\projects\desktopcs\DesktopCS\bin\Release\app.publish" "C:\projects\desktopcs\Deployment\download" /S
 
 cd "C:\projects\desktopcs\Deployment"
 
