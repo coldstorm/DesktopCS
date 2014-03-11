@@ -15,8 +15,6 @@
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Sepehr\Documents\GitHub\DesktopCS - Pages\download\</PublishUrl>
-    <PublishUrl>A:\David\repos\Coldstorm\DesktopCS-Pages\download\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -29,10 +27,7 @@
     <InstallUrl>http://coldstorm.github.io/DesktopCS/download/</InstallUrl>
     <UpdateUrl>http://coldstorm.github.io/DesktopCS/download/</UpdateUrl>
     <TargetCulture>en</TargetCulture>
-    <MinimumRequiredVersion>0.2.0.4</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>7</ApplicationRevision>
-    <ApplicationVersion>0.2.1.7</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
