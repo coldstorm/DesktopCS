@@ -15,4 +15,5 @@ configuration: Debug
 build:
   project: AppVeyor.sln
 
-deploy_script: deploy.ps1
+deploy_script: 
+  - ps: deploy.ps1
