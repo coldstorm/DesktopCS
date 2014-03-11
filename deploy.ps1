@@ -5,9 +5,7 @@ $patchFile = "deploy-" + $version + ".patch"
 
 git clone --quiet --branch=gh-pages https://github.com/coldstorm/DesktopCS.git "C:\projects\desktopcs\Deployment"
 
-& 'C:\Program Files (x86)\MSBuild\12.0\bin\msbuild.exe' /target:publish /p:Configuration=Release /p:Platform=AnyCPU /p:ApplicationVersion=$version "C:\projects\desktopcs\DesktopCS\DesktopCS.csproj"
-
-robocopy "C:\projects\desktopcs\DesktopCS\bin\Release\app.publish" "C:\projects\desktopcs\Deployment\download" /S
+& 'C:\Program Files (x86)\MSBuild\12.0\bin\msbuild.exe' /target:publish /p:Configuration=Release /p:Platform=AnyCPU /p:ApplicationVersion=$version /p:PublishUrl="C:\projects\desktopcs\Deployment\download" "C:\projects\desktopcs\DesktopCS\DesktopCS.csproj"
 
 cd "C:\projects\desktopcs\Deployment"
 
