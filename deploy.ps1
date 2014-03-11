@@ -1,4 +1,7 @@
 $version = $env:APPVEYOR_BUILD_VERSION
+$gitExe = Get-Command git -syntax
+$gitFormatPatch = "format-patch --stdout HEAD^"
+$patchFile = "deploy-" + $version + ".patch"
 
 git clone --quiet --branch=gh-pages https://github.com/coldstorm/DesktopCS.git "C:\projects\desktopcs\Deployment"
 
@@ -12,6 +15,6 @@ git add .
 
 git commit -m ("Release " + $version)
 
-git format-patch --stdout HEAD^ > ("deploy-" + $version + ".patch")
+Start-Process -FilePath $gitExe -ArgumentList $gitFormatPatch -Wait -NoNewWindow -RedirectStandardOutput $patchFile
 
-appveyor PushArtifact ("deploy-" + $version + ".patch")
+appveyor PushArtifact $patchFile
