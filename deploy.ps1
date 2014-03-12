@@ -1,6 +1,6 @@
 $version = $env:APPVEYOR_BUILD_VERSION
 $gitExe = Get-Command git -syntax
-$gitClone = "git clone --branch=gh-pages https://github.com/coldstorm/DesktopCS.git " + $deploymentFolder
+$gitClone = "clone --branch=gh-pages https://github.com/coldstorm/DesktopCS.git " + $deploymentFolder
 $gitFormatPatch = "format-patch --stdout HEAD^"
 $patchFile = "deploy-" + $version + ".patch"
 $deploymentFolder = "C:\projects\Deployment"
