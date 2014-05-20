@@ -3,9 +3,11 @@ $gitExe = Get-Command git -syntax
 $gitClone = "clone --branch=gh-pages https://github.com/coldstorm/DesktopCS.git " + $deploymentFolder
 $gitFormatPatch = "format-patch --stdout HEAD^"
 $patchFile = "deploy-" + $version + ".patch"
-$deploymentFolder = "C:\projects\Deployment"
+$deploymentFolder = "C:\projects\desktopcs\Deployment"
 $projectFile = "C:\projects\desktopcs\DesktopCS\DesktopCS.csproj"
-$releaseFolder = "C:\projects\desktopcs\DesktopCS\DesktopCS\bin\Release\app.publish"
+$releaseFolder = "C:\projects\desktopcs\DesktopCS\bin\Release\app.publish"
+
+mkdir $deploymentFolder
 
 Start-Process -FilePath $gitExe -ArgumentList $gitClone -Wait -NoNewWindow
 
