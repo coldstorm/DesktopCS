@@ -11,6 +11,8 @@ Start-Process -FilePath $gitExe -ArgumentList $gitClone -Wait -NoNewWindow
 
 & 'C:\Program Files (x86)\MSBuild\12.0\bin\msbuild.exe' /target:publish /p:Configuration=Release /p:Platform=AnyCPU /p:ApplicationVersion=$version $projectFile
 
+ls $deploymentFolder -Recurse
+
 cd $deploymentFolder
 
 mkdir "\download"
