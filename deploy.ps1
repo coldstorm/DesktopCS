@@ -11,16 +11,16 @@ Start-Process -FilePath $gitExe -ArgumentList $gitClone -Wait -NoNewWindow
 
 & 'C:\Program Files (x86)\MSBuild\12.0\bin\msbuild.exe' /target:publish /p:Configuration=Release /p:Platform=AnyCPU /p:ApplicationVersion=$version $projectFile
 
-ls $deploymentFolder -Recurse
+ls $deploymentFolder -Recurse -Force
 
 cd $deploymentFolder
 
 mkdir "\download"
 
-Move-Item -Path ($releaseFolder + "\DesktopCS.application") -Destination ($deploymentFolder + "\download\") -Verbose
-Move-Item -Path ($releaseFolder + "\*") -Destination ($deploymentFolder + "\download\") -Force -Verbose
+Move-Item -Path ($releaseFolder + "\Application Files\") -Destination ($deploymentFolder + "\download") -Force -Verbose
+Move-Item -Path ($releaseFolder + "\DesktopCS.application") -Destination ($deploymentFolder + "\download") -Force -Verbose
 
-ls $deploymentFolder -Recurse
+ls $deploymentFolder -Recurse -Force
 
 git add .
 
