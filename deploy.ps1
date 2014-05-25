@@ -20,7 +20,7 @@ cd ".\download"
 mkdir ".\Application Files" 
 cd $deploymentFolder
 
-Move-Item -Path ($releaseFolder + "\Application Files\") -Destination ($deploymentFolder + "\download\Application Files") -Force -Verbose
+Move-Item -Path ($releaseFolder + "\Application Files\DesktopCS*") -Destination ($deploymentFolder + "\download\Application Files\") -Force -Verbose
 Move-Item -Path ($releaseFolder + "\DesktopCS.application") -Destination ($deploymentFolder + "\download") -Force -Verbose
 
 ls $deploymentFolder -Recurse -Force
