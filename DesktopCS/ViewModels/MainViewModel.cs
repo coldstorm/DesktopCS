@@ -78,6 +78,7 @@ namespace DesktopCS.ViewModels
 
             LoginData loginData = SettingsManager.Value.GetLoginData();
             IRCSettings ircSettings = SettingsManager.Value.GetIRCSettings();
+            SettingsManager.Value.OnIRCSettingsChanged += SettingsManager_OnIRCSettingsChanged;
             this._irc = new IRCClient(this.TabManager, loginData, ircSettings);
 
             this.ChatData = new ChatData();
@@ -88,6 +89,11 @@ namespace DesktopCS.ViewModels
             this.BanUserNameCommand = new RelayCommand(param => this.BanUserName((string)param));
             this.BanHostNameCommand = new RelayCommand(param => this.BanHostName((string)param));
             this.ShowSettingsCommand = new RelayCommand(param => this.ShowSettings());
+        }
+
+        void SettingsManager_OnIRCSettingsChanged(IRCSettings settings)
+        {
+            this._irc.IRCSettings = settings;
         }
 
         public bool CanChat
