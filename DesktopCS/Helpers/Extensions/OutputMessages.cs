@@ -94,6 +94,16 @@ namespace DesktopCS.Helpers.Extensions
             tab.AddSystemChat(String.Format("{0} removed ban on {1}.", setter, mask), args);
         }
 
+        public static void AddChannelModeSet(this Tab tab, string setter, string mode, ParseArgs args)
+        {
+            tab.AddSystemChat(String.Format("{0} set channel mode '{1}'.", setter, mode), args);
+        }
+
+        public static void AddChannelModeRemoved(this Tab tab, string setter, string mode, ParseArgs args)
+        {
+            tab.AddSystemChat(String.Format("{0} removed channel mode '{1}'.", setter, mode), args);
+        }
+
         #endregion
         
         #region User

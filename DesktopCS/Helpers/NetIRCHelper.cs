@@ -53,7 +53,7 @@ namespace DesktopCS.Helpers
             }
         };
 
-        public static Dictionary<char, UserRank> ModeChars = new Dictionary<char, UserRank>()
+        public static Dictionary<char, UserRank> ChannelRankModeChars = new Dictionary<char, UserRank>()
         {
             {
                 'q',
@@ -75,6 +75,34 @@ namespace DesktopCS.Helpers
                 'v',
                 UserRank.Voice
             }
+        };
+
+        public static Dictionary<char, string> ChannelModeChars = new Dictionary<char, string>()
+        {
+            {
+                'i',
+                "invite only"
+            },
+            {
+                'm',
+                "moderated"
+            },
+            {
+                'n',
+                "no outside messages"
+            },
+            {
+                'p',
+                "private"
+            },
+            {
+                's',
+                "secret"
+            },
+            {
+                't',
+                "topic-locked"
+            },
         };
 
         public static bool IsChannel(string name)

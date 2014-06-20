@@ -129,16 +129,29 @@ namespace DesktopCS.Services.IRC
             {
                 foreach (KeyValuePair<string, string> change in changes)
                 {
-                    if (NetIRCHelper.ModeChars.ContainsKey(change.Key[1]))
+                    if (NetIRCHelper.ChannelRankModeChars.ContainsKey(change.Key[1]))
                     {
                         if (change.Key[0] == '+')
                         {
-                            this._channelTab.AddRankGiven(setter.NickName, change.Value, NetIRCHelper.ModeChars[change.Key[1]], this.GetArgs());
+                            this._channelTab.AddRankGiven(setter.NickName, change.Value, NetIRCHelper.ChannelRankModeChars[change.Key[1]], this.GetArgs());
                         }
 
                         else
                         {
-                            this._channelTab.AddRankTaken(setter.NickName, change.Value, NetIRCHelper.ModeChars[change.Key[1]], this.GetArgs());
+                            this._channelTab.AddRankTaken(setter.NickName, change.Value, NetIRCHelper.ChannelRankModeChars[change.Key[1]], this.GetArgs());
+                        }
+                    }
+
+                    else if (NetIRCHelper.ChannelModeChars.ContainsKey(change.Key[1]))
+                    {
+                        if (change.Key[0] == '+')
+                        {
+                            this._channelTab.AddChannelModeSet(setter.NickName, NetIRCHelper.ChannelModeChars[change.Key[1]], this.GetArgs());
+                        }
+
+                        else
+                        {
+                            this._channelTab.AddChannelModeRemoved(setter.NickName, NetIRCHelper.ChannelModeChars[change.Key[1]], this.GetArgs());
                         }
                     }
 
