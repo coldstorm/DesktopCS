@@ -69,11 +69,23 @@ namespace DesktopCS.Services
         {
             this._settings.SoundNotifications = settings.SoundNotifications;
             this._settings.DesktopNotifications = settings.DesktopNotifications;
+            this.TriggerOnSettingsChanged();
         }
 
         public void Save()
         {
             this._settings.Save();
+        }
+
+        public delegate void OnIRCSettingsChangedHandler(IRCSettings settings);
+        public event OnIRCSettingsChangedHandler OnIRCSettingsChanged;
+
+        internal void TriggerOnSettingsChanged()
+        {
+            if (this.OnIRCSettingsChanged != null)
+            {
+                this.OnIRCSettingsChanged(GetIRCSettings());
+            }
         }
     }
 }

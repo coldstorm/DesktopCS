@@ -23,9 +23,18 @@ namespace DesktopCS.Services.IRC
         private readonly CommandExecutor _commandExecutor = new CommandExecutor();
         private readonly TabManager _tabManager;
         private readonly LoginData _loginData;
-        private readonly IRCSettings _ircSettings;
+        private IRCSettings _ircSettings;
         private Client _client;
         private bool _joining;
+
+        public IRCSettings IRCSettings
+        {
+            get { return this._ircSettings; }
+            set
+            {
+                this._ircSettings = value;
+            }
+        }
 
         public User User
         {
