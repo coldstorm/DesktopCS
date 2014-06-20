@@ -68,6 +68,7 @@ namespace DesktopCS.Services
         public void SetIRCSettings(IRCSettings settings)
         {
             this._settings.SoundNotifications = settings.SoundNotifications;
+            this._settings.DesktopNotifications = settings.DesktopNotifications;
         }
 
         public void Save()
