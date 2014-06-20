@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DesktopCS.ViewModels;
+using DesktopCS.Services;
 
 namespace DesktopCS.Views
 {
@@ -20,7 +22,8 @@ namespace DesktopCS.Views
     {
         public SettingsView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.DataContext = new SettingsViewModel();
         }
     }
 }

@@ -3,12 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:converters="clr-namespace:DesktopCS.Converters"
+        xmlns:behaviors="clr-namespace:DesktopCS.Behaviors"
         xmlns:viewModels="clr-namespace:DesktopCS.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignData viewModels:SettingsViewModel}"
-        Title="Settings" Height="300" Width="300"
-        Style="{StaticResource WindowStyle}">
+        d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}"
+        Title="Settings" Width="372" SizeToContent="Height" WindowStartupLocation="CenterScreen" UseLayoutRounding="True"
+        behaviors:BindableDialogResult.DialogResult="{Binding DialogResult}"
+        Style="{StaticResource WindowStyle}" ResizeMode="CanMinimize">
 
     <Border
         Style="{StaticResource ContentBorder}"
@@ -20,9 +22,16 @@
             <TextBlock Margin="0,10" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" Text="Settings" />
             
             <StackPanel Margin="0,5"  Orientation="Horizontal">
-                <TextBlock FontSize="10" FontWeight="SemiBold" HorizontalAlignment="Left" Text="Sound notifications" />
-                <CheckBox Margin="50,0,0,0" IsChecked="{Binding SettingsData.SoundNotifications, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Mode=TwoWay}"></CheckBox>
+                <CheckBox Margin="0,0,10,0" IsChecked="{Binding SettingsData.SoundNotifications, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Mode=TwoWay}"/>
+                <TextBlock FontSize="10" FontWeight="SemiBold" Text="Sound notifications" />
             </StackPanel>
+
+            <StackPanel Margin="0,5"  Orientation="Horizontal">
+                <CheckBox Margin="0,0,10,0" IsChecked="{Binding SettingsData.DesktopNotifications, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Mode=TwoWay}"/>
+                <TextBlock FontSize="10" FontWeight="SemiBold" Text="Desktop notifications" />
+            </StackPanel>
+            
+            <Button Margin="0,15,0,0" Width="150" FontSize="14" Content="Save" Command="{Binding SaveSettingsCommand}" />
         </StackPanel>
     </Border>
 </Window>

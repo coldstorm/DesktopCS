@@ -138,7 +138,7 @@ namespace DesktopCS.ViewModels
 
         public void ShowSettings()
         {
-            new SettingsView().ShowDialog();
+            bool? showDialog = new SettingsView().ShowDialog();
         }
     }
 }
