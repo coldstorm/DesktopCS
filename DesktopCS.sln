@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopCS", "DesktopCS\DesktopCS.csproj", "{6276F143-5307-418B-80BC-360B95F06B4E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopCS.Tests", "DesktopCS.Tests\DesktopCS.Tests.csproj", "{A6564F2E-6CA6-4696-B064-6DC84C22CC9B}"
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "DesktopCS.Modeling", "DesktopCS.Modeling\DesktopCS.Modeling.modelproj", "{8BD2256B-6CF2-4A20-B35F-975D86671324}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetIRC", "..\..\NetIRC\NetIRC\NetIRC.csproj", "{4AEE2D87-D356-4CA1-BA02-7536B1AF2B8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +27,6 @@ Global
 		{8BD2256B-6CF2-4A20-B35F-975D86671324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BD2256B-6CF2-4A20-B35F-975D86671324}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BD2256B-6CF2-4A20-B35F-975D86671324}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4AEE2D87-D356-4CA1-BA02-7536B1AF2B8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4AEE2D87-D356-4CA1-BA02-7536B1AF2B8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4AEE2D87-D356-4CA1-BA02-7536B1AF2B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4AEE2D87-D356-4CA1-BA02-7536B1AF2B8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
