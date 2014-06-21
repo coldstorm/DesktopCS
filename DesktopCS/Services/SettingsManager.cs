@@ -69,7 +69,27 @@ namespace DesktopCS.Services
         {
             this._settings.SoundNotifications = settings.SoundNotifications;
             this._settings.DesktopNotifications = settings.DesktopNotifications;
-            this.TriggerOnSettingsChanged();
+            this.TriggerOnIRCSettingsChanged();
+        }
+
+        public WindowGeometry GetWindowGeometry()
+        {
+            double top = this._settings.WindowTop;
+            double left = this._settings.WindowLeft;
+            double height = this._settings.WindowHeight;
+            double width = this._settings.WindowWidth;
+            bool isMaximized = this._settings.WindowMaximized;
+
+            return new WindowGeometry(top, left, height, width, isMaximized);
+        }
+
+        public void SetWindowGeometry(WindowGeometry window)
+        {
+            this._settings.WindowTop = window.Top;
+            this._settings.WindowLeft = window.Left;
+            this._settings.WindowHeight = window.Height;
+            this._settings.WindowWidth = window.Width;
+            this._settings.WindowMaximized = window.IsMaximized;
         }
 
         public void Save()
@@ -80,7 +100,7 @@ namespace DesktopCS.Services
         public delegate void OnIRCSettingsChangedHandler(IRCSettings settings);
         public event OnIRCSettingsChangedHandler OnIRCSettingsChanged;
 
-        internal void TriggerOnSettingsChanged()
+        internal void TriggerOnIRCSettingsChanged()
         {
             if (this.OnIRCSettingsChanged != null)
             {

@@ -143,6 +143,7 @@
     <Compile Include="Models\ErrorLine.cs" />
     <Compile Include="Models\IRCSettings.cs" />
     <Compile Include="Models\Topic.cs" />
+    <Compile Include="Models\WindowGeometry.cs" />
     <Compile Include="MVVM\ObservableObject.cs" />
     <Compile Include="MVVM\RelayCommand.cs" />
     <Compile Include="MVVM\SortedObservableCollection.cs" />

@@ -14,7 +14,7 @@
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         Title="Coldstorm" Height="350" Width="550" MinHeight="200" MinWidth="300" UseLayoutRounding="True"
         PreviewMouseUp="PreviewWindow_MouseUp"
-        Style="{StaticResource WindowStyle}">
+        Style="{StaticResource WindowStyle}" Closing="Window_Closing">
 
     <Window.Resources>
         <converters:FlagToImageConverter x:Key="FlagToImageConverter" />
