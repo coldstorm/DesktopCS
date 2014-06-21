@@ -3,10 +3,10 @@ using System.Windows.Media;
 using DesktopCS.Helpers.Parsers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DesktopCS.Tests.Parsers
+namespace DesktopCS.Tests.Helpers.Parsers
 {
     [TestClass]
-    public class IdentParserTests
+    public class IdentHelperTests
     {
         [TestMethod]
         public void InvalidIdentTest()
