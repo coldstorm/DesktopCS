@@ -57,5 +57,17 @@ namespace DesktopCS.Tests.Services
 
             Assert.IsTrue(this.tabManager.ChannelTabs.Count == 0);
         }
+
+        [TestMethod]
+        public void CloseServerTabTest()
+        {
+            ServerTab tab = this.tabManager.AddServer("testServer");
+
+            Assert.IsTrue(this.tabManager.ServerTabs.Count == 1);
+
+            tab.TabItem.RaiseEvent(new System.Windows.RoutedEventArgs(CSTabItem.CloseTabEvent));
+
+            Assert.IsTrue(this.tabManager.ServerTabs.Count == 1);
+        }
     }
 }
