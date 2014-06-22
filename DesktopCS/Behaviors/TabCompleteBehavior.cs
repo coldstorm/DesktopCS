@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.PerformanceData;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace DesktopCS.Behaviors
         public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(
             "Items",
             typeof(ObservableCollection<UserItem>),
-            typeof (TabCompleteBehavior),
+            typeof(TabCompleteBehavior),
             new FrameworkPropertyMetadata(null));
 
         public ObservableCollection<UserItem> Items
@@ -25,7 +26,7 @@ namespace DesktopCS.Behaviors
             set { base.SetValue(ItemsProperty, value); }
         }
 
-        private UserItem[] results;
+        private List<UserItem> results = new List<UserItem>();
         private TextBox _textBox;
         private int _completeIndex = -1;
 
@@ -33,29 +34,10 @@ namespace DesktopCS.Behaviors
         private int wordStart = -1;
         private int wordEnd = -1;
 
-        protected override void OnAttached()
+        private void UpdateResults()
         {
-            base.OnAttached();
-
-            this._textBox = this.AssociatedObject;
-            this._textBox.KeyUp += this._textBox_KeyUp;
-            this._textBox.KeyDown += this._textBox_KeyDown;
-        }
-
-        protected override void OnDetaching()
-        {
-            base.OnDetaching();
-
-            this._textBox.KeyUp -= this._textBox_KeyUp;
-            this._textBox.KeyDown -= this._textBox_KeyDown;
-        }
-
-        void _textBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Tab && this.Items != null)
+            if (this.Items != null)
             {
-                // Cancel current loop if any other key is pressed
-
                 if (this._textBox.CaretIndex - 1 >= 0)
                     this.wordStart = this._textBox.Text.LastIndexOf(" ", this._textBox.CaretIndex - 1) + 1;
 
@@ -73,7 +55,44 @@ namespace DesktopCS.Behaviors
 
                 this._completeIndex = 0;
 
-                this.results = this.Items.Where(s => s.NickName.StartsWith(replaceWord, StringComparison.OrdinalIgnoreCase)).ToArray();
+                this.results = this.Items.Where(s => s.NickName.StartsWith(replaceWord, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            else
+            {
+                this.results.Clear();
+            }
+        }
+
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+
+            this._textBox = this.AssociatedObject;
+            this._textBox.KeyUp += this._textBox_KeyUp;
+            this._textBox.KeyDown += this._textBox_KeyDown;
+        }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+
+            this.UpdateResults();
+        }
+
+        protected override void OnDetaching()
+        {
+            base.OnDetaching();
+
+            this._textBox.KeyUp -= this._textBox_KeyUp;
+            this._textBox.KeyDown -= this._textBox_KeyDown;
+        }
+
+        void _textBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Tab)
+            {
+                this.UpdateResults();
             }
         }
 
