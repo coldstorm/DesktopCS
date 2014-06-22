@@ -6,7 +6,7 @@ using DesktopCS.Helpers;
 namespace DesktopCS.Tests.Helpers
 {
     [TestClass]
-    public class ColorHelpersTests
+    public class ColorHelperTests
     {
         [TestMethod]
         public void InvalidHexToColorTest()

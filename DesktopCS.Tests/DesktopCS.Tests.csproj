@@ -58,7 +58,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Unit\Helpers\ColorHelpersTests.cs" />
+    <Compile Include="Unit\Helpers\ColorHelperTests.cs" />
     <Compile Include="Unit\Helpers\Parsers\IdentHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\Services\TabManagerTests.cs" />
