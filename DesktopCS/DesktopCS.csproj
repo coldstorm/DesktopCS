@@ -88,6 +88,7 @@
       <HintPath>..\Lib\NetIRC.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
@@ -138,6 +139,7 @@
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\Parsers\IdentHelper.cs" />
     <Compile Include="Helpers\Parsers\URLHelper.cs" />
+    <Compile Include="Helpers\VersionHelper.cs" />
     <Compile Include="Models\ChatData.cs" />
     <Compile Include="Models\ChannelTab.cs" />
     <Compile Include="Models\ErrorLine.cs" />
@@ -1083,7 +1085,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Target Name="BeforePublish">   
-    <Error Condition="'$(Configuration)' != 'Release' Or '$(PlatformName)' != 'AnyCPU'" Text="You attempted to publish a configuration that is not Release and AnyCPU architecture!" /> 
+  <Target Name="BeforePublish">
+    <Error Condition="'$(Configuration)' != 'Release' Or '$(PlatformName)' != 'AnyCPU'" Text="You attempted to publish a configuration that is not Release and AnyCPU architecture!" />
   </Target>
 </Project>
