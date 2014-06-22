@@ -1083,4 +1083,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="BeforePublish">   
+    <Error Condition="'$(Configuration)' != 'Release' Or '$(PlatformName)' != 'AnyCPU'" Text="You attempted to publish a configuration that is not Release and AnyCPU architecture!" /> 
+  </Target>
 </Project>
