@@ -119,6 +119,7 @@
     <Compile Include="Converters\PlaceholderConverter.cs" />
     <Compile Include="Converters\RankConverter.cs" />
     <Compile Include="Helpers\ColorHelper.cs" />
+    <Compile Include="Helpers\CountryNameHelper.cs" />
     <Compile Include="Helpers\Extensions\ChatLineExtensions.cs" />
     <Compile Include="Helpers\Extensions\EnumExtensions.cs" />
     <Compile Include="Helpers\Extensions\NetIRCExtensions.cs" />

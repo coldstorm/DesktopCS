@@ -27,6 +27,7 @@ namespace DesktopCS.Helpers
                     }
                 }
             }
+
             catch
             {
                 Debug.WriteLine("GeoIP lookup failed.");
