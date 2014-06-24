@@ -18,13 +18,13 @@ namespace DesktopCS.Services.Command
 
         public CommandExecutor()
         {
-            this._commands.Add("JOIN", new Command(this.JoinCallback, "/join [#channel[,#channel2[,...]]]"));
-            this._commands.Add("PART", new Command(this.PartCallback, "/part [#channel[,#channel2[,...]]] [reason]"));
+            this._commands.Add("JOIN", new Command(new string[] {}, this.JoinCallback, "/join [#channel[,#channel2[,...]]]", ""));
+            this._commands.Add("PART", new Command(new string[] {}, this.PartCallback, "/part [#channel[,#channel2[,...]]] [reason]", ""));
 
-            this._commands.Add("QUERY", new Command(this.QueryCallback, "/msg <user> <message>"));
+            this._commands.Add("QUERY", new Command(new string[] {"MSG"}, this.QueryCallback, "/msg <user> <message>", ""));
 
-            this._commands.Add("AWAY", new Command(this.AwayCallback, "/away [message]"));
-            this._commands.Add("BACK", new Command(this.BackCallback, "/back"));
+            this._commands.Add("AWAY", new Command(new string[] {"AFK"}, this.AwayCallback, "/away [message]", ""));
+            this._commands.Add("BACK", new Command(new string[] {"BACK"}, this.BackCallback, "/back", ""));
         }
 
         public ISendMessage Execute(Client client, Tab tab, string message)
@@ -34,7 +34,7 @@ namespace DesktopCS.Services.Command
 
             foreach (var entry in this._commands)
             {
-                if (entry.Key == command)
+                if (entry.Key == command || entry.Value.Labels.Contains(command))
                 {
                     try
                     {
@@ -66,7 +66,7 @@ namespace DesktopCS.Services.Command
                 return new Join(new Channel(arg.Tab.Header));
             }
 
-            throw new CommandException("/JOIN expects a channel");
+            throw InvalidUsage(this._commands["JOIN"]);
         }
 
         private ISendMessage PartCallback(CommandArgs arg)
@@ -92,7 +92,7 @@ namespace DesktopCS.Services.Command
                 return new Part(new Channel(arg.Tab.Header));
             }
 
-            throw new CommandException("/PART expects a channel");
+            throw InvalidUsage(this._commands["PART"]);
         }
 
         private ISendMessage QueryCallback(CommandArgs arg)
@@ -127,6 +127,7 @@ namespace DesktopCS.Services.Command
             {
                 return new Away("AFK");
             }
+
             return new NotAway();
         }
 
@@ -143,7 +144,7 @@ namespace DesktopCS.Services.Command
 
         private static CommandException InvalidUsage(Command command)
         {
-            return new CommandException("Invalid usage: " + command.Usage);
+            return new CommandException("Correct usage: " + command.Usage);
         }
     }
 }
