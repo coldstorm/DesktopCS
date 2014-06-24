@@ -8,7 +8,7 @@ using NetIRC;
 
 namespace DesktopCS.Converters
 {
-    class RankConverter : IValueConverter
+    public class RankConverter : IValueConverter
     {
         #region IValueConverter Members
 
