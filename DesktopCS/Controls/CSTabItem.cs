@@ -12,6 +12,7 @@ namespace DesktopCS.Controls
 
         public static readonly DependencyProperty IsUnreadProperty = DependencyProperty.Register("IsUnread", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
         public static readonly DependencyProperty IsClosableProperty = DependencyProperty.Register("IsClosable", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsConnectedProperty = DependencyProperty.Register("IsConnected", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
 
         public static readonly RoutedEvent CloseTabEvent =
             EventManager.RegisterRoutedEvent("CloseTab", RoutingStrategy.Bubble,
@@ -35,6 +36,12 @@ namespace DesktopCS.Controls
         {
             get { return (bool)this.GetValue(IsUnreadProperty); }
             set { this.SetValue(IsUnreadProperty, value); }
+        }
+
+        public bool IsConnected
+        {
+            get { return (bool)this.GetValue(IsConnectedProperty); }
+            set { this.SetValue(IsConnectedProperty, value); }
         }
 
         public override void OnApplyTemplate()

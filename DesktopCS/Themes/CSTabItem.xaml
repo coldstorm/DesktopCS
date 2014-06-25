@@ -3,8 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:DesktopCS.Controls">
 
-
-    
     <Style TargetType="{x:Type controls:CSTabItem}">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -65,6 +63,12 @@
                         <Trigger Property="IsClosable" Value="False">
                             <Setter TargetName="PART_Close" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_Close" Property="IsEnabled" Value="False" />
+                        </Trigger>
+                        
+                        <Trigger Property="IsConnected" Value="False">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource NotConnectedTabBorderBrush}" />
+                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{StaticResource NotConnectedTabForegroundBrush}" />
+                            <Setter TargetName="PART_Close" Property="TextElement.Foreground" Value="{StaticResource NotConnectedTabForegroundBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

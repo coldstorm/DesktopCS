@@ -3,7 +3,7 @@
 
     <Style TargetType="Window" x:Key="WindowStyle">
         <Setter Property="Icon" Value="/Resources\coldstorm.ico" />
-        <Setter Property="Background" Value="{StaticResource WindowBgBrush}" />
+        <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ChatBrush}" />
         <Setter Property="FontFamily" Value="Verdana" />
         <Setter Property="FontSize" Value="11px" />

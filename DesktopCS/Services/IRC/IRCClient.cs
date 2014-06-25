@@ -104,6 +104,7 @@ namespace DesktopCS.Services.IRC
             {
                 ChannelTab tab = this._tabManager.AddChannel(tabName);
                 new IRCChannel(this, tab, channel);
+                tab.TabItem.IsConnected = true;
             }
         }
 
@@ -357,7 +358,12 @@ namespace DesktopCS.Services.IRC
 
         private void _client_OnChannelLeave(Client client, Channel channel)
         {
-            this.Run(() => this.OnChannelLeave(channel));
+            this.Run(() =>
+            {
+                ChannelTab tab = this._tabManager.AddChannel(channel.FullName);
+                this.OnChannelLeave(channel);
+                tab.TabItem.IsConnected = false;
+            });
         }
 
         private void client_OnSend(Client client, SendMessageEventArgs e)
