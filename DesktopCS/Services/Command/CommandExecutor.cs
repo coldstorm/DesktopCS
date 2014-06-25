@@ -27,7 +27,7 @@ namespace DesktopCS.Services.Command
             this._commands.Add("BACK", new Command(new string[] {"BACK"}, this.BackCallback, "/back", ""));
         }
 
-        public ISendMessage Execute(Client client, Tab tab, string message)
+        public void Execute(Client client, Tab tab, string message)
         {
             var parsedMessage = new ParsedMessage(null, message);
             string command = parsedMessage.Command.ToUpperInvariant();
@@ -38,70 +38,79 @@ namespace DesktopCS.Services.Command
                 {
                     try
                     {
-                        return entry.Value.Callback(new CommandArgs(client, tab, parsedMessage.Parameters));
+                        entry.Value.Callback(new CommandArgs(client, tab, parsedMessage.Parameters));
+                        return;
                     }
                     catch (CommandException ex)
                     {
                         tab.AddException(ex, new ParseArgs());
-                        return null;
+                        return;
                     }
                 }
             }
 
-            return new Raw(message);
+            client.Send(new Raw(message));
         }
         
-        private ISendMessage JoinCallback(CommandArgs arg)
+        private void JoinCallback(CommandArgs args)
         {
+            Client client = args.Client;
             // /join #channel
-            if (arg.Parameters.Length >= 1)
+            if (args.Parameters.Length >= 1)
             {
-                return new SendCollection(
-                    this.GetChannels(arg.Parameters[0])
-                        .Select(channel => new Join(channel)));
+                client.Send(new SendCollection(
+                    this.GetChannels(args.Parameters[0])
+                        .Select(channel => new Join(channel))));
+                return;
             }
             // /join
-            if (NetIRCHelper.IsChannel(arg.Tab.Header))
+            if (NetIRCHelper.IsChannel(args.Tab.Header) && !args.Client.Channels.ContainsKey(args.Tab.Header))
             {
-                return new Join(new Channel(arg.Tab.Header));
+                client.Send(new Join(new Channel(args.Tab.Header)));
+                return;
             }
 
             throw InvalidUsage(this._commands["JOIN"]);
         }
 
-        private ISendMessage PartCallback(CommandArgs arg)
+        private void PartCallback(CommandArgs args)
         {
+            Client client = args.Client;
             // /part #channel reason
-            if (arg.Parameters.Length >= 2)
+            if (args.Parameters.Length >= 2)
             {
-                string reason = String.Join(" ", arg.Parameters.Skip(1));
-                return new SendCollection(
-                    this.GetChannels(arg.Parameters[0])
-                        .Select(channel => new Part(channel, reason)));
+                string reason = String.Join(" ", args.Parameters.Skip(1));
+                client.Send(new SendCollection(
+                    this.GetChannels(args.Parameters[0])
+                        .Select(channel => new Part(channel, reason))));
+                return;
             }
             // /part #channel
-            if (arg.Parameters.Length == 1)
+            if (args.Parameters.Length == 1)
             {
-                return new SendCollection(
-                    this.GetChannels(arg.Parameters[0])
-                        .Select(channel => new Part(channel)));
+                client.Send(new SendCollection(
+                    this.GetChannels(args.Parameters[0])
+                        .Select(channel => new Part(channel))));
+                return;
             }
             // /part
-            if (NetIRCHelper.IsChannel(arg.Tab.Header))
+            if (NetIRCHelper.IsChannel(args.Tab.Header))
             {
-                return new Part(new Channel(arg.Tab.Header));
+                client.Send(new Part(new Channel(args.Tab.Header)));
+                return;
             }
 
             throw InvalidUsage(this._commands["PART"]);
         }
 
-        private ISendMessage QueryCallback(CommandArgs arg)
+        private void QueryCallback(CommandArgs args)
         {
+            Client client = args.Client;
             // /query user message
-            if (arg.Parameters.Length >= 2)
+            if (args.Parameters.Length >= 2)
             {
-                string text = String.Join(" ", arg.Parameters.Skip(1));
-                string target = arg.Parameters[0];
+                string text = String.Join(" ", args.Parameters.Skip(1));
+                string target = args.Parameters[0];
 
                 ISendMessage message;
                 if (NetIRCHelper.IsChannel(target))
@@ -109,32 +118,37 @@ namespace DesktopCS.Services.Command
                 else
                     message = new UserPrivate(target, text);
 
-                return message;
+                client.Send(message);
+                return;
             }
 
             throw InvalidUsage(this._commands["QUERY"]);
         }
 
-        private ISendMessage AwayCallback(CommandArgs arg)
+        private void AwayCallback(CommandArgs args)
         {
+            Client client = args.Client;
             // /away message
-            if (arg.Parameters.Length >= 1)
+            if (args.Parameters.Length >= 1)
             {
-                return new Away(String.Join(" ", arg.Parameters));
+                client.Send(new Away(String.Join(" ", args.Parameters)));
+                return;
             }
             // /away
-            if (!arg.Client.User.IsAway)
+            if (!args.Client.User.IsAway)
             {
-                return new Away("AFK");
+                client.Send(new Away("AFK"));
+                return;
             }
 
-            return new NotAway();
+            client.Send(new NotAway());
         }
 
-        private ISendMessage BackCallback(CommandArgs arg)
+        private void BackCallback(CommandArgs args)
         {
+            Client client = args.Client;
             // /back
-            return new NotAway();
+            client.Send(new NotAway());
         }
 
         private IEnumerable<Channel> GetChannels(string channels)

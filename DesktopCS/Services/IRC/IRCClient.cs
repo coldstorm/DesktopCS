@@ -159,9 +159,9 @@ namespace DesktopCS.Services.IRC
         {
             if (text.StartsWith("/", StringComparison.Ordinal))
             {
-                ISendMessage message = this._commandExecutor.Execute(this._client, this._tabManager.SelectedTab, text.Substring(1));
-                this.Send(message);
+                this._commandExecutor.Execute(this._client, this._tabManager.SelectedTab, text.Substring(1));
             }
+
             else
             {
                 this.OnInput(text);

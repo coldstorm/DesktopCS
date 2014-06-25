@@ -1,5 +1,7 @@
 ﻿using System;
-using NetIRC.Messages;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace DesktopCS.Services.Command
 {
@@ -7,11 +9,11 @@ namespace DesktopCS.Services.Command
     {
         public string[] Labels;
         public int MinParams;
-        public Func<CommandArgs, ISendMessage> Callback;
+        public Action<CommandArgs> Callback;
         public string Usage;
         public string Help;
 
-        public Command(string[] labels, Func<CommandArgs, ISendMessage> callback, string usage, string help)
+        public Command(string[] labels, Action<CommandArgs> callback, string usage, string help)
         {
             this.Labels = labels;
             this.Callback = callback;
