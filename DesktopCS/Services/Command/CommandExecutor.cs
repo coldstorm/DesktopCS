@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DesktopCS.Controls;
 using DesktopCS.Helpers;
 using DesktopCS.Helpers.Extensions;
 using DesktopCS.Helpers.Parsers;
@@ -18,13 +19,21 @@ namespace DesktopCS.Services.Command
 
         public CommandExecutor()
         {
-            this._commands.Add("JOIN", new Command(new string[] {}, this.JoinCallback, "/join [#channel[,#channel2[,...]]]", ""));
-            this._commands.Add("PART", new Command(new string[] {}, this.PartCallback, "/part [#channel[,#channel2[,...]]] [reason]", ""));
+            this._commands.Add("JOIN", new Command(new string[] { "JOIN" }, this.JoinCallback, "/join [#channel[,#channel2[,...]]]", 
+                "Joins the specified channel(s). If a channel is not specified and the current tab is an unjoined channel, it joins it. Multiple channels need to be comma-separated."));
+            this._commands.Add("PART", new Command(new string[] { "PART" }, this.PartCallback, "/part [#channel[,#channel2[,...]]] [reason]", 
+                "Parts the specified channel(s). If a channel is not specified and the current tab is a joined channel, it parts it. Multiple channels need to be comma-separated."));
 
-            this._commands.Add("QUERY", new Command(new string[] {"MSG"}, this.QueryCallback, "/msg <user> <message>", ""));
+            this._commands.Add("QUERY", new Command(new string[] { "QUERY", "MSG" }, this.QueryCallback, "/query <target> <message>", 
+                "Sends the specified message to the target (a user or a channel)."));
 
-            this._commands.Add("AWAY", new Command(new string[] {"AFK"}, this.AwayCallback, "/away [message]", ""));
-            this._commands.Add("BACK", new Command(new string[] {"BACK"}, this.BackCallback, "/back", ""));
+            this._commands.Add("AWAY", new Command(new string[] { "AWAY", "AFK" }, this.AwayCallback, "/away [message]", 
+                "Marks the user as away with an optional message. If the user is already away, it removes their away status."));
+            this._commands.Add("BACK", new Command(new string[] { "BACK", "BACK" }, this.BackCallback, "/back", 
+                "Removes the user's away status."));
+
+            this._commands.Add("HELP", new Command(new string[] { "HELP" }, this.HelpCallback, "/help [command]", 
+                "Displays help for a specified command. If a command is not specified this help text will display."));
         }
 
         public void Execute(Client client, Tab tab, string message)
@@ -151,6 +160,35 @@ namespace DesktopCS.Services.Command
             client.Send(new NotAway());
         }
 
+        private void HelpCallback(CommandArgs args)
+        {
+            Tab tab = args.Tab;
+            // /help command
+            if (args.Parameters.Length >= 1)
+            {
+                try
+                {
+                    Command command = this._commands[args.Parameters[0].ToUpperInvariant()];
+                    tab.AddHelp(String.Format("{0}: {1}", command.Labels[0], command.Usage), new ParseArgs());
+                    return;
+                }
+
+                catch (KeyNotFoundException ex)
+                {
+                    throw InvalidParameter(args.Parameters[0]);
+                }
+            }
+            // /help
+            else
+            {
+                foreach (Command command in this._commands.Values)
+                {
+                    tab.AddHelp(String.Format("{0}: {1}", command.Labels[0], command.Help), new ParseArgs());
+                }
+                return;
+            }
+        }
+
         private IEnumerable<Channel> GetChannels(string channels)
         {
             return channels.Split(',').Select(channel => new Channel(channel));
@@ -159,6 +197,11 @@ namespace DesktopCS.Services.Command
         private static CommandException InvalidUsage(Command command)
         {
             return new CommandException("Correct usage: " + command.Usage);
+        }
+
+        private static CommandException InvalidParameter(string parameter)
+        {
+            return new CommandException(String.Format("Invalid parameter: '{0}'", parameter));
         }
     }
 }

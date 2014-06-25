@@ -8,6 +8,11 @@ namespace DesktopCS.Helpers.Extensions
 {
     public static class OutputMessages
     {
+        public static void AddHelp(this Tab tab, string message, ParseArgs args)
+        {
+            tab.AddChat(new SystemMessageLine(message, args));
+        }
+
         public static void AddException(this Tab tab, CommandException ex, ParseArgs args)
         {
             tab.AddChat(new ErrorLine(ex.Message, args));
