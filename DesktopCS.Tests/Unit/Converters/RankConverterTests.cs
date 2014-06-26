@@ -18,7 +18,7 @@ namespace DesktopCS.Tests.Unit.Converters
         }
 
         [TestMethod]
-        public void NullRankConversion()
+        public void NullRankConversionTest()
         {
             NullReferenceException expectedException = null;
 
@@ -36,7 +36,7 @@ namespace DesktopCS.Tests.Unit.Converters
         }
 
         [TestMethod]
-        public void SingleRankConversion()
+        public void SingleRankConversionTest()
         {
             UserRank rank = UserRank.Voice;
 
@@ -46,7 +46,7 @@ namespace DesktopCS.Tests.Unit.Converters
         }
 
         [TestMethod]
-        public void MultipleRankConversion()
+        public void MultipleRankConversionTest()
         {
             UserRank rank = UserRank.Voice | UserRank.HalfOp;
 
