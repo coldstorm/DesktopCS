@@ -57,6 +57,14 @@ namespace DesktopCS.Models
             if (handler != null) handler(this, oldvalue);
         }
 
+        public event EventHandler<EventArgs> Part;
+
+        protected virtual void OnPart()
+        {
+            EventHandler<EventArgs> handler = this.Part;
+            if (handler != null) handler(this, EventArgs.Empty);
+        }
+
         public event EventHandler<EventArgs> Close;
 
         protected virtual void OnClose()
@@ -72,6 +80,14 @@ namespace DesktopCS.Models
             this.Header = header;
 
             this.TabItem.CloseTab += this.TabItem_CloseTab;
+            this.TabItem.PartTab += this.TabItem_PartTab;
+        }
+
+        void TabItem_PartTab(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+
+            this.OnPart();
         }
 
         void TabItem_CloseTab(object sender, RoutedEventArgs e)

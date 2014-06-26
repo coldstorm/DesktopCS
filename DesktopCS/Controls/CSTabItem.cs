@@ -13,6 +13,7 @@ namespace DesktopCS.Controls
         public static readonly DependencyProperty IsUnreadProperty = DependencyProperty.Register("IsUnread", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
         public static readonly DependencyProperty IsClosableProperty = DependencyProperty.Register("IsClosable", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
         public static readonly DependencyProperty IsConnectedProperty = DependencyProperty.Register("IsConnected", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsChannelProperty = DependencyProperty.Register("IsChannel", typeof(bool), typeof(CSTabItem), new PropertyMetadata(false));
 
         public static readonly RoutedEvent CloseTabEvent =
             EventManager.RegisterRoutedEvent("CloseTab", RoutingStrategy.Bubble,
@@ -22,6 +23,16 @@ namespace DesktopCS.Controls
         {
             add { this.AddHandler(CloseTabEvent, value); }
             remove { this.RemoveHandler(CloseTabEvent, value); }
+        }
+
+        public static readonly RoutedEvent PartTabEvent = 
+            EventManager.RegisterRoutedEvent("PartTab", RoutingStrategy.Bubble,
+                typeof(RoutedEventHandler), typeof(CSTabItem));
+
+        public event RoutedEventHandler PartTab
+        {
+            add { this.AddHandler(PartTabEvent, value); }
+            remove { this.RemoveHandler(PartTabEvent, value); }
         }
 
         [System.ComponentModel.Description("Shows or hides the close button.")]
@@ -44,6 +55,12 @@ namespace DesktopCS.Controls
             set { this.SetValue(IsConnectedProperty, value); }
         }
 
+        public bool IsChannel
+        {
+            get { return (bool)this.GetValue(IsChannelProperty); }
+            set { this.SetValue(IsChannelProperty, value); }
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -55,7 +72,16 @@ namespace DesktopCS.Controls
 
         void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            var args = new RoutedEventArgs(CloseTabEvent, this);
+            RoutedEventArgs args = null;
+            if (this.IsConnected)
+            {
+                args = new RoutedEventArgs(PartTabEvent, this);
+            }
+
+            else
+            {
+                args = new RoutedEventArgs(CloseTabEvent, this);
+            }
             this.RaiseEvent(args);
         }
 

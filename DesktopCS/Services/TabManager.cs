@@ -84,6 +84,7 @@ namespace DesktopCS.Services
             channel.HeaderChange += this.tab_HeaderChange;
             this._tabDictionary.Add(tabName.ToLower(), channel);
             this.ChannelTabs.Add(channel.TabItem);
+            channel.TabItem.IsChannel = true;
 
             return channel;
         }

@@ -47,6 +47,18 @@ namespace DesktopCS.Tests.Services
         }
 
         [TestMethod]
+        public void PartChannelTabTest()
+        {
+            ChannelTab tab = this.tabManager.AddChannel("testChannel");
+
+            Assert.IsTrue(this.tabManager.ChannelTabs.Count == 1);
+
+            tab.TabItem.RaiseEvent(new System.Windows.RoutedEventArgs(CSTabItem.PartTabEvent));
+
+            Assert.IsTrue(this.tabManager.ChannelTabs.Count == 1);
+        }
+
+        [TestMethod]
         public void CloseTabTest()
         {
             ChannelTab tab = this.tabManager.AddChannel("testChannel");

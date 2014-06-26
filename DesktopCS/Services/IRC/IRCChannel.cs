@@ -33,7 +33,7 @@ namespace DesktopCS.Services.IRC
             this._channel.OnKick += _channel_OnKick;
 
             this._channelTab = channelTab;
-            this._channelTab.Close += this._channelTab_Close;
+            this._channelTab.Part += this._channelTab_Part;
             this._channelTab.AddJoin(this.GetArgs());
             this._channelTab.Header = this._channel.FullName; // Correct casing
         }
@@ -48,10 +48,9 @@ namespace DesktopCS.Services.IRC
 
         #region Event Handlers
 
-        private void _channelTab_Close(object sender, EventArgs e)
+        private void _channelTab_Part(object sender, EventArgs e)
         {
             this._ircClient.Send(this._channel.Part());
-            this.Dispose();
         }
 
         private void _ircClient_ChannelLeave(object sender, Channel channel)
@@ -204,7 +203,7 @@ namespace DesktopCS.Services.IRC
 
             this._ircClient.ChannelLeave -= this._ircClient_ChannelLeave;
 
-            this._channelTab.Close -= this._channelTab_Close;
+            this._channelTab.Close -= this._channelTab_Part;
 
             this._channel.OnMessage -= this._channel_OnMessage;
             this._channel.OnJoin -= this._channel_OnJoin;
