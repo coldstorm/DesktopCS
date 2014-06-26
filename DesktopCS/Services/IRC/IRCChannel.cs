@@ -30,7 +30,7 @@ namespace DesktopCS.Services.IRC
             this._channel.OnTopicChange += this._channel_OnTopicChange;
             this._channel.OnWho += this._channel_OnWho;
             this._channel.OnMode += this._channel_OnMode;
-            this._channel.OnKick += _channel_OnKick;
+            this._channel.OnKick += this._channel_OnKick;
 
             this._channelTab = channelTab;
             this._channelTab.Part += this._channelTab_Part;
@@ -203,14 +203,18 @@ namespace DesktopCS.Services.IRC
 
             this._ircClient.ChannelLeave -= this._ircClient_ChannelLeave;
 
-            this._channelTab.Close -= this._channelTab_Part;
+            this._channelTab.Part -= this._channelTab_Part;
 
+            this._channel.OnAction -= this._channel_OnAction;
             this._channel.OnMessage -= this._channel_OnMessage;
             this._channel.OnJoin -= this._channel_OnJoin;
             this._channel.OnLeave -= this._channel_OnLeave;
             this._channel.OnNames -= this._channel_OnNames;
+            this._channel.OnTopic -= this._channel_OnTopic;
             this._channel.OnTopicChange -= this._channel_OnTopicChange;
             this._channel.OnWho -= this._channel_OnWho;
+            this._channel.OnMode -= this._channel_OnMode;
+            this._channel.OnKick -= this._channel_OnKick;
         }
 
         #endregion
