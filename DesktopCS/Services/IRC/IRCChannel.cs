@@ -31,6 +31,7 @@ namespace DesktopCS.Services.IRC
             this._channel.OnWho += this._channel_OnWho;
             this._channel.OnMode += this._channel_OnMode;
             this._channel.OnKick += this._channel_OnKick;
+            this._channel.OnChannelOperatorNeeded += this._channel_OnChannelOperatorNeeded;
 
             this._channelTab = channelTab;
             this._channelTab.Part += this._channelTab_Part;
@@ -191,6 +192,14 @@ namespace DesktopCS.Services.IRC
         {
             if (user.IsAway)
                 this._ircClient.Send(new Whois(user));
+        }
+
+        private void _channel_OnChannelOperatorNeeded(Channel source, string reason)
+        {
+            this.Run(() =>
+            {
+                this._channelTab.AddSystemErrorChat(reason, this.GetArgs());
+            });
         }
 
         #endregion
