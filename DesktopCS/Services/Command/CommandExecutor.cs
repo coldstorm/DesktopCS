@@ -32,6 +32,9 @@ namespace DesktopCS.Services.Command
             this._commands.Add("BACK", new Command(new string[] { "BACK", "BACK" }, this.BackCallback, "/back", 
                 "Removes the user's away status."));
 
+            this._commands.Add("KICK", new Command(new string[] { "KICK" }, this.KickCallback, "/kick <user> [message]",
+                "Kicks the specified user from the currently selected channel with an optional message."));
+
             this._commands.Add("HELP", new Command(new string[] { "HELP" }, this.HelpCallback, "/help [command]", 
                 "Displays help for a specified command. If a command is not specified this help text will display."));
         }
@@ -109,6 +112,9 @@ namespace DesktopCS.Services.Command
                 return;
             }
 
+            else
+                throw InvalidContext(args.FullCommand, args.Tab.Header);
+
             throw InvalidUsage(args.FullCommand);
         }
 
@@ -160,6 +166,38 @@ namespace DesktopCS.Services.Command
             client.Send(new NotAway());
         }
 
+        private void KickCallback(CommandArgs args)
+        {
+            Client client = args.Client;
+            Tab tab = args.Tab;
+            // /kick user message
+            if (args.Parameters.Length >= 2)
+            {
+                if (NetIRCHelper.IsChannel(tab.Header))
+                {
+                    client.Send(new Kick(tab.Header, args.Parameters[0], String.Join(" ", args.Parameters.Skip(1))));
+                    return;
+                }
+
+                else
+                    throw InvalidContext(args.FullCommand, tab.Header);
+            }
+            // /kick user
+            else if (args.Parameters.Length == 1)
+            {
+                if (NetIRCHelper.IsChannel(tab.Header))
+                {
+                    client.Send(new Kick(tab.Header, args.Parameters[0]));
+                    return;
+                }
+
+                else
+                    throw InvalidContext(args.FullCommand, tab.Header);
+            }
+
+            throw InvalidUsage(args.FullCommand);
+        }
+
         private void HelpCallback(CommandArgs args)
         {
             Tab tab = args.Tab;
@@ -173,7 +211,7 @@ namespace DesktopCS.Services.Command
                     return;
                 }
 
-                catch (KeyNotFoundException ex)
+                catch (KeyNotFoundException)
                 {
                     throw InvalidParameter(args.Parameters[0]);
                 }
@@ -202,6 +240,11 @@ namespace DesktopCS.Services.Command
         private static CommandException InvalidParameter(string parameter)
         {
             return new CommandException(String.Format("Invalid parameter: '{0}'", parameter));
+        }
+
+        private static CommandException InvalidContext(string command, string context)
+        {
+            return new CommandException(String.Format("Invalid context: cannot call command '{0}' from '{1}'.", command, context));
         }
     }
 }
