@@ -47,7 +47,7 @@ namespace DesktopCS.Services.Command
                 {
                     try
                     {
-                        entry.Value.Callback(new CommandArgs(client, tab, parsedMessage.Parameters));
+                        entry.Value.Callback(new CommandArgs(parsedMessage.Message, client, tab, parsedMessage.Parameters));
                         return;
                     }
                     catch (CommandException ex)
@@ -79,7 +79,7 @@ namespace DesktopCS.Services.Command
                 return;
             }
 
-            throw InvalidUsage(this._commands["JOIN"]);
+            throw InvalidUsage(args.FullCommand);
         }
 
         private void PartCallback(CommandArgs args)
@@ -109,7 +109,7 @@ namespace DesktopCS.Services.Command
                 return;
             }
 
-            throw InvalidUsage(this._commands["PART"]);
+            throw InvalidUsage(args.FullCommand);
         }
 
         private void QueryCallback(CommandArgs args)
@@ -131,7 +131,7 @@ namespace DesktopCS.Services.Command
                 return;
             }
 
-            throw InvalidUsage(this._commands["QUERY"]);
+            throw InvalidUsage(args.FullCommand);
         }
 
         private void AwayCallback(CommandArgs args)
@@ -194,9 +194,9 @@ namespace DesktopCS.Services.Command
             return channels.Split(',').Select(channel => new Channel(channel));
         }
 
-        private static CommandException InvalidUsage(Command command)
+        private static CommandException InvalidUsage(string usage)
         {
-            return new CommandException("Correct usage: " + command.Usage);
+            return new CommandException("Invalid usage: " + usage);
         }
 
         private static CommandException InvalidParameter(string parameter)
