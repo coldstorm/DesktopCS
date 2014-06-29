@@ -34,6 +34,8 @@ namespace DesktopCS.Services.Command
 
             this._commands.Add("KICK", new Command(new string[] { "KICK" }, this.KickCallback, "/kick <user> [message]",
                 "Kicks the specified user from the currently selected channel with an optional message."));
+            this._commands.Add("BAN", new Command(new string[] { "BAN" }, this.BanCallback, "/ban <user>",
+                "Bans the specified user by his hostname."));
 
             this._commands.Add("HELP", new Command(new string[] { "HELP" }, this.HelpCallback, "/help [command]", 
                 "Displays help for a specified command. If a command is not specified this help text will display."));
@@ -53,6 +55,7 @@ namespace DesktopCS.Services.Command
                         entry.Value.Callback(new CommandArgs(parsedMessage.Message, client, tab, parsedMessage.Parameters));
                         return;
                     }
+
                     catch (CommandException ex)
                     {
                         tab.AddException(ex, new ParseArgs());
@@ -198,6 +201,32 @@ namespace DesktopCS.Services.Command
             throw InvalidUsage(args.FullCommand);
         }
 
+        private void BanCallback(CommandArgs args)
+        {
+            Client client = args.Client;
+            Tab tab = args.Tab;
+            ChannelTab channelTab = tab as ChannelTab;
+
+            if (args.Parameters.Length < 1)
+            {
+                throw InvalidUsage(args.FullCommand);
+            }
+
+            if (channelTab == null)
+            {
+                throw InvalidContext(args.FullCommand, tab.Header);
+            }
+
+            UserItem userItem = channelTab.Users.FirstOrDefault(e => { return e.NickName.ToLowerInvariant() == args.Parameters[0].ToLowerInvariant(); });
+
+            if (userItem == null)
+            {
+                throw InvalidParameter(args.Parameters[0]);
+            }
+
+            client.Send(new ChannelMode(tab.Header, "+b", "*!*@" + userItem.User.HostName));
+        }
+
         private void HelpCallback(CommandArgs args)
         {
             Tab tab = args.Tab;
@@ -244,7 +273,7 @@ namespace DesktopCS.Services.Command
 
         private static CommandException InvalidContext(string command, string context)
         {
-            return new CommandException(String.Format("Invalid context: cannot call command '{0}' from '{1}'.", command, context));
+            return new CommandException(String.Format("Invalid context: cannot call command '{0}' from the tab '{1}'.", command, context));
         }
     }
 }
