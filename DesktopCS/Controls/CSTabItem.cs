@@ -73,7 +73,7 @@ namespace DesktopCS.Controls
         void closeButton_Click(object sender, RoutedEventArgs e)
         {
             RoutedEventArgs args = null;
-            if (this.IsConnected)
+            if (this.IsChannel && this.IsConnected)
             {
                 args = new RoutedEventArgs(PartTabEvent, this);
             }
