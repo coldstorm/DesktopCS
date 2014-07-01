@@ -11,10 +11,12 @@ using NetIRC.IRCv3;
 using NetIRC.Messages;
 using NetIRC.Messages.Send;
 using NetIRC.Messages.Send.IRCv3;
+using NetIRC.Messages.Send.CTCP;
+using System.Windows;
 
 namespace DesktopCS.Services.IRC
 {
-    // Handles Connecting and reconnecting to the IRC network and managing other IRC classes
+    // Handles connecting and reconnecting to the IRC network and managing other IRC classes
     public class IRCClient : UIInvoker
     {
         private const string PasswordService = "NickServ";
@@ -102,6 +104,7 @@ namespace DesktopCS.Services.IRC
             {
                 ChannelTab tab = this._tabManager.AddChannel(tabName);
                 new IRCChannel(this, tab, channel);
+                tab.TabItem.IsConnected = true;
             }
         }
 
@@ -133,6 +136,7 @@ namespace DesktopCS.Services.IRC
             client.OnChannelLeave += this._client_OnChannelLeave;
             client.OnMessage += this._client_OnMessage;
             client.OnAction += this._client_OnAction;
+            client.OnVersion += this._client_OnVersion;
             client.OnConnect += this.client_OnConnect;
             client.OnSend += this.client_OnSend;
             client.OnDisconnect += this.client_OnDisconnect;
@@ -147,7 +151,7 @@ namespace DesktopCS.Services.IRC
             this._client = this.CreateClient();
 
             var cc = CountryCodeHelper.GetCC();
-            var user = new User(this._loginData.Username, IdentHelper.Generate(this._loginData.Color, cc));
+            var user = new User(this._loginData.Username, IdentHelper.Generate(this._loginData.Color, cc), "Desktop Coldstormer");
             this._client.Connect("irc.frogbox.es", 6667, false, user);
         }
 
@@ -155,9 +159,9 @@ namespace DesktopCS.Services.IRC
         {
             if (text.StartsWith("/", StringComparison.Ordinal))
             {
-                ISendMessage message = this._commandExecutor.Execute(this._client, this._tabManager.SelectedTab, text.Substring(1));
-                this.Send(message);
+                this._commandExecutor.Execute(this._client, this._tabManager.SelectedTab, text.Substring(1));
             }
+
             else
             {
                 this.OnInput(text);
@@ -256,6 +260,16 @@ namespace DesktopCS.Services.IRC
             if (handler != null) handler(this, user, message);
         }
 
+        public delegate void VersionHandler(object sender, User user);
+
+        public event VersionHandler Version;
+
+        protected virtual void OnVersion(User user)
+        {
+            VersionHandler handler = this.Version;
+            if (handler != null) handler(this, user);
+        }
+
         public static event TextEventHandler ReceiveText;
 
         public static void OnReceiveText(object sender, string text)
@@ -319,6 +333,16 @@ namespace DesktopCS.Services.IRC
             });
         }
 
+        private void _client_OnVersion(Client client, User source)
+        {
+            this.Run(() =>
+            {
+                string versionString = String.Format("Coldstorm Desktop Client ({0})", VersionHelper.GetPublishedVersion());
+                this.Send(new VersionReply(source, versionString));
+                this.OnVersion(source);
+            });
+        }
+
         private void _client_OnChannelJoin(Client client, Channel channel)
         {
             this.Run(() =>
@@ -334,7 +358,12 @@ namespace DesktopCS.Services.IRC
 
         private void _client_OnChannelLeave(Client client, Channel channel)
         {
-            this.Run(() => this.OnChannelLeave(channel));
+            this.Run(() =>
+            {
+                ChannelTab tab = this._tabManager.AddChannel(channel.FullName);
+                this.OnChannelLeave(channel);
+                tab.TabItem.IsConnected = false;
+            });
         }
 
         private void client_OnSend(Client client, SendMessageEventArgs e)

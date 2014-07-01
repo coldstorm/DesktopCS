@@ -67,6 +67,7 @@ namespace DesktopCS.Services
             var server = (ServerTab)this.CreateTab((f, t) => new ServerTab(tabName, f, t));
             this._tabDictionary.Add(tabName.ToLower(), server);
             this.ServerTabs.Add(server.TabItem);
+            server.TabItem.IsConnected = true;
 
             return server;
         }
@@ -83,6 +84,7 @@ namespace DesktopCS.Services
             channel.HeaderChange += this.tab_HeaderChange;
             this._tabDictionary.Add(tabName.ToLower(), channel);
             this.ChannelTabs.Add(channel.TabItem);
+            channel.TabItem.IsChannel = true;
 
             return channel;
         }
@@ -99,6 +101,7 @@ namespace DesktopCS.Services
             user.HeaderChange += this.tab_HeaderChange;
             this._tabDictionary.Add(tabName.ToLower(), user);
             this.UserTabs.Add(user.TabItem);
+            user.TabItem.IsConnected = true;
 
             return user;
         }

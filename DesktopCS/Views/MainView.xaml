@@ -122,7 +122,7 @@
                         <ListBox behaviors:ListBoxSelectionBehavior.ClickSelection="True">
                             <ListBox.ItemTemplate>
                                 <DataTemplate DataType="{x:Type models:UserItem}">
-                                    <controls:UserlistItem Flag="{Binding Metadata.CountryCode, Converter={StaticResource FlagToImageConverter}}">
+                                    <controls:UserlistItem Flag="{Binding Metadata.CountryCode, Converter={StaticResource FlagToImageConverter}}" ToolTip="{Binding Metadata.CountryName}">
                                         <controls:UserlistItem.Header>
                                             <TextBlock TextTrimming="CharacterEllipsis" Foreground="{StaticResource ChatBrush}">
                                                 <Span ToolTip="{Binding NickName}" Foreground="{Binding Metadata.Color, Converter={StaticResource BrushColorConverter}}">

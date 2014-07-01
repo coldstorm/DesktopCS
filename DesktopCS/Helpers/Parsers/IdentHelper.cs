@@ -15,10 +15,11 @@ namespace DesktopCS.Helpers.Parsers
             {
                 var color = ColorHelper.FromHexWithoutHash(match.Groups[1].Value);
                 var flag = match.Groups[2].Value;
-                return new UserMetadata(color, flag);
+                var countryName = CountryNameHelper.GetCountryNameFromCC(flag);
+                return new UserMetadata(color, flag, countryName);
             }
 
-            return new UserMetadata(ColorHelper.ChatColor, null);
+            return new UserMetadata(ColorHelper.ChatColor, null, null);
         }
 
         public static string Generate(Color color, string cc)

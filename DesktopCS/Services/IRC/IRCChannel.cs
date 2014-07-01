@@ -30,10 +30,11 @@ namespace DesktopCS.Services.IRC
             this._channel.OnTopicChange += this._channel_OnTopicChange;
             this._channel.OnWho += this._channel_OnWho;
             this._channel.OnMode += this._channel_OnMode;
-            this._channel.OnKick += _channel_OnKick;
+            this._channel.OnKick += this._channel_OnKick;
+            this._channel.OnChannelOperatorNeeded += this._channel_OnChannelOperatorNeeded;
 
             this._channelTab = channelTab;
-            this._channelTab.Close += this._channelTab_Close;
+            this._channelTab.Part += this._channelTab_Part;
             this._channelTab.AddJoin(this.GetArgs());
             this._channelTab.Header = this._channel.FullName; // Correct casing
         }
@@ -48,10 +49,9 @@ namespace DesktopCS.Services.IRC
 
         #region Event Handlers
 
-        private void _channelTab_Close(object sender, EventArgs e)
+        private void _channelTab_Part(object sender, EventArgs e)
         {
             this._ircClient.Send(this._channel.Part());
-            this.Dispose();
         }
 
         private void _ircClient_ChannelLeave(object sender, Channel channel)
@@ -194,6 +194,14 @@ namespace DesktopCS.Services.IRC
                 this._ircClient.Send(new Whois(user));
         }
 
+        private void _channel_OnChannelOperatorNeeded(Channel source, string reason)
+        {
+            this.Run(() =>
+            {
+                this._channelTab.AddSystemErrorChat(reason, this.GetArgs());
+            });
+        }
+
         #endregion
 
         #region IDisposable Members
@@ -204,14 +212,18 @@ namespace DesktopCS.Services.IRC
 
             this._ircClient.ChannelLeave -= this._ircClient_ChannelLeave;
 
-            this._channelTab.Close -= this._channelTab_Close;
+            this._channelTab.Part -= this._channelTab_Part;
 
+            this._channel.OnAction -= this._channel_OnAction;
             this._channel.OnMessage -= this._channel_OnMessage;
             this._channel.OnJoin -= this._channel_OnJoin;
             this._channel.OnLeave -= this._channel_OnLeave;
             this._channel.OnNames -= this._channel_OnNames;
+            this._channel.OnTopic -= this._channel_OnTopic;
             this._channel.OnTopicChange -= this._channel_OnTopicChange;
             this._channel.OnWho -= this._channel_OnWho;
+            this._channel.OnMode -= this._channel_OnMode;
+            this._channel.OnKick -= this._channel_OnKick;
         }
 
         #endregion

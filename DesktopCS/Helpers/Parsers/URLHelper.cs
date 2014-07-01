@@ -22,6 +22,7 @@ namespace DesktopCS.Helpers.Parsers
                         Foreground = new SolidColorBrush(ColorHelper.HyperlinkColor),
                         TextDecorations = null
                     };
+
                     link.Click += OnUrlClick;
 
                     return link;
