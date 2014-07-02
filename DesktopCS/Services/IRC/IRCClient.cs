@@ -13,6 +13,7 @@ using NetIRC.Messages.Send;
 using NetIRC.Messages.Send.IRCv3;
 using NetIRC.Messages.Send.CTCP;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace DesktopCS.Services.IRC
 {
@@ -105,6 +106,8 @@ namespace DesktopCS.Services.IRC
                 ChannelTab tab = this._tabManager.AddChannel(tabName);
                 new IRCChannel(this, tab, channel);
                 tab.TabItem.IsConnected = true;
+                updateChannelList();
+                tab.Close += (object sender, EventArgs e) => updateChannelList(); //Update saved channel list on exit
             }
         }
 
@@ -304,8 +307,13 @@ namespace DesktopCS.Services.IRC
 #if DEBUG
                 this.Send(new Join("#test"));
 #else
-                this.Send(new Join("#Coldstorm"));
-                this.Send(new Join("#2"));
+                //Split channel names and join them all
+                string[] channelNames = this._loginData.Channels.Split(',');
+
+                for (var i = 0; i < channelNames.Length; i++)
+                {
+                    this.Send(new Join(channelNames[i]));
+                }
 #endif
             });
         }
@@ -384,6 +392,22 @@ namespace DesktopCS.Services.IRC
             this.Send(new Whois(user));
         }
 
+        private void updateChannelList()
+        {
+            //Update the channel list to save when logging out
+            LoginData loginData = SettingsManager.Value.GetLoginData();
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            int i = 0;
+            foreach (KeyValuePair<string, Channel> kv in _client.Channels)
+            {
+                sb.Append(kv.Key);
+                if (i < _client.Channels.Count - 1) //Don't add comma to last channel
+                    sb.Append(',');
+                i++;
+            }
+            loginData.Channels = sb.ToString();
+            SettingsManager.Value.SetLoginData(loginData);
+        }
         #endregion
     }
 }

@@ -32,6 +32,18 @@ namespace DesktopCS.Models
             }
         }
 
+        private string _channels;
+
+        public string Channels
+        {
+            get { return this._channels; }
+            set
+            {
+                this._channels = value;
+                this.OnPropertyChanged("Channels");
+            }
+        }
+
         private Color _color;
 
         public Color Color
@@ -44,11 +56,12 @@ namespace DesktopCS.Models
             }
         }
 
-        public LoginData(string username, string password, Color color)
+        public LoginData(string username, string password, string channels, Color color)
         {
             this._username = username;
             this._password = password;
             this._color = color;
+            this._channels = channels;
         }
 
         #region IDataErrorInfo Members
@@ -82,6 +95,8 @@ namespace DesktopCS.Models
             {
                 case "Username":
                     return this.ValidateUsername();
+                case "Channels":
+                    return this.ValidateChannels();
             }
             return null;
         }
@@ -89,12 +104,31 @@ namespace DesktopCS.Models
         private string ValidateUsername()
         {
             var regex = new Regex(@"^[a-z_\-\[\]\\^{}|`][a-z0-9_\-\[\]\\^{}|`]{0,30}$", RegexOptions.IgnoreCase);
-            if (this.Username == null || !regex.IsMatch(this.Username)) 
+            if (string.IsNullOrEmpty(this.Username) || !regex.IsMatch(this.Username)) 
                return "Invalid Username.";
 
             return null;
         }
 
+        private string ValidateChannels()
+        {
+            var regex = new Regex(@"^([#&][a-zA-Z0-9]{1,25})$", RegexOptions.IgnoreCase);
+            if (!string.IsNullOrEmpty(this.Channels))
+            {
+                string[] channelNames = this.Channels.Split(',');
+
+                //Check to make sure each channel is valid
+                for (var i = 0; i < channelNames.Length; i++)
+                {
+                    if (!regex.IsMatch(channelNames[i]))
+                        return "Invalid Channel Name. Try #Coldstorm.";
+                }
+            }
+            else
+                return "No Channel Selected.";
+
+            return null;
+        }
         #endregion
     }
 }

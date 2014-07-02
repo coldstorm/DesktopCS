@@ -42,6 +42,9 @@ namespace DesktopCS.Views
                 windowGeometry = new WindowGeometry(this.Top, this.Left, this.Height, this.Width, false);
 
             SettingsManager.Value.SetWindowGeometry(windowGeometry);
+
+            //Save settings, specifically channels, when logging out
+            SettingsManager.Value.Save(); 
         }
     }
 }

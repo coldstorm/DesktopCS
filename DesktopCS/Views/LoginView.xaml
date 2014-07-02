@@ -27,7 +27,7 @@
 
         <StackPanel>
             <TextBlock Margin="0,10" FontSize="20" FontWeight="Bold"  HorizontalAlignment="Center" Text="DesktopCS" />
-            
+
             <StackPanel Margin="0,10">
                 <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Username" />
                 <TextBox Style="{StaticResource InputTextBox}" MaxLength="30" Text="{Binding LoginData.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
@@ -36,6 +36,10 @@
             <StackPanel Margin="0,10">
                 <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Password" />
                 <PasswordBox behaviors:PasswordBoxAssistant.BindPassword="True" behaviors:PasswordBoxAssistant.BoundPassword="{Binding LoginData.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Margin="0,10">
+                <TextBlock Margin="0,0,0,5" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" Text="Channels" />
+                <TextBox Style="{StaticResource InputTextBox}" MaxLength="30" Text="{Binding LoginData.Channels, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             </StackPanel>
 
             <StackPanel Margin="0,10">
@@ -46,7 +50,7 @@
                             UsingAlphaChannel="False" 
                             SelectedColor="{Binding LoginData.Color}" />
                     </xctk:DropDownButton.DropDownContent>
-                    
+
                     <Label Background="{Binding LoginData.Color, Converter={StaticResource BrushColorConverter}}" />
                 </xctk:DropDownButton>
             </StackPanel>
@@ -54,12 +58,20 @@
             <Button Margin="0,15" Width="150" FontSize="14" Content="Login" Command="{Binding LoginCommand}" />
 
             <Border Style="{StaticResource ContentBorder}">
-                <TextBlock Padding="4">
-                    <Run x:Name="Time" Foreground="{StaticResource TimeBrush}" />
-                    <Run Foreground="{Binding LoginData.Color, Converter={StaticResource BrushColorConverter}, TargetNullValue='#FFFFFFFF', FallbackValue='#FFFFFFFF'}" 
-                         Text="{Binding LoginData.Username, Converter={StaticResource PlaceholderConverter}, ConverterParameter='Username'}" />
-                    I love this color!
-                </TextBlock>
+                <TextBlock Padding="4"><Run x:Name="Time" Foreground="#FF373F4E"/><Run Text=" "/><Run>
+                		<Run.Foreground>
+                			<Binding FallbackValue="#FFFFFFFF" Path="LoginData.Color" TargetNullValue="#FFFFFFFF">
+                				<Binding.Converter>
+                					<converters:BrushColorConverter/>
+                				</Binding.Converter>
+                			</Binding>
+                		</Run.Foreground>
+                		<Binding ConverterParameter="Username" Path="LoginData.Username">
+                			<Binding.Converter>
+                				<converters:PlaceholderConverter/>
+                			</Binding.Converter>
+                		</Binding>
+                	</Run><Run Text=" I love this color!"/></TextBlock>
             </Border>
         </StackPanel>
     </Border>

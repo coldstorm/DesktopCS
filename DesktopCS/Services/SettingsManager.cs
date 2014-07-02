@@ -30,11 +30,13 @@ namespace DesktopCS.Services
         {
             string username = null;
             string password = null;
+            string channels = null;
             Color color = ColorHelper.ChatColor;
 
             try
             {
                 username = this._settings.Username;
+                channels = this._settings.Channels;
 
                 if (!String.IsNullOrWhiteSpace(this._settings.Password))
                     password = this._settings.Password.DecryptString().ToInsecureString();
@@ -47,13 +49,14 @@ namespace DesktopCS.Services
                 Debug.WriteLine("Failed to load settings: " + ex);
             }
 
-            return new LoginData(username, password, color);
+            return new LoginData(username, password, channels, color);
         }
 
         public void SetLoginData(LoginData loginData)
         {
             this._settings.Username = loginData.Username;
             this._settings.Password = loginData.Password.ToSecureString().EncryptString();
+            this._settings.Channels = loginData.Channels;
             this._settings.Color = loginData.Color.ToString();
         }
 
