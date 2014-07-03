@@ -37,6 +37,9 @@ namespace DesktopCS.Services.Command
             this._commands.Add("BAN", new Command(new string[] { "BAN" }, this.BanCallback, "/ban <user>",
                 "Bans the specified user by his hostname."));
 
+            this._commands.Add("TOPIC", new Command(new string[] { "TOPIC" }, this.TopicCallback, "/topic <topic>",
+                "Sets the given text as the channel's topic."));
+
             this._commands.Add("HELP", new Command(new string[] { "HELP" }, this.HelpCallback, "/help [command]", 
                 "Displays help for a specified command. If a command is not specified this help text will display."));
         }
@@ -224,7 +227,28 @@ namespace DesktopCS.Services.Command
                 throw InvalidParameter(args.Parameters[0]);
             }
 
+            // /ban user
             client.Send(new ChannelMode(tab.Header, "+b", "*!*@" + userItem.User.HostName));
+        }
+
+        private void TopicCallback(CommandArgs args)
+        {
+            Client client = args.Client;
+            Tab tab = args.Tab;
+            ChannelTab channelTab = tab as ChannelTab;
+
+            if (channelTab == null)
+            {
+                throw InvalidContext(args.FullCommand, tab.Header);
+            }
+
+            if (args.Parameters.Length < 1)
+            {
+                throw InvalidUsage(args.FullCommand);
+            }
+
+            // /topic message
+            client.Send(new NetIRC.Messages.Send.Topic(tab.Header, String.Join(" ", args.Parameters)));
         }
 
         private void HelpCallback(CommandArgs args)
