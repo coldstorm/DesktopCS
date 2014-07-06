@@ -121,7 +121,7 @@ namespace DesktopCS.Models
                 for (var i = 0; i < channelNames.Length; i++)
                 {
                     if (!regex.IsMatch(channelNames[i]))
-                        return "Invalid Channel Name. Try #Coldstorm.";
+                        return "Invalid Channel Name.";
                 }
             }
             else

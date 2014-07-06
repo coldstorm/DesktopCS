@@ -43,8 +43,7 @@ namespace DesktopCS.Views
 
             SettingsManager.Value.SetWindowGeometry(windowGeometry);
 
-            //Save settings, specifically channels, when logging out
-            SettingsManager.Value.Save(); 
+            (this.DataContext as MainViewModel).SaveChannels();
         }
     }
 }

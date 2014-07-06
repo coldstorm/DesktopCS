@@ -106,8 +106,6 @@ namespace DesktopCS.Services.IRC
                 ChannelTab tab = this._tabManager.AddChannel(tabName);
                 new IRCChannel(this, tab, channel);
                 tab.TabItem.IsConnected = true;
-                updateChannelList();
-                tab.Close += (object sender, EventArgs e) => updateChannelList(); //Update saved channel list on exit
             }
         }
 
@@ -140,9 +138,9 @@ namespace DesktopCS.Services.IRC
             client.OnMessage += this._client_OnMessage;
             client.OnAction += this._client_OnAction;
             client.OnVersion += this._client_OnVersion;
-            client.OnConnect += this.client_OnConnect;
-            client.OnSend += this.client_OnSend;
-            client.OnDisconnect += this.client_OnDisconnect;
+            client.OnConnect += this._client_OnConnect;
+            client.OnSend += this._client_OnSend;
+            client.OnDisconnect += this._client_OnDisconnect;
 
             this.AddServer(client);
 
@@ -281,11 +279,21 @@ namespace DesktopCS.Services.IRC
             if (eventHandler != null) eventHandler(sender, text);
         }
 
+        public delegate void DisconnectEventHandler(object sender, Client client);
+
+        public event DisconnectEventHandler Disconnect;
+
+        protected virtual void OnDisconnect(Client client)
+        {
+            DisconnectEventHandler handler = this.Disconnect;
+            if (handler != null) handler(this, client);
+        }
+
         #endregion
 
         #region Event Handlers
 
-        private void client_OnConnect(Client client)
+        private void _client_OnConnect(Client client)
         {
             this.Run(() =>
             {
@@ -318,9 +326,13 @@ namespace DesktopCS.Services.IRC
             });
         }
 
-        private void client_OnDisconnect(Client client)
+        private void _client_OnDisconnect(Client client)
         {
-            this.Run(this.Connect);
+            this.Run(() =>
+            {
+                this.OnDisconnect(client);
+                this.Connect();
+            });
         }
 
         private void _client_OnMessage(Client client, User source, string message)
@@ -374,7 +386,7 @@ namespace DesktopCS.Services.IRC
             });
         }
 
-        private void client_OnSend(Client client, SendMessageEventArgs e)
+        private void _client_OnSend(Client client, SendMessageEventArgs e)
         {
             this.Run(() =>
             {
@@ -390,23 +402,6 @@ namespace DesktopCS.Services.IRC
         private void User_OnIsAwayChange(User user)
         {
             this.Send(new Whois(user));
-        }
-
-        private void updateChannelList()
-        {
-            //Update the channel list to save when logging out
-            LoginData loginData = SettingsManager.Value.GetLoginData();
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            int i = 0;
-            foreach (KeyValuePair<string, Channel> kv in _client.Channels)
-            {
-                sb.Append(kv.Key);
-                if (i < _client.Channels.Count - 1) //Don't add comma to last channel
-                    sb.Append(',');
-                i++;
-            }
-            loginData.Channels = sb.ToString();
-            SettingsManager.Value.SetLoginData(loginData);
         }
         #endregion
     }

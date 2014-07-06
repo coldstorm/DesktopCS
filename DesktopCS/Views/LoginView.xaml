@@ -50,7 +50,6 @@
                             UsingAlphaChannel="False" 
                             SelectedColor="{Binding LoginData.Color}" />
                     </xctk:DropDownButton.DropDownContent>
-
                     <Label Background="{Binding LoginData.Color, Converter={StaticResource BrushColorConverter}}" />
                 </xctk:DropDownButton>
             </StackPanel>
@@ -58,7 +57,10 @@
             <Button Margin="0,15" Width="150" FontSize="14" Content="Login" Command="{Binding LoginCommand}" />
 
             <Border Style="{StaticResource ContentBorder}">
-                <TextBlock Padding="4"><Run x:Name="Time" Foreground="#FF373F4E"/><Run Text=" "/><Run>
+                <TextBlock Padding="4">
+                    <Run x:Name="Time" Foreground="#FF373F4E"/>
+                        <Run Text=" "/>
+                    <Run>
                 		<Run.Foreground>
                 			<Binding FallbackValue="#FFFFFFFF" Path="LoginData.Color" TargetNullValue="#FFFFFFFF">
                 				<Binding.Converter>
@@ -71,7 +73,9 @@
                 				<converters:PlaceholderConverter/>
                 			</Binding.Converter>
                 		</Binding>
-                	</Run><Run Text=" I love this color!"/></TextBlock>
+                	</Run>
+                    <Run Text=" I love this color!"/>
+                </TextBlock>
             </Border>
         </StackPanel>
     </Border>
