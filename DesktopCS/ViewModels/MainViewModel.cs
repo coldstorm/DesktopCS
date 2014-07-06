@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using DesktopCS.Controls;
 using DesktopCS.Helpers.Parsers;
@@ -8,6 +10,7 @@ using DesktopCS.MVVM;
 using DesktopCS.Services;
 using DesktopCS.Services.IRC;
 using DesktopCS.Views;
+using NetIRC;
 
 namespace DesktopCS.ViewModels
 {
@@ -145,6 +148,25 @@ namespace DesktopCS.ViewModels
         public void ShowSettings()
         {
             bool? showDialog = new SettingsView().ShowDialog();
+        }
+
+        public void SaveChannels()
+        {
+            //Update the channel list to save when logging out
+            LoginData loginData = SettingsManager.Value.GetLoginData();
+            string channels = string.Empty;
+
+            for (int i = 0; i < this._irc.User.Channels.Count; i++)
+            {
+                string channelName = this._irc.User.Channels.Keys.ElementAt(i);
+
+                channels += "#" + channelName;
+                if (i < this._irc.User.Channels.Count - 1) //Don't add comma to last channel
+                    channels += ",";
+            }
+
+            loginData.Channels = channels;
+            SettingsManager.Value.SetLoginData(loginData);
         }
     }
 }

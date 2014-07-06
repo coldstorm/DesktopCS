@@ -42,6 +42,8 @@ namespace DesktopCS.Views
                 windowGeometry = new WindowGeometry(this.Top, this.Left, this.Height, this.Width, false);
 
             SettingsManager.Value.SetWindowGeometry(windowGeometry);
+
+            (this.DataContext as MainViewModel).SaveChannels();
         }
     }
 }

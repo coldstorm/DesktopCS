@@ -13,6 +13,7 @@ using NetIRC.Messages.Send;
 using NetIRC.Messages.Send.IRCv3;
 using NetIRC.Messages.Send.CTCP;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace DesktopCS.Services.IRC
 {
@@ -137,9 +138,9 @@ namespace DesktopCS.Services.IRC
             client.OnMessage += this._client_OnMessage;
             client.OnAction += this._client_OnAction;
             client.OnVersion += this._client_OnVersion;
-            client.OnConnect += this.client_OnConnect;
-            client.OnSend += this.client_OnSend;
-            client.OnDisconnect += this.client_OnDisconnect;
+            client.OnConnect += this._client_OnConnect;
+            client.OnSend += this._client_OnSend;
+            client.OnDisconnect += this._client_OnDisconnect;
 
             this.AddServer(client);
 
@@ -278,11 +279,21 @@ namespace DesktopCS.Services.IRC
             if (eventHandler != null) eventHandler(sender, text);
         }
 
+        public delegate void DisconnectEventHandler(object sender, Client client);
+
+        public event DisconnectEventHandler Disconnect;
+
+        protected virtual void OnDisconnect(Client client)
+        {
+            DisconnectEventHandler handler = this.Disconnect;
+            if (handler != null) handler(this, client);
+        }
+
         #endregion
 
         #region Event Handlers
 
-        private void client_OnConnect(Client client)
+        private void _client_OnConnect(Client client)
         {
             this.Run(() =>
             {
@@ -304,15 +315,24 @@ namespace DesktopCS.Services.IRC
 #if DEBUG
                 this.Send(new Join("#test"));
 #else
-                this.Send(new Join("#Coldstorm"));
-                this.Send(new Join("#2"));
+                //Split channel names and join them all
+                string[] channelNames = this._loginData.Channels.Split(',');
+
+                for (var i = 0; i < channelNames.Length; i++)
+                {
+                    this.Send(new Join(channelNames[i]));
+                }
 #endif
             });
         }
 
-        private void client_OnDisconnect(Client client)
+        private void _client_OnDisconnect(Client client)
         {
-            this.Run(this.Connect);
+            this.Run(() =>
+            {
+                this.OnDisconnect(client);
+                this.Connect();
+            });
         }
 
         private void _client_OnMessage(Client client, User source, string message)
@@ -366,7 +386,7 @@ namespace DesktopCS.Services.IRC
             });
         }
 
-        private void client_OnSend(Client client, SendMessageEventArgs e)
+        private void _client_OnSend(Client client, SendMessageEventArgs e)
         {
             this.Run(() =>
             {
@@ -383,7 +403,6 @@ namespace DesktopCS.Services.IRC
         {
             this.Send(new Whois(user));
         }
-
         #endregion
     }
 }
