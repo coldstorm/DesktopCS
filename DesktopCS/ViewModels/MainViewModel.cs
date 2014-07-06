@@ -83,7 +83,6 @@ namespace DesktopCS.ViewModels
             IRCSettings ircSettings = SettingsManager.Value.GetIRCSettings();
             SettingsManager.Value.OnIRCSettingsChanged += SettingsManager_OnIRCSettingsChanged;
             this._irc = new IRCClient(this.TabManager, loginData, ircSettings);
-            this._irc.Disconnect += (object sender, Client client) => { SaveChannels(); };
 
             this.ChatData = new ChatData();
             this.ChatInputCommand = new RelayCommand(param => this.Chat(), param => this.CanChat);
