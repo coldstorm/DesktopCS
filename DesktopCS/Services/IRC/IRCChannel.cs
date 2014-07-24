@@ -32,6 +32,7 @@ namespace DesktopCS.Services.IRC
             this._channel.OnMode += this._channel_OnMode;
             this._channel.OnKick += this._channel_OnKick;
             this._channel.OnChannelOperatorNeeded += this._channel_OnChannelOperatorNeeded;
+            this._channel.OnCannotSendToChannel += this._channel_OnCannotSendToChannel;
 
             this._channelTab = channelTab;
             this._channelTab.Part += this._channelTab_Part;
@@ -195,6 +196,14 @@ namespace DesktopCS.Services.IRC
         }
 
         private void _channel_OnChannelOperatorNeeded(Channel source, string reason)
+        {
+            this.Run(() =>
+            {
+                this._channelTab.AddSystemErrorChat(reason, this.GetArgs());
+            });
+        }
+
+        private void _channel_OnCannotSendToChannel(Channel source, string reason)
         {
             this.Run(() =>
             {

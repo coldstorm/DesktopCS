@@ -31,6 +31,7 @@ namespace DesktopCS.Services.IRC.Messages.Receive.Numerics
             "368", // RPL_ENDOFBANLIST
             "378", // RPL_MOTD
             "379", // RPL_KICKLINKED
+            "404", // ERR_CANNOTSENDTOCHAN
             "482", // ERR_CHANOPRIVSNEEDED
             "671"  // RPL_WHOISSECURE
         };
