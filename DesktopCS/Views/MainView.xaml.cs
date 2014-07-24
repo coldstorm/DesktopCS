@@ -1,4 +1,5 @@
-﻿using DesktopCS.Models;
+﻿using DesktopCS.Helpers.Extensions;
+using DesktopCS.Models;
 using DesktopCS.Services;
 using DesktopCS.ViewModels;
 
@@ -51,6 +52,14 @@ namespace DesktopCS.Views
         private void Window_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             this.InputTextBox.Focus();
+        }
+
+        private void Window_StateChanged(object sender, System.EventArgs e)
+        {
+            if (this.WindowState != System.Windows.WindowState.Minimized)
+            {
+                WindowExtensions.StopFlashingWindow(this);
+            }
         }
     }
 }

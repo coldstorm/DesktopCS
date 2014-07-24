@@ -37,8 +37,12 @@ namespace DesktopCS.Helpers.Extensions
 
         public static void FlashWindow(this Window win, UInt32 count = UInt32.MaxValue)
         {
-            //Don't flash if the window is active
-            if (win.IsActive) return;
+            //Don't flash if window isn't minimized and active
+            if (win.WindowState != WindowState.Minimized &&
+                win.IsActive == true)
+            {
+                return;
+            }
 
             WindowInteropHelper h = new WindowInteropHelper(win);
 

@@ -28,6 +28,5 @@ namespace DesktopCS
             // Stop flashing window when it receives focus
             WindowExtensions.StopFlashingWindow(App.Current.MainWindow);
         }
-
     }
 }
