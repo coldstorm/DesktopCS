@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using DesktopCS.Views;
 
 namespace DesktopCS.Controls
 {
@@ -89,6 +90,7 @@ namespace DesktopCS.Controls
         {
             base.OnSelected(e);
 
+            ((ChatTabContentView)this.Content).ScrollToEnd();
             this.IsUnread = false;
         }
     }
