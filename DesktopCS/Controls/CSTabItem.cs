@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using DesktopCS.Views;
+using System.Windows.Documents;
 
 namespace DesktopCS.Controls
 {
@@ -60,6 +61,11 @@ namespace DesktopCS.Controls
         {
             get { return (bool)this.GetValue(IsChannelProperty); }
             set { this.SetValue(IsChannelProperty, value); }
+        }
+
+        public TextRange Selection
+        {
+            get { return ((ChatTabContentView)this.Content).Selection; }
         }
 
         public override void OnApplyTemplate()

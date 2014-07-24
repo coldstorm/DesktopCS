@@ -14,7 +14,7 @@
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         Title="Coldstorm" Height="350" Width="550" MinHeight="200" MinWidth="300" UseLayoutRounding="True"
         PreviewMouseUp="PreviewWindow_MouseUp"
-        Style="{StaticResource WindowStyle}" Closing="Window_Closing">
+        Style="{StaticResource WindowStyle}" Closing="Window_Closing" Loaded="Window_Loaded">
 
     <Window.Resources>
         <converters:FlagToImageConverter x:Key="FlagToImageConverter" />
@@ -106,7 +106,7 @@
                 <Border Padding="4" Grid.Row="4" Grid.Column="0" Style="{StaticResource ContentBorder}" FocusManager.IsFocusScope="True">
                     <ScrollViewer MaxHeight="64" VerticalScrollBarVisibility="Auto">
                         <TextBox x:Name="InputTextBox" SpellCheck.IsEnabled="False" Language="en" TextWrapping="Wrap" AcceptsReturn="True"
-                                 Text="{Binding ChatData.InputText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                                 Text="{Binding ChatData.InputText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TabIndex="0">
                             <TextBox.InputBindings>
                                 <KeyBinding Command="{Binding ChatInputCommand}" Key="Enter" />
                             </TextBox.InputBindings>

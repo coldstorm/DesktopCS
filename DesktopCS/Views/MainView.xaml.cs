@@ -24,11 +24,15 @@ namespace DesktopCS.Views
             if (windowGeometry.IsMaximized)
                 this.WindowState = System.Windows.WindowState.Maximized;
         } 
-        
-        //Keep the focus on InputTextBox all the time
+
         private void PreviewWindow_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            this.InputTextBox.Focus();
+            // Only focus on InputTextBox if there is no text selected, to allow events to be handled in ChatRichTextBox
+            MainViewModel vm = this.DataContext as MainViewModel;
+            if (vm.SelectedItem.Selection.IsEmpty)
+            {
+                this.InputTextBox.Focus();
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -42,6 +46,11 @@ namespace DesktopCS.Views
                 windowGeometry = new WindowGeometry(this.Top, this.Left, this.Height, this.Width, false);
 
             SettingsManager.Value.SetWindowGeometry(windowGeometry);
+        }
+
+        private void Window_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.InputTextBox.Focus();
         }
     }
 }

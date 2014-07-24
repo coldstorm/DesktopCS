@@ -11,6 +11,11 @@ namespace DesktopCS.Views
     /// </summary>
     public partial class ChatTabContentView
     {
+        public TextRange Selection
+        {
+            get { return this.ChatRichTextBox.Selection; }
+        }
+
         public ChatTabContentView(ChatTabContentViewModel vm)
         {
             this.InitializeComponent();
