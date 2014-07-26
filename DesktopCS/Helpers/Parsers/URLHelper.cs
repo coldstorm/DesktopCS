@@ -34,42 +34,16 @@ namespace DesktopCS.Helpers.Parsers
         private static void OnUrlClick(object sender, RoutedEventArgs e)
         {
             var link = (Hyperlink)sender;
-
-            string browserPath = GetBrowserPath();
-            if (browserPath == string.Empty)
-                browserPath = "iexplore";
-
-            var process = new Process {StartInfo = new ProcessStartInfo(browserPath)};
-            process.StartInfo.Arguments = "\"" + link.NavigateUri + "\"";
-            process.Start();
-        }
-
-        private static string GetBrowserPath()
-        {
-            string browser = String.Empty;
-
             try
             {
-                RegistryKey key = Registry.ClassesRoot.OpenSubKey(@"HTTP\shell\open\command", false) ??
-                                  Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http", false);
-
-                if (key != null)
-                {
-                    browser = key.GetValue(null).ToString().ToLower().Replace("\"", "");
-                    if (!browser.EndsWith("exe", StringComparison.Ordinal))
-                    {
-                        browser = browser.Substring(0, browser.LastIndexOf(".exe", StringComparison.Ordinal) + 4);
-                    }
-
-                    key.Close();
-                }
+                // Let Process.Start() open the link in the appropriate browser
+                Process.Start(link.NavigateUri.AbsoluteUri);
             }
-            catch
+
+            catch (System.ComponentModel.Win32Exception ex)
             {
-                return String.Empty;
+                MessageBox.Show(ex.Message);
             }
-
-            return browser;
         }
     }
 }
