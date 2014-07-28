@@ -17,14 +17,7 @@ namespace DesktopCS.Helpers.Parsers
             return RegexHelper.Parse(text, highlightRegex, args, callback,
                 s =>
                 {
-                    // Play the ping sound if it is enabled
-                    if (args.SoundNotification)
-                        SoundHelper.PlaySound(SoundHelper.PingUri);
-                    
-                    // Flash the window indefinitely if desktop notifications are enabled
-                    // TODO: Add setting for flashing window X number of times
-                    if (args.DesktopNotification)
-                        WindowExtensions.FlashWindow(Application.Current.MainWindow);
+                    NotificationHelper.Notify(args);
 
                     return new Run(s)
                     {

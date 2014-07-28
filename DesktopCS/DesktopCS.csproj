@@ -125,6 +125,7 @@
     <Compile Include="Helpers\Extensions\NetIRCExtensions.cs" />
     <Compile Include="Helpers\Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\Extensions\WindowExtensions.cs" />
+    <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Helpers\Parsers\HighlightHelper.cs" />
     <Compile Include="Helpers\Parsers\ImageHelper.cs" />
     <Compile Include="Helpers\Parsers\InputHelper.cs" />

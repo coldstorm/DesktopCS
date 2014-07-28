@@ -320,6 +320,10 @@ namespace DesktopCS.Services.IRC
             this.Run(() =>
             {
                 this.AddUser(source);
+                NotificationHelper.Notify(new ParseArgs(this._client.User.NickName,
+                    this._ircSettings.SoundNotifications,
+                    this._ircSettings.DesktopNotifications,
+                    null));
                 this.OnMessage(source, message);
             });
         }

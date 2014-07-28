@@ -48,26 +48,6 @@
                     </Border>
 
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource SelectedTabBackgroundBrush}" />
-                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{StaticResource SelectedTabForegroundBrush}" />
-                            <Setter TargetName="PART_Close" Property="TextElement.Foreground" Value="{StaticResource SelectedTabForegroundBrush}" />
-                            <!-- Move the header one px down and make its size one px bigger so we hide the line of the border under the header -->
-                            <Setter TargetName="OuterBorder" Property="Margin" Value="0,0,0,-3" />
-                            <Setter TargetName="OuterBorder" Property="Padding" Value="0,0,3,2" />
-                        </Trigger>
-
-                        <Trigger Property="IsUnread" Value="True">
-                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{StaticResource WarningBrush}" />
-                            <Setter TargetName="PART_Close" Property="TextElement.Foreground" Value="{StaticResource WarningBrush}" />
-                        </Trigger>
-
-
-                        <Trigger Property="IsClosable" Value="False">
-                            <Setter TargetName="PART_Close" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="PART_Close" Property="IsEnabled" Value="False" />
-                        </Trigger>
-                        
                         <Trigger Property="IsChannel" Value="False">
                             <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource BorderBrush}" />
                             <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{StaticResource ForegroundBrush}" />
@@ -87,6 +67,32 @@
                             <Setter TargetName="PART_Close" Property="ToolTip" Value="Close" />
                             <Setter TargetName="PART_Close" Property="Content" Value=" X" />
                         </MultiTrigger>
+                        
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True" />
+                                <Condition Property="IsConnected" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{StaticResource SelectedTabForegroundBrush}" />
+                            <Setter TargetName="PART_Close" Property="TextElement.Foreground" Value="{StaticResource SelectedTabForegroundBrush}" />
+                        </MultiTrigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource SelectedTabBackgroundBrush}" />
+                            <!-- Move the header one px down and make its size one px bigger so we hide the line of the border under the header -->
+                            <Setter TargetName="OuterBorder" Property="Margin" Value="0,0,0,-3" />
+                            <Setter TargetName="OuterBorder" Property="Padding" Value="0,0,3,2" />
+                        </Trigger>
+
+                        <Trigger Property="IsUnread" Value="True">
+                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{StaticResource WarningBrush}" />
+                            <Setter TargetName="PART_Close" Property="TextElement.Foreground" Value="{StaticResource WarningBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsClosable" Value="False">
+                            <Setter TargetName="PART_Close" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_Close" Property="IsEnabled" Value="False" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
